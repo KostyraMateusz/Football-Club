@@ -16,26 +16,25 @@ namespace FootballClubLibrary.Models
         [Key]
         public Guid IdPracownik { get; set; }
 
-        [MaxLength(30), Required]
-        public string Imie { get; set; }
+        [MaxLength(30)]
+        public string? Imie { get; set; }
 
-        [MaxLength(30), Required]
-        public string Nazwisko { get; set; }
+        [MaxLength(30)]
+        public string? Nazwisko { get; set; }
 
-        [Required]
         [RegularExpression(@"^\d{11}$")]
-        public string PESEL { get; set; }
+        public string? PESEL { get; set; }
 
-        [Range(16, 99), Required]
+        [Range(16, 99)]
         public int Wiek { get; set; }
 
-        [MaxLength(30), Required]
-        public string WykonywanaFunkcja { get; set; }
+        [MaxLength(30)]
+        public string? WykonywanaFunkcja { get; set; }
 
-        public Guid IdZarzadu { get; set; }
+        public Guid? IdZarzadu { get; set; }
 
         [ForeignKey(nameof(IdZarzadu))]
-        public Zarzad Zarzad { get; set; }
+        public Zarzad? Zarzad { get; set; }
 
     }
 }
