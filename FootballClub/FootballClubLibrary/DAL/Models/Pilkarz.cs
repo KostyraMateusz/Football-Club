@@ -16,20 +16,19 @@ namespace FootballClubLibrary.Models
         [Key]
         public Guid IdPilkarz { get; set; }
 
-        [MaxLength(30), Required]
-        public string Pozycja { get; set; }
+        [MaxLength(30)]
+        public string? Pozycja { get; set; }
 
         public ICollection<Statystyka>? Statystyki { get; set; }
 
         public ICollection<Klub>? ArchiwalneKluby { get; set; }
 
-        [Required]
         public decimal Wynagrodzenie { get; set; }
 
-        public Guid IdKlubu { get; set; }
+        public Guid? IdKlubu { get; set; }
 
         [ForeignKey(nameof(IdKlubu))]
-        public Klub Klub { get; set; }
+        public Klub? Klub { get; set; }
 
     }
 }

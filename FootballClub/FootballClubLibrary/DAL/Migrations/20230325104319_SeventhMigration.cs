@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace FootballClubAPI.Migrations
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
+namespace FootballClubLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class ThirdMigration : Migration
+    public partial class SeventhMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +18,7 @@ namespace FootballClubAPI.Migrations
                 columns: table => new
                 {
                     IdKlub = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Stadion = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Stadion = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Trofea = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -29,9 +31,9 @@ namespace FootballClubAPI.Migrations
                 columns: table => new
                 {
                     IdPilkarz = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Pozycja = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Pozycja = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     Wynagrodzenie = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IdKlubu = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    IdKlubu = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -40,8 +42,7 @@ namespace FootballClubAPI.Migrations
                         name: "FK_Pilkarze_Kluby_IdKlubu",
                         column: x => x.IdKlubu,
                         principalTable: "Kluby",
-                        principalColumn: "IdKlub",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "IdKlub");
                 });
 
             migrationBuilder.CreateTable(
@@ -51,7 +52,7 @@ namespace FootballClubAPI.Migrations
                     IdZarzad = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Budzet = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Cele = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdKlubu = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    IdKlubu = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -65,6 +66,30 @@ namespace FootballClubAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "KlubPilkarz",
+                columns: table => new
+                {
+                    ArchiwalneKlubyIdKlub = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ArchwilaniPilkarzeIdPilkarz = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_KlubPilkarz", x => new { x.ArchiwalneKlubyIdKlub, x.ArchwilaniPilkarzeIdPilkarz });
+                    table.ForeignKey(
+                        name: "FK_KlubPilkarz_Kluby_ArchiwalneKlubyIdKlub",
+                        column: x => x.ArchiwalneKlubyIdKlub,
+                        principalTable: "Kluby",
+                        principalColumn: "IdKlub",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_KlubPilkarz_Pilkarze_ArchwilaniPilkarzeIdPilkarz",
+                        column: x => x.ArchwilaniPilkarzeIdPilkarz,
+                        principalTable: "Pilkarze",
+                        principalColumn: "IdPilkarz",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Statystki",
                 columns: table => new
                 {
@@ -74,7 +99,7 @@ namespace FootballClubAPI.Migrations
                     Kartki = table.Column<int>(type: "int", nullable: false),
                     PrzebiegnietyDystans = table.Column<double>(type: "float", nullable: false),
                     Ocena = table.Column<double>(type: "float", nullable: false),
-                    IdPilkarz = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    IdPilkarz = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -92,12 +117,12 @@ namespace FootballClubAPI.Migrations
                 columns: table => new
                 {
                     IdPracownik = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Imie = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Nazwisko = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    PESEL = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Imie = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    Nazwisko = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    PESEL = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Wiek = table.Column<int>(type: "int", nullable: false),
-                    WykonywanaFunkcja = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    IdZarzadu = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    WykonywanaFunkcja = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    IdZarzadu = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -109,6 +134,20 @@ namespace FootballClubAPI.Migrations
                         principalColumn: "IdZarzad",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Kluby",
+                columns: new[] { "IdKlub", "Stadion", "Trofea" },
+                values: new object[,]
+                {
+                    { new Guid("2cf6ec60-5e18-4b35-a8a6-0cf3c1bd337f"), "Stadion2", null },
+                    { new Guid("f063d180-358b-49a1-8ab9-b822d2626b32"), "Stadion1", null }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_KlubPilkarz_ArchwilaniPilkarzeIdPilkarz",
+                table: "KlubPilkarz",
+                column: "ArchwilaniPilkarzeIdPilkarz");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pilkarze_IdKlubu",
@@ -129,12 +168,15 @@ namespace FootballClubAPI.Migrations
                 name: "IX_Zarzady_IdKlubu",
                 table: "Zarzady",
                 column: "IdKlubu",
-                unique: true);
+                unique: true,
+                filter: "[IdKlubu] IS NOT NULL");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "KlubPilkarz");
 
             migrationBuilder.DropTable(
                 name: "Pracownicy");

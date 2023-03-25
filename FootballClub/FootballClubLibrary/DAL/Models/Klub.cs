@@ -17,18 +17,16 @@ namespace FootballClubLibrary.Models
         [Key]
         public Guid IdKlub { get; set; }
 
-        [MaxLength(50), Required]
-        public string Stadion { get; set; }
+        [MaxLength(50)]
+        public string? Stadion { get; set; }
 
         public ICollection<string>? Trofea { get; set; }
 
-        [Required]
-        public ICollection<Pilkarz> ArchwilaniPilkarze { get; set; }
+        public ICollection<Pilkarz>? ArchwilaniPilkarze { get; set; }
 
-        [Required]
-        public ICollection<Pilkarz> ObecniPilkarze { get; set; }
+        public ICollection<Pilkarz>? ObecniPilkarze { get; set; }
 
-        public Zarzad Zarzad { get; set; }
+        public Zarzad? Zarzad { get; set; }
 
     }
 }

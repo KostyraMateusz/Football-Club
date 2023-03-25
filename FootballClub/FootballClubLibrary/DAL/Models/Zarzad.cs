@@ -18,14 +18,12 @@ namespace FootballClubLibrary.Models
 
         public ICollection<Pracownik> Pracownicy { get; set; }
 
-        [Required]
         public decimal Budzet { get; set; }
 
-        [Required]
         public ICollection<string> Cele { get; set; }
 
-        public Klub Klub { get; set; }
+        public Klub? Klub { get; set; }
 
-        public Guid IdKlubu { get; set; }
+        public Guid? IdKlubu { get; set; }
     }
 }

@@ -16,24 +16,22 @@ namespace FootballClubLibrary.Models
         [Key]
         public Guid IdStatystyka { get; set; }
 
-        [Required]
         public int Gole { get; set; }
 
-        [Required]
         public int Asysty { get; set; }
 
-        [Range(0, 3), Required]
+        [Range(0, 3)]
         public int Kartki { get; set; }
 
-        [Range(0, 15), Required]
+        [Range(0, 15)]
         public double PrzebiegnietyDystans { get; set; }
 
-        [Range(0, 10), Required]
+        [Range(0, 10)]
         public double Ocena { get; set; }
 
-        public Guid IdPilkarz { get; set; }
+        public Guid? IdPilkarz { get; set; }
 
         [ForeignKey(nameof(IdPilkarz))]
-        public Pilkarz Pilkarz { get; set; }
+        public Pilkarz? Pilkarz { get; set; }
     }
 }
