@@ -16,11 +16,11 @@ namespace FootballClubLibrary.Models
         [Key]
         public Guid IdZarzad { get; set; }
 
-        public ICollection<Pracownik> Pracownicy { get; set; }
+        public ICollection<Pracownik>? Pracownicy { get; set; }
 
         public decimal Budzet { get; set; }
 
-        public ICollection<string> Cele { get; set; }
+        public ICollection<string>? Cele { get; set; }
 
         public Klub? Klub { get; set; }
 

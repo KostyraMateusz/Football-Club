@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FootballClubLibrary.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230325104319_SeventhMigration")]
-    partial class SeventhMigration
+    [Migration("20230325210120_UpdateMigtation")]
+    partial class UpdateMigtation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,12 +45,12 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdKlub = new Guid("f063d180-358b-49a1-8ab9-b822d2626b32"),
+                            IdKlub = new Guid("bb9a96ed-466b-4221-8600-e4f22a412dd1"),
                             Stadion = "Stadion1"
                         },
                         new
                         {
-                            IdKlub = new Guid("2cf6ec60-5e18-4b35-a8a6-0cf3c1bd337f"),
+                            IdKlub = new Guid("67ef82f5-ad33-4962-a10a-2d65ec223703"),
                             Stadion = "Stadion2"
                         });
                 });
@@ -76,6 +76,20 @@ namespace FootballClubLibrary.Migrations
                     b.HasIndex("IdKlubu");
 
                     b.ToTable("Pilkarze");
+
+                    b.HasData(
+                        new
+                        {
+                            IdPilkarz = new Guid("d88c2ffe-be90-4f97-a703-75dc02fc6b58"),
+                            Pozycja = "Napastnik",
+                            Wynagrodzenie = 1000m
+                        },
+                        new
+                        {
+                            IdPilkarz = new Guid("f95c4ff2-a335-4353-ae90-e2c47eb6bd22"),
+                            Pozycja = "Pomocnik",
+                            Wynagrodzenie = 2000m
+                        });
                 });
 
             modelBuilder.Entity("FootballClubLibrary.Models.Pracownik", b =>
@@ -110,6 +124,26 @@ namespace FootballClubLibrary.Migrations
                     b.HasIndex("IdZarzadu");
 
                     b.ToTable("Pracownicy");
+
+                    b.HasData(
+                        new
+                        {
+                            IdPracownik = new Guid("4b7845b7-bcb8-41f3-99d5-532b0a18a6e4"),
+                            Imie = "Mateusz",
+                            Nazwisko = "Kostyra",
+                            PESEL = "00124168751",
+                            Wiek = 23,
+                            WykonywanaFunkcja = "Preszes"
+                        },
+                        new
+                        {
+                            IdPracownik = new Guid("1b6974f1-fc4c-4c32-9a85-0b0d73e9904a"),
+                            Imie = "Stanisław",
+                            Nazwisko = "Kluczewski",
+                            PESEL = "00864164771",
+                            Wiek = 23,
+                            WykonywanaFunkcja = "Vc-Preszes"
+                        });
                 });
 
             modelBuilder.Entity("FootballClubLibrary.Models.Statystyka", b =>
@@ -141,6 +175,26 @@ namespace FootballClubLibrary.Migrations
                     b.HasIndex("IdPilkarz");
 
                     b.ToTable("Statystki");
+
+                    b.HasData(
+                        new
+                        {
+                            IdStatystyka = new Guid("e4864f0a-4593-4a33-b4c7-d38d7998ef0d"),
+                            Asysty = 1,
+                            Gole = 4,
+                            Kartki = 0,
+                            Ocena = 8.6999999999999993,
+                            PrzebiegnietyDystans = 10.4
+                        },
+                        new
+                        {
+                            IdStatystyka = new Guid("1c4bcb41-78c4-4974-b909-3a5fd0a9d061"),
+                            Asysty = 2,
+                            Gole = 0,
+                            Kartki = 1,
+                            Ocena = 7.5,
+                            PrzebiegnietyDystans = 8.4000000000000004
+                        });
                 });
 
             modelBuilder.Entity("FootballClubLibrary.Models.Zarzad", b =>
@@ -153,7 +207,6 @@ namespace FootballClubLibrary.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Cele")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("IdKlubu")
@@ -166,6 +219,13 @@ namespace FootballClubLibrary.Migrations
                         .HasFilter("[IdKlubu] IS NOT NULL");
 
                     b.ToTable("Zarzady");
+
+                    b.HasData(
+                        new
+                        {
+                            IdZarzad = new Guid("9fbbe64f-f554-452f-8129-8839ec07c797"),
+                            Budzet = 2000m
+                        });
                 });
 
             modelBuilder.Entity("KlubPilkarz", b =>
