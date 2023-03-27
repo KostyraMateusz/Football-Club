@@ -16,12 +16,17 @@ namespace FootballClubLibrary.Models
         [Key]
         public Guid IdStatystyka { get; set; }
 
+        public string? Mecz { get; set; }
+
         public int Gole { get; set; }
 
         public int Asysty { get; set; }
 
-        [Range(0, 3)]
-        public int Kartki { get; set; }
+        [Range(0, 2)]
+        public int ZolteKartki { get; set; }
+
+        [Range(0,1)]
+        public int CzerwoneKartki { get; set; }
 
         [Range(0, 15)]
         public double PrzebiegnietyDystans { get; set; }

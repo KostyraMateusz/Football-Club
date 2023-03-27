@@ -9,7 +9,7 @@ namespace FootballClubLibrary.Intefaces
 {
     public interface IKlubRepository
     {
-        IEnumerable<Klub>GetKlubs();
+        IEnumerable<Klub>GetKluby();
         Klub GetKlubById(Guid id);
         void CreateKlub(Klub klub);
         void DeleteKlub(Guid id);

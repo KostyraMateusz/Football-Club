@@ -80,6 +80,7 @@ namespace FootballClubLibrary.Data
                     new Klub()
                     {
                         IdKlub = Guid.NewGuid(),
+                        Nazwa = "Klub1",
                         Stadion = "Stadion1",
                         Trofea = null,
                         ObecniPilkarze = null,
@@ -90,6 +91,7 @@ namespace FootballClubLibrary.Data
                     new Klub()
                     {
                         IdKlub = Guid.NewGuid(),
+                        Nazwa = "Klub2",
                         Stadion = "Stadion2",
                         Trofea = null,
                         ObecniPilkarze = null,
@@ -131,7 +133,8 @@ namespace FootballClubLibrary.Data
                         Nazwisko = "Kostyra",
                         PESEL = "00124168751",
                         Wiek = 23,
-                        WykonywanaFunkcja = "Preszes",
+                        Wynagrodzenie = 50000,
+                        WykonywanaFunkcja = "Prezes",
                         IdZarzadu = null,
                         Zarzad = null
                     },
@@ -140,9 +143,10 @@ namespace FootballClubLibrary.Data
                         IdPracownik = Guid.NewGuid(),
                         Imie = "Stanisław",
                         Nazwisko = "Kluczewski",
+                        Wynagrodzenie = 50000,
                         PESEL = "00864164771",
                         Wiek = 23,
-                        WykonywanaFunkcja = "Vc-Preszes",
+                        WykonywanaFunkcja = "Vc-Prezes",
                         IdZarzadu = null,
                         Zarzad = null
                     }
@@ -155,7 +159,8 @@ namespace FootballClubLibrary.Data
                     IdStatystyka = Guid.NewGuid(),
                     Gole = 4,
                     Asysty = 1,
-                    Kartki = 0,
+                    ZolteKartki = 0,
+                    CzerwoneKartki = 1,
                     PrzebiegnietyDystans = 10.4,
                     Ocena = 8.7,
                     IdPilkarz = null,
@@ -165,14 +170,15 @@ namespace FootballClubLibrary.Data
                 {
                     IdStatystyka = Guid.NewGuid(),
                     Gole = 0,
+                    ZolteKartki = 2,
+                    CzerwoneKartki = 1,
                     Asysty = 2,
-                    Kartki = 1,
                     PrzebiegnietyDystans = 8.4,
                     Ocena = 7.5,
                     IdPilkarz = null,
                     Pilkarz = null
                 }
-                );
+                );;
 
             modelBuilder.Entity<Zarzad>()
                 .HasData(

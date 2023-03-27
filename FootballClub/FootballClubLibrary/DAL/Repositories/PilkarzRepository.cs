@@ -1,52 +1,51 @@
-﻿
-using FootballClubLibrary.Data;
-using FootballClubLibrary.Intefaces;
+﻿using FootballClubLibrary.Data;
+using FootballClubLibrary.Interfaces;
 using FootballClubLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace FootballClubLibrary.Repositories
 {
-    public class KlubRepository : IKlubRepository, IDisposable
+    public class PilkarzRepository : IPilkarzRepository, IDisposable
     {
         private readonly ApplicationDbContext dbContext;
         private bool disposed = false;
 
-        public KlubRepository(ApplicationDbContext dbContext)
+        public PilkarzRepository(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
 
-        public void CreateKlub(Klub klub)
+        public void CreatePilkarz(Pilkarz pilkarz)
         {
-            this.dbContext.Kluby.Add(klub);
+            this.dbContext.Pilkarze.Add(pilkarz);
         }
 
-        public void DeleteKlub(Guid id)
+        public void DeletePilkarz(Guid id)
         {
-            var klub = this.dbContext.Kluby.Find(id);
-            this.dbContext.Kluby.Remove(klub);
+            var pilkarz = this.dbContext.Pilkarze.Find(id);
+            this.dbContext.Pilkarze.Remove(pilkarz);
         }
 
-        public Klub GetKlubById(Guid id)
+        public Pilkarz GetPilkarzById(Guid id)
         {
-            return this.dbContext.Kluby.Find(id);
+            var pilkarz = this.dbContext.Pilkarze.Find(id);
+            return pilkarz;
         }
 
-        public IEnumerable<Klub> GetKluby()
+        public IEnumerable<Pilkarz> GetPilkarze()
         {
-            return this.dbContext.Kluby.ToList();
+            var pilkarze = this.dbContext.Pilkarze.ToList();
+            return pilkarze;
         }
 
-        public void UpdateKlub(Klub klub)
+        public void UpdatePilkarz(Pilkarz pilkarz)
         {
-            this.dbContext.Entry(klub).State = EntityState.Modified;
+            this.dbContext.Entry(pilkarz).State = EntityState.Modified;
         }
 
         public virtual void Dispose(bool disposing)
