@@ -1,5 +1,6 @@
 global using FootballClubLibrary.Data;
 using FootballClubLibrary.Intefaces;
+using FootballClubLibrary.Interfaces;
 using FootballClubLibrary.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddScoped<IKlubRepository, KlubRepository>();
+builder.Services.AddScoped<IZarzadRepository, ZarzadRepository>();
 
 var app = builder.Build();
 
