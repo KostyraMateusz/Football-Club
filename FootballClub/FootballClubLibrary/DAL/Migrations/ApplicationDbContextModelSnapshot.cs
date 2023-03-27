@@ -28,6 +28,9 @@ namespace FootballClubLibrary.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Nazwa")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Stadion")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -42,12 +45,14 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdKlub = new Guid("bb9a96ed-466b-4221-8600-e4f22a412dd1"),
+                            IdKlub = new Guid("d8846ec1-c8ce-43fd-87e0-f6ca49f0d10e"),
+                            Nazwa = "Klub1",
                             Stadion = "Stadion1"
                         },
                         new
                         {
-                            IdKlub = new Guid("67ef82f5-ad33-4962-a10a-2d65ec223703"),
+                            IdKlub = new Guid("97639ccf-13a1-4f8a-b405-5f1a4482191f"),
+                            Nazwa = "Klub2",
                             Stadion = "Stadion2"
                         });
                 });
@@ -77,13 +82,13 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdPilkarz = new Guid("d88c2ffe-be90-4f97-a703-75dc02fc6b58"),
+                            IdPilkarz = new Guid("aa2811a8-fb02-4841-bc83-84ec98114a60"),
                             Pozycja = "Napastnik",
                             Wynagrodzenie = 1000m
                         },
                         new
                         {
-                            IdPilkarz = new Guid("f95c4ff2-a335-4353-ae90-e2c47eb6bd22"),
+                            IdPilkarz = new Guid("b6e0ad33-c448-4c7d-bea0-7a4643943ea4"),
                             Pozycja = "Pomocnik",
                             Wynagrodzenie = 2000m
                         });
@@ -116,6 +121,9 @@ namespace FootballClubLibrary.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<decimal>("Wynagrodzenie")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("IdPracownik");
 
                     b.HasIndex("IdZarzadu");
@@ -125,21 +133,23 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdPracownik = new Guid("4b7845b7-bcb8-41f3-99d5-532b0a18a6e4"),
+                            IdPracownik = new Guid("026a7c74-82ae-4b24-8ae9-ff948adcba90"),
                             Imie = "Mateusz",
                             Nazwisko = "Kostyra",
                             PESEL = "00124168751",
                             Wiek = 23,
-                            WykonywanaFunkcja = "Preszes"
+                            WykonywanaFunkcja = "Prezes",
+                            Wynagrodzenie = 50000m
                         },
                         new
                         {
-                            IdPracownik = new Guid("1b6974f1-fc4c-4c32-9a85-0b0d73e9904a"),
+                            IdPracownik = new Guid("ea7c1f63-805e-451d-9686-b469f31e7c06"),
                             Imie = "Stanisław",
                             Nazwisko = "Kluczewski",
                             PESEL = "00864164771",
                             Wiek = 23,
-                            WykonywanaFunkcja = "Vc-Preszes"
+                            WykonywanaFunkcja = "Vc-Prezes",
+                            Wynagrodzenie = 50000m
                         });
                 });
 
@@ -152,20 +162,26 @@ namespace FootballClubLibrary.Migrations
                     b.Property<int>("Asysty")
                         .HasColumnType("int");
 
+                    b.Property<int>("CzerwoneKartki")
+                        .HasColumnType("int");
+
                     b.Property<int>("Gole")
                         .HasColumnType("int");
 
                     b.Property<Guid?>("IdPilkarz")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Kartki")
-                        .HasColumnType("int");
+                    b.Property<string>("Mecz")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Ocena")
                         .HasColumnType("float");
 
                     b.Property<double>("PrzebiegnietyDystans")
                         .HasColumnType("float");
+
+                    b.Property<int>("ZolteKartki")
+                        .HasColumnType("int");
 
                     b.HasKey("IdStatystyka");
 
@@ -176,21 +192,23 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdStatystyka = new Guid("e4864f0a-4593-4a33-b4c7-d38d7998ef0d"),
+                            IdStatystyka = new Guid("21e6caf1-1184-4802-82c6-ecd02b5fc985"),
                             Asysty = 1,
+                            CzerwoneKartki = 1,
                             Gole = 4,
-                            Kartki = 0,
                             Ocena = 8.6999999999999993,
-                            PrzebiegnietyDystans = 10.4
+                            PrzebiegnietyDystans = 10.4,
+                            ZolteKartki = 0
                         },
                         new
                         {
-                            IdStatystyka = new Guid("1c4bcb41-78c4-4974-b909-3a5fd0a9d061"),
+                            IdStatystyka = new Guid("77afdb37-3517-4db1-9e33-82b1d2164f27"),
                             Asysty = 2,
+                            CzerwoneKartki = 1,
                             Gole = 0,
-                            Kartki = 1,
                             Ocena = 7.5,
-                            PrzebiegnietyDystans = 8.4000000000000004
+                            PrzebiegnietyDystans = 8.4000000000000004,
+                            ZolteKartki = 2
                         });
                 });
 
@@ -220,7 +238,7 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdZarzad = new Guid("9fbbe64f-f554-452f-8129-8839ec07c797"),
+                            IdZarzad = new Guid("4cb42210-e7ab-4ca1-87b2-ae6b3db9e3a2"),
                             Budzet = 2000m
                         });
                 });

@@ -1,5 +1,8 @@
 ﻿using FootballClubLibrary.Data;
+using FootballClubLibrary.Intefaces;
+using FootballClubLibrary.Interfaces;
 using FootballClubLibrary.Models;
+using FootballClubLibrary.Repositories;
 using FootballClubLibrary.Repositories.Generic;
 using System;
 using System.Collections.Generic;
@@ -9,79 +12,86 @@ using System.Threading.Tasks;
 
 namespace FootballClubLibrary.Unit_of_Work
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork : IDisposable, IUnitOfWork
     {
-        private ApplicationDbContext dbContext = new ApplicationDbContext();
-        private GenericRepository<Klub> klubRepository;
-        private GenericRepository<Pilkarz> pilkarzRepository;
-        private GenericRepository<Pracownik> pracownikRepository;
-        private GenericRepository<Statystyka> statystykaRepository;
-        private GenericRepository<Zarzad> zarzadRepository;
 
+        private readonly ApplicationDbContext _context;
+        private IKlubRepository klubRepository;
+        private IPilkarzRepository pilkarzRepository;
+        private IPracownikRepository pracownikRepository;
+        private IStatystykaRepository statystykaRepository;
+        private IZarzadRepository zarzadRepository;
 
-        public GenericRepository<Klub> KlubRepository
+        public UnitOfWork(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public IKlubRepository KlubRepository
         {
             get
             {
                 if(this.klubRepository == null)
                 {
-                    this.klubRepository = new GenericRepository<Klub>(this.dbContext);
+                    this.klubRepository = new KlubRepository(this._context);
                 }
                 return this.klubRepository;
             }
         }
 
-        public GenericRepository<Pilkarz> PilkarzRepository
+        public IPilkarzRepository PilkarzRepository
         {
             get
             {
                 if (this.pilkarzRepository == null)
                 {
-                    this.pilkarzRepository = new GenericRepository<Pilkarz>(this.dbContext);
+                    this.pilkarzRepository = new PilkarzRepository(this._context);
                 }
                 return this.pilkarzRepository;
             }
         }
 
-        public GenericRepository<Pracownik> PracownikRepository
+        public IPracownikRepository PracownikRepository
         {
             get
             {
                 if (this.pracownikRepository == null)
                 {
-                    this.pracownikRepository = new GenericRepository<Pracownik>(this.dbContext);
+                    this.pracownikRepository = new PracownikRepository(this._context);
                 }
                 return this.pracownikRepository;
             }
         }
 
-        public GenericRepository<Statystyka> StatystykaRepository
+        public IStatystykaRepository StatystykaRepository
         {
             get
             {
                 if (this.statystykaRepository == null)
                 {
-                    this.statystykaRepository = new GenericRepository<Statystyka>(this.dbContext);
+                    this.statystykaRepository = new StatystykaRepository(this._context);
                 }
                 return this.statystykaRepository;
             }
         }
 
-        public GenericRepository<Zarzad> ZarzadRepository
+        public IZarzadRepository ZarzadRepository
         {
             get
             {
                 if (this.zarzadRepository == null)
                 {
-                    this.zarzadRepository = new GenericRepository<Zarzad>(this.dbContext);
+                    this.zarzadRepository = new ZarzadRepository(this._context);
                 }
                 return this.zarzadRepository;
             }
         }
 
+
+
         public void Save()
         {
-            this.dbContext.SaveChanges();
+            this._context.SaveChanges();
         }
 
         private bool disposed = false;
@@ -91,7 +101,7 @@ namespace FootballClubLibrary.Unit_of_Work
             {
                 if (disposing)
                 {
-                    this.dbContext.Dispose();
+                    this._context.Dispose();
                 }
             }
             this.disposed = true;
