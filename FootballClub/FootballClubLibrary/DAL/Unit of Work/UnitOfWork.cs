@@ -13,6 +13,11 @@ namespace FootballClubLibrary.Unit_of_Work
     {
         private ApplicationDbContext dbContext = new ApplicationDbContext();
         private GenericRepository<Klub> klubRepository;
+        private GenericRepository<Pilkarz> pilkarzRepository;
+        private GenericRepository<Pracownik> pracownikRepository;
+        private GenericRepository<Statystyka> statystykaRepository;
+        private GenericRepository<Zarzad> zarzadRepository;
+
 
         public GenericRepository<Klub> KlubRepository
         {
@@ -23,6 +28,54 @@ namespace FootballClubLibrary.Unit_of_Work
                     this.klubRepository = new GenericRepository<Klub>(this.dbContext);
                 }
                 return this.klubRepository;
+            }
+        }
+
+        public GenericRepository<Pilkarz> PilkarzRepository
+        {
+            get
+            {
+                if (this.pilkarzRepository == null)
+                {
+                    this.pilkarzRepository = new GenericRepository<Pilkarz>(this.dbContext);
+                }
+                return this.pilkarzRepository;
+            }
+        }
+
+        public GenericRepository<Pracownik> PracownikRepository
+        {
+            get
+            {
+                if (this.pracownikRepository == null)
+                {
+                    this.pracownikRepository = new GenericRepository<Pracownik>(this.dbContext);
+                }
+                return this.pracownikRepository;
+            }
+        }
+
+        public GenericRepository<Statystyka> StatystykaRepository
+        {
+            get
+            {
+                if (this.statystykaRepository == null)
+                {
+                    this.statystykaRepository = new GenericRepository<Statystyka>(this.dbContext);
+                }
+                return this.statystykaRepository;
+            }
+        }
+
+        public GenericRepository<Zarzad> ZarzadRepository
+        {
+            get
+            {
+                if (this.zarzadRepository == null)
+                {
+                    this.zarzadRepository = new GenericRepository<Zarzad>(this.dbContext);
+                }
+                return this.zarzadRepository;
             }
         }
 

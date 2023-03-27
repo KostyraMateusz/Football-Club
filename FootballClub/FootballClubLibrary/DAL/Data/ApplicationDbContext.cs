@@ -96,8 +96,96 @@ namespace FootballClubLibrary.Data
                         ArchwilaniPilkarze = null,
                         Zarzad = null,
                     }
+                ); ;
+
+            modelBuilder.Entity<Pilkarz>()
+                .HasData(
+                new Pilkarz()
+                {
+                    IdPilkarz = Guid.NewGuid(),
+                    Pozycja = "Napastnik",
+                    Statystyki = null,
+                    ArchiwalneKluby = null,
+                    Wynagrodzenie = 1000,
+                    IdKlubu = null,
+                    Klub = null
+                },
+                new Pilkarz()
+                {
+                    IdPilkarz = Guid.NewGuid(),
+                    Pozycja = "Pomocnik",
+                    Statystyki = null,
+                    ArchiwalneKluby = null,
+                    Wynagrodzenie = 2000,
+                    IdKlubu = null,
+                    Klub = null
+                }
                 );
 
+            modelBuilder.Entity<Pracownik>()
+                .HasData(
+                    new Pracownik()
+                    {
+                        IdPracownik = Guid.NewGuid(),
+                        Imie = "Mateusz",
+                        Nazwisko = "Kostyra",
+                        PESEL = "00124168751",
+                        Wiek = 23,
+                        WykonywanaFunkcja = "Preszes",
+                        IdZarzadu = null,
+                        Zarzad = null
+                    },
+                    new Pracownik()
+                    {
+                        IdPracownik = Guid.NewGuid(),
+                        Imie = "Stanisław",
+                        Nazwisko = "Kluczewski",
+                        PESEL = "00864164771",
+                        Wiek = 23,
+                        WykonywanaFunkcja = "Vc-Preszes",
+                        IdZarzadu = null,
+                        Zarzad = null
+                    }
+                );
+
+            modelBuilder.Entity<Statystyka>()
+                .HasData(
+                new Statystyka
+                {
+                    IdStatystyka = Guid.NewGuid(),
+                    Gole = 4,
+                    Asysty = 1,
+                    Kartki = 0,
+                    PrzebiegnietyDystans = 10.4,
+                    Ocena = 8.7,
+                    IdPilkarz = null,
+                    Pilkarz = null
+                },
+                new Statystyka
+                {
+                    IdStatystyka = Guid.NewGuid(),
+                    Gole = 0,
+                    Asysty = 2,
+                    Kartki = 1,
+                    PrzebiegnietyDystans = 8.4,
+                    Ocena = 7.5,
+                    IdPilkarz = null,
+                    Pilkarz = null
+                }
+                );
+
+            modelBuilder.Entity<Zarzad>()
+                .HasData(
+                    new Zarzad()
+                    {
+                        IdZarzad = Guid.NewGuid(),
+                        Pracownicy = null,
+                        Budzet = 2000,
+                        Cele = null,
+                        Klub = null,
+                        IdKlubu = null
+                    }
+                );
         }
     }
 }

@@ -84,7 +84,7 @@ namespace FootballClubAPI.Controllers
 
         [HttpPatch]
         [Route("api/[controller]/edytujKlub")]
-        public async Task<IActionResult>EdytujKlub(Guid id)
+        public async Task<IActionResult>EdytujKlub(Guid id, Klub _klub)
         {
             try
             {
@@ -93,6 +93,11 @@ namespace FootballClubAPI.Controllers
                 {
                     throw new Exception();
                 }
+                klub.Stadion = _klub.Stadion;
+                klub.Trofea = _klub.Trofea;
+                klub.ArchwilaniPilkarze = _klub.ArchwilaniPilkarze;
+                klub.ObecniPilkarze = _klub.ObecniPilkarze;
+                klub.Zarzad = _klub.Zarzad;
                 this.unitOfWork.KlubRepository.Update(klub);
                 this.unitOfWork.Save();
                 return Ok($"Klub o id {id} został edytowany");
@@ -102,7 +107,5 @@ namespace FootballClubAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
     }
-
 }
