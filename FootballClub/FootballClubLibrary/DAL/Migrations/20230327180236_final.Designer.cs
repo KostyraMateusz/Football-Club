@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FootballClubLibrary.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230327160253_FinalMigration")]
-    partial class FinalMigration
+    [Migration("20230327180236_final")]
+    partial class final
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,13 +48,13 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdKlub = new Guid("d8846ec1-c8ce-43fd-87e0-f6ca49f0d10e"),
+                            IdKlub = new Guid("f3f899c4-b724-4436-bb01-845eb6df8637"),
                             Nazwa = "Klub1",
                             Stadion = "Stadion1"
                         },
                         new
                         {
-                            IdKlub = new Guid("97639ccf-13a1-4f8a-b405-5f1a4482191f"),
+                            IdKlub = new Guid("2b9f0aa6-f441-4488-8989-9925f520cacd"),
                             Nazwa = "Klub2",
                             Stadion = "Stadion2"
                         });
@@ -85,13 +85,13 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdPilkarz = new Guid("aa2811a8-fb02-4841-bc83-84ec98114a60"),
+                            IdPilkarz = new Guid("caa23349-53e5-40e2-b0cf-d0b7050b751c"),
                             Pozycja = "Napastnik",
                             Wynagrodzenie = 1000m
                         },
                         new
                         {
-                            IdPilkarz = new Guid("b6e0ad33-c448-4c7d-bea0-7a4643943ea4"),
+                            IdPilkarz = new Guid("5e4648b9-119e-43f5-b086-f5ea56267848"),
                             Pozycja = "Pomocnik",
                             Wynagrodzenie = 2000m
                         });
@@ -136,7 +136,7 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdPracownik = new Guid("026a7c74-82ae-4b24-8ae9-ff948adcba90"),
+                            IdPracownik = new Guid("fc089e06-d34e-496d-b149-03c18ebe278a"),
                             Imie = "Mateusz",
                             Nazwisko = "Kostyra",
                             PESEL = "00124168751",
@@ -146,7 +146,7 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPracownik = new Guid("ea7c1f63-805e-451d-9686-b469f31e7c06"),
+                            IdPracownik = new Guid("bd860188-d4eb-4f94-abba-6df7c0e6d3d7"),
                             Imie = "Stanisław",
                             Nazwisko = "Kluczewski",
                             PESEL = "00864164771",
@@ -195,7 +195,7 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdStatystyka = new Guid("21e6caf1-1184-4802-82c6-ecd02b5fc985"),
+                            IdStatystyka = new Guid("484be89a-56f2-4b50-a87b-84786ddfb734"),
                             Asysty = 1,
                             CzerwoneKartki = 1,
                             Gole = 4,
@@ -205,7 +205,7 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdStatystyka = new Guid("77afdb37-3517-4db1-9e33-82b1d2164f27"),
+                            IdStatystyka = new Guid("87c2050c-3b0e-4817-88fe-cb3fa37b6384"),
                             Asysty = 2,
                             CzerwoneKartki = 1,
                             Gole = 0,
@@ -241,7 +241,7 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdZarzad = new Guid("4cb42210-e7ab-4ca1-87b2-ae6b3db9e3a2"),
+                            IdZarzad = new Guid("7c9dddda-9e1e-4bd3-a255-7cfb0fb9064d"),
                             Budzet = 2000m
                         });
                 });
