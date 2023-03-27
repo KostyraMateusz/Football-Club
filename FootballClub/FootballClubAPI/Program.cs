@@ -14,6 +14,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddScoped<IKlubRepository, KlubRepository>();
 builder.Services.AddScoped<IZarzadRepository, ZarzadRepository>();
+builder.Services.AddScoped<IPilkarzRepository, PilkarzRepository>();
+builder.Services.AddScoped<IPracownikRepository, PracownikRepository>();
+builder.Services.AddScoped<IStatystykaRepository, StatystykaRepository>();
 
 var app = builder.Build();
 

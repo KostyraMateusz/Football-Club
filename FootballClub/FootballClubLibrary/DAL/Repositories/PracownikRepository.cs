@@ -1,52 +1,51 @@
-﻿
-using FootballClubLibrary.Data;
-using FootballClubLibrary.Intefaces;
+﻿using FootballClubLibrary.Data;
+using FootballClubLibrary.Interfaces;
 using FootballClubLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace FootballClubLibrary.Repositories
 {
-    public class KlubRepository : IKlubRepository, IDisposable
+    public class PracownikRepository : IPracownikRepository, IDisposable
     {
         private readonly ApplicationDbContext dbContext;
         private bool disposed = false;
 
-        public KlubRepository(ApplicationDbContext dbContext)
+        public PracownikRepository(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
 
-        public void CreateKlub(Klub klub)
+        public void CreatePracownik(Pracownik pracownik)
         {
-            this.dbContext.Kluby.Add(klub);
+            this.dbContext.Pracownicy.Add(pracownik);
         }
 
-        public void DeleteKlub(Guid id)
+        public void DeletePracownik(Guid id)
         {
-            var klub = this.dbContext.Kluby.Find(id);
-            this.dbContext.Kluby.Remove(klub);
+            var pracownik = this.dbContext.Pracownicy.Find(id);
+            this.dbContext.Pracownicy.Remove(pracownik);
         }
 
-        public Klub GetKlubById(Guid id)
+        public IEnumerable<Pracownik> GetPracownicy()
         {
-            return this.dbContext.Kluby.Find(id);
+            var pracownicy = this.dbContext.Pracownicy.ToList();
+            return pracownicy;
         }
 
-        public IEnumerable<Klub> GetKluby()
+        public Pracownik GetPracownikById(Guid id)
         {
-            return this.dbContext.Kluby.ToList();
+           var pracownik = this.dbContext.Pracownicy.Find(id);
+            return pracownik;
         }
 
-        public void UpdateKlub(Klub klub)
+        public void UpdatePracownik(Pracownik pracownik)
         {
-            this.dbContext.Entry(klub).State = EntityState.Modified;
+            this.dbContext.Entry(pracownik).State = EntityState.Modified;
         }
 
         public virtual void Dispose(bool disposing)

@@ -16,6 +16,7 @@ namespace FootballClubLibrary.Models
     {
         [Key]
         public Guid IdKlub { get; set; }
+        public string? Nazwa { get; set; }
 
         [MaxLength(50)]
         public string? Stadion { get; set; }

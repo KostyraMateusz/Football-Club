@@ -33,6 +33,8 @@ namespace FootballClubLibrary.Models
 
         public Guid? IdZarzadu { get; set; }
 
+        public decimal Wynagrodzenie { get; set; }
+
         [ForeignKey(nameof(IdZarzadu))]
         public Zarzad? Zarzad { get; set; }
 
