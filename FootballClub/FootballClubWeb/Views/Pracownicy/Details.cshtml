@@ -1,0 +1,60 @@
+﻿@model FootballClubLibrary.Models.Pracownik
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Pracownik</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Imie)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Imie)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nazwisko)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nazwisko)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PESEL)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PESEL)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Wiek)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Wiek)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WykonywanaFunkcja)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WykonywanaFunkcja)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Wynagrodzenie)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Wynagrodzenie)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Zarzad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Zarzad.IdZarzad)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdPracownik">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

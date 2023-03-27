@@ -1,0 +1,77 @@
+﻿@model IEnumerable<FootballClubLibrary.Models.Statystyka>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Mecz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gole)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Asysty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ZolteKartki)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CzerwoneKartki)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrzebiegnietyDystans)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ocena)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pilkarz)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mecz)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gole)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Asysty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZolteKartki)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CzerwoneKartki)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrzebiegnietyDystans)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ocena)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pilkarz.IdPilkarz)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdStatystyka">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdStatystyka">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdStatystyka">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
