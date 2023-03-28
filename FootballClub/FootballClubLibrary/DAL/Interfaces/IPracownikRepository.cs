@@ -1,4 +1,5 @@
 ﻿using FootballClubLibrary.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,12 @@ namespace FootballClubLibrary.Interfaces
 {
     public interface IPracownikRepository
     {
-        IEnumerable<Pracownik> GetPracownicy();
-        Pracownik GetPracownikById(Guid id);
-        void CreatePracownik(Pracownik pracownik);
-        void DeletePracownik(Guid id);
-        void UpdatePracownik(Pracownik pracownik);
-        void Save();
+        Task<IEnumerable<Pracownik>> GetPracownicy();
+        Task<Pracownik> GetPracownikById(Guid id);
+        Task CreatePracownik(Pracownik pracownik);
+        Task DeletePracownik(Guid id);
+        Task UpdatePracownik(Pracownik pracownik);
+        Task Save();
+        DbSet<Pracownik> GetDbSetPracownicy();
     }
 }

@@ -23,28 +23,28 @@ namespace FootballClubLibrary.Repositories
             this.dbContext = dbContext;
         }
 
-        public void CreateKlub(Klub klub)
+        public async Task CreateKlub(Klub klub)
         {
-            this.dbContext.Kluby.Add(klub);
+            await this.dbContext.Kluby.AddAsync(klub);
         }
 
-        public void DeleteKlub(Guid id)
+        public async Task DeleteKlub(Guid id)
         {
-            var klub = this.dbContext.Kluby.Find(id);
+            var klub = await  this.dbContext.Kluby.FindAsync(id);
             this.dbContext.Kluby.Remove(klub);
         }
 
-        public Klub GetKlubById(Guid id)
+        public async Task<Klub> GetKlubById(Guid id)
         {
-            return this.dbContext.Kluby.Find(id);
+            return await this.dbContext.Kluby.FindAsync(id);
         }
 
-        public IEnumerable<Klub> GetKluby()
+        public async Task<IEnumerable<Klub>> GetKluby()
         {
-            return this.dbContext.Kluby.ToList();
+            return await this.dbContext.Kluby.ToListAsync();
         }
 
-        public void UpdateKlub(Klub klub)
+        public async Task UpdateKlub(Klub klub)
         {
             this.dbContext.Entry(klub).State = EntityState.Modified;
         }
@@ -67,9 +67,15 @@ namespace FootballClubLibrary.Repositories
             GC.SuppressFinalize(this);
         }
 
-        public void Save()
+        public DbSet<Klub> GetDbSetKluby()
         {
-            this.dbContext.SaveChanges();
+            var result = this.dbContext.Kluby;
+            return result;
+        }
+
+        public async Task Save()
+        {
+            this.dbContext.SaveChangesAsync();
         }
     }
 }

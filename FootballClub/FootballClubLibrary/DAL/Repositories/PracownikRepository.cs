@@ -20,30 +20,30 @@ namespace FootballClubLibrary.Repositories
             this.dbContext = dbContext;
         }
 
-        public void CreatePracownik(Pracownik pracownik)
+        public async Task CreatePracownik(Pracownik pracownik)
         {
-            this.dbContext.Pracownicy.Add(pracownik);
+            await this.dbContext.Pracownicy.AddAsync(pracownik);
         }
 
-        public void DeletePracownik(Guid id)
+        public async Task DeletePracownik(Guid id)
         {
-            var pracownik = this.dbContext.Pracownicy.Find(id);
+            var pracownik = await this.dbContext.Pracownicy.FindAsync(id);
             this.dbContext.Pracownicy.Remove(pracownik);
         }
 
-        public IEnumerable<Pracownik> GetPracownicy()
+        public async Task<IEnumerable<Pracownik>> GetPracownicy()
         {
-            var pracownicy = this.dbContext.Pracownicy.ToList();
+            var pracownicy = await this.dbContext.Pracownicy.ToListAsync();
             return pracownicy;
         }
 
-        public Pracownik GetPracownikById(Guid id)
+        public async Task<Pracownik> GetPracownikById(Guid id)
         {
-           var pracownik = this.dbContext.Pracownicy.Find(id);
-            return pracownik;
+           var pracownik = await this.dbContext.Pracownicy.FindAsync(id);
+           return pracownik;
         }
 
-        public void UpdatePracownik(Pracownik pracownik)
+        public async Task UpdatePracownik(Pracownik pracownik)
         {
             this.dbContext.Entry(pracownik).State = EntityState.Modified;
         }
@@ -66,9 +66,15 @@ namespace FootballClubLibrary.Repositories
             GC.SuppressFinalize(this);
         }
 
-        public void Save()
+        public async Task Save()
         {
-            this.dbContext.SaveChanges();
+            this.dbContext.SaveChangesAsync();
+        }
+
+        public DbSet<Pracownik> GetDbSetPracownicy()
+        {
+            var result = this.dbContext.Pracownicy;
+            return result;
         }
     }
 }

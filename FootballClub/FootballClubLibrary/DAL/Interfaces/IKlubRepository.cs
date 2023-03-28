@@ -1,4 +1,5 @@
 ﻿using FootballClubLibrary.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,12 @@ namespace FootballClubLibrary.Intefaces
 {
     public interface IKlubRepository
     {
-        IEnumerable<Klub>GetKluby();
-        Klub GetKlubById(Guid id);
-        void CreateKlub(Klub klub);
-        void DeleteKlub(Guid id);
-        void UpdateKlub(Klub klub);
-        void Save();
+        Task<IEnumerable<Klub>>GetKluby();
+        Task<Klub> GetKlubById(Guid id);
+        Task CreateKlub(Klub klub);
+        Task DeleteKlub(Guid id);
+        Task UpdateKlub(Klub klub);
+        Task Save();
+        DbSet<Klub> GetDbSetKluby();
     }
 }

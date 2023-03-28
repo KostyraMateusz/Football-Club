@@ -20,28 +20,28 @@ namespace FootballClubLibrary.Repositories
             this.dbContext = dbContext;
         }
 
-        public void CreateZarzad(Zarzad zarzad)
+        public async Task CreateZarzad(Zarzad zarzad)
         {
-            this.dbContext.Zarzady.Add(zarzad);
+            await this.dbContext.Zarzady.AddAsync(zarzad);
         }
 
-        public void DeleteZarzad(Guid id)
+        public async Task DeleteZarzad(Guid id)
         {
-            var zarzad = this.dbContext.Zarzady.Find(id);
+            var zarzad = await this.dbContext.Zarzady.FindAsync(id);
             this.dbContext.Zarzady.Remove(zarzad);
         }
 
-        public Zarzad GetZarzadById(Guid id)
+        public async Task<Zarzad> GetZarzadById(Guid id)
         {
-            return this.dbContext.Zarzady.Find(id);
+            return await this.dbContext.Zarzady.FindAsync(id);
         }
 
-        public IEnumerable<Zarzad> GetZarzady()
+        public async Task<IEnumerable<Zarzad>> GetZarzady()
         {
-            return this.dbContext.Zarzady.ToList();
+            return await this.dbContext.Zarzady.ToListAsync();
         }
 
-        public void UpdateZarzad(Zarzad zarzad)
+        public async Task UpdateZarzad(Zarzad zarzad)
         {
             this.dbContext.Entry(zarzad).State = EntityState.Modified;
         }
@@ -64,9 +64,15 @@ namespace FootballClubLibrary.Repositories
             GC.SuppressFinalize(this);
         }
 
-        public void Save()
+        public async Task Save()
         {
-            this.dbContext.SaveChanges();
+            this.dbContext.SaveChangesAsync();
+        }
+
+        public DbSet<Zarzad> GetDbSetZarzady()
+        {
+            var result = this.dbContext.Zarzady;
+            return result;
         }
     }
 }

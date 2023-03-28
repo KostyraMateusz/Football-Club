@@ -1,4 +1,5 @@
 ﻿using FootballClubLibrary.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,13 @@ namespace FootballClubLibrary.Interfaces
 {
     public interface IPilkarzRepository
     {
-        IEnumerable<Pilkarz> GetPilkarze();
-        Pilkarz GetPilkarzById(Guid id);
-        void CreatePilkarz(Pilkarz pilkarz);
-        void DeletePilkarz(Guid id);
-        void UpdatePilkarz(Pilkarz pilkarz);
-        void Save();
+        Task<IEnumerable<Pilkarz>> GetPilkarze();
+        Task<Pilkarz> GetPilkarzById(Guid id);
+        Task CreatePilkarz(Pilkarz pilkarz);
+        Task DeletePilkarz(Guid id);
+        Task UpdatePilkarz(Pilkarz pilkarz);
+        Task Save();
+
+        DbSet<Pilkarz> GetDbSetPilkarze();
     }
 }

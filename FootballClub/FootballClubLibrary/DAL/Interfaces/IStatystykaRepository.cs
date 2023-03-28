@@ -1,4 +1,5 @@
 ﻿using FootballClubLibrary.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,12 @@ namespace FootballClubLibrary.Interfaces
 {
     public interface IStatystykaRepository
     {
-        IEnumerable<Statystyka> GetStatystyki();
-        Statystyka GetStatystykaById(Guid id);
-        void CreateStatystyka(Statystyka statystyka);
-        void DeleteStatystyka(Guid id);
-        void UpdateStatystyka(Statystyka statystyka);
-        void Save();
+        Task<IEnumerable<Statystyka>> GetStatystyki();
+        Task<Statystyka> GetStatystykaById(Guid id);
+        Task CreateStatystyka(Statystyka statystyka);
+        Task DeleteStatystyka(Guid id);
+        Task UpdateStatystyka(Statystyka statystyka);
+        Task Save();
+        DbSet<Statystyka> GetDbSetStatystyki();
     }
 }
