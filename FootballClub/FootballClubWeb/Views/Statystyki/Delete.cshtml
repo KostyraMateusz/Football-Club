@@ -1,0 +1,69 @@
+﻿@model FootballClubLibrary.Models.Statystyka
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Statystyka</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Mecz)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Mecz)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gole)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gole)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Asysty)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Asysty)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ZolteKartki)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ZolteKartki)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CzerwoneKartki)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CzerwoneKartki)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PrzebiegnietyDystans)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PrzebiegnietyDystans)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ocena)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ocena)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pilkarz)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pilkarz.IdPilkarz)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdStatystyka" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
