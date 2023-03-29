@@ -7,36 +7,35 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FootballClubLibrary.Data;
 using FootballClubLibrary.Models;
+using FootballClubLibrary.Unit_of_Work;
 
 namespace FootballClubWeb.Controllers
 {
     public class PracownicyController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly UnitOfWork unitOfWork;
 
-        public PracownicyController(ApplicationDbContext context)
+        public PracownicyController()
         {
-            _context = context;
+            this.unitOfWork = new UnitOfWork();
         }
 
         // GET: Pracownicy
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Pracownicy.Include(p => p.Zarzad);
-            return View(await applicationDbContext.ToListAsync());
+            var pracownicy = await this.unitOfWork.PracownikRepository.GetPracownicy();
+            return View(pracownicy);
         }
 
         // GET: Pracownicy/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(Guid id)
         {
-            if (id == null || _context.Pracownicy == null)
+            if (id == null ||  this.unitOfWork.PracownikRepository == null)
             {
                 return NotFound();
             }
 
-            var pracownik = await _context.Pracownicy
-                .Include(p => p.Zarzad)
-                .FirstOrDefaultAsync(m => m.IdPracownik == id);
+            var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(id);
             if (pracownik == null)
             {
                 return NotFound();
@@ -48,7 +47,7 @@ namespace FootballClubWeb.Controllers
         // GET: Pracownicy/Create
         public IActionResult Create()
         {
-            ViewData["IdZarzadu"] = new SelectList(_context.Zarzady, "IdZarzad", "IdZarzad");
+            ViewData["IdZarzadu"] = new SelectList(this.unitOfWork.ZarzadRepository.GetDbSetZarzady(), "IdZarzad", "IdZarzad");
             return View();
         }
 
@@ -62,28 +61,28 @@ namespace FootballClubWeb.Controllers
             if (ModelState.IsValid)
             {
                 pracownik.IdPracownik = Guid.NewGuid();
-                _context.Add(pracownik);
-                await _context.SaveChangesAsync();
+                await this.unitOfWork.PracownikRepository.CreatePracownik(pracownik);
+                await this.unitOfWork.PracownikRepository.Save();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdZarzadu"] = new SelectList(_context.Zarzady, "IdZarzad", "IdZarzad", pracownik.IdZarzadu);
+            ViewData["IdZarzadu"] = new SelectList(this.unitOfWork.ZarzadRepository.GetDbSetZarzady(), "IdZarzad", "IdZarzad", pracownik.IdZarzadu);
             return View(pracownik);
         }
 
         // GET: Pracownicy/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(Guid id)
         {
-            if (id == null || _context.Pracownicy == null)
+            if (id == null || this.unitOfWork.PracownikRepository == null)
             {
                 return NotFound();
             }
 
-            var pracownik = await _context.Pracownicy.FindAsync(id);
+            var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(id);
             if (pracownik == null)
             {
                 return NotFound();
             }
-            ViewData["IdZarzadu"] = new SelectList(_context.Zarzady, "IdZarzad", "IdZarzad", pracownik.IdZarzadu);
+            ViewData["IdZarzadu"] = new SelectList(this.unitOfWork.ZarzadRepository.GetDbSetZarzady(), "IdZarzad", "IdZarzad", pracownik.IdZarzadu);
             return View(pracownik);
         }
 
@@ -103,8 +102,8 @@ namespace FootballClubWeb.Controllers
             {
                 try
                 {
-                    _context.Update(pracownik);
-                    await _context.SaveChangesAsync();
+                    await this.unitOfWork.PracownikRepository.UpdatePracownik(pracownik);
+                    await this.unitOfWork.PracownikRepository.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -119,21 +118,19 @@ namespace FootballClubWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdZarzadu"] = new SelectList(_context.Zarzady, "IdZarzad", "IdZarzad", pracownik.IdZarzadu);
+            ViewData["IdZarzadu"] = new SelectList(this.unitOfWork.ZarzadRepository.GetDbSetZarzady(), "IdZarzad", "IdZarzad", pracownik.IdZarzadu);
             return View(pracownik);
         }
 
         // GET: Pracownicy/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            if (id == null || _context.Pracownicy == null)
+            if (id == null || this.unitOfWork.PracownikRepository == null)
             {
                 return NotFound();
             }
 
-            var pracownik = await _context.Pracownicy
-                .Include(p => p.Zarzad)
-                .FirstOrDefaultAsync(m => m.IdPracownik == id);
+            var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(id);
             if (pracownik == null)
             {
                 return NotFound();
@@ -147,23 +144,23 @@ namespace FootballClubWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if (_context.Pracownicy == null)
+            if (this.unitOfWork.PracownikRepository == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Pracownicy'  is null.");
             }
-            var pracownik = await _context.Pracownicy.FindAsync(id);
+            var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(id);
             if (pracownik != null)
             {
-                _context.Pracownicy.Remove(pracownik);
+                await this.unitOfWork.PracownikRepository.DeletePracownik(id);
             }
             
-            await _context.SaveChangesAsync();
+            await this.unitOfWork.PracownikRepository.Save();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PracownikExists(Guid id)
         {
-          return (_context.Pracownicy?.Any(e => e.IdPracownik == id)).GetValueOrDefault();
+            return this.unitOfWork.PracownikRepository.GetPracownikById(id) != null ? true : false;
         }
     }
 }

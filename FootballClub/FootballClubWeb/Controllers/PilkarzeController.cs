@@ -7,36 +7,35 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FootballClubLibrary.Data;
 using FootballClubLibrary.Models;
+using FootballClubLibrary.Unit_of_Work;
 
 namespace FootballClubWeb.Controllers
 {
     public class PilkarzeController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly UnitOfWork unitOfWork;
 
-        public PilkarzeController(ApplicationDbContext context)
+        public PilkarzeController()
         {
-            _context = context;
+            this.unitOfWork = new UnitOfWork();
         }
 
         // GET: Pilkarze
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Pilkarze.Include(p => p.Klub);
-            return View(await applicationDbContext.ToListAsync());
+            var pilkarze = await this.unitOfWork.PilkarzRepository.GetPilkarze();
+            return View(pilkarze);
         }
 
         // GET: Pilkarze/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(Guid id)
         {
-            if (id == null || _context.Pilkarze == null)
+            if (id == null || this.unitOfWork.PilkarzRepository == null)
             {
                 return NotFound();
             }
 
-            var pilkarz = await _context.Pilkarze
-                .Include(p => p.Klub)
-                .FirstOrDefaultAsync(m => m.IdPilkarz == id);
+            var pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(id);
             if (pilkarz == null)
             {
                 return NotFound();
@@ -48,7 +47,7 @@ namespace FootballClubWeb.Controllers
         // GET: Pilkarze/Create
         public IActionResult Create()
         {
-            ViewData["IdKlubu"] = new SelectList(_context.Kluby, "IdKlub", "IdKlub");
+            ViewData["IdKlubu"] = new SelectList(this.unitOfWork.KlubRepository.GetDbSetKluby(), "IdKlub", "IdKlub");
             return View();
         }
 
@@ -62,28 +61,28 @@ namespace FootballClubWeb.Controllers
             if (ModelState.IsValid)
             {
                 pilkarz.IdPilkarz = Guid.NewGuid();
-                _context.Add(pilkarz);
-                await _context.SaveChangesAsync();
+                await this.unitOfWork.PilkarzRepository.CreatePilkarz(pilkarz);
+                await this.unitOfWork.PilkarzRepository.Save();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdKlubu"] = new SelectList(_context.Kluby, "IdKlub", "IdKlub", pilkarz.IdKlubu);
+            ViewData["IdKlubu"] = new SelectList(this.unitOfWork.KlubRepository.GetDbSetKluby(), "IdKlub", "IdKlub", pilkarz.IdKlubu);
             return View(pilkarz);
         }
 
         // GET: Pilkarze/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(Guid id)
         {
-            if (id == null || _context.Pilkarze == null)
+            if (id == null || this.unitOfWork.KlubRepository == null)
             {
                 return NotFound();
             }
 
-            var pilkarz = await _context.Pilkarze.FindAsync(id);
+            var pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(id);
             if (pilkarz == null)
             {
                 return NotFound();
             }
-            ViewData["IdKlubu"] = new SelectList(_context.Kluby, "IdKlub", "IdKlub", pilkarz.IdKlubu);
+            ViewData["IdKlubu"] = new SelectList(this.unitOfWork.KlubRepository.GetDbSetKluby(), "IdKlub", "IdKlub", pilkarz.IdKlubu);
             return View(pilkarz);
         }
 
@@ -103,8 +102,8 @@ namespace FootballClubWeb.Controllers
             {
                 try
                 {
-                    _context.Update(pilkarz);
-                    await _context.SaveChangesAsync();
+                    await this.unitOfWork.PilkarzRepository.UpdatePilkarz(pilkarz);
+                    await this.unitOfWork.PilkarzRepository.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -119,21 +118,19 @@ namespace FootballClubWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdKlubu"] = new SelectList(_context.Kluby, "IdKlub", "IdKlub", pilkarz.IdKlubu);
+            ViewData["IdKlubu"] = new SelectList(this.unitOfWork.KlubRepository.GetDbSetKluby(), "IdKlub", "IdKlub", pilkarz.IdKlubu);
             return View(pilkarz);
         }
 
         // GET: Pilkarze/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            if (id == null || _context.Pilkarze == null)
+            if (id == null || this.unitOfWork.PilkarzRepository == null)
             {
                 return NotFound();
             }
 
-            var pilkarz = await _context.Pilkarze
-                .Include(p => p.Klub)
-                .FirstOrDefaultAsync(m => m.IdPilkarz == id);
+            var pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(id);
             if (pilkarz == null)
             {
                 return NotFound();
@@ -147,23 +144,23 @@ namespace FootballClubWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if (_context.Pilkarze == null)
+            if (this.unitOfWork.PilkarzRepository == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Pilkarze'  is null.");
+                return Problem("Entity set 'unitOfWork.PilkarzRepository'  is null.");
             }
-            var pilkarz = await _context.Pilkarze.FindAsync(id);
+            var pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(id);
             if (pilkarz != null)
             {
-                _context.Pilkarze.Remove(pilkarz);
+                await this.unitOfWork.PilkarzRepository.DeletePilkarz(id);
             }
-            
-            await _context.SaveChangesAsync();
+
+            await this.unitOfWork.PilkarzRepository.Save();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PilkarzExists(Guid id)
         {
-          return (_context.Pilkarze?.Any(e => e.IdPilkarz == id)).GetValueOrDefault();
+          return this.unitOfWork.PilkarzRepository.GetPilkarzById(id) != null ? true : false;
         }
     }
 }

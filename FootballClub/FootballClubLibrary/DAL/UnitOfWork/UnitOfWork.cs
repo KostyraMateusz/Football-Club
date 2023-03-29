@@ -22,9 +22,9 @@ namespace FootballClubLibrary.Unit_of_Work
         private IStatystykaRepository statystykaRepository;
         private IZarzadRepository zarzadRepository;
 
-        public UnitOfWork(ApplicationDbContext context)
+        public UnitOfWork()
         {
-            _context = context;
+            _context = new ApplicationDbContext();
         }
 
         public IKlubRepository KlubRepository

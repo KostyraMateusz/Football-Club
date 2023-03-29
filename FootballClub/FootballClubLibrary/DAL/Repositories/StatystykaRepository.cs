@@ -20,30 +20,30 @@ namespace FootballClubLibrary.Repositories
             this.dbContext = dbContext;
         }
 
-        public void CreateStatystyka(Statystyka statystyka)
+        public async Task CreateStatystyka(Statystyka statystyka)
         {
-            this.dbContext.Statystyki.Add(statystyka);
+            await this.dbContext.Statystyki.AddAsync(statystyka);
         }
 
-        public void DeleteStatystyka(Guid id)
+        public async Task DeleteStatystyka(Guid id)
         {
-            var statystyka = this.dbContext.Statystyki.Find(id);
+            var statystyka = await this.dbContext.Statystyki.FindAsync(id);
             this.dbContext.Statystyki.Remove(statystyka);
         }
 
-        public Statystyka GetStatystykaById(Guid id)
+        public async Task<Statystyka> GetStatystykaById(Guid id)
         {
-            var statystyka = this.dbContext.Statystyki.Find(id);
+            var statystyka = await this.dbContext.Statystyki.FindAsync(id);
             return statystyka;
         }
 
-        public IEnumerable<Statystyka> GetStatystyki()
+        public async Task<IEnumerable<Statystyka>> GetStatystyki()
         {
-            var statystyki = this.dbContext.Statystyki.ToList();
+            var statystyki = await this.dbContext.Statystyki.ToListAsync();
             return statystyki;
         }
 
-        public void UpdateStatystyka(Statystyka statystyka)
+        public async Task UpdateStatystyka(Statystyka statystyka)
         {
             this.dbContext.Entry(statystyka).State = EntityState.Modified;
         }
@@ -66,9 +66,15 @@ namespace FootballClubLibrary.Repositories
             GC.SuppressFinalize(this);
         }
 
-        public void Save()
+        public async Task Save()
         {
-            this.dbContext.SaveChanges();
+            this.dbContext.SaveChangesAsync();
+        }
+
+        public DbSet<Statystyka> GetDbSetStatystyki()
+        {
+            var result = this.dbContext.Statystyki;
+            return result;
         }
     }
 }
