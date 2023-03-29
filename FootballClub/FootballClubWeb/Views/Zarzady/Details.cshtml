@@ -1,0 +1,36 @@
+﻿@model FootballClubLibrary.Models.Zarzad
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Zarzad</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Budzet)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Budzet)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cele)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cele)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Klub)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Klub.IdKlub)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdZarzad">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

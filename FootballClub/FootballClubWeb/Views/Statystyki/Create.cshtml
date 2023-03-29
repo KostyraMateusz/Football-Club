@@ -1,0 +1,67 @@
+﻿@model FootballClubLibrary.Models.Statystyka
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Statystyka</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Mecz" class="control-label"></label>
+                <input asp-for="Mecz" class="form-control" />
+                <span asp-validation-for="Mecz" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gole" class="control-label"></label>
+                <input asp-for="Gole" class="form-control" />
+                <span asp-validation-for="Gole" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Asysty" class="control-label"></label>
+                <input asp-for="Asysty" class="form-control" />
+                <span asp-validation-for="Asysty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZolteKartki" class="control-label"></label>
+                <input asp-for="ZolteKartki" class="form-control" />
+                <span asp-validation-for="ZolteKartki" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CzerwoneKartki" class="control-label"></label>
+                <input asp-for="CzerwoneKartki" class="form-control" />
+                <span asp-validation-for="CzerwoneKartki" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrzebiegnietyDystans" class="control-label"></label>
+                <input asp-for="PrzebiegnietyDystans" class="form-control" />
+                <span asp-validation-for="PrzebiegnietyDystans" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ocena" class="control-label"></label>
+                <input asp-for="Ocena" class="form-control" />
+                <span asp-validation-for="Ocena" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdPilkarz" class="control-label"></label>
+                <select asp-for="IdPilkarz" class ="form-control" asp-items="ViewBag.IdPilkarz"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

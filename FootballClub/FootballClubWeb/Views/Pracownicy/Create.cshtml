@@ -1,0 +1,62 @@
+﻿@model FootballClubLibrary.Models.Pracownik
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Pracownik</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Imie" class="control-label"></label>
+                <input asp-for="Imie" class="form-control" />
+                <span asp-validation-for="Imie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nazwisko" class="control-label"></label>
+                <input asp-for="Nazwisko" class="form-control" />
+                <span asp-validation-for="Nazwisko" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PESEL" class="control-label"></label>
+                <input asp-for="PESEL" class="form-control" />
+                <span asp-validation-for="PESEL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Wiek" class="control-label"></label>
+                <input asp-for="Wiek" class="form-control" />
+                <span asp-validation-for="Wiek" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WykonywanaFunkcja" class="control-label"></label>
+                <input asp-for="WykonywanaFunkcja" class="form-control" />
+                <span asp-validation-for="WykonywanaFunkcja" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdZarzadu" class="control-label"></label>
+                <select asp-for="IdZarzadu" class ="form-control" asp-items="ViewBag.IdZarzadu"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Wynagrodzenie" class="control-label"></label>
+                <input asp-for="Wynagrodzenie" class="form-control" />
+                <span asp-validation-for="Wynagrodzenie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
