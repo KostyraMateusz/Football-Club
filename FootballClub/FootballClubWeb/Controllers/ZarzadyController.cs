@@ -7,36 +7,35 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FootballClubLibrary.Data;
 using FootballClubLibrary.Models;
+using FootballClubLibrary.Unit_of_Work;
 
 namespace FootballClubWeb.Controllers
 {
     public class ZarzadyController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly UnitOfWork unitOfWork;
 
-        public ZarzadyController(ApplicationDbContext context)
+        public ZarzadyController()
         {
-            _context = context;
+            this.unitOfWork = new UnitOfWork();
         }
 
         // GET: Zarzady
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Zarzady.Include(z => z.Klub);
-            return View(await applicationDbContext.ToListAsync());
+            var zarzady = await this.unitOfWork.ZarzadRepository.GetZarzady();
+            return View(zarzady);
         }
 
         // GET: Zarzady/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(Guid id)
         {
-            if (id == null || _context.Zarzady == null)
+            if (id == null || this.unitOfWork.ZarzadRepository == null)
             {
                 return NotFound();
             }
 
-            var zarzad = await _context.Zarzady
-                .Include(z => z.Klub)
-                .FirstOrDefaultAsync(m => m.IdZarzad == id);
+            var zarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(id);
             if (zarzad == null)
             {
                 return NotFound();
@@ -48,7 +47,7 @@ namespace FootballClubWeb.Controllers
         // GET: Zarzady/Create
         public IActionResult Create()
         {
-            ViewData["IdKlubu"] = new SelectList(_context.Kluby, "IdKlub", "IdKlub");
+            ViewData["IdKlubu"] = new SelectList(this.unitOfWork.KlubRepository.GetDbSetKluby(), "IdKlub", "IdKlub");
             return View();
         }
 
@@ -62,28 +61,28 @@ namespace FootballClubWeb.Controllers
             if (ModelState.IsValid)
             {
                 zarzad.IdZarzad = Guid.NewGuid();
-                _context.Add(zarzad);
-                await _context.SaveChangesAsync();
+                await this.unitOfWork.ZarzadRepository.CreateZarzad(zarzad);
+                await this.unitOfWork.ZarzadRepository.Save();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdKlubu"] = new SelectList(_context.Kluby, "IdKlub", "IdKlub", zarzad.IdKlubu);
+            ViewData["IdKlubu"] = new SelectList(this.unitOfWork.KlubRepository.GetDbSetKluby(), "IdKlub", "IdKlub", zarzad.IdKlubu);
             return View(zarzad);
         }
 
         // GET: Zarzady/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(Guid id)
         {
-            if (id == null || _context.Zarzady == null)
+            if (id == null || this.unitOfWork.ZarzadRepository == null)
             {
                 return NotFound();
             }
 
-            var zarzad = await _context.Zarzady.FindAsync(id);
+            var zarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(id);
             if (zarzad == null)
             {
                 return NotFound();
             }
-            ViewData["IdKlubu"] = new SelectList(_context.Kluby, "IdKlub", "IdKlub", zarzad.IdKlubu);
+            ViewData["IdKlubu"] = new SelectList(this.unitOfWork.KlubRepository.GetDbSetKluby(), "IdKlub", "IdKlub", zarzad.IdKlubu);
             return View(zarzad);
         }
 
@@ -103,8 +102,8 @@ namespace FootballClubWeb.Controllers
             {
                 try
                 {
-                    _context.Update(zarzad);
-                    await _context.SaveChangesAsync();
+                    await this.unitOfWork.ZarzadRepository.UpdateZarzad(zarzad);
+                    await this.unitOfWork.ZarzadRepository.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -119,21 +118,19 @@ namespace FootballClubWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdKlubu"] = new SelectList(_context.Kluby, "IdKlub", "IdKlub", zarzad.IdKlubu);
+            ViewData["IdKlubu"] = new SelectList(this.unitOfWork.KlubRepository.GetDbSetKluby(), "IdKlub", "IdKlub", zarzad.IdKlubu);
             return View(zarzad);
         }
 
         // GET: Zarzady/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            if (id == null || _context.Zarzady == null)
+            if (id == null || this.unitOfWork.ZarzadRepository == null)
             {
                 return NotFound();
             }
 
-            var zarzad = await _context.Zarzady
-                .Include(z => z.Klub)
-                .FirstOrDefaultAsync(m => m.IdZarzad == id);
+            var zarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(id);
             if (zarzad == null)
             {
                 return NotFound();
@@ -147,23 +144,23 @@ namespace FootballClubWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if (_context.Zarzady == null)
+            if (this.unitOfWork.ZarzadRepository == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Zarzady'  is null.");
             }
-            var zarzad = await _context.Zarzady.FindAsync(id);
+            var zarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(id);
             if (zarzad != null)
             {
-                _context.Zarzady.Remove(zarzad);
+                await this.unitOfWork.ZarzadRepository.DeleteZarzad(id);
             }
             
-            await _context.SaveChangesAsync();
+            await this.unitOfWork.ZarzadRepository.Save();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ZarzadExists(Guid id)
         {
-          return (_context.Zarzady?.Any(e => e.IdZarzad == id)).GetValueOrDefault();
+          return this.unitOfWork.ZarzadRepository.GetZarzadById(id) != null ? true : false;
         }
     }
 }

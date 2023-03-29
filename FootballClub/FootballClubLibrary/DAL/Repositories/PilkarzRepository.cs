@@ -20,30 +20,30 @@ namespace FootballClubLibrary.Repositories
             this.dbContext = dbContext;
         }
 
-        public void CreatePilkarz(Pilkarz pilkarz)
+        public async Task CreatePilkarz(Pilkarz pilkarz)
         {
-            this.dbContext.Pilkarze.Add(pilkarz);
+            await this.dbContext.Pilkarze.AddAsync(pilkarz);
         }
 
-        public void DeletePilkarz(Guid id)
+        public async Task DeletePilkarz(Guid id)
         {
-            var pilkarz = this.dbContext.Pilkarze.Find(id);
+            var pilkarz = await this.dbContext.Pilkarze.FindAsync(id);
             this.dbContext.Pilkarze.Remove(pilkarz);
         }
 
-        public Pilkarz GetPilkarzById(Guid id)
+        public async Task<Pilkarz> GetPilkarzById(Guid id)
         {
-            var pilkarz = this.dbContext.Pilkarze.Find(id);
+            var pilkarz = await this.dbContext.Pilkarze.FindAsync(id);
             return pilkarz;
         }
 
-        public IEnumerable<Pilkarz> GetPilkarze()
+        public async Task<IEnumerable<Pilkarz>> GetPilkarze()
         {
-            var pilkarze = this.dbContext.Pilkarze.ToList();
+            var pilkarze = await this.dbContext.Pilkarze.ToListAsync();
             return pilkarze;
         }
 
-        public void UpdatePilkarz(Pilkarz pilkarz)
+        public async Task UpdatePilkarz(Pilkarz pilkarz)
         {
             this.dbContext.Entry(pilkarz).State = EntityState.Modified;
         }
@@ -66,9 +66,15 @@ namespace FootballClubLibrary.Repositories
             GC.SuppressFinalize(this);
         }
 
-        public void Save()
+        public async Task Save()
         {
-            this.dbContext.SaveChanges();
+            this.dbContext.SaveChangesAsync();
+        }
+
+        public DbSet<Pilkarz> GetDbSetPilkarze()
+        {
+            var result = this.dbContext.Pilkarze;
+            return result;
         }
     }
 }

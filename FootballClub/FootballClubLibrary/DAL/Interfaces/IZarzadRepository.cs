@@ -1,4 +1,5 @@
 ﻿using FootballClubLibrary.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,12 @@ namespace FootballClubLibrary.Interfaces
 {
     public interface IZarzadRepository
     {
-        IEnumerable<Zarzad> GetZarzady();
-        Zarzad GetZarzadById(Guid id);
-        void CreateZarzad(Zarzad zarzad);
-        void DeleteZarzad(Guid id);
-        void UpdateZarzad(Zarzad zarzad);
-        void Save();
+        Task<IEnumerable<Zarzad>> GetZarzady();
+        Task<Zarzad> GetZarzadById(Guid id);
+        Task CreateZarzad(Zarzad zarzad);
+        Task DeleteZarzad(Guid id);
+        Task UpdateZarzad(Zarzad zarzad);
+        Task Save();
+        DbSet<Zarzad> GetDbSetZarzady();
     }
 }

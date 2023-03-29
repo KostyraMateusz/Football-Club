@@ -7,35 +7,35 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FootballClubLibrary.Data;
 using FootballClubLibrary.Models;
+using FootballClubLibrary.Unit_of_Work;
 
 namespace FootballClubWeb.Controllers
 {
     public class KlubyController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly UnitOfWork unitOfWork;
 
-        public KlubyController(ApplicationDbContext context)
+        public KlubyController()
         {
-            _context = context;
+            this.unitOfWork = new UnitOfWork();
         }
 
         // GET: Kluby
         public async Task<IActionResult> Index()
         {
-            var kluby = await _context.Kluby.ToListAsync();
+            var kluby = await this.unitOfWork.KlubRepository.GetKluby();
             return View(kluby);
         }
 
         // GET: Kluby/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(Guid id)
         {
-            if (id == null || _context.Kluby == null)
+            if (id == null || this.unitOfWork.KlubRepository == null)
             {
                 return NotFound();
             }
 
-            var klub = await _context.Kluby
-                .FirstOrDefaultAsync(m => m.IdKlub == id);
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById(id);
             if (klub == null)
             {
                 return NotFound();
@@ -60,22 +60,22 @@ namespace FootballClubWeb.Controllers
             if (ModelState.IsValid)
             {
                 klub.IdKlub = Guid.NewGuid();
-                _context.Add(klub);
-                await _context.SaveChangesAsync();
+                await this.unitOfWork.KlubRepository.CreateKlub(klub);
+                await this.unitOfWork.KlubRepository.Save();
                 return RedirectToAction(nameof(Index));
             }
             return View(klub);
         }
 
         // GET: Kluby/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(Guid id)
         {
-            if (id == null || _context.Kluby == null)
+            if (id == null || this.unitOfWork.KlubRepository == null)
             {
                 return NotFound();
             }
 
-            var klub = await _context.Kluby.FindAsync(id);
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById(id);
             if (klub == null)
             {
                 return NotFound();
@@ -99,8 +99,8 @@ namespace FootballClubWeb.Controllers
             {
                 try
                 {
-                    _context.Update(klub);
-                    await _context.SaveChangesAsync();
+                    await this.unitOfWork.KlubRepository.UpdateKlub(klub);
+                    await this.unitOfWork.KlubRepository.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -119,15 +119,14 @@ namespace FootballClubWeb.Controllers
         }
 
         // GET: Kluby/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            if (id == null || _context.Kluby == null)
+            if (id == null || this.unitOfWork.KlubRepository == null)
             {
                 return NotFound();
             }
 
-            var klub = await _context.Kluby
-                .FirstOrDefaultAsync(m => m.IdKlub == id);
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById(id);
             if (klub == null)
             {
                 return NotFound();
@@ -141,23 +140,23 @@ namespace FootballClubWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if (_context.Kluby == null)
+            if (this.unitOfWork.KlubRepository == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Kluby'  is null.");
+                return Problem("Entity set 'unitOfWork.KlubRepository'  is null.");
             }
-            var klub = await _context.Kluby.FindAsync(id);
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById(id);
             if (klub != null)
             {
-                _context.Kluby.Remove(klub);
+                await this.unitOfWork.KlubRepository.DeleteKlub(id);
             }
-            
-            await _context.SaveChangesAsync();
+
+            await this.unitOfWork.KlubRepository.Save();
             return RedirectToAction(nameof(Index));
         }
 
         private bool KlubExists(Guid id)
         {
-          return (_context.Kluby?.Any(e => e.IdKlub == id)).GetValueOrDefault();
+          return this.unitOfWork.KlubRepository.GetKlubById(id) != null ? true : false;
         }
     }
 }
