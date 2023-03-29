@@ -16,7 +16,6 @@ namespace FootballClubLibrary.Interfaces
         Task DeletePilkarz(Guid id);
         Task UpdatePilkarz(Pilkarz pilkarz);
         Task Save();
-
         DbSet<Pilkarz> GetDbSetPilkarze();
     }
 }

@@ -16,7 +16,6 @@ namespace FootballClubLibrary.Interfaces
         Task DeleteZarzad(Guid id);
         Task UpdateZarzad(Zarzad zarzad);
         Task Save();
-
         DbSet<Zarzad> GetDbSetZarzady();
     }
 }
