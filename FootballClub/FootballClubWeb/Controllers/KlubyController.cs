@@ -20,6 +20,7 @@ namespace FootballClubWeb.Controllers
             this.unitOfWork = new UnitOfWork();
         }
 
+
         // GET: Kluby
         public async Task<IActionResult> Index()
         {

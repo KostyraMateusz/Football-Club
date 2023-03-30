@@ -15,6 +15,7 @@ namespace FootballClubWeb.Controllers
     {
         private readonly UnitOfWork unitOfWork;
 
+
         public PracownicyController()
         {
             this.unitOfWork = new UnitOfWork();
