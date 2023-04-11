@@ -2,6 +2,7 @@ using FootballClubLibrary.Data;
 using FootballClubLibrary.Intefaces;
 using FootballClubLibrary.Interfaces;
 using FootballClubLibrary.Repositories;
+using FootballClubLibrary.Unit_of_Work;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddScoped<IZarzadRepository, ZarzadRepository>();
 builder.Services.AddScoped<IPilkarzRepository, PilkarzRepository>();
 builder.Services.AddScoped<IPracownikRepository, PracownikRepository>();
 builder.Services.AddScoped<IStatystykaRepository, StatystykaRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
