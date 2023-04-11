@@ -13,11 +13,11 @@ namespace FootballClubWeb.Controllers
 {
     public class StatystykiController : Controller
     {
-        private readonly UnitOfWork unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
 
-        public StatystykiController()
+        public StatystykiController(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = new UnitOfWork();
+            this.unitOfWork = unitOfWork;
         }
 
         // GET: Statystyki

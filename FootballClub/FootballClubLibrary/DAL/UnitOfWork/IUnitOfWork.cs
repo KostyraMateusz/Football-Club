@@ -16,6 +16,5 @@ namespace FootballClubLibrary.Unit_of_Work
         IPracownikRepository PracownikRepository { get; }
         IStatystykaRepository StatystykaRepository { get; }
         IZarzadRepository ZarzadRepository { get; }
-
     }
 }
