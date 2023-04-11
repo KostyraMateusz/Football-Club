@@ -13,11 +13,11 @@ namespace FootballClubWeb.Controllers
 {
     public class KlubyController : Controller
     {
-        private readonly UnitOfWork unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
 
-        public KlubyController()
+        public KlubyController(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = new UnitOfWork();
+            this.unitOfWork = unitOfWork;
         }
 
 

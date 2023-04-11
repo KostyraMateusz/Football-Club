@@ -13,12 +13,12 @@ namespace FootballClubWeb.Controllers
 {
     public class PracownicyController : Controller
     {
-        private readonly UnitOfWork unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
 
 
-        public PracownicyController()
+        public PracownicyController(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = new UnitOfWork();
+            this.unitOfWork = unitOfWork;
         }
 
         // GET: Pracownicy

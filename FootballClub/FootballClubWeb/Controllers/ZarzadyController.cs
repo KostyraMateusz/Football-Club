@@ -13,11 +13,11 @@ namespace FootballClubWeb.Controllers
 {
     public class ZarzadyController : Controller
     {
-        private readonly UnitOfWork unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
 
-        public ZarzadyController()
+        public ZarzadyController(IUnitOfWork unitOfWork)
         {
-            this.unitOfWork = new UnitOfWork();
+            this.unitOfWork = unitOfWork;
         }
 
         // GET: Zarzady
