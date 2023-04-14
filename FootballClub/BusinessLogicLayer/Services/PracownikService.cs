@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.Interfaces;
+using FootballClubLibrary.Models;
 using FootballClubLibrary.Unit_of_Work;
 using System;
 using System.Collections.Generic;
@@ -17,19 +18,34 @@ namespace BusinessLogicLayer.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public Task ZmienFunkcjePracownika(Guid IdPracownik, string funkcja)
+        public async Task ZmienFunkcjePracownika(Guid IdPracownika, string funkcja)
         {
-            throw new NotImplementedException();
+            var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(IdPracownika);
+            if (funkcja != "")
+            {
+                pracownik.WykonywanaFunkcja=funkcja;
+            }
+            return;
         }
 
-        public Task ZmienWiekPracownika(Guid IdPracownika, int wiek)
+        public async Task ZmienWiekPracownika(Guid IdPracownika, int wiek)
         {
-            throw new NotImplementedException();
+            var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(IdPracownika);
+            if (wiek >= 16 && wiek <=99)
+            {
+                pracownik.Wiek = wiek;
+            }
+            return;
         }
 
-        public Task ZmienWynagrodzenie(Guid IdPracownik, decimal wynagrodzenie)
+        public async Task ZmienWynagrodzenie(Guid IdPracownika, decimal wynagrodzenie)
         {
-            throw new NotImplementedException();
+            var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(IdPracownika);
+            if (wynagrodzenie > 0)
+            {
+                pracownik.Wynagrodzenie = wynagrodzenie;
+            }
+            return;
         }
     }
 }

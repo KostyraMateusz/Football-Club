@@ -39,7 +39,7 @@ namespace BusinessLogicLayer.Services
             return result;
         }
 
-        public async Task<IEnumerable<Pilkarz>> DodajObecnychPilkarzy(Guid IdKlubu)
+        public async Task<IEnumerable<Pilkarz>> DajObecnychPilkarzy(Guid IdKlubu)
         {
             var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
             var result = klub.ObecniPilkarze.ToList();
