@@ -9,9 +9,9 @@ namespace BusinessLogicLayer.Interfaces
 {
     public interface IZarzadService
     {
-        Task DodajCzlonkaZarzadu(Pracownik pracownik, Zarzad zarzad);
-        Task<decimal> DajBudzetZarzadu(Zarzad zarzad);
-        Task ZmienBudzetZarzadu(Zarzad zarzad, decimal budget);
-        Task DodajCelZarzadu(string target, Zarzad zarzad);
+        Task<decimal> DajBudzetZarzadu(Guid IdZarzadu);
+        Task DodajCelZarzadu(Guid IdZarzadu, string cel);
+        Task DodajCzlonkaZarzadu(Guid IdZarzadu, Pracownik pracownik);
+        Task ZmienBudzetZarzadu(Guid IdZarzadu, decimal budget);
     }
 }

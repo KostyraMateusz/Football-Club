@@ -11,7 +11,7 @@ namespace BusinessLogicLayer.Interfaces
     {
         Task<IEnumerable<Pilkarz>> DajArchiwalnychPilkarzy(Guid IdKlubu);
         Task<Pilkarz> DajArchiwalnegoPilkarza(Guid IdKlubu, Guid IdPilkarza);
-        Task <IEnumerable<Pilkarz>> DodajObecnychPilkarzy(Guid IdKlubu);
+        Task <IEnumerable<Pilkarz>> DajObecnychPilkarzy(Guid IdKlubu);
         Task<Pilkarz> DajObecnegoPilkarza(Guid IdKlubu, Guid IdPilkarza);
         Task<string> DajStadionKlubu(Guid IdKlubu);
         Task<IEnumerable<string>> DajTrofeaKlubu(Guid IdKlubu);

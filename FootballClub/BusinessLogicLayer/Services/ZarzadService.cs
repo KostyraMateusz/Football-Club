@@ -18,24 +18,41 @@ namespace BusinessLogicLayer.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public Task<decimal> DajBudzetZarzadu(Zarzad zarzad)
+        public async Task<decimal> DajBudzetZarzadu(Guid IdZarzadu)
         {
-            throw new NotImplementedException();
+            var zarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(IdZarzadu);
+            var result = zarzad.Budzet;
+            return result;
         }
 
-        public Task DodajCelZarzadu(string target, Zarzad zarzad)
+        public async Task DodajCelZarzadu(Guid IdZarzadu, string cel)
         {
-            throw new NotImplementedException();
+            var zarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(IdZarzadu);
+            if (cel != "")
+            {
+                zarzad.Cele.Add(cel);
+            }
+            return;
         }
 
-        public Task DodajCzlonkaZarzadu(Pracownik pracownik, Zarzad zarzad)
+        public async Task DodajCzlonkaZarzadu(Guid IdZarzadu, Pracownik pracownik)
         {
-            throw new NotImplementedException();
+            var zarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(IdZarzadu);
+            if (pracownik != null)
+            {
+                zarzad.Pracownicy.Add(pracownik);
+            }
+            return;
         }
 
-        public Task ZmienBudzetZarzadu(Zarzad zarzad, decimal budget)
+        public async Task ZmienBudzetZarzadu(Guid IdZarzadu, decimal budzet)
         {
-            throw new NotImplementedException();
+            var zarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(IdZarzadu);
+            if (budzet > 0)
+            {
+                zarzad.Budzet = budzet;
+            }
+            return;
         }
     }
 }
