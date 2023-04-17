@@ -86,9 +86,9 @@ namespace FootballClubLibrary.Unit_of_Work
             }
         }
 
-        public void Save()
+        public async Task Save()
         {
-            this._context.SaveChanges();
+            await this._context.SaveChangesAsync();
         }
 
         private bool disposed = false;

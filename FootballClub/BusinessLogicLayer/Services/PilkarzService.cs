@@ -18,10 +18,22 @@ namespace BusinessLogicLayer.Services
             this.unitOfWork = unitOfWork;
         }
 
+        public async Task<IEnumerable<Pilkarz>> DajPilkarzy()
+        {
+            return await this.unitOfWork.PilkarzRepository.GetPilkarze();
+        }
+
         public async Task<IEnumerable<Klub>> DajArchiwalneKlubyPilkarza(Guid IdPilkarz)
         {
             var pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(IdPilkarz);
             var result = pilkarz.ArchiwalneKluby.ToList();
+            return result;
+        }
+
+        public async Task<IEnumerable<Statystyka>> DajNajlepszeStatystykiPilkarza(Guid IdPilkarz)
+        {
+            var pilkarze = await this.unitOfWork.PilkarzRepository.GetPilkarzById(IdPilkarz);
+            var result = pilkarze.Statystyki.OrderByDescending(p => p.Ocena).Take(5);
             return result;
         }
 
@@ -42,11 +54,15 @@ namespace BusinessLogicLayer.Services
         public async Task ZmienPozycjePilkarza(Guid IdPilkarza, string pozycja)
         {
             var pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(IdPilkarza);
-            if(pozycja != "")
+            if (pozycja != "")
             {
                 pilkarz.Pozycja = pozycja;
             }
-            return;
+            else
+            {
+                return;
+            }
+            await this.unitOfWork.Save();
         }
     }
 }

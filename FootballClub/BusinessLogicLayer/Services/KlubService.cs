@@ -18,6 +18,11 @@ namespace BusinessLogicLayer.Services
             this.unitOfWork = unitOfWork;
         }
 
+        public async Task<IEnumerable<Klub>> DajKluby()
+        {
+            return await this.unitOfWork.KlubRepository.GetKluby();
+        }
+
         public async Task<Pilkarz> DajArchiwalnegoPilkarza(Guid IdKlubu, Guid IdPilkarza)
         {
             var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
@@ -55,7 +60,32 @@ namespace BusinessLogicLayer.Services
         public async Task<IEnumerable<string>> DajTrofeaKlubu(Guid IdKlubu)
         {
             var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
-            return klub.Trofea;
+            return klub.Trofea.ToList();
+        }
+
+        public async Task DodajPilkarzaDoObecnych(Guid PilkarzId, Guid IdKlubu)
+        {
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
+            var _pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(PilkarzId);
+            if (_pilkarz == null || klub == null)
+            {
+                return;
+            }
+            klub.ObecniPilkarze.Add(_pilkarz);
+            await this.unitOfWork.Save();
+        }
+
+        public async Task UsunPilkarzaZObecnych(Guid PilkarzId, Guid IdKlubu)
+        {
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
+            var _pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(PilkarzId);
+            if (_pilkarz == null || klub == null)
+            {
+                return;
+            }
+            klub.ObecniPilkarze.Remove(_pilkarz);
+            klub.ArchwilaniPilkarze.Add(_pilkarz);
+            await this.unitOfWork.Save();
         }
     }
 }
