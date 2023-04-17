@@ -10,5 +10,8 @@ namespace BusinessLogicLayer.Interfaces
     public interface IStatystykaService
     {
         Task<Statystyka>DajStatystykeMeczu(string mecz);
+        Task<IEnumerable<Statystyka>> DajStatystkiZoltejKartki();
+        Task<IEnumerable<Statystyka>> DajStatystykiCzerwonychKartek();
+        Task<IEnumerable<Statystyka>> DajStatystykeNajdluzszePrzebiegnieteDystanse();
     }
 }
