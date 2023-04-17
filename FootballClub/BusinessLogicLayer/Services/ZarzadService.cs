@@ -17,12 +17,22 @@ namespace BusinessLogicLayer.Services
         {
             this.unitOfWork = unitOfWork;
         }
+        public async Task<IEnumerable<Zarzad>> DajZarzady()
+        {
+            return await this.unitOfWork.ZarzadRepository.GetZarzady();
+        }
 
-        public async Task<decimal> DajBudzetZarzadu(Guid IdZarzadu)
+        public async Task<decimal> DajWynikFinansowyZarzadu(Guid IdZarzadu)
         {
             var zarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(IdZarzadu);
-            var result = zarzad.Budzet;
-            return result;
+            if (zarzad == null)
+            {
+                return 0;
+            }
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById((Guid)zarzad.IdKlubu);
+            var pensjePilkarze = klub.ObecniPilkarze.Sum(p => p.Wynagrodzenie);
+            var pensjePracownikow = zarzad.Pracownicy.Sum(p => p.Wynagrodzenie);
+            return zarzad.Budzet - pensjePilkarze - pensjePracownikow;
         }
 
         public async Task DodajCelZarzadu(Guid IdZarzadu, string cel)
@@ -32,17 +42,26 @@ namespace BusinessLogicLayer.Services
             {
                 zarzad.Cele.Add(cel);
             }
-            return;
+            else
+            {
+                return;
+            }
+            await this.unitOfWork.Save();
         }
 
-        public async Task DodajCzlonkaZarzadu(Guid IdZarzadu, Pracownik pracownik)
+        public async Task DodajCzlonkaZarzadu(Guid IdZarzadu, Guid PracownikId)
         {
             var zarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(IdZarzadu);
+            var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(PracownikId);
             if (pracownik != null)
             {
                 zarzad.Pracownicy.Add(pracownik);
+            } 
+            else
+            {
+                return;
             }
-            return;
+            await this.unitOfWork.Save();
         }
 
         public async Task ZmienBudzetZarzadu(Guid IdZarzadu, decimal budzet)
@@ -52,7 +71,11 @@ namespace BusinessLogicLayer.Services
             {
                 zarzad.Budzet = budzet;
             }
-            return;
+            else
+            {
+                return;
+            }
+            await this.unitOfWork.Save();
         }
     }
 }

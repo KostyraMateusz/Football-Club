@@ -23,19 +23,27 @@ namespace BusinessLogicLayer.Services
             var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(IdPracownika);
             if (funkcja != "")
             {
-                pracownik.WykonywanaFunkcja=funkcja;
+                pracownik.WykonywanaFunkcja = funkcja;
             }
-            return;
+            else
+            {
+                return;
+            }
+            await this.unitOfWork.Save();
         }
 
         public async Task ZmienWiekPracownika(Guid IdPracownika, int wiek)
         {
             var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(IdPracownika);
-            if (wiek >= 16 && wiek <=99)
+            if (wiek >= 16 && wiek <= 99)
             {
                 pracownik.Wiek = wiek;
             }
-            return;
+            else
+            {
+                return;
+            }
+            await this.unitOfWork.Save();
         }
 
         public async Task ZmienWynagrodzenie(Guid IdPracownika, decimal wynagrodzenie)
@@ -45,7 +53,11 @@ namespace BusinessLogicLayer.Services
             {
                 pracownik.Wynagrodzenie = wynagrodzenie;
             }
-            return;
+            else
+            {
+                return;
+            }
+            await this.unitOfWork.Save();
         }
     }
 }
