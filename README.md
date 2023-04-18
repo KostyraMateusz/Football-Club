@@ -6,6 +6,3 @@ Aplikacja ta będzie stanowić źródło informacji dla kibiców klubu oraz osó
 ## Authors
 * @KostyraMateusz
 * @StanislawKluczewski
-
-
-# Used Technologies:
