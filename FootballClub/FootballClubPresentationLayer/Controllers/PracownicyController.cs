@@ -12,6 +12,11 @@ namespace FootballClubPresentationLayer.Controllers
             this.pracownikService = pracownikService;
         }
 
+        public async Task<ActionResult> Index()
+        {
+            var pracownicy = await this.pracownikService.DajPracownikow();
+            return View(pracownicy);
+        }
 
         [HttpPut("/ZmienFunkcjePracownika")]
         public async Task<ActionResult> ZmienFunkcjePracownika([FromBody] Guid IdPracownik, string funkcja)
@@ -25,9 +30,9 @@ namespace FootballClubPresentationLayer.Controllers
                 await this.pracownikService.ZmienFunkcjePracownika(IdPracownik, funkcja);
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -44,9 +49,9 @@ namespace FootballClubPresentationLayer.Controllers
                 await this.pracownikService.ZmienWynagrodzenie(IdPracownik, wynagrodzenie);
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -63,9 +68,9 @@ namespace FootballClubPresentationLayer.Controllers
                 await this.pracownikService.ZmienWiekPracownika(IdPracownik, wiek);
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
     }

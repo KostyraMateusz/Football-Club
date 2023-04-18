@@ -64,5 +64,12 @@ namespace BusinessLogicLayer.Services
             }
             await this.unitOfWork.Save();
         }
+
+        public async Task<IEnumerable<Pilkarz>> DajPilkarzyBezKlubu()
+        {
+            var pilkarze = await this.unitOfWork.PilkarzRepository.GetPilkarze();
+            var result = pilkarze.Where(p => p.IdKlubu == null && p.Klub == null);
+            return result;
+        }
     }
 }

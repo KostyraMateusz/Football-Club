@@ -15,10 +15,9 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var pilkarze = this.pilkarzService.DajPilkarzy();
-            ViewData["Pilkarze"] = pilkarze;
+            var pilkarze = await this.pilkarzService.DajPilkarzy();
             return View(pilkarze);
         }
 
@@ -35,9 +34,9 @@ namespace FootballClubPresentationLayer.Controllers
                 }
                 return View(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -54,9 +53,9 @@ namespace FootballClubPresentationLayer.Controllers
                 }
                 return View(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -73,9 +72,9 @@ namespace FootballClubPresentationLayer.Controllers
                 }
                 return View(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -92,9 +91,9 @@ namespace FootballClubPresentationLayer.Controllers
                 await this.pilkarzService.ZmienPozycjePilkarza(IdPilkarza, pozycja);
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -111,9 +110,27 @@ namespace FootballClubPresentationLayer.Controllers
                 }
                 return View(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
+            }
+        }
+
+        [HttpGet("/DajPilkarzyBezKlubu")]
+        public async Task<ActionResult> DajPilkarzyBezKlubu()
+        {
+            try
+            {
+                var result = await this.pilkarzService.DajPilkarzyBezKlubu();
+                if (result == null)
+                {
+                    throw new Exception("");
+                }
+                return View(result);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
             }
         }
     }
