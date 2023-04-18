@@ -3,7 +3,7 @@ Celem niniejszego projektu jest stworzenie aplikacji webowej dla klubu piłkarsk
 Aplikacja ta będzie stanowić źródło informacji dla kibiców klubu oraz osób zainteresowanych historią klubu. Dzięki stworzeniu takiej aplikacji, fani będą mieli możliwość przeglądania aktualnych wyników meczów, statystyk piłkarzy, a także możliwość poznania historii klubu i jego wcześniejszych osiągnięć. Aplikacja będzie łatwo dostępna z poziomu przeglądarki internetowej oraz zaprojektowana w sposób intuicyjny i przyjazny dla użytkownika.
 
 ## Authors
-*@KostyraMateusz
-*@StanislawKluczewski
+* @KostyraMateusz
+* @StanislawKluczewski
 
 # Used Technologies:
