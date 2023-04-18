@@ -15,11 +15,10 @@ namespace FootballClubPresentationLayer.Controllers
             _zarzadService = zarzadService;
         }
 
-
-        public IActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var zarzady = this._zarzadService.DajZarzady();
-            return View();
+            var zarzady = await this._zarzadService.DajZarzady();
+            return View(zarzady);
         }
 
         [HttpGet("/DajWynikFinansowy")]
@@ -34,9 +33,9 @@ namespace FootballClubPresentationLayer.Controllers
                 }
                 return View(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -52,9 +51,9 @@ namespace FootballClubPresentationLayer.Controllers
                 await this._zarzadService.DodajCelZarzadu(IdZarzadu, cel);
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -70,9 +69,9 @@ namespace FootballClubPresentationLayer.Controllers
                 await this._zarzadService.DodajCzlonkaZarzadu(IdZarzadu, IdPracownik);
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -88,9 +87,9 @@ namespace FootballClubPresentationLayer.Controllers
                 await this._zarzadService.ZmienBudzetZarzadu(IdZarzadu, budzet);
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
     }

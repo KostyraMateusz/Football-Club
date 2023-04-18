@@ -14,6 +14,11 @@ namespace FootballClubPresentationLayer.Controllers
             this.statystykaService = statystykaService;
         }
 
+        public async Task<ActionResult> Index()
+        {
+            var statystyki = await this.statystykaService.DajStatystyki();
+            return View(statystyki);
+        }
 
         [HttpGet("/DajStatystykeMeczu")]
         public async Task<ActionResult> DajStatystykeMeczu(string mecz)
@@ -27,9 +32,9 @@ namespace FootballClubPresentationLayer.Controllers
                 }
                 return View(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -46,9 +51,9 @@ namespace FootballClubPresentationLayer.Controllers
                 }
                 return View(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -65,9 +70,9 @@ namespace FootballClubPresentationLayer.Controllers
                 }
                 return View(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -84,9 +89,9 @@ namespace FootballClubPresentationLayer.Controllers
                 }
                 return View(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
     }

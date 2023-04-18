@@ -18,6 +18,11 @@ namespace BusinessLogicLayer.Services
             this.unitOfWork = unitOfWork;
         }
 
+        public async Task<IEnumerable<Pracownik>> DajPracownikow()
+        {
+            return await this.unitOfWork.PracownikRepository.GetPracownicy();
+        }
+
         public async Task ZmienFunkcjePracownika(Guid IdPracownika, string funkcja)
         {
             var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(IdPracownika);

@@ -15,5 +15,6 @@ namespace BusinessLogicLayer.Interfaces
         Task<IEnumerable<Statystyka>> DajStatystykiPilkarza(Guid IdPilkarz);
         Task ZmienPozycjePilkarza(Guid IdPilkarza, string pozycja);
         Task<IEnumerable<Statystyka>> DajNajlepszeStatystykiPilkarza(Guid IdPilkarz);
+        Task<IEnumerable<Pilkarz>> DajPilkarzyBezKlubu();
     }
 }

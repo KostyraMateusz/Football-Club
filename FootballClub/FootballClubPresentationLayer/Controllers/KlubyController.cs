@@ -14,10 +14,9 @@ namespace FootballClubPresentationLayer.Controllers
             this.klubService = klubService;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var kluby = this.klubService.DajKluby();
-            ViewData["Kluby"] = kluby;
+            var kluby = await this.klubService.DajKluby();
             return View(kluby);
         }
 
@@ -33,9 +32,9 @@ namespace FootballClubPresentationLayer.Controllers
                 }
                 return View(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -51,9 +50,9 @@ namespace FootballClubPresentationLayer.Controllers
                 }
                 return View(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -70,9 +69,9 @@ namespace FootballClubPresentationLayer.Controllers
                 }
                 return View(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -89,9 +88,9 @@ namespace FootballClubPresentationLayer.Controllers
                 }
                 return View(result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -107,9 +106,9 @@ namespace FootballClubPresentationLayer.Controllers
                 await this.klubService.DodajPilkarzaDoObecnych(IdPilkarza, IdKlubu);
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
 
@@ -125,9 +124,9 @@ namespace FootballClubPresentationLayer.Controllers
                 await this.klubService.UsunPilkarzaZObecnych(IdPilkarza, IdKlubu);
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound();
+                return View(ex.Message);
             }
         }
     }
