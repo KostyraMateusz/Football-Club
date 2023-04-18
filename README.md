@@ -7,4 +7,5 @@ Aplikacja ta będzie stanowić źródło informacji dla kibiców klubu oraz osó
 * @KostyraMateusz
 * @StanislawKluczewski
 
+
 # Used Technologies:
