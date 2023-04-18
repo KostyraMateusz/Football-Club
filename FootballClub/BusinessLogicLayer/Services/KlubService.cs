@@ -1,6 +1,7 @@
 ﻿using BusinessLogicLayer.Interfaces;
 using FootballClubLibrary.Models;
 using FootballClubLibrary.Unit_of_Work;
+using NuGet.Versioning;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,7 +68,8 @@ namespace BusinessLogicLayer.Services
         {
             var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
             var _pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(PilkarzId);
-            if (_pilkarz == null || klub == null)
+            bool czyPilkarzJestWObecnych = klub.ObecniPilkarze.Contains(_pilkarz);
+            if (_pilkarz == null || klub == null || czyPilkarzJestWObecnych == true)
             {
                 return;
             }
@@ -79,7 +81,8 @@ namespace BusinessLogicLayer.Services
         {
             var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
             var _pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(PilkarzId);
-            if (_pilkarz == null || klub == null)
+            bool czyPilkarzJestWObecnych = klub.ObecniPilkarze.Contains(_pilkarz);
+            if (_pilkarz == null || klub == null || czyPilkarzJestWObecnych == false)
             {
                 return;
             }

@@ -18,6 +18,12 @@ namespace BusinessLogicLayer.Services
             this.unitOfWork = unitOfWork;
         }
 
+        public async Task<IEnumerable<Statystyka>> DajStatystyki()
+        {
+            return await this.unitOfWork.StatystykaRepository.GetStatystyki();
+        }
+
+
         public async Task<IEnumerable<Statystyka>> DajStatystkiZoltejKartki()
         {
             var statystyki = await this.unitOfWork.StatystykaRepository.GetStatystyki();
