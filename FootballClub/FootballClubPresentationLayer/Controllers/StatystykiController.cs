@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FootballClubPresentationLayer.Controllers
 {
-    [Route("/api/statystyka")]
     public class StatystykiController : Controller
     {
         private readonly IStatystykaService statystykaService;
@@ -20,7 +19,8 @@ namespace FootballClubPresentationLayer.Controllers
             return View(statystyki);
         }
 
-        [HttpGet("/DajStatystykeMeczu")]
+        [HttpGet]
+        [Route("api/[controller]/DajStatystykeMeczu")]
         public async Task<ActionResult> DajStatystykeMeczu(string mecz)
         {
             try
@@ -39,7 +39,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
 
-        [HttpGet("/DajStatystkiZoltejKartki")]
+        [HttpGet]
+        [Route("api/[controller]/DajStatystkiZoltejKartki")]
         public async Task<ActionResult> DajStatystkiZoltejKartki()
         {
             try
@@ -58,7 +59,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
 
-        [HttpGet("/DajStatystykiCzerwonychKartek")]
+        [HttpGet]
+        [Route("api/[controller]/DajStatystykiCzerwonychKartek")]
         public async Task<ActionResult> DajStatystykiCzerwonychKartek()
         {
             try
@@ -77,7 +79,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
 
-        [HttpGet("/DajStatystykeNajdluzszePrzebiegnieteDystanse")]
+        [HttpGet]
+        [Route("api/[controller]/DajStatystykeNajdluzszePrzebiegnieteDystanse")]
         public async Task<ActionResult> DajStatystykeNajdluzszePrzebiegnieteDystanse()
         {
             try

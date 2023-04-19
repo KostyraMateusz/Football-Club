@@ -18,7 +18,8 @@ namespace FootballClubPresentationLayer.Controllers
             return View(pracownicy);
         }
 
-        [HttpPut("/ZmienFunkcjePracownika")]
+        [HttpPut]
+        [Route("api/[controller]/ZmienFunkcjePracownika")]
         public async Task<ActionResult> ZmienFunkcjePracownika([FromBody] Guid IdPracownik, string funkcja)
         {
             try
@@ -37,7 +38,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
 
-        [HttpPut("/ZmienWynagrodzenie")]
+        [HttpPut]
+        [Route("api/[controller]/ZmienWynagrodzenie")]
         public async Task<ActionResult> ZmienWynagrodzenie([FromBody] Guid IdPracownik, decimal wynagrodzenie)
         {
             try
@@ -56,7 +58,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
 
-        [HttpPut("/ZmienWiekPracownika")]
+        [HttpPut]
+        [Route("api/[controller]/ZmienWiekPracownika")]
         public async Task<ActionResult> ZmienWiekPracownika([FromBody] Guid IdPracownik, int wiek)
         {
             try

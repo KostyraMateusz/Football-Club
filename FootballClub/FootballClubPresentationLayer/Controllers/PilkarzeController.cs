@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FootballClubPresentationLayer.Controllers
 {
-    [Route("/api/pilkarz")]
     public class PilkarzeController : Controller
     {
         private readonly IPilkarzService pilkarzService;
@@ -22,7 +21,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
 
-        [HttpGet("/DajArchiwalneKlubyPilkarza")]
+        [HttpGet]
+        [Route("api/[controller]/DajArchiwalneKlubyPilkarza")]
         public async Task<ActionResult> DajArchiwalneKlubyPilkarza([FromBody] Guid IdPilkarza)
         {
             try
@@ -41,7 +41,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
 
-        [HttpGet("/DajStatystykePilkarza")]
+        [HttpGet]
+        [Route("api/[controller]/DajStatystykePilkarza")]
         public async Task<ActionResult> DajStatystykePilkarza([FromBody] Guid IdStatystyka, [FromBody] Guid IdPilkarza)
         {
             try
@@ -60,7 +61,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
 
-        [HttpGet("/DajStatystykiPilkarza")]
+        [HttpGet]
+        [Route("api/[controller]/DajStatystykiPilkarza")]
         public async Task<ActionResult> DajStatystykiPilkarza([FromBody] Guid IdPilkarza)
         {
             try
@@ -78,27 +80,8 @@ namespace FootballClubPresentationLayer.Controllers
             }
         }
 
-
-        [HttpPut("/ZmienPozycjePilkarza")]
-        public async Task<ActionResult> ZmienPozycjePilkarza([FromBody] Guid IdPilkarza, string pozycja)
-        {
-            try
-            {
-                if (IdPilkarza.Equals(null) || pozycja.Equals(null))
-                {
-                    throw new Exception();
-                }
-                await this.pilkarzService.ZmienPozycjePilkarza(IdPilkarza, pozycja);
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                return View(ex.Message);
-            }
-        }
-
-
-        [HttpGet("/DajNajlepszeStatystykiPilkarza")]
+        [HttpGet]
+        [Route("api/[controller]/DajNajlepszeStatystykiPilkarza")]
         public async Task<ActionResult> DajNajlepszeStatystykiPilkarza([FromBody] Guid IdPilkarza)
         {
             try
@@ -116,7 +99,8 @@ namespace FootballClubPresentationLayer.Controllers
             }
         }
 
-        [HttpGet("/DajPilkarzyBezKlubu")]
+        [HttpGet]
+        [Route("api/[controller]/DajPilkarzyBezKlubu")]
         public async Task<ActionResult> DajPilkarzyBezKlubu()
         {
             try
@@ -127,6 +111,25 @@ namespace FootballClubPresentationLayer.Controllers
                     throw new Exception("");
                 }
                 return View(result);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("api/[controller]/ZmienPozycjePilkarza")]
+        public async Task<ActionResult> ZmienPozycjePilkarza([FromBody] Guid IdPilkarza, string pozycja)
+        {
+            try
+            {
+                if (IdPilkarza.Equals(null) || pozycja.Equals(null))
+                {
+                    throw new Exception();
+                }
+                await this.pilkarzService.ZmienPozycjePilkarza(IdPilkarza, pozycja);
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {

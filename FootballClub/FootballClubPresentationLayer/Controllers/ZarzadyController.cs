@@ -5,7 +5,6 @@ using System.Runtime.ConstrainedExecution;
 
 namespace FootballClubPresentationLayer.Controllers
 {
-    [Route("/api/Zarzad")]
     public class ZarzadyController : Controller
     {
         private readonly IZarzadService _zarzadService;
@@ -21,7 +20,8 @@ namespace FootballClubPresentationLayer.Controllers
             return View(zarzady);
         }
 
-        [HttpGet("/DajWynikFinansowy")]
+        [HttpGet]
+        [Route("api/[controller]/DajWynikFinansowy")]
         public async Task<ActionResult>DajWynikFinansowy([FromBody]Guid IdZarzadu)
         {
             try
@@ -39,7 +39,8 @@ namespace FootballClubPresentationLayer.Controllers
             }
         }
 
-        [HttpPost("/DodajCelZarzadu")]
+        [HttpPost]
+        [Route("api/[controller]/DodajCelZarzadu")]
         public async Task<ActionResult> DodajCelZarzadu([FromBody]Guid IdZarzadu, string cel)
         {
             try
@@ -57,7 +58,8 @@ namespace FootballClubPresentationLayer.Controllers
             }
         }
 
-        [HttpPost("/DodajCzlonkaZarzadu")]
+        [HttpPost]
+        [Route("api/[controller]/DodajCzlonkaZarzadu")]
         public async Task<ActionResult> DodajCzlonkaZarzadu([FromBody]Guid IdZarzadu, [FromBody]Guid IdPracownik)
         {
             try
@@ -75,7 +77,8 @@ namespace FootballClubPresentationLayer.Controllers
             }
         }
 
-        [HttpPut("/ZmienBudzetZarzadu")]
+        [HttpPut]
+        [Route("api/[controller]/ZmienBudzetZarzadu")]
         public async Task<ActionResult> ZmienBudzetZarzadu([FromBody]Guid IdZarzadu, decimal budzet)
         {
             try
