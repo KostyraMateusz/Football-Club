@@ -75,7 +75,7 @@ namespace FootballClubLibrary.Repositories
 
         public async Task Save()
         {
-            this.dbContext.SaveChangesAsync();
+            await this.dbContext.SaveChangesAsync();
         }
     }
 }

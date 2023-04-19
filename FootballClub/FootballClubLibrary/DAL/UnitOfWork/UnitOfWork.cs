@@ -14,7 +14,6 @@ namespace FootballClubLibrary.Unit_of_Work
 {
     public class UnitOfWork : IDisposable, IUnitOfWork
     {
-
         private readonly ApplicationDbContext _context;
         private IKlubRepository klubRepository;
         private IPilkarzRepository pilkarzRepository;
@@ -22,9 +21,9 @@ namespace FootballClubLibrary.Unit_of_Work
         private IStatystykaRepository statystykaRepository;
         private IZarzadRepository zarzadRepository;
 
-        public UnitOfWork()
+        public UnitOfWork(ApplicationDbContext _context)
         {
-            _context = new ApplicationDbContext();
+            this._context = _context;
         }
 
         public IKlubRepository KlubRepository
@@ -87,11 +86,9 @@ namespace FootballClubLibrary.Unit_of_Work
             }
         }
 
-
-
-        public void Save()
+        public async Task Save()
         {
-            this._context.SaveChanges();
+            await this._context.SaveChangesAsync();
         }
 
         private bool disposed = false;
