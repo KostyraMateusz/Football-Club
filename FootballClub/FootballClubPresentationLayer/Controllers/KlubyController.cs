@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FootballClubPresentationLayer.Controllers
 {
-    [Route("/api/klub")]
     public class KlubyController : Controller
     {
         private readonly IKlubService klubService;
@@ -20,7 +19,8 @@ namespace FootballClubPresentationLayer.Controllers
             return View(kluby);
         }
 
-        [HttpGet("/DajArchiwalnegoPilkarza")]
+        [HttpGet]
+        [Route("api/[controller]/DajArchiwalnegoPilkarza")]
         public async Task<ActionResult> DajArchiwalnegoPilkarza([FromBody] Guid IdKlubu, [FromBody] Guid IdPilkarza)
         {
             try
@@ -38,7 +38,8 @@ namespace FootballClubPresentationLayer.Controllers
             }
         }
 
-        [HttpGet("/DajArchiwalnychPilkarzy")]
+        [HttpGet]
+        [Route("api/[controller]/DajArchiwalnychPilkarzy")]
         public async Task<ActionResult> DajArchiwalnychPilkarzy([FromBody] Guid IdKlubu)
         {
             try
@@ -57,7 +58,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
 
-        [HttpGet("/DajObecnegoPilkarza")]
+        [HttpGet]
+        [Route("api/[controller]/DajObecnegoPilkarza")]
         public async Task<ActionResult> DajObecnegoPilkarza([FromBody] Guid IdKlubu, [FromBody] Guid IdPilkarza)
         {
             try
@@ -76,7 +78,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
 
-        [HttpGet("/DajObecnychPilkarzy")]
+        [HttpGet]
+        [Route("api/[controller]/DajObecnychPilkarzy")]
         public async Task<ActionResult> DajObecnychPilkarzy([FromBody] Guid IdKlubu)
         {
             try
@@ -94,7 +97,8 @@ namespace FootballClubPresentationLayer.Controllers
             }
         }
 
-        [HttpPost("/DodajPilkarzaDoObecnych")]
+        [HttpPost]
+        [Route("api/[controller]/DodajPilkarzaDoObecnych")]
         public async Task<ActionResult> DodajPilkarzaDoObecnych([FromBody] Guid IdPilkarza, [FromBody] Guid IdKlubu)
         {
             try
@@ -112,7 +116,8 @@ namespace FootballClubPresentationLayer.Controllers
             }
         }
 
-        [HttpPost("/UsunPilkarzaZObecnych")]
+        [HttpPost]
+        [Route("api/[controller]/UsunPilkarzaZObecnych")]
         public async Task<ActionResult> UsunPilkarzaZObecnych([FromBody] Guid IdPilkarza, [FromBody] Guid IdKlubu)
         {
             try
