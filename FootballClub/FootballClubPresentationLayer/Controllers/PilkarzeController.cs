@@ -22,7 +22,7 @@ namespace FootballClubPresentationLayer.Controllers
 
 
         [HttpGet]
-        [Route("api/[controller]/DajArchiwalneKlubyPilkarza")]
+        [Route("api/[controller]/DajArchiwalneKlubyPilkarza/{IdPilkarza}")]
         public async Task<ActionResult> DajArchiwalneKlubyPilkarza([FromRoute] Guid IdPilkarza)
         {
             try
@@ -42,7 +42,7 @@ namespace FootballClubPresentationLayer.Controllers
 
 
         [HttpGet]
-        [Route("api/[controller]/DajStatystykePilkarza")]
+        [Route("api/[controller]/DajStatystykePilkarza/{IdStatystyka}, {IdPilkarza}")]
         public async Task<ActionResult> DajStatystykePilkarza([FromRoute] Guid IdStatystyka, [FromRoute] Guid IdPilkarza)
         {
             try
@@ -62,7 +62,7 @@ namespace FootballClubPresentationLayer.Controllers
 
 
         [HttpGet]
-        [Route("api/[controller]/DajStatystykiPilkarza")]
+        [Route("api/[controller]/DajStatystykiPilkarza/{IdPilkarza}")]
         public async Task<ActionResult> DajStatystykiPilkarza([FromRoute] Guid IdPilkarza)
         {
             try
@@ -81,7 +81,7 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpGet]
-        [Route("api/[controller]/DajNajlepszeStatystykiPilkarza")]
+        [Route("api/[controller]/DajNajlepszeStatystykiPilkarza/{IdPilkarza}")]
         public async Task<ActionResult> DajNajlepszeStatystykiPilkarza([FromRoute] Guid IdPilkarza)
         {
             try

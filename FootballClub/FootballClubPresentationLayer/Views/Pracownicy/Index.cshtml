@@ -1,0 +1,38 @@
+﻿@model IEnumerable<FootballClubLibrary.Models.Pracownik>
+<h1>Pracownicy</h1>
+
+@if (Model.Count() > 0)
+{
+    <table id="table" class="table table-striped table-dark table-bordered table-hover table-sm">
+        <thead>
+            <tr class="name-of-headers">
+                <th>Imie</th>
+                <th>Nazwisko</th>
+                <th>Pesel</th>
+                <th>Wiek</th>
+                <th>Wykonywana funkcja</th>
+                <th>Wynagrodzenie</th>
+                <th>IdZarzadu</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pracownik in Model)
+            {
+                <tr>
+                    <td>@pracownik.Imie</td>
+                    <td>@pracownik.Nazwisko</td>
+                    <td>@pracownik.PESEL</td>
+                    <td>@pracownik.Wiek</td>
+                    <td>@pracownik.WykonywanaFunkcja</td>
+                    <td>@pracownik.Wynagrodzenie</td>
+                    <td>@pracownik.IdZarzadu</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Brak pracowników!</p>
+}
+
