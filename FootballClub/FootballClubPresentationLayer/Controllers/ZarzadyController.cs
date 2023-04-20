@@ -22,7 +22,7 @@ namespace FootballClubPresentationLayer.Controllers
 
         [HttpGet]
         [Route("api/[controller]/DajWynikFinansowy")]
-        public async Task<ActionResult>DajWynikFinansowy([FromBody]Guid IdZarzadu)
+        public async Task<ActionResult>DajWynikFinansowy([FromRoute] Guid IdZarzadu)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace FootballClubPresentationLayer.Controllers
 
         [HttpPost]
         [Route("api/[controller]/DodajCelZarzadu")]
-        public async Task<ActionResult> DodajCelZarzadu([FromBody]Guid IdZarzadu, string cel)
+        public async Task<ActionResult> DodajCelZarzadu([FromRoute] Guid IdZarzadu, string cel)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace FootballClubPresentationLayer.Controllers
 
         [HttpPost]
         [Route("api/[controller]/DodajCzlonkaZarzadu")]
-        public async Task<ActionResult> DodajCzlonkaZarzadu([FromBody]Guid IdZarzadu, [FromBody]Guid IdPracownik)
+        public async Task<ActionResult> DodajCzlonkaZarzadu([FromRoute] Guid IdZarzadu, [FromRoute]Guid IdPracownik)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace FootballClubPresentationLayer.Controllers
 
         [HttpPut]
         [Route("api/[controller]/ZmienBudzetZarzadu")]
-        public async Task<ActionResult> ZmienBudzetZarzadu([FromBody]Guid IdZarzadu, decimal budzet)
+        public async Task<ActionResult> ZmienBudzetZarzadu([FromRoute]Guid IdZarzadu, decimal budzet)
         {
             try
             {
