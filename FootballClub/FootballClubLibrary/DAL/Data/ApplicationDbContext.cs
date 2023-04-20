@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -62,94 +63,44 @@ namespace FootballClubLibrary.Data
                 .WithMany(p => p.ArchwilaniPilkarze);
 
 
-            // Entity Framework does not support collections of primitive types. Converting ICollection to string of max value
-            modelBuilder.Entity<Klub>()
-                .Property(e => e.Trofea)
-                .HasConversion(v => string.Join(',', v),
-                v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
-
-            modelBuilder.Entity<Zarzad>()
-                .Property(e => e.Cele)
-                .HasConversion(v => string.Join(',', v),
-                v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
-
-
             // mock data
             modelBuilder.Entity<Klub>()
                 .HasData(
                     new Klub()
                     {
                         IdKlub = Guid.NewGuid(),
-                        Nazwa = "Klub1",
-                        Stadion = "Stadion1",
-                        Trofea = null,
-                        ObecniPilkarze = null,
-                        ArchwilaniPilkarze = null,
-                        Zarzad = null,
+                        Nazwa = "Real Madryt",
+                        Stadion = "Estadio Santiago Bernabéu",
+                        Trofea = "Liga Mistrzów",
+                        ObecniPilkarze = new Collection<Pilkarz> { },
+                        ArchwilaniPilkarze = new Collection<Pilkarz> { },
+                        Zarzad = null
 
                     },
                     new Klub()
                     {
                         IdKlub = Guid.NewGuid(),
-                        Nazwa = "Klub2",
-                        Stadion = "Stadion2",
-                        Trofea = null,
-                        ObecniPilkarze = null,
-                        ArchwilaniPilkarze = null,
-                        Zarzad = null,
+                        Nazwa = "FC Barcelona",
+                        Stadion = "Camp Nou",
+                        Trofea = "La Liga",
+                        ObecniPilkarze = new Collection<Pilkarz> { },
+                        ArchwilaniPilkarze = new Collection<Pilkarz> { },
+                        Zarzad = null
                     }
                 ); ;
 
             modelBuilder.Entity<Pilkarz>()
                 .HasData(
-                new Pilkarz()
-                {
-                    IdPilkarz = Guid.NewGuid(),
-                    Pozycja = "Napastnik",
-                    Statystyki = null,
-                    ArchiwalneKluby = null,
-                    Wynagrodzenie = 1000,
-                    IdKlubu = null,
-                    Klub = null
-                },
-                new Pilkarz()
-                {
-                    IdPilkarz = Guid.NewGuid(),
-                    Pozycja = "Pomocnik",
-                    Statystyki = null,
-                    ArchiwalneKluby = null,
-                    Wynagrodzenie = 2000,
-                    IdKlubu = null,
-                    Klub = null
-                }
+                new Pilkarz { IdPilkarz = Guid.NewGuid(), Imie = "Robert", Nazwisko = "Lewandowski", Wiek = 35, Pozycja = "Napastnik", Statystyki = null, ArchiwalneKluby = null, Wynagrodzenie = 440000, IdKlubu = null },
+                new Pilkarz { IdPilkarz = Guid.NewGuid(), Imie = "Sergio", Nazwisko = "Busquets", Wiek = 34, Pozycja = "Pomocnik", Statystyki = null, ArchiwalneKluby = null, Wynagrodzenie = 350000, IdKlubu = null }
                 );
 
             modelBuilder.Entity<Pracownik>()
                 .HasData(
-                    new Pracownik()
-                    {
-                        IdPracownik = Guid.NewGuid(),
-                        Imie = "Mateusz",
-                        Nazwisko = "Kostyra",
-                        PESEL = "00124168751",
-                        Wiek = 23,
-                        Wynagrodzenie = 50000,
-                        WykonywanaFunkcja = "Prezes",
-                        IdZarzadu = null,
-                        Zarzad = null
-                    },
-                    new Pracownik()
-                    {
-                        IdPracownik = Guid.NewGuid(),
-                        Imie = "Stanisław",
-                        Nazwisko = "Kluczewski",
-                        Wynagrodzenie = 50000,
-                        PESEL = "00864164771",
-                        Wiek = 23,
-                        WykonywanaFunkcja = "Vc-Prezes",
-                        IdZarzadu = null,
-                        Zarzad = null
-                    }
+                   new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Fiorentino", Nazwisko = "Perez", PESEL = "12345678901", Wiek = 77, WykonywanaFunkcja = "Prezes", IdZarzadu = null, Wynagrodzenie = 340000 },
+                   new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Carlo", Nazwisko = "Carlo Ancelotti", PESEL = "12345600101", Wiek = 63, WykonywanaFunkcja = "Trener", IdZarzadu = null, Wynagrodzenie = 340000, },
+                   new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Joan", Nazwisko = "Laporta", PESEL = "12345338901", Wiek = 60, WykonywanaFunkcja = "Prezes", IdZarzadu = null, Wynagrodzenie = 340000 },
+                   new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Xavi", Nazwisko = "Hernandez", PESEL = "12345600101", Wiek = 43, WykonywanaFunkcja = "Trener", IdZarzadu = null, Wynagrodzenie = 340000 }
                 );
 
             modelBuilder.Entity<Statystyka>()
@@ -157,6 +108,7 @@ namespace FootballClubLibrary.Data
                 new Statystyka
                 {
                     IdStatystyka = Guid.NewGuid(),
+                    Mecz = "Real Madrid vs FC Barcelona",
                     Gole = 4,
                     Asysty = 1,
                     ZolteKartki = 0,
@@ -169,6 +121,7 @@ namespace FootballClubLibrary.Data
                 new Statystyka
                 {
                     IdStatystyka = Guid.NewGuid(),
+                    Mecz = "FC Barcelona vs Real Madrid",
                     Gole = 0,
                     ZolteKartki = 2,
                     CzerwoneKartki = 1,
@@ -187,7 +140,7 @@ namespace FootballClubLibrary.Data
                         IdZarzad = Guid.NewGuid(),
                         Pracownicy = null,
                         Budzet = 2000,
-                        Cele = null,
+                        Cele = "Cel 1",
                         Klub = null,
                         IdKlubu = null
                     }

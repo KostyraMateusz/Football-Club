@@ -134,5 +134,43 @@ namespace FootballClubPresentationLayer.Controllers
                 return View(ex.Message);
             }
         }
+
+        [HttpGet]
+        [Route("api/[controller]/DajTrofeaKlubu/{IdKlubu}")]
+        public async Task<ActionResult> DajTrofeaKlubu([FromRoute] Guid IdKlubu)
+        {
+            try
+            {
+                var result = await this.klubService.DajTrofeaKlubu(IdKlubu);
+                if (result == null)
+                {
+                    throw new Exception("");
+                }
+                return View(result);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/DajStadionKlubu/{IdKlubu}")]
+        public async Task<ActionResult> DajStadionKlubu([FromRoute]Guid IdKlubu)
+        {
+            try
+            {
+                var result = await this.klubService.DajStadionKlubu(IdKlubu);
+                if (result == null)
+                {
+                    throw new Exception("");
+                }
+                return View(result);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
     }
 }

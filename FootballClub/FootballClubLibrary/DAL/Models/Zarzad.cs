@@ -20,7 +20,7 @@ namespace FootballClubLibrary.Models
 
         public decimal Budzet { get; set; }
 
-        public ICollection<string>? Cele { get; set; }
+        public string Cele { get; set; }
 
         public Klub? Klub { get; set; }
 

@@ -17,6 +17,15 @@ namespace FootballClubLibrary.Models
         public Guid IdPilkarz { get; set; }
 
         [MaxLength(30)]
+        public string Imie { get; set; }
+        
+        [MaxLength(30)]
+        public string Nazwisko { get; set; }
+
+        [Range(16,50)]
+        public int Wiek { get; set; }
+
+        [MaxLength(30)]
         public string? Pozycja { get; set; }
 
         public ICollection<Statystyka>? Statystyki { get; set; }

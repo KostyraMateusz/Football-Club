@@ -21,7 +21,7 @@ namespace FootballClubLibrary.Models
         [MaxLength(50)]
         public string? Stadion { get; set; }
 
-        public ICollection<string>? Trofea { get; set; }
+        public string Trofea { get; set; }
 
         public ICollection<Pilkarz>? ArchwilaniPilkarze { get; set; }
 
