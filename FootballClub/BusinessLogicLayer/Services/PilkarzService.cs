@@ -26,28 +26,28 @@ namespace BusinessLogicLayer.Services
         public async Task<IEnumerable<Klub>> DajArchiwalneKlubyPilkarza(Guid IdPilkarz)
         {
             var pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(IdPilkarz);
-            var result = pilkarz.ArchiwalneKluby.ToList();
+            var result = pilkarz.ArchiwalneKluby?.ToList();
             return result;
         }
 
         public async Task<IEnumerable<Statystyka>> DajNajlepszeStatystykiPilkarza(Guid IdPilkarz)
         {
             var pilkarze = await this.unitOfWork.PilkarzRepository.GetPilkarzById(IdPilkarz);
-            var result = pilkarze.Statystyki.OrderByDescending(p => p.Ocena).Take(5);
+            var result = pilkarze.Statystyki?.OrderByDescending(p => p.Ocena).Take(5);
             return result;
         }
 
         public async Task<Statystyka> DajStatystykePilkarza(Guid IdStatystyka, Guid IdPilkarza)
         {
             var pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(IdPilkarza);
-            var result = pilkarz.Statystyki.First(s => s.IdStatystyka == IdStatystyka);
+            var result = pilkarz.Statystyki?.First(s => s.IdStatystyka == IdStatystyka);
             return result;
         }
 
         public async Task<IEnumerable<Statystyka>> DajStatystykiPilkarza(Guid IdPilkarz)
         {
             var pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(IdPilkarz);
-            var result = pilkarz.Statystyki.ToList();
+            var result = pilkarz.Statystyki?.ToList();
             return result;
         }
 

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FootballClubLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class final : Migration
+    public partial class UpdateMigration2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,7 @@ namespace FootballClubLibrary.Migrations
                     IdKlub = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nazwa = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Stadion = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Trofea = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Trofea = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,6 +32,9 @@ namespace FootballClubLibrary.Migrations
                 columns: table => new
                 {
                     IdPilkarz = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Imie = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Nazwisko = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Wiek = table.Column<int>(type: "int", nullable: false),
                     Pozycja = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     Wynagrodzenie = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IdKlubu = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -52,7 +55,7 @@ namespace FootballClubLibrary.Migrations
                 {
                     IdZarzad = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Budzet = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Cele = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cele = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdKlubu = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
@@ -144,17 +147,17 @@ namespace FootballClubLibrary.Migrations
                 columns: new[] { "IdKlub", "Nazwa", "Stadion", "Trofea" },
                 values: new object[,]
                 {
-                    { new Guid("2b9f0aa6-f441-4488-8989-9925f520cacd"), "Klub2", "Stadion2", null },
-                    { new Guid("f3f899c4-b724-4436-bb01-845eb6df8637"), "Klub1", "Stadion1", null }
+                    { new Guid("23da5e72-4b42-47ad-965e-5511cc772eae"), "Real Madryt", "Estadio Santiago Bernabéu", "Liga Mistrzów" },
+                    { new Guid("90fe8fab-b90e-4cd1-aa7c-12ab3b6040ad"), "FC Barcelona", "Camp Nou", "La Liga" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Pilkarze",
-                columns: new[] { "IdPilkarz", "IdKlubu", "Pozycja", "Wynagrodzenie" },
+                columns: new[] { "IdPilkarz", "IdKlubu", "Imie", "Nazwisko", "Pozycja", "Wiek", "Wynagrodzenie" },
                 values: new object[,]
                 {
-                    { new Guid("5e4648b9-119e-43f5-b086-f5ea56267848"), null, "Pomocnik", 2000m },
-                    { new Guid("caa23349-53e5-40e2-b0cf-d0b7050b751c"), null, "Napastnik", 1000m }
+                    { new Guid("5ed7ba86-5116-4da1-badb-61592d26ce74"), null, "Robert", "Lewandowski", "Napastnik", 35, 440000m },
+                    { new Guid("eda062ba-e7b1-4e41-8c91-9b166880a497"), null, "Sergio", "Busquets", "Pomocnik", 34, 350000m }
                 });
 
             migrationBuilder.InsertData(
@@ -162,8 +165,10 @@ namespace FootballClubLibrary.Migrations
                 columns: new[] { "IdPracownik", "IdZarzadu", "Imie", "Nazwisko", "PESEL", "Wiek", "WykonywanaFunkcja", "Wynagrodzenie" },
                 values: new object[,]
                 {
-                    { new Guid("bd860188-d4eb-4f94-abba-6df7c0e6d3d7"), null, "Stanisław", "Kluczewski", "00864164771", 23, "Vc-Prezes", 50000m },
-                    { new Guid("fc089e06-d34e-496d-b149-03c18ebe278a"), null, "Mateusz", "Kostyra", "00124168751", 23, "Prezes", 50000m }
+                    { new Guid("265c9b83-b7ba-4b18-8cf2-2b02973c1467"), null, "Carlo", "Carlo Ancelotti", "12345600101", 63, "Trener", 340000m },
+                    { new Guid("3a0e73ac-053b-4c05-a1fe-04e15d9d4ebb"), null, "Xavi", "Hernandez", "12345600101", 43, "Trener", 340000m },
+                    { new Guid("7a303c5a-b9f9-42b6-9a03-f51c6e2ad182"), null, "Fiorentino", "Perez", "12345678901", 77, "Prezes", 340000m },
+                    { new Guid("b3cc1806-b9a5-465b-8b51-d73dd2f70a76"), null, "Joan", "Laporta", "12345338901", 60, "Prezes", 340000m }
                 });
 
             migrationBuilder.InsertData(
@@ -171,14 +176,14 @@ namespace FootballClubLibrary.Migrations
                 columns: new[] { "IdStatystyka", "Asysty", "CzerwoneKartki", "Gole", "IdPilkarz", "Mecz", "Ocena", "PrzebiegnietyDystans", "ZolteKartki" },
                 values: new object[,]
                 {
-                    { new Guid("484be89a-56f2-4b50-a87b-84786ddfb734"), 1, 1, 4, null, null, 8.6999999999999993, 10.4, 0 },
-                    { new Guid("87c2050c-3b0e-4817-88fe-cb3fa37b6384"), 2, 1, 0, null, null, 7.5, 8.4000000000000004, 2 }
+                    { new Guid("4dc1af77-4d52-4a55-bd71-2dcc3e8a6252"), 2, 1, 0, null, "FC Barcelona vs Real Madrid", 7.5, 8.4000000000000004, 2 },
+                    { new Guid("facef62e-d543-4593-bc68-ee153e121920"), 1, 1, 4, null, "Real Madrid vs FC Barcelona", 8.6999999999999993, 10.4, 0 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Zarzady",
                 columns: new[] { "IdZarzad", "Budzet", "Cele", "IdKlubu" },
-                values: new object[] { new Guid("7c9dddda-9e1e-4bd3-a255-7cfb0fb9064d"), 2000m, null, null });
+                values: new object[] { new Guid("e47db833-127c-4b8c-8965-a2d35dd760db"), 2000m, "Cel 1", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_KlubPilkarz_ArchwilaniPilkarzeIdPilkarz",
