@@ -21,7 +21,7 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpGet]
-        [Route("api/[controller]/DajWynikFinansowy")]
+        [Route("api/[controller]/DajWynikFinansowy/{IdZarzadu}")]
         public async Task<ActionResult>DajWynikFinansowy([FromRoute] Guid IdZarzadu)
         {
             try

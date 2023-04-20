@@ -20,7 +20,7 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpGet]
-        [Route("api/[controller]/DajStatystykeMeczu")]
+        [Route("api/[controller]/DajStatystykeMeczu/{mecz}")]
         public async Task<ActionResult> DajStatystykeMeczu(string mecz)
         {
             try
