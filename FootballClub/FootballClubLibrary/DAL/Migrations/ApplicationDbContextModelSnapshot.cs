@@ -36,6 +36,7 @@ namespace FootballClubLibrary.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Trofea")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdKlub");
@@ -45,15 +46,17 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdKlub = new Guid("f3f899c4-b724-4436-bb01-845eb6df8637"),
-                            Nazwa = "Klub1",
-                            Stadion = "Stadion1"
+                            IdKlub = new Guid("23da5e72-4b42-47ad-965e-5511cc772eae"),
+                            Nazwa = "Real Madryt",
+                            Stadion = "Estadio Santiago Bernabéu",
+                            Trofea = "Liga Mistrzów"
                         },
                         new
                         {
-                            IdKlub = new Guid("2b9f0aa6-f441-4488-8989-9925f520cacd"),
-                            Nazwa = "Klub2",
-                            Stadion = "Stadion2"
+                            IdKlub = new Guid("90fe8fab-b90e-4cd1-aa7c-12ab3b6040ad"),
+                            Nazwa = "FC Barcelona",
+                            Stadion = "Camp Nou",
+                            Trofea = "La Liga"
                         });
                 });
 
@@ -66,9 +69,22 @@ namespace FootballClubLibrary.Migrations
                     b.Property<Guid?>("IdKlubu")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Imie")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Nazwisko")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
                     b.Property<string>("Pozycja")
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<int>("Wiek")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Wynagrodzenie")
                         .HasColumnType("decimal(18,2)");
@@ -82,15 +98,21 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdPilkarz = new Guid("caa23349-53e5-40e2-b0cf-d0b7050b751c"),
+                            IdPilkarz = new Guid("5ed7ba86-5116-4da1-badb-61592d26ce74"),
+                            Imie = "Robert",
+                            Nazwisko = "Lewandowski",
                             Pozycja = "Napastnik",
-                            Wynagrodzenie = 1000m
+                            Wiek = 35,
+                            Wynagrodzenie = 440000m
                         },
                         new
                         {
-                            IdPilkarz = new Guid("5e4648b9-119e-43f5-b086-f5ea56267848"),
+                            IdPilkarz = new Guid("eda062ba-e7b1-4e41-8c91-9b166880a497"),
+                            Imie = "Sergio",
+                            Nazwisko = "Busquets",
                             Pozycja = "Pomocnik",
-                            Wynagrodzenie = 2000m
+                            Wiek = 34,
+                            Wynagrodzenie = 350000m
                         });
                 });
 
@@ -133,23 +155,43 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdPracownik = new Guid("fc089e06-d34e-496d-b149-03c18ebe278a"),
-                            Imie = "Mateusz",
-                            Nazwisko = "Kostyra",
-                            PESEL = "00124168751",
-                            Wiek = 23,
+                            IdPracownik = new Guid("7a303c5a-b9f9-42b6-9a03-f51c6e2ad182"),
+                            Imie = "Fiorentino",
+                            Nazwisko = "Perez",
+                            PESEL = "12345678901",
+                            Wiek = 77,
                             WykonywanaFunkcja = "Prezes",
-                            Wynagrodzenie = 50000m
+                            Wynagrodzenie = 340000m
                         },
                         new
                         {
-                            IdPracownik = new Guid("bd860188-d4eb-4f94-abba-6df7c0e6d3d7"),
-                            Imie = "Stanisław",
-                            Nazwisko = "Kluczewski",
-                            PESEL = "00864164771",
-                            Wiek = 23,
-                            WykonywanaFunkcja = "Vc-Prezes",
-                            Wynagrodzenie = 50000m
+                            IdPracownik = new Guid("265c9b83-b7ba-4b18-8cf2-2b02973c1467"),
+                            Imie = "Carlo",
+                            Nazwisko = "Carlo Ancelotti",
+                            PESEL = "12345600101",
+                            Wiek = 63,
+                            WykonywanaFunkcja = "Trener",
+                            Wynagrodzenie = 340000m
+                        },
+                        new
+                        {
+                            IdPracownik = new Guid("b3cc1806-b9a5-465b-8b51-d73dd2f70a76"),
+                            Imie = "Joan",
+                            Nazwisko = "Laporta",
+                            PESEL = "12345338901",
+                            Wiek = 60,
+                            WykonywanaFunkcja = "Prezes",
+                            Wynagrodzenie = 340000m
+                        },
+                        new
+                        {
+                            IdPracownik = new Guid("3a0e73ac-053b-4c05-a1fe-04e15d9d4ebb"),
+                            Imie = "Xavi",
+                            Nazwisko = "Hernandez",
+                            PESEL = "12345600101",
+                            Wiek = 43,
+                            WykonywanaFunkcja = "Trener",
+                            Wynagrodzenie = 340000m
                         });
                 });
 
@@ -192,20 +234,22 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdStatystyka = new Guid("484be89a-56f2-4b50-a87b-84786ddfb734"),
+                            IdStatystyka = new Guid("facef62e-d543-4593-bc68-ee153e121920"),
                             Asysty = 1,
                             CzerwoneKartki = 1,
                             Gole = 4,
+                            Mecz = "Real Madrid vs FC Barcelona",
                             Ocena = 8.6999999999999993,
                             PrzebiegnietyDystans = 10.4,
                             ZolteKartki = 0
                         },
                         new
                         {
-                            IdStatystyka = new Guid("87c2050c-3b0e-4817-88fe-cb3fa37b6384"),
+                            IdStatystyka = new Guid("4dc1af77-4d52-4a55-bd71-2dcc3e8a6252"),
                             Asysty = 2,
                             CzerwoneKartki = 1,
                             Gole = 0,
+                            Mecz = "FC Barcelona vs Real Madrid",
                             Ocena = 7.5,
                             PrzebiegnietyDystans = 8.4000000000000004,
                             ZolteKartki = 2
@@ -222,6 +266,7 @@ namespace FootballClubLibrary.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Cele")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("IdKlubu")
@@ -238,8 +283,9 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdZarzad = new Guid("7c9dddda-9e1e-4bd3-a255-7cfb0fb9064d"),
-                            Budzet = 2000m
+                            IdZarzad = new Guid("e47db833-127c-4b8c-8965-a2d35dd760db"),
+                            Budzet = 2000m,
+                            Cele = "Cel 1"
                         });
                 });
 
