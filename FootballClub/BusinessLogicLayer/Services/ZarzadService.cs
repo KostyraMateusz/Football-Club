@@ -40,7 +40,7 @@ namespace BusinessLogicLayer.Services
             var zarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(IdZarzadu);
             if (cel != "")
             {
-                zarzad.Cele.Add(cel);
+                zarzad.Cele += ", " + cel;
             }
             else
             {
@@ -55,7 +55,7 @@ namespace BusinessLogicLayer.Services
             var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(PracownikId);
             if (pracownik != null)
             {
-                zarzad.Pracownicy.Add(pracownik);
+                zarzad.Pracownicy?.Add(pracownik);
             } 
             else
             {
