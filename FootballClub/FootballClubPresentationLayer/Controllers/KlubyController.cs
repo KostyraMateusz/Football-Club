@@ -13,15 +13,15 @@ namespace FootballClubPresentationLayer.Controllers
             this.klubService = klubService;
         }
 
-        public async Task<ActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             var kluby = await this.klubService.DajKluby();
-            return View(kluby);
+            return Ok(kluby);
         }
 
         [HttpGet]
         [Route("api/[controller]/DajArchiwalnegoPilkarza/{IdKlubu}, {IdPilkarza}")]
-        public async Task<ActionResult> DajArchiwalnegoPilkarza([FromRoute] Guid IdKlubu, [FromRoute] Guid IdPilkarza)
+        public async Task<ActionResult<Pilkarz>> DajArchiwalnegoPilkarza([FromRoute] Guid IdKlubu, [FromRoute] Guid IdPilkarza)
         {
             try
             {
@@ -30,17 +30,17 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                return View(result);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
         [HttpGet]
         [Route("api/[controller]/DajArchiwalnychPilkarzy/{IdKlubu}")]
-        public async Task<ActionResult> DajArchiwalnychPilkarzy([FromRoute] Guid IdKlubu)
+        public async Task<ActionResult<IEnumerable<Pilkarz>>> DajArchiwalnychPilkarzy([FromRoute] Guid IdKlubu)
         {
             try
             {
@@ -49,18 +49,18 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                return View(result);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
 
         [HttpGet]
         [Route("api/[controller]/DajObecnegoPilkarza/{IdKlubu}, {IdPilkarza}")]
-        public async Task<ActionResult> DajObecnegoPilkarza([FromRoute] Guid IdKlubu, [FromRoute] Guid IdPilkarza)
+        public async Task<ActionResult<Pilkarz>> DajObecnegoPilkarza([FromRoute] Guid IdKlubu, [FromRoute] Guid IdPilkarza)
         {
             try
             {
@@ -69,18 +69,19 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                return View(result);
+                return Ok(result);
+ 
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
 
         [HttpGet]
         [Route("api/[controller]/DajObecnychPilkarzy/{IdKlubu}")]
-        public async Task<ActionResult> DajObecnychPilkarzy([FromRoute] Guid IdKlubu)
+        public async Task<ActionResult<IEnumerable<Pilkarz>>> DajObecnychPilkarzy([FromRoute] Guid IdKlubu)
         {
             try
             {
@@ -89,11 +90,11 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                return View(result);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
@@ -108,11 +109,11 @@ namespace FootballClubPresentationLayer.Controllers
                     throw new Exception("");
                 }
                 await this.klubService.DodajPilkarzaDoObecnych(IdPilkarza, IdKlubu);
-                return RedirectToAction("Index");
+                return Ok();
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
@@ -127,17 +128,17 @@ namespace FootballClubPresentationLayer.Controllers
                     throw new Exception("");
                 }
                 await this.klubService.UsunPilkarzaZObecnych(IdPilkarza, IdKlubu);
-                return RedirectToAction("Index");
+                return Ok();
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
         [HttpGet]
         [Route("api/[controller]/DajTrofeaKlubu/{IdKlubu}")]
-        public async Task<ActionResult> DajTrofeaKlubu([FromRoute] Guid IdKlubu)
+        public async Task<ActionResult<string>> DajTrofeaKlubu([FromRoute] Guid IdKlubu)
         {
             try
             {
@@ -146,17 +147,17 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                return View(result);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
         [HttpGet]
         [Route("api/[controller]/DajStadionKlubu/{IdKlubu}")]
-        public async Task<ActionResult> DajStadionKlubu([FromRoute]Guid IdKlubu)
+        public async Task<ActionResult<string>> DajStadionKlubu([FromRoute] Guid IdKlubu)
         {
             try
             {
@@ -165,11 +166,11 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                return View(result);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
     }

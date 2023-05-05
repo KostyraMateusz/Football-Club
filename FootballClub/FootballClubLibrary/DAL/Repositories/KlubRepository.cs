@@ -30,7 +30,7 @@ namespace FootballClubLibrary.Repositories
 
         public async Task DeleteKlub(Guid id)
         {
-            var klub = await  this.dbContext.Kluby.FindAsync(id);
+            var klub = await this.dbContext.Kluby.FindAsync(id);
             this.dbContext.Kluby.Remove(klub);
         }
 
@@ -47,6 +47,12 @@ namespace FootballClubLibrary.Repositories
         public async Task UpdateKlub(Klub klub)
         {
             this.dbContext.Entry(klub).State = EntityState.Modified;
+        }
+
+        public async Task DodajTrofeumKlubu(Guid id, string trofeum)
+        {
+            var klub = await this.dbContext.Kluby.FindAsync(id);
+            klub.Trofea += $"{trofeum}, ";
         }
 
         public virtual void Dispose(bool disposing)
