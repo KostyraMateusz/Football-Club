@@ -21,6 +21,12 @@ namespace FootballClubLibrary.Unit_of_Work
         private IStatystykaRepository statystykaRepository;
         private IZarzadRepository zarzadRepository;
 
+        public UnitOfWork(IKlubRepository? klubRepository, IPilkarzRepository? pilkarzRepository)
+        {
+            this.klubRepository = klubRepository;
+            this.pilkarzRepository = pilkarzRepository;
+        }
+
         public UnitOfWork(ApplicationDbContext _context)
         {
             this._context = _context;
