@@ -5,6 +5,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using TestsFootballClub.FakeRepositories;
@@ -74,12 +75,12 @@ namespace TestsFootballClub.BLL.Tests
             var unitOfWork = new UnitOfWork(klubRepo, null);
             var klubService = new KlubService(unitOfWork);
 
-            Pilkarz pilkarz = new Pilkarz();
+            Pilkarz pilkarz1 = new Pilkarz();
             Pilkarz pilkarz2 = new Pilkarz();
             Pilkarz pilkarz3 = new Pilkarz();
             var klub = new Klub();
             klubRepo?.CreateKlub(klub);
-            klubService?.DodajPilkarzaDoObecnych(pilkarz.IdPilkarz, klub.IdKlub);
+            klubService?.DodajPilkarzaDoObecnych(pilkarz1.IdPilkarz, klub.IdKlub);
             klubService?.DodajPilkarzaDoObecnych(pilkarz2.IdPilkarz, klub.IdKlub);
             klubService?.DodajPilkarzaDoObecnych(pilkarz3.IdPilkarz, klub.IdKlub);
             var result = klubService?.DajObecnychPilkarzy(klub.IdKlub).Result.Count();
@@ -129,13 +130,11 @@ namespace TestsFootballClub.BLL.Tests
 
             Mock<IKlubRepository> _mockKlubRepository = new Mock<IKlubRepository>();
             _mockKlubRepository.Setup(x => x.GetKluby())
-                .ReturnsAsync(new List<Klub> { new Klub(), new Klub(), new Klub() });
+                .ReturnsAsync(new List<Klub> { klub, klub2 });
 
             Assert.NotEqual(klub.IdKlub, klub2.IdKlub);
             Assert.Equal(klub.Trofea, klub2.Trofea);
             Assert.NotSame(klub, klub2);
         }
-
     }
-
 }

@@ -1,4 +1,5 @@
 ﻿using FootballClubLibrary.Interfaces;
+using FootballClubLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -24,8 +25,6 @@ namespace TestsFootballClub.FakeRepositories
             return;
         }
 
-
-
         public async Task<Pilkarz> GetPilkarzById(Guid id)
         {
             var result = await Task.FromResult(pilkarze.Find(p => p.IdPilkarz == id));
@@ -46,6 +45,11 @@ namespace TestsFootballClub.FakeRepositories
                 pilkarze[index] = pilkarz;
             }
             return;
+        }
+
+        public int IleJestPilkarzy()
+        {
+            return pilkarze.Count();
         }
 
         // Niewykorzystywane w FakePilkarzRepository
