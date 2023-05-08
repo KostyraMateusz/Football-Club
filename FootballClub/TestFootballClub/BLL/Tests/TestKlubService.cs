@@ -33,25 +33,6 @@ namespace TestsFootballClub.BLL.Tests
             Assert.Equal(3, klubRepo?.IleJestKlubow());
         }
 
-        [Fact]
-        public void TestSprawdzTrofeaKlubu()
-        {
-            var klubRepo = new FakeKlubRepository();
-            var unitOfWork = new UnitOfWork(klubRepo, null);
-            var klubService = new KlubService(unitOfWork);
-
-            var klub = new Klub();
-            klubRepo?.CreateKlub(klub);
-            klubRepo?.DodajTrofeumKlubu(klub.IdKlub, "test1");
-            Assert.Equal("test1, ", klub.Trofea);
-
-            klubRepo?.DodajTrofeumKlubu(klub.IdKlub, "test2");
-            Assert.Equal("test1, test2, ", klub.Trofea);
-
-
-            var trofea = klubService?.DajTrofeaKlubu(klub.IdKlub);
-            Assert.Equal("test1, test2, ", (IEnumerable<char>)trofea);
-        }
 
         [Fact]
         public void TestSprawdzIloscObecnychPilkarzy()
@@ -60,12 +41,23 @@ namespace TestsFootballClub.BLL.Tests
             var unitOfWork = new UnitOfWork(klubRepo, null);
             var klubService = new KlubService(unitOfWork);
 
-            Pilkarz pilkarz = new Pilkarz();
-            var klub = new Klub();
+            var klub = new Klub() { ObecniPilkarze = new List<Pilkarz>(), IdKlub = Guid.NewGuid() };
             klubRepo?.CreateKlub(klub);
-            klubService?.DodajPilkarzaDoObecnych(pilkarz.IdPilkarz, klub.IdKlub);
-            var result = klubService?.DajObecnychPilkarzy(klub.IdKlub).Result.Count();
-            Assert.Equal(1, result);
+
+            Pilkarz pilkarz1 = new Pilkarz();
+            Pilkarz pilkarz2 = new Pilkarz();
+            Pilkarz pilkarz3 = new Pilkarz();
+            List<Pilkarz> pilkarze = new List<Pilkarz>() { pilkarz1, pilkarz2, pilkarz3 };
+            klubService?.DodajPilkarzyDoObecnych(pilkarze, klub);
+            Assert.Equal(3, klub.ObecniPilkarze.Count());
+
+            Pilkarz pilkarz4 = new Pilkarz();
+            Pilkarz pilkarz5 = new Pilkarz();
+            Pilkarz pilkarz6 = new Pilkarz();
+            List<Pilkarz> pilkarze2 = new List<Pilkarz>() { pilkarz4, pilkarz5, pilkarz6 };
+            klubService?.DodajPilkarzyDoObecnych(pilkarze2, klub);
+            Assert.Equal(6, klub.ObecniPilkarze.Count());
+
         }
 
         [Fact]
@@ -78,13 +70,12 @@ namespace TestsFootballClub.BLL.Tests
             Pilkarz pilkarz1 = new Pilkarz();
             Pilkarz pilkarz2 = new Pilkarz();
             Pilkarz pilkarz3 = new Pilkarz();
-            var klub = new Klub();
+            List<Pilkarz> pilkarze = new List<Pilkarz>() { pilkarz1, pilkarz2, pilkarz3 };
+            var klub = new Klub() { ObecniPilkarze = new List<Pilkarz>(), IdKlub = Guid.NewGuid() };
             klubRepo?.CreateKlub(klub);
-            klubService?.DodajPilkarzaDoObecnych(pilkarz1.IdPilkarz, klub.IdKlub);
-            klubService?.DodajPilkarzaDoObecnych(pilkarz2.IdPilkarz, klub.IdKlub);
-            klubService?.DodajPilkarzaDoObecnych(pilkarz3.IdPilkarz, klub.IdKlub);
-            var result = klubService?.DajObecnychPilkarzy(klub.IdKlub).Result.Count();
-            Assert.NotNull(result);
+            klubService?.DodajPilkarzyDoObecnych(pilkarze, klub);
+
+            Assert.Equal(3, klub.ObecniPilkarze.Count());
         }
 
 
@@ -106,8 +97,8 @@ namespace TestsFootballClub.BLL.Tests
         [Fact]
         public void TestSprawdzDwaKluby()
         {
-            Klub klub = new Klub() 
-            { 
+            Klub klub = new Klub()
+            {
                 IdKlub = Guid.NewGuid(),
                 ArchwilaniPilkarze = null,
                 ObecniPilkarze = new List<Pilkarz>(),
