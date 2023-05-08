@@ -11,14 +11,16 @@ namespace TestsFootballClub.DAL.Tests
 {
     public class UnitOfWorkTest
     {
-        DummyKlubRepository klubRepository = new DummyKlubRepository();
-        DummyPilkarzRepository pilkarzRepository = new DummyPilkarzRepository();
-        //var unitOfWork = new UnitOfWork(klubRepository, pilkarzRepository);
 
-        KlubRepository klub = new KlubRepository(null);
-        public void test()
+        [Fact]
+        public void TestUnitOfWork()
         {
-            Assert.NotSame(klubRepository, klub);
+            var klubRepository = new DummyKlubRepository();
+            var pilkarzRepository = new DummyPilkarzRepository();
+            var unitOfWork = new UnitOfWork(klubRepository, pilkarzRepository);
+
+            Assert.Same(klubRepository, unitOfWork.KlubRepository);
+            Assert.Same(pilkarzRepository, unitOfWork.PilkarzRepository);
         }
     }
 }
