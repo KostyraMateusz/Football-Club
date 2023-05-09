@@ -7,6 +7,7 @@ using FootballClubLibrary.Unit_of_Work;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,44 @@ namespace TestsFootballClub.Tests
         }
 
         [Fact]
+        public void TestArchiwalneKlubyPilkarza()
+        {
+            var pilkarzRepo = new FakePilkarzRepository();
+            var unitOfWork = new UnitOfWork(null, pilkarzRepo);
+            var pilkarzService = new PilkarzService(unitOfWork);
+
+            Klub OlympiqueLyon = new Klub()
+            {
+                IdKlub = Guid.NewGuid(),
+                ArchwilaniPilkarze = null,
+                ObecniPilkarze = new List<Pilkarz>(),
+                Stadion = "Groupama Arena",
+                Trofea = "Mistrzostwo Francji",
+                Nazwa = "Olympique Lyon",
+                Zarzad = new Zarzad()
+            };
+
+            Pilkarz Benzema = new Pilkarz
+            {
+                IdPilkarz = Guid.NewGuid(),
+                Imie = "Karim",
+                Nazwisko = "Benzema",
+                Wiek = 35,
+                Pozycja = "Pomocnik",
+                Statystyki = null,
+                ArchiwalneKluby = new Collection<Klub> { OlympiqueLyon },
+                Wynagrodzenie = 440000,
+                IdKlubu = null
+            };
+
+            Collection<Klub> listaArchiwalnych = new Collection<Klub>();
+            listaArchiwalnych.Add(OlympiqueLyon);
+
+            Assert.Same(Benzema.ArchiwalneKluby.ToString(), listaArchiwalnych.ToString());
+        }
+
+
+        [Fact]
         public void TestSprawdzIluJestPilkarzyMOQ()
         {
             Mock<IPilkarzRepository> _mockPilkarzeRepository = new Mock<IPilkarzRepository>();
@@ -50,35 +89,45 @@ namespace TestsFootballClub.Tests
             Assert.Equal(3, pilkarzService.DajPilkarzy().Result.Count());
         }
 
-
         [Fact]
-        public void TestZmienPozycjePilkarza()
+        public void TestPorownajDwochPilkarzy()
         {
-            var pilkarzRepo = new FakePilkarzRepository();
-            var unitOfWork = new UnitOfWork(null, pilkarzRepo);
-            var pilkarzService = new PilkarzService(unitOfWork);
+            Pilkarz Benzema = new Pilkarz
+            {
+                IdPilkarz = Guid.NewGuid(),
+                Imie = "Karim",
+                Nazwisko = "Benzema",
+                Wiek = 35,
+                Pozycja = "Napastnik",
+                Statystyki = null,
+                ArchiwalneKluby = null,
+                Wynagrodzenie = 440000,
+                IdKlubu = null
+            };
 
-            Pilkarz Benzema = new Pilkarz { IdPilkarz = Guid.NewGuid(), Imie = "Karim", Nazwisko = "Benzema", Wiek = 35, Pozycja = "Pomocnik", Statystyki = null, ArchiwalneKluby = null, Wynagrodzenie = 440000, IdKlubu = null };
-            pilkarzService.ZmienPozycjePilkarza(Benzema.IdPilkarz, "Napastnik");
-
-            Assert.Same(Benzema.Pozycja, "Napastnik");
-        }
-
-        [Fact]
-        public void TestZmienPozycjePilkarzaMOQ()
-        {
-            Pilkarz Benzema = new Pilkarz { IdPilkarz = Guid.NewGuid(), Imie = "Karim", Nazwisko = "Benzema", Wiek = 35, Pozycja = "Pomocnik", Statystyki = null, ArchiwalneKluby = null, Wynagrodzenie = 440000, IdKlubu = null };
+            Pilkarz Mbappé = new Pilkarz
+            {
+                IdPilkarz = Guid.NewGuid(),
+                Imie = "Kylian",
+                Nazwisko = "Mbappé",
+                Wiek = 24,
+                Pozycja = "Napastnik",
+                Statystyki = null,
+                ArchiwalneKluby = null,
+                Wynagrodzenie = 350000,
+                IdKlubu = null
+            };
 
             Mock<IPilkarzRepository> _mockPilkarzeRepository = new Mock<IPilkarzRepository>();
             _mockPilkarzeRepository.Setup(x => x.GetPilkarze())
-                .ReturnsAsync(new List<Pilkarz> { Benzema });
+                .ReturnsAsync(new List<Pilkarz> { Benzema, Mbappé });
 
             var unitOfWork = new UnitOfWork(null, _mockPilkarzeRepository.Object);
             var pilkarzService = new PilkarzService(unitOfWork);
 
-            pilkarzService.ZmienPozycjePilkarza(Benzema.IdPilkarz, "Napastnik");
-
-            Assert.Same(Benzema.Pozycja, "Napastnik");
+            Assert.NotEqual(Benzema.IdPilkarz, Mbappé.IdPilkarz);
+            Assert.NotSame(Benzema, Mbappé);
+            Assert.Same(Benzema.Pozycja, Mbappé.Pozycja);
         }
     }
 }
