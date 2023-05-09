@@ -18,6 +18,8 @@ namespace FootballClubLibrary.Data
         public DbSet<Statystyka> Statystyki { get; set; }
         public DbSet<Zarzad> Zarzady { get; set; }
 
+        public ApplicationDbContext(DbContextOptions options) : base(options) { }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=FootballClub;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
@@ -131,7 +133,7 @@ namespace FootballClubLibrary.Data
                     IdPilkarz = null,
                     Pilkarz = null
                 }
-                );;
+                ); ;
 
             modelBuilder.Entity<Zarzad>()
                 .HasData(

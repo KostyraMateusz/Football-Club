@@ -111,5 +111,20 @@ namespace BusinessLogicLayer.Services
             klub.ArchwilaniPilkarze?.Add(_pilkarz);
             await this.unitOfWork.Save();
         }
+
+        public async Task DodajPilkarzyDoObecnych(List<Pilkarz> pilkarze, Klub klub)
+        {
+            if (klub == null || pilkarze == null)
+            {
+                return;
+            }
+            foreach(var pilkarz in pilkarze)
+            {
+                if(pilkarz != null)
+                {
+                    klub?.ObecniPilkarze?.Add(pilkarz);
+                }
+            }
+        }
     }
 }

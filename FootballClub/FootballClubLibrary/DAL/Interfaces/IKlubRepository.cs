@@ -17,5 +17,6 @@ namespace FootballClubLibrary.Intefaces
         Task UpdateKlub(Klub klub);
         Task Save();
         DbSet<Klub> GetDbSetKluby();
+        Task DodajTrofeumKlubu(Guid id, string trofeum);
     }
 }

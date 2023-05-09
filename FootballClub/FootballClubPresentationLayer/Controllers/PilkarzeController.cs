@@ -8,7 +8,7 @@ namespace FootballClubPresentationLayer.Controllers
     {
         private readonly IPilkarzService pilkarzService;
 
-        public PilkarzeController (IPilkarzService pilkarzService)
+        public PilkarzeController(IPilkarzService pilkarzService)
         {
             this.pilkarzService = pilkarzService;
         }
@@ -17,13 +17,13 @@ namespace FootballClubPresentationLayer.Controllers
         public async Task<ActionResult> Index()
         {
             var pilkarze = await this.pilkarzService.DajPilkarzy();
-            return View(pilkarze);
+            return Ok(pilkarze);
         }
 
 
         [HttpGet]
         [Route("api/[controller]/DajArchiwalneKlubyPilkarza/{IdPilkarza}")]
-        public async Task<ActionResult> DajArchiwalneKlubyPilkarza([FromRoute] Guid IdPilkarza)
+        public async Task<ActionResult<IEnumerable<Klub>>> DajArchiwalneKlubyPilkarza([FromRoute] Guid IdPilkarza)
         {
             try
             {
@@ -32,18 +32,18 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                return View(result);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
 
         [HttpGet]
         [Route("api/[controller]/DajStatystykePilkarza/{IdStatystyka}, {IdPilkarza}")]
-        public async Task<ActionResult> DajStatystykePilkarza([FromRoute] Guid IdStatystyka, [FromRoute] Guid IdPilkarza)
+        public async Task<ActionResult<Statystyka>> DajStatystykePilkarza([FromRoute] Guid IdStatystyka, [FromRoute] Guid IdPilkarza)
         {
             try
             {
@@ -52,18 +52,18 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                return View(result);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
 
         [HttpGet]
         [Route("api/[controller]/DajStatystykiPilkarza/{IdPilkarza}")]
-        public async Task<ActionResult> DajStatystykiPilkarza([FromRoute] Guid IdPilkarza)
+        public async Task<ActionResult<IEnumerable<Statystyka>>> DajStatystykiPilkarza([FromRoute] Guid IdPilkarza)
         {
             try
             {
@@ -72,17 +72,17 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                return View(result);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
         [HttpGet]
         [Route("api/[controller]/DajNajlepszeStatystykiPilkarza/{IdPilkarza}")]
-        public async Task<ActionResult> DajNajlepszeStatystykiPilkarza([FromRoute] Guid IdPilkarza)
+        public async Task<ActionResult<IEnumerable<Statystyka>>> DajNajlepszeStatystykiPilkarza([FromRoute] Guid IdPilkarza)
         {
             try
             {
@@ -91,17 +91,17 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                return View(result);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
         [HttpGet]
         [Route("api/[controller]/DajPilkarzyBezKlubu")]
-        public async Task<ActionResult> DajPilkarzyBezKlubu()
+        public async Task<ActionResult<IEnumerable<Pilkarz>>> DajPilkarzyBezKlubu()
         {
             try
             {
@@ -110,11 +110,11 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                return View(result);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 

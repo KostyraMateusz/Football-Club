@@ -16,12 +16,12 @@ namespace FootballClubPresentationLayer.Controllers
         public async Task<ActionResult> Index()
         {
             var statystyki = await this.statystykaService.DajStatystyki();
-            return View(statystyki);
+            return Ok(statystyki);
         }
 
         [HttpGet]
         [Route("api/[controller]/DajStatystykeMeczu/{mecz}")]
-        public async Task<ActionResult> DajStatystykeMeczu(string mecz)
+        public async Task<ActionResult<Statystyka>> DajStatystykeMeczu(string mecz)
         {
             try
             {
@@ -30,18 +30,18 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                return View(result);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
 
         [HttpGet]
         [Route("api/[controller]/DajStatystkiZoltejKartki")]
-        public async Task<ActionResult> DajStatystkiZoltejKartki()
+        public async Task<ActionResult<IEnumerable<Statystyka>>> DajStatystkiZoltejKartki()
         {
             try
             {
@@ -50,18 +50,18 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                return View(result);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
 
         [HttpGet]
         [Route("api/[controller]/DajStatystykiCzerwonychKartek")]
-        public async Task<ActionResult> DajStatystykiCzerwonychKartek()
+        public async Task<ActionResult<IEnumerable<Statystyka>>> DajStatystykiCzerwonychKartek()
         {
             try
             {
@@ -70,18 +70,18 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                return View(result);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
 
         [HttpGet]
         [Route("api/[controller]/DajStatystykeNajdluzszePrzebiegnieteDystanse")]
-        public async Task<ActionResult> DajStatystykeNajdluzszePrzebiegnieteDystanse()
+        public async Task<ActionResult<IEnumerable<Statystyka>>> DajStatystykiNajdluzszePrzebiegnieteDystanse()
         {
             try
             {
@@ -90,11 +90,11 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                return View(result);
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
     }
