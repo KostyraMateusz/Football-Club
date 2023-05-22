@@ -100,15 +100,15 @@ namespace FootballClubPresentationLayer.Controllers
 
         [HttpPost]
         [Route("api/[controller]/DodajPilkarzaDoObecnych/{IdPilkarza}, {IdKlubu}")]
-        public async Task<ActionResult> DodajPilkarzaDoObecnych([FromRoute] Guid IdPilkarza, [FromRoute] Guid IdKlubu)
+        public async Task<ActionResult> DodajPilkarzaDoObecnych([FromRoute] Pilkarz pilkarz, [FromRoute] Guid IdKlubu)
         {
             try
             {
-                if (IdPilkarza.Equals(null) || IdKlubu.Equals(null))
+                if (pilkarz.Equals(null) || IdKlubu.Equals(null))
                 {
                     throw new Exception("");
                 }
-                await this.klubService.DodajPilkarzaDoObecnych(IdPilkarza, IdKlubu);
+                await this.klubService.DodajPilkarzaDoObecnych(pilkarz, IdKlubu);
                 return Ok();
             }
             catch (Exception ex)
