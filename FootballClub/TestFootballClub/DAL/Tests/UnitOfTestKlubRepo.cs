@@ -12,7 +12,7 @@ namespace TestsFootballClub.DAL.Tests
     public class UnitOfTestKlubRepo
     {
         [Fact]
-        public void TestKlubow()
+        public async Task TestKlubowAsync()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "Testowa").Options;
@@ -20,21 +20,15 @@ namespace TestsFootballClub.DAL.Tests
             KlubRepository klubRepository = new KlubRepository(klubContext);
 
             Assert.NotNull(klubRepository);
+            
+            await klubRepository.CreateKlub(new Klub() { IdKlub = Guid.NewGuid(), ObecniPilkarze = new List<Pilkarz>() });
+            await klubRepository.CreateKlub(new Klub() { IdKlub = Guid.NewGuid(), ObecniPilkarze = new List<Pilkarz>() });
+            await klubRepository.Save();
 
-            Klub klub = new Klub() { IdKlub = Guid.NewGuid(), ObecniPilkarze = new List<Pilkarz>() };
-            Klub klub2 = new Klub() { IdKlub = Guid.NewGuid(), ObecniPilkarze = new List<Pilkarz>() };
+            var klubs = await klubRepository.GetKluby();
+            Assert.NotEmpty(klubs);
+            Assert.Equal(2, klubs.Count());
 
-            klub.ObecniPilkarze.Add(new Pilkarz());
-            klub.ObecniPilkarze.Add(new Pilkarz());
-            klub2.ObecniPilkarze.Add(new Pilkarz());
-            klub.Trofea = "CL";
-            klub2.Trofea = "UKL";
-            klubRepository.Save();
-
-            Assert.NotSame(klub, klub2);
-            Assert.NotEqual(klub.Trofea, klub2.Trofea);
-            Assert.Equal(2, klub.ObecniPilkarze.Count);
-            Assert.Equal(1, klub2.ObecniPilkarze.Count);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace BusinessLogicLayer.Interfaces
         Task<Pilkarz> DajObecnegoPilkarza(Guid IdKlubu, Guid IdPilkarza);
         Task<string> DajStadionKlubu(Guid IdKlubu);
         Task<string> DajTrofeaKlubu(Guid IdKlubu);
-        Task DodajPilkarzaDoObecnych(Guid PilkarzId, Guid IdKlubu);
+        Task DodajPilkarzaDoObecnych(Pilkarz pilkarz, Guid IdKlubu);
         Task UsunPilkarzaZObecnych(Guid PilkarzId, Guid IdKlubu);
         Task DodajPilkarzyDoObecnych(List<Pilkarz> pilkarze, Klub klub);
     }

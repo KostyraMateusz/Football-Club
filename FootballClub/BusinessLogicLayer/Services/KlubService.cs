@@ -85,16 +85,15 @@ namespace BusinessLogicLayer.Services
             return klub.Trofea;
         }
 
-        public async Task DodajPilkarzaDoObecnych(Guid PilkarzId, Guid IdKlubu)
+        public async Task DodajPilkarzaDoObecnych(Pilkarz pilkarz, Guid IdKlubu)
         {
             var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
-            var _pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(PilkarzId);
-            bool czyPilkarzJestWObecnych = klub.ObecniPilkarze == null ? false : (klub.ObecniPilkarze.Contains(_pilkarz));
-            if (_pilkarz == null || klub == null || czyPilkarzJestWObecnych == true)
+            bool czyPilkarzJestWObecnych = klub.ObecniPilkarze == null ? false : (klub.ObecniPilkarze.Contains(pilkarz));
+            if (pilkarz == null || klub == null || czyPilkarzJestWObecnych == true)
             {
                 return;
             }
-            klub.ObecniPilkarze?.Add(_pilkarz);
+            klub.ObecniPilkarze?.Add(pilkarz);
             await this.unitOfWork.Save();
         }
 
