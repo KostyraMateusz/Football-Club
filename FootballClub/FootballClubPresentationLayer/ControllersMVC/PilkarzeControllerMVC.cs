@@ -18,6 +18,12 @@ namespace FootballClubPresentationLayer.ControllersMVC
             return View(pilkarze);
         }
 
+        public IActionResult DajPilkarzyBezKlubu()
+        {
+            var pilkarze = this.pilkarzService.DajPilkarzyBezKlubu();
+            return View(pilkarze);
+        }
+
         public IActionResult DajStatystykiPilkarza(Guid IdPilkarz)
         {
             var statystyki = this.pilkarzService.DajStatystykiPilkarza(IdPilkarz);
@@ -28,6 +34,16 @@ namespace FootballClubPresentationLayer.ControllersMVC
             return View(statystyki);
         }
 
+        public IActionResult DajArchiwalneKlubyPilkarza(Guid IdPilkarz)
+        {
+            var kluby = this.pilkarzService.DajArchiwalneKlubyPilkarza(IdPilkarz);
+            if (kluby == null)
+            {
+                return NotFound();
+            }
+            return View(kluby);
+        }
+        
         public IActionResult ZmienPozycjePilkarza(Guid idPilkarz, string pozycja)
         {
             this.pilkarzService.ZmienPozycjePilkarza(idPilkarz, pozycja);
