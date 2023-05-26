@@ -10,11 +10,11 @@ namespace BusinessLogicLayer.Interfaces
     public interface IPilkarzService
     {
         Task<IEnumerable<Pilkarz>> DajPilkarzy();
-        Task<IEnumerable<Klub>> DajArchiwalneKlubyPilkarza(Guid IdPilkarz);
-        Task<Statystyka> DajStatystykePilkarza(Guid IdStatystyka, Guid IdPilkarza);
-        Task<IEnumerable<Statystyka>> DajStatystykiPilkarza(Guid IdPilkarz);
-        Task ZmienPozycjePilkarza(Guid IdPilkarza, string pozycja);
-        Task<IEnumerable<Statystyka>> DajNajlepszeStatystykiPilkarza(Guid IdPilkarz);
+        Task<IEnumerable<Klub>> DajArchiwalneKlubyPilkarza(Pilkarz pilkarz);
+        Task<Statystyka> DajStatystykePilkarza(Pilkarz pilkarz, Guid IdStatystyka);
+        Task<IEnumerable<Statystyka>> DajStatystykiPilkarza(Pilkarz pilkarz);
+        Task ZmienPozycjePilkarza(Pilkarz pilkarz, string pozycja);
+        Task<IEnumerable<Statystyka>> DajNajlepszeStatystykiPilkarza(Pilkarz pilkarz);
         Task<IEnumerable<Pilkarz>> DajPilkarzyBezKlubu();
     }
 }

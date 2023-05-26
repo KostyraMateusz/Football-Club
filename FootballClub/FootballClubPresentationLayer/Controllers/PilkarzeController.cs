@@ -27,7 +27,9 @@ namespace FootballClubPresentationLayer.Controllers
         {
             try
             {
-                var result = await this.pilkarzService.DajArchiwalneKlubyPilkarza(IdPilkarza);
+                var pilkarze = await this.pilkarzService.DajPilkarzy();
+                var pilkarz = pilkarze.First(p => p.IdPilkarz == IdPilkarza);
+                var result = await this.pilkarzService.DajArchiwalneKlubyPilkarza(pilkarz);
                 if (result == null)
                 {
                     throw new Exception("");
@@ -47,7 +49,9 @@ namespace FootballClubPresentationLayer.Controllers
         {
             try
             {
-                var result = await this.pilkarzService.DajStatystykePilkarza(IdStatystyka, IdPilkarza);
+                var pilkarze = await this.pilkarzService.DajPilkarzy();
+                var pilkarz = pilkarze.First(p => p.IdPilkarz == IdPilkarza);
+                var result = await this.pilkarzService.DajStatystykePilkarza(pilkarz, IdStatystyka);
                 if (result == null)
                 {
                     throw new Exception("");
@@ -67,7 +71,9 @@ namespace FootballClubPresentationLayer.Controllers
         {
             try
             {
-                var result = await this.pilkarzService.DajStatystykiPilkarza(IdPilkarza);
+                var pilkarze = await this.pilkarzService.DajPilkarzy();
+                var pilkarz = pilkarze.First(p => p.IdPilkarz == IdPilkarza);
+                var result = await this.pilkarzService.DajStatystykiPilkarza(pilkarz);
                 if (result == null)
                 {
                     throw new Exception("");
@@ -86,7 +92,9 @@ namespace FootballClubPresentationLayer.Controllers
         {
             try
             {
-                var result = await this.pilkarzService.DajNajlepszeStatystykiPilkarza(IdPilkarza);
+                var pilkarze = await this.pilkarzService.DajPilkarzy();
+                var pilkarz = pilkarze.First(p => p.IdPilkarz == IdPilkarza);
+                var result = await this.pilkarzService.DajNajlepszeStatystykiPilkarza(pilkarz);
                 if (result == null)
                 {
                     throw new Exception("");
@@ -124,11 +132,13 @@ namespace FootballClubPresentationLayer.Controllers
         {
             try
             {
+                var pilkarze = await this.pilkarzService.DajPilkarzy();
+                var pilkarz = pilkarze.First(p => p.IdPilkarz == IdPilkarza);
                 if (IdPilkarza.Equals(null) || pozycja.Equals(null))
                 {
                     throw new Exception();
                 }
-                await this.pilkarzService.ZmienPozycjePilkarza(IdPilkarza, pozycja);
+                await this.pilkarzService.ZmienPozycjePilkarza(pilkarz, pozycja);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
