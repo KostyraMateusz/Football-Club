@@ -22,30 +22,27 @@ namespace TestsFootballClub.ControllerTests.Kluby
             return await Task.FromResult(this.kluby);
         }
 
-        public async Task<string> DajTrofeaKlubu(Guid IdKlubu)
+        public async Task<string> DajTrofeaKlubu(Klub klub)
         {
-            var klub = await Task.FromResult(this.kluby.First(k => k.IdKlub == IdKlubu));
-            return klub.Trofea;
+            return await Task.FromResult(klub.Trofea);
         }
 
-        public async Task DodajPilkarzaDoObecnych(Pilkarz pilkarz, Guid IdKlubu)
+        public async Task<string> DajStadionKlubu(Klub klub)
         {
-            var klub = await Task.FromResult(this.kluby.First(k => k.IdKlub == IdKlubu));
-            klub.ObecniPilkarze?.Add(pilkarz);
+            return await Task.FromResult(klub.Stadion);
         }
 
-        public async Task<IEnumerable<Pilkarz>> DajObecnychPilkarzy(Guid IdKlubu)
+        public async Task DodajPilkarzaDoObecnych(Pilkarz pilkarz, Klub _klub)
         {
-            var klub = await Task.FromResult(this.kluby.First(k=> k.IdKlub == IdKlubu));
-            return klub.ObecniPilkarze?.ToList();
+            _klub.ObecniPilkarze?.Add(pilkarz);
+        }
+
+        public async Task<IEnumerable<Pilkarz>> DajObecnychPilkarzy(Klub klub)
+        {
+            return await Task.FromResult(klub.ObecniPilkarze?.ToList());
         }
 
         public Task<Pilkarz> DajArchiwalnegoPilkarza(Guid IdKlubu, Guid IdPilkarza)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<string> DajStadionKlubu(Guid IdKlubu)
         {
             throw new NotImplementedException();
         }

@@ -20,29 +20,34 @@ namespace FootballClubPresentationLayer.ControllersMVC
             return View(kluby);
         }
 
-        public IActionResult DajTrofea(Guid id)
+        public IActionResult DajTrofea(Klub klub)
         {
-            var troefa = this.klubService.DajTrofeaKlubu(id);
-            if(troefa == null)
-            {
-                return NotFound();
-            }
+            var troefa = this.klubService.DajTrofeaKlubu(klub).Result.ToString();
+            ViewBag.Trofea = troefa;
             return View(troefa);
         }
 
-        public IActionResult DajObecnychPilkarzyKlubu(Guid id)
+        public IActionResult DajStadion(Klub klub)
         {
-            var pilkarze = this.klubService.DajObecnychPilkarzy(id);
+            var stadion = this.klubService.DajStadionKlubu(klub).Result.ToString();
+            ViewBag.Stadion = stadion;
+            return View(stadion);
+        }
+
+        public IActionResult DajObecnychPilkarzyKlubu(Klub klub)
+        {
+            var pilkarze = this.klubService.DajObecnychPilkarzy(klub).Result.ToList();
             if(pilkarze == null)
             {
                 return NotFound();
             }
+            ViewBag.Pilkarze = pilkarze;
             return View(pilkarze);
         }
 
-        public IActionResult DodajPilkarzaDoObecnych(Guid id, Pilkarz pilkarz)
+        public IActionResult DodajPilkarzaDoObecnych(Klub klub, Pilkarz pilkarz)
         {
-            this.klubService.DodajPilkarzaDoObecnych(pilkarz, id);
+            this.klubService.DodajPilkarzaDoObecnych(pilkarz, klub);
             return View();
         }
     }
