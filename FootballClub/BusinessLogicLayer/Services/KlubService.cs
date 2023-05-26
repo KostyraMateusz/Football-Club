@@ -59,9 +59,9 @@ namespace BusinessLogicLayer.Services
                 return null;
             }
         }
-        public async Task<IEnumerable<Pilkarz>> DajObecnychPilkarzy(Guid IdKlubu)
+        public async Task<IEnumerable<Pilkarz>> DajObecnychPilkarzy(Klub _klub)
         {
-            var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById(_klub.IdKlub);
             var result = klub.ObecniPilkarze?.ToList();
             if (result != null)
             {
@@ -73,21 +73,21 @@ namespace BusinessLogicLayer.Services
             }
         }
 
-        public async Task<string> DajStadionKlubu(Guid IdKlubu)
+        public async Task<string> DajStadionKlubu(Klub _klub)
         {
-            var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById(_klub.IdKlub);
             return klub?.Stadion;
         }
 
-        public async Task<string> DajTrofeaKlubu(Guid IdKlubu)
+        public async Task<string> DajTrofeaKlubu(Klub _klub)
         {
-            var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById(_klub.IdKlub);
             return klub.Trofea;
         }
 
-        public async Task DodajPilkarzaDoObecnych(Pilkarz pilkarz, Guid IdKlubu)
+        public async Task DodajPilkarzaDoObecnych(Pilkarz pilkarz, Klub _klub)
         {
-            var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById(_klub.IdKlub);
             bool czyPilkarzJestWObecnych = klub.ObecniPilkarze == null ? false : (klub.ObecniPilkarze.Contains(pilkarz));
             if (pilkarz == null || klub == null || czyPilkarzJestWObecnych == true)
             {
