@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FootballClubLibrary.Data;
 using FootballClubLibrary.Models;
-using FootballClubLibrary.Unit_of_Work;
+using FootballClubLibrary.UnitOfWork;
 
 namespace FootballClubWeb.Controllers
 {

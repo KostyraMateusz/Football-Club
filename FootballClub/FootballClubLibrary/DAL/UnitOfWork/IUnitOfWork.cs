@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FootballClubLibrary.Unit_of_Work
+namespace FootballClubLibrary.UnitOfWork
 {
     public interface IUnitOfWork
     { 
