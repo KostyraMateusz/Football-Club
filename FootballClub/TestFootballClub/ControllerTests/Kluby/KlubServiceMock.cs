@@ -37,6 +37,11 @@ namespace TestsFootballClub.ControllerTests.Kluby
             _klub.ObecniPilkarze?.Add(pilkarz);
         }
 
+        public async Task UsunPilkarzaZObecnych(Pilkarz pilkarz, Klub _klub)
+        {
+            _klub.ObecniPilkarze?.Remove(pilkarz);
+        }
+
         public async Task<IEnumerable<Pilkarz>> DajObecnychPilkarzy(Klub klub)
         {
             return await Task.FromResult(klub.ObecniPilkarze?.ToList());
