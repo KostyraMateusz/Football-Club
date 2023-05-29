@@ -4,7 +4,7 @@ using FootballClubLibrary.Data;
 using FootballClubLibrary.Intefaces;
 using FootballClubLibrary.Interfaces;
 using FootballClubLibrary.Repositories;
-using FootballClubLibrary.Unit_of_Work;
+using FootballClubLibrary.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 

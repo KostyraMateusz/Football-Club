@@ -13,7 +13,7 @@ namespace FootballClubPresentationLayer.Controllers
             this.klubService = klubService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> DajKluby()
         {
             var kluby = await this.klubService.DajKluby();
             return Ok(kluby);

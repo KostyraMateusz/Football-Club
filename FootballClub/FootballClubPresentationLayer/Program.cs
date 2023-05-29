@@ -4,12 +4,9 @@ using FootballClubLibrary.Data;
 using FootballClubLibrary.Intefaces;
 using FootballClubLibrary.Interfaces;
 using FootballClubLibrary.Repositories;
-using FootballClubLibrary.Unit_of_Work;
+using FootballClubLibrary.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -25,6 +22,8 @@ builder.Services.AddScoped<IStatystykaService, StatystykaService>();
 builder.Services.AddScoped<IZarzadRepository, ZarzadRepository>();
 builder.Services.AddSwaggerGen();
 
+// Add services to the container.
+builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
