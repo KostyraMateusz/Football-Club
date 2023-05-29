@@ -22,6 +22,26 @@ namespace FootballClubPresentationLayer.Controllers
 
 
         [HttpGet]
+        [Route("api/[controller]/DajPilkarzy")]
+        public async Task<ActionResult<IEnumerable<Pilkarz>>> DajPilkarzy()
+        {
+            try
+            {
+                var result = await this.pilkarzService.DajPilkarzy();
+                if (result == null)
+                {
+                    throw new Exception("");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+
+        [HttpGet]
         [Route("api/[controller]/DajArchiwalneKlubyPilkarza/{IdPilkarza}")]
         public async Task<ActionResult<IEnumerable<Klub>>> DajArchiwalneKlubyPilkarza([FromRoute] Guid IdPilkarza)
         {
