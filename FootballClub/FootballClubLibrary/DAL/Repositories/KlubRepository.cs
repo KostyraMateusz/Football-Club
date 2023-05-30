@@ -23,7 +23,7 @@ namespace FootballClubLibrary.Repositories
             this.dbContext = dbContext;
         }
 
-        public async Task CreateKlub(Klub klub)
+        public async Task CreateKlub(Klub? klub)
         {
             await this.dbContext.Kluby.AddAsync(klub);
         }

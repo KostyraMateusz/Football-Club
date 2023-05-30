@@ -26,6 +26,8 @@
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj" />
     <ProjectReference Include="..\FootballClubLibrary\DAL\FootballClubLibrary.csproj" />
+    <ProjectReference Include="..\FootballClubPresentationLayer\FootballClubPresentationLayer.csproj" />
+    <ProjectReference Include="..\FootballClubWeb\FootballClubWeb.csproj" />
   </ItemGroup>
 
 </Project>

@@ -13,7 +13,7 @@ namespace FootballClubPresentationLayer.Controllers
             this.klubService = klubService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> DajKluby()
         {
             var kluby = await this.klubService.DajKluby();
             return Ok(kluby);
@@ -81,11 +81,13 @@ namespace FootballClubPresentationLayer.Controllers
 
         [HttpGet]
         [Route("api/[controller]/DajObecnychPilkarzy/{IdKlubu}")]
-        public async Task<ActionResult<IEnumerable<Pilkarz>>> DajObecnychPilkarzy([FromRoute] Guid IdKlubu)
+        public async Task<ActionResult<IEnumerable<Pilkarz>>> DajObecnychPilkarzy([FromRoute] Guid IdKlub)
         {
             try
             {
-                var result = await this.klubService.DajObecnychPilkarzy(IdKlubu);
+                var kluby = await this.klubService.DajKluby();
+                var klub = kluby.First(k => k.Equals(IdKlub));
+                var result = await this.klubService.DajObecnychPilkarzy(klub);
                 if (result == null)
                 {
                     throw new Exception("");
@@ -100,15 +102,17 @@ namespace FootballClubPresentationLayer.Controllers
 
         [HttpPost]
         [Route("api/[controller]/DodajPilkarzaDoObecnych/{IdPilkarza}, {IdKlubu}")]
-        public async Task<ActionResult> DodajPilkarzaDoObecnych([FromRoute] Guid IdPilkarza, [FromRoute] Guid IdKlubu)
+        public async Task<ActionResult> DodajPilkarzaDoObecnych([FromRoute] Pilkarz pilkarz, [FromRoute] Guid IdKlubu)
         {
             try
             {
-                if (IdPilkarza.Equals(null) || IdKlubu.Equals(null))
+                if (pilkarz.Equals(null) || IdKlubu.Equals(null))
                 {
                     throw new Exception("");
                 }
-                await this.klubService.DodajPilkarzaDoObecnych(IdPilkarza, IdKlubu);
+                var kluby = this.klubService.DajKluby();
+                var klub = kluby.Result.First(k => k.IdKlub == IdKlubu);
+                await this.klubService.DodajPilkarzaDoObecnych(pilkarz, klub);
                 return Ok();
             }
             catch (Exception ex)
@@ -142,7 +146,9 @@ namespace FootballClubPresentationLayer.Controllers
         {
             try
             {
-                var result = await this.klubService.DajTrofeaKlubu(IdKlubu);
+                var kluby = this.klubService.DajKluby();
+                var klub = kluby.Result.First(k => k.IdKlub == IdKlubu);
+                var result = await this.klubService.DajTrofeaKlubu(klub);
                 if (result == null)
                 {
                     throw new Exception("");
@@ -161,7 +167,9 @@ namespace FootballClubPresentationLayer.Controllers
         {
             try
             {
-                var result = await this.klubService.DajStadionKlubu(IdKlubu);
+                var kluby = this.klubService.DajKluby();
+                var klub = kluby.Result.First(k => k.IdKlub == IdKlubu);
+                var result = await this.klubService.DajStadionKlubu(klub);
                 if (result == null)
                 {
                     throw new Exception("");
