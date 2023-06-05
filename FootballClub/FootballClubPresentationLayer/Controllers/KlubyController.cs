@@ -13,10 +13,23 @@ namespace FootballClubPresentationLayer.Controllers
             this.klubService = klubService;
         }
 
-        public async Task<IActionResult> DajKluby()
+        [HttpGet]
+        [Route("api/[controller]/DajKluby")]
+        public async Task<ActionResult<IEnumerable<Pilkarz>>> DajKluby()
         {
-            var kluby = await this.klubService.DajKluby();
-            return Ok(kluby);
+            try
+            {
+                var result = await this.klubService.DajKluby();
+                if (result == null)
+                {
+                    throw new Exception("");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpGet]
