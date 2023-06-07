@@ -21,6 +21,25 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpGet]
+        [Route("api/[controller]/DajZarzady")]
+        public async Task<ActionResult<decimal>> DajZarzady()
+        {
+            try
+            {
+                var result = await this._zarzadService.DajZarzady();
+                if (result.Equals(null))
+                {
+                    throw new Exception("");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpGet]
         [Route("api/[controller]/DajWynikFinansowy/{IdZarzadu}")]
         public async Task<ActionResult<decimal>> DajWynikFinansowy([FromRoute] Guid IdZarzadu)
         {
@@ -40,7 +59,7 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpPost]
-        [Route("api/[controller]/DodajCelZarzadu")]
+        [Route("api/[controller]/DodajCelZarzadu/{IdZarzadu}, {cel}")]
         public async Task<ActionResult> DodajCelZarzadu([FromRoute] Guid IdZarzadu, string cel)
         {
             try
@@ -59,7 +78,7 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpPost]
-        [Route("api/[controller]/DodajCzlonkaZarzadu")]
+        [Route("api/[controller]/DodajCzlonkaZarzadu/{IdZarzadu}, {IdPracownik}")]
         public async Task<ActionResult> DodajCzlonkaZarzadu([FromRoute] Guid IdZarzadu, [FromRoute] Guid IdPracownik)
         {
             try

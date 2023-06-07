@@ -18,6 +18,25 @@ namespace FootballClubPresentationLayer.Controllers
             return Ok(pracownicy);
         }
 
+        [HttpGet]
+        [Route("api/[controller]/DajPracownikow")]
+        public async Task<ActionResult<decimal>> DajPracownikow()
+        {
+            try
+            {
+                var result = await this.pracownikService.DajPracownikow();
+                if (result.Equals(null))
+                {
+                    throw new Exception("");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
         [HttpPut]
         [Route("api/[controller]/ZmienFunkcjePracownika")]
         public async Task<ActionResult> ZmienFunkcjePracownika([FromRoute] Guid IdPracownik, string funkcja)
