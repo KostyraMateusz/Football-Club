@@ -20,6 +20,25 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpGet]
+        [Route("api/[controller]/DajStatystyki")]
+        public async Task<ActionResult<Statystyka>> DajStatystyki()
+        {
+            try
+            {
+                var result = await this.statystykaService.DajStatystyki();
+                if (result == null)
+                {
+                    throw new Exception("");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpGet]
         [Route("api/[controller]/DajStatystykeMeczu/{mecz}")]
         public async Task<ActionResult<Statystyka>> DajStatystykeMeczu(string mecz)
         {
