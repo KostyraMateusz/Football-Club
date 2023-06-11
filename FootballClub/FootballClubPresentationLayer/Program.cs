@@ -21,6 +21,10 @@ builder.Services.AddScoped<IPracownikService, PracownikService>();
 builder.Services.AddScoped<IStatystykaService, StatystykaService>();
 builder.Services.AddScoped<IZarzadRepository, ZarzadRepository>();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(p => p.AddPolicy("CorsPolicy", build =>
+{
+    build.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+}));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -34,6 +38,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseCors("CorsPolicy");
 app.UseSwagger();
 app.UseSwaggerUI();
 
