@@ -27,4 +27,8 @@
     <ProjectReference Include="..\FootballClubLibrary\DAL\FootballClubLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ControllersMVC\" />
+  </ItemGroup>
+
 </Project>
