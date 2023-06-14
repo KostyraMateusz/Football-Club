@@ -71,5 +71,25 @@ namespace TestsFootballClub.ControllerTests.Kluby
         {
             throw new NotImplementedException();
         }
+
+        public Task DodajKlub(Klub klub)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task EdytujKlub(Klub klub)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UsunKlub(Guid IdKlubu)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Klub> DajKlub(Guid IdKlubu)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

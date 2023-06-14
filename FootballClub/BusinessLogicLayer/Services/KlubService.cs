@@ -19,6 +19,43 @@ namespace BusinessLogicLayer.Services
             this.unitOfWork = unitOfWork;
         }
 
+        public async Task<Klub> DajKlub(Guid IdKlubu)
+        {
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
+            if(klub == null)
+            {
+                return null;
+            }
+            return klub;
+        }
+
+        public async Task DodajKlub(Klub klub)
+        {
+            var foundClub = await this.unitOfWork.KlubRepository.GetKlubById(klub.IdKlub);
+            if(foundClub == null)
+            {
+                await this.unitOfWork.KlubRepository.CreateKlub(klub);
+                await this.unitOfWork.Save();
+            }
+        }
+
+        public async Task EdytujKlub(Klub klub)
+        {
+            if(klub != null)
+            {
+                await this.unitOfWork.KlubRepository.UpdateKlub(klub);
+            }
+        }
+
+        public async Task UsunKlub(Guid IdKlubu)
+        {
+            var foundClub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
+            if (foundClub != null)
+            {
+                await this.unitOfWork.KlubRepository.DeleteKlub(IdKlubu);
+            }
+        }
+
         public async Task<IEnumerable<Klub>> DajKluby()
         {
             return await this.unitOfWork.KlubRepository.GetKluby();

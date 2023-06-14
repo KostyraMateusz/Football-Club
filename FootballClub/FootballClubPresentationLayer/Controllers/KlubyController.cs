@@ -1,6 +1,7 @@
 ﻿using BusinessLogicLayer.Interfaces;
 using FootballClubLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace FootballClubPresentationLayer.Controllers
 {
@@ -12,6 +13,66 @@ namespace FootballClubPresentationLayer.Controllers
         {
             this.klubService = klubService;
         }
+
+        [HttpPost]
+        [Route("api/Kluby/NowyKlub")]
+        public async Task<ActionResult> UtworzKlub([FromBody] Klub klub)
+        {
+            try
+            {
+                if (klub == null)
+                {
+                    throw new Exception("");
+                }
+                await this.klubService.DodajKlub(klub);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+               return NotFound(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("api/Kluby/EdytujKlub/{id}")]
+        public async Task<ActionResult> EdytujKlub([FromBody] Klub klub)
+        {
+            try
+            {
+                if (klub == null)
+                {
+                    throw new Exception("");
+                }
+                await this.klubService.EdytujKlub(klub);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("api/Kluby/UsunKlub/{id}")]
+        public async Task<ActionResult> UsunKlub([FromRoute] Guid IdKlubu)
+        {
+            try
+            {
+                var kluby = await this.klubService.DajKluby();
+                var klub = kluby.First(k=> k.IdKlub == IdKlubu);
+                if (klub == null)
+                {
+                    throw new Exception("");
+                }
+                await this.klubService.UsunKlub(IdKlubu);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
 
         [HttpGet]
         [Route("api/[controller]/DajKluby")]

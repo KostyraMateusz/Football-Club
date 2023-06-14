@@ -1,0 +1,17 @@
+<div class="header-container">
+    <div class="title">
+        <h1>{{title}}</h1>
+    </div>
+    <div class="panel">
+        <ul class="nav-bar-list">
+            <li><a [routerLink]="['/Kluby']">Kluby</a></li>
+            <li><a [routerLink]="['/Pilkarze']">Piłkarze</a></li>
+            <li><a [routerLink]="['/Pracownicy']">Pracownicy</a></li>
+            <li><a [routerLink]="['/Statystyki']">Statystyki</a></li>
+            <li><a [routerLink]="['/Zarzad']">Zarząd</a></li>
+        </ul>
+    </div>
+    <div class="title">
+        <h1>{{myDate | date:"EEEE MMMM d yyyy h:mm:ss "}} </h1>
+    </div>
+</div>
