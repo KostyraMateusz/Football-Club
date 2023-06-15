@@ -14,8 +14,8 @@ export class StatystykaService {
   }
   constructor(private httpClient: HttpClient) { }
 
-  DajDajStatystykiZarzady(): Observable<StatystykaResponse[]> {
-    return this.httpClient.get<StatystykaResponse[]>(environment.url + '/DajZarzady');
+  DajStatystyki(): Observable<StatystykaResponse[]>{
+    return this.httpClient.get<StatystykaResponse[]>(environment.url + 'Statystyki/DajStatystyki');
   }
 
   DajStatystykeMeczu(mecz: string): Observable<StatystykaResponse[]> {

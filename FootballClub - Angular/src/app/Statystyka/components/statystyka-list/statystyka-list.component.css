@@ -1,0 +1,51 @@
+.list-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+}
+
+table {
+    width: 700px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+
+th,
+tr {
+    border: 1px solid darkgoldenrod;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+    border-color: darkgoldenrod;
+    background-color: black;
+    color: white;
+    transition: 0.3s;
+}
+
+.demo-row-is-clicked {
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+    color: darkgoldenrod;
+}
+
+.panel {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    border: 1px solid darkgoldenrod;
+}

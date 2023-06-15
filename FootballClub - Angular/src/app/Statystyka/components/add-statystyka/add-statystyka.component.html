@@ -1,0 +1,50 @@
+<div class="add-container">
+    <h1>Dodaj nową statystyke</h1>
+    <form [formGroup]="statystyka" (ngSubmit)="DodajStatystyke()">
+        <mat-form-field>
+            <mat-label>Mecz</mat-label>
+            <input matInput formControlName="Mecz">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Gole</mat-label>
+            <input matInput formControlName="Gole">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Asysty</mat-label>
+            <input matInput formControlName="Asysty">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>ZolteKartki</mat-label>
+            <input matInput formControlName="ZolteKartki">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>CzerwoneKartki</mat-label>
+            <input matInput formControlName="CzerwoneKartki">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>PrzebiegnietyDystans</mat-label>
+            <input matInput formControlName="PrzebiegnietyDystans">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Ocena</mat-label>
+            <input matInput formControlName="Ocena">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Pilkarz</mat-label>
+            <mat-select formControlName="Pilkarz" multiple>
+                <mat-option *ngFor="let pilkarz of this.pilkarze" [value]="pilkarz">
+                    {{ pilkarz.Nazwisko }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button type="submit" mat-button>Dodaj statystyke</button>
+    </form>
+
+</div>
