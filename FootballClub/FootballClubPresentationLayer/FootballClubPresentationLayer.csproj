@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\css\ZdjecieAutorow.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
       <PrivateAssets>all</PrivateAssets>
@@ -25,10 +29,6 @@
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj" />
     <ProjectReference Include="..\FootballClubLibrary\DAL\FootballClubLibrary.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ControllersMVC\" />
   </ItemGroup>
 
 </Project>

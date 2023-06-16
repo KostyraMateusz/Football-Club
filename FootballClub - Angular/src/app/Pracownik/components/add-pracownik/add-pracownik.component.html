@@ -1,0 +1,37 @@
+<div class="add-container">
+    <h1>Dodaj nowego pracownika</h1>
+    <form [formGroup]="pracownik" (ngSubmit)="DodajPracownika()">
+        <mat-form-field>
+            <mat-label>Imie</mat-label>
+            <input matInput formControlName="Imie">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Nazwisko</mat-label>
+            <input matInput formControlName="Nazwisko">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>PESEL</mat-label>
+            <input matInput formControlName="PESEL">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Wiek</mat-label>
+            <input matInput formControlName="Wiek">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>WykonywanaFunkcja</mat-label>
+            <input matInput formControlName="WykonywanaFunkcja">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Wynagrodzenie</mat-label>
+            <input matInput formControlName="Wynagrodzenie">
+        </mat-form-field>
+
+        <button type="submit" mat-button>Dodaj pracownika</button>
+    </form>
+
+</div>

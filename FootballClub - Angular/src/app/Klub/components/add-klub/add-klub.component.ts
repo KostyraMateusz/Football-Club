@@ -43,7 +43,7 @@ export class AddKlubComponent implements OnInit {
   }
 
   getZarzady(): void {
-
+    
   }
 
   DodajKlub(): void {
