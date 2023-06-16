@@ -23,7 +23,7 @@ builder.Services.AddScoped<IZarzadRepository, ZarzadRepository>();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(p => p.AddPolicy("CorsPolicy", build =>
 {
-    build.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+    build.WithOrigins("http://localhost:7160").AllowAnyMethod().AllowAnyHeader();
 }));
 
 // Add services to the container.

@@ -12,12 +12,6 @@ namespace FootballClubPresentationLayer.Controllers
             this.pracownikService = pracownikService;
         }
 
-        public async Task<ActionResult> Index()
-        {
-            var pracownicy = await this.pracownikService.DajPracownikow();
-            return Ok(pracownicy);
-        }
-
         [HttpGet]
         [Route("api/[controller]/DajPracownikow")]
         public async Task<ActionResult<decimal>> DajPracownikow()

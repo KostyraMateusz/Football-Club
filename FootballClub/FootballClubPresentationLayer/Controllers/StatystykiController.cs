@@ -13,12 +13,6 @@ namespace FootballClubPresentationLayer.Controllers
             this.statystykaService = statystykaService;
         }
 
-        public async Task<ActionResult> Index()
-        {
-            var statystyki = await this.statystykaService.DajStatystyki();
-            return Ok(statystyki);
-        }
-
         [HttpGet]
         [Route("api/[controller]/DajStatystyki")]
         public async Task<ActionResult<Statystyka>> DajStatystyki()
