@@ -1,33 +1,32 @@
 ﻿using BusinessLogicLayer.Interfaces;
 using FootballClubLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.ConstrainedExecution;
 
 namespace FootballClubPresentationLayer.Controllers
 {
     public class ZarzadyController : Controller
     {
-        private readonly IZarzadService _zarzadService;
+        private readonly IZarzadService zarzadService;
 
         public ZarzadyController(IZarzadService zarzadService)
         {
-            _zarzadService = zarzadService;
+            this.zarzadService = zarzadService;
         }
 
         public async Task<ActionResult> Index()
         {
-            var zarzady = await this._zarzadService.DajZarzady();
-            return Ok(zarzady);
+            var zarzady = await this.zarzadService.DajZarzady();
+            return View(zarzady);
         }
 
         [HttpGet]
         [Route("api/[controller]/DajZarzady")]
-        public async Task<ActionResult<decimal>> DajZarzady()
+        public async Task<ActionResult<Zarzad>> DajZarzady()
         {
             try
             {
-                var result = await this._zarzadService.DajZarzady();
-                if (result.Equals(null))
+                var result = await this.zarzadService.DajZarzady();
+                if (result == null)
                 {
                     throw new Exception("");
                 }
@@ -45,8 +44,8 @@ namespace FootballClubPresentationLayer.Controllers
         {
             try
             {
-                var result = await this._zarzadService.DajWynikFinansowyZarzadu(IdZarzadu);
-                if (result.Equals(null))
+                var result = await this.zarzadService.DajWynikFinansowyZarzadu(IdZarzadu);
+                if (result == null)
                 {
                     throw new Exception("");
                 }
@@ -68,7 +67,7 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("Pusty cel");
                 }
-                await this._zarzadService.DodajCelZarzadu(IdZarzadu, cel);
+                await this.zarzadService.DodajCelZarzadu(IdZarzadu, cel);
                 return Ok();
             }
             catch (Exception ex)
@@ -87,7 +86,7 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception();
                 }
-                await this._zarzadService.DodajCzlonkaZarzadu(IdZarzadu, IdPracownik);
+                await this.zarzadService.DodajCzlonkaZarzadu(IdZarzadu, IdPracownik);
                 return Ok();
             }
             catch (Exception ex)
@@ -106,7 +105,7 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception();
                 }
-                await this._zarzadService.ZmienBudzetZarzadu(IdZarzadu, budzet);
+                await this.zarzadService.ZmienBudzetZarzadu(IdZarzadu, budzet);
                 return Ok();
             }
             catch (Exception ex)

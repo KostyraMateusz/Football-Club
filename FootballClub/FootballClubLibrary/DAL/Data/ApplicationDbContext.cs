@@ -77,7 +77,6 @@ namespace FootballClubLibrary.Data
                         ObecniPilkarze = new Collection<Pilkarz> { },
                         ArchwilaniPilkarze = new Collection<Pilkarz> { },
                         Zarzad = null
-
                     },
                     new Klub()
                     {
