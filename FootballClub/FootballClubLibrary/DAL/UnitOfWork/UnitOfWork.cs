@@ -1,20 +1,14 @@
 ﻿using FootballClubLibrary.Data;
-using FootballClubLibrary.Intefaces;
 using FootballClubLibrary.Interfaces;
-using FootballClubLibrary.Models;
 using FootballClubLibrary.Repositories;
-using FootballClubLibrary.Repositories.Generic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballClubLibrary.UnitOfWork
 {
     public class UnitOfWork : IDisposable, IUnitOfWork
     {
-        private readonly ApplicationDbContext _context;
+		private bool disposed = false;
+		private readonly ApplicationDbContext _context;
+
         private IKlubRepository klubRepository;
         private IPilkarzRepository pilkarzRepository;
         private IPracownikRepository pracownikRepository;
@@ -25,13 +19,12 @@ namespace FootballClubLibrary.UnitOfWork
         {
             this._context = _context;
         }
-        //public UnitOfWork(IKlubRepository? klubRepository, IPilkarzRepository? pilkarzRepository) : base()
-        //{
-        //    this.klubRepository = klubRepository;
-        //    this.pilkarzRepository = pilkarzRepository;
-        //}
 
-
+        public UnitOfWork(IKlubRepository klubRepository, IPilkarzRepository pilkarzRepository)
+        {
+            this.klubRepository = klubRepository;
+            this.pilkarzRepository = pilkarzRepository;
+        }
 
         public IKlubRepository KlubRepository
         {
@@ -98,8 +91,13 @@ namespace FootballClubLibrary.UnitOfWork
             await this._context.SaveChangesAsync();
         }
 
-        private bool disposed = false;
-        protected virtual void Dispose(bool disposing)
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
             {
@@ -109,12 +107,6 @@ namespace FootballClubLibrary.UnitOfWork
                 }
             }
             this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }

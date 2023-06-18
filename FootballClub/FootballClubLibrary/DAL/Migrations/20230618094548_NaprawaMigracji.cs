@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FootballClubLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateMigration2 : Migration
+    public partial class NaprawaMigracji : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -128,8 +128,8 @@ namespace FootballClubLibrary.Migrations
                     PESEL = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Wiek = table.Column<int>(type: "int", nullable: false),
                     WykonywanaFunkcja = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    IdZarzadu = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Wynagrodzenie = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Wynagrodzenie = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IdZarzadu = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -147,8 +147,8 @@ namespace FootballClubLibrary.Migrations
                 columns: new[] { "IdKlub", "Nazwa", "Stadion", "Trofea" },
                 values: new object[,]
                 {
-                    { new Guid("23da5e72-4b42-47ad-965e-5511cc772eae"), "Real Madryt", "Estadio Santiago Bernabéu", "Liga Mistrzów" },
-                    { new Guid("90fe8fab-b90e-4cd1-aa7c-12ab3b6040ad"), "FC Barcelona", "Camp Nou", "La Liga" }
+                    { new Guid("193dbec0-d42c-4ad4-821c-a0e8f5987e38"), "FC Barcelona", "Camp Nou", "La Liga" },
+                    { new Guid("d657d937-7263-4ab8-98c4-08bb6f8b994e"), "Real Madryt", "Estadio Santiago Bernabéu", "Liga Mistrzów" }
                 });
 
             migrationBuilder.InsertData(
@@ -156,8 +156,8 @@ namespace FootballClubLibrary.Migrations
                 columns: new[] { "IdPilkarz", "IdKlubu", "Imie", "Nazwisko", "Pozycja", "Wiek", "Wynagrodzenie" },
                 values: new object[,]
                 {
-                    { new Guid("5ed7ba86-5116-4da1-badb-61592d26ce74"), null, "Robert", "Lewandowski", "Napastnik", 35, 440000m },
-                    { new Guid("eda062ba-e7b1-4e41-8c91-9b166880a497"), null, "Sergio", "Busquets", "Pomocnik", 34, 350000m }
+                    { new Guid("89909247-6d01-49e3-ba77-4e08e4e7622b"), null, "Sergio", "Busquets", "Pomocnik", 34, 350000m },
+                    { new Guid("e6bed5e7-725d-4464-aa40-742102e75fea"), null, "Robert", "Lewandowski", "Napastnik", 35, 440000m }
                 });
 
             migrationBuilder.InsertData(
@@ -165,10 +165,10 @@ namespace FootballClubLibrary.Migrations
                 columns: new[] { "IdPracownik", "IdZarzadu", "Imie", "Nazwisko", "PESEL", "Wiek", "WykonywanaFunkcja", "Wynagrodzenie" },
                 values: new object[,]
                 {
-                    { new Guid("265c9b83-b7ba-4b18-8cf2-2b02973c1467"), null, "Carlo", "Carlo Ancelotti", "12345600101", 63, "Trener", 340000m },
-                    { new Guid("3a0e73ac-053b-4c05-a1fe-04e15d9d4ebb"), null, "Xavi", "Hernandez", "12345600101", 43, "Trener", 340000m },
-                    { new Guid("7a303c5a-b9f9-42b6-9a03-f51c6e2ad182"), null, "Fiorentino", "Perez", "12345678901", 77, "Prezes", 340000m },
-                    { new Guid("b3cc1806-b9a5-465b-8b51-d73dd2f70a76"), null, "Joan", "Laporta", "12345338901", 60, "Prezes", 340000m }
+                    { new Guid("0bf71aa4-5b4e-4ff7-b809-d9ba9c6ab743"), null, "Xavi", "Hernandez", "12345600101", 43, "Trener", 340000m },
+                    { new Guid("136d34e9-8e2a-4458-b0d7-bf590ab84111"), null, "Fiorentino", "Perez", "12345678901", 77, "Prezes", 340000m },
+                    { new Guid("2d544ac5-a381-4b9c-9fde-757df2086d47"), null, "Carlo", "Carlo Ancelotti", "12345600101", 63, "Trener", 340000m },
+                    { new Guid("3428fe6e-bdd3-4398-86dd-d34731ecb70a"), null, "Joan", "Laporta", "12345338901", 60, "Prezes", 340000m }
                 });
 
             migrationBuilder.InsertData(
@@ -176,14 +176,14 @@ namespace FootballClubLibrary.Migrations
                 columns: new[] { "IdStatystyka", "Asysty", "CzerwoneKartki", "Gole", "IdPilkarz", "Mecz", "Ocena", "PrzebiegnietyDystans", "ZolteKartki" },
                 values: new object[,]
                 {
-                    { new Guid("4dc1af77-4d52-4a55-bd71-2dcc3e8a6252"), 2, 1, 0, null, "FC Barcelona vs Real Madrid", 7.5, 8.4000000000000004, 2 },
-                    { new Guid("facef62e-d543-4593-bc68-ee153e121920"), 1, 1, 4, null, "Real Madrid vs FC Barcelona", 8.6999999999999993, 10.4, 0 }
+                    { new Guid("437cc7db-3379-4c4b-84c9-ffa300b636a3"), 2, 1, 0, null, "FC Barcelona vs Real Madrid", 7.5, 8.4000000000000004, 2 },
+                    { new Guid("6d05db7f-cbc7-4b6c-a28b-0c9806584ec8"), 1, 1, 4, null, "Real Madrid vs FC Barcelona", 8.6999999999999993, 10.4, 0 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Zarzady",
                 columns: new[] { "IdZarzad", "Budzet", "Cele", "IdKlubu" },
-                values: new object[] { new Guid("e47db833-127c-4b8c-8965-a2d35dd760db"), 2000m, "Cel 1", null });
+                values: new object[] { new Guid("0421cded-5253-469c-9622-163f6b463997"), 2000m, "Cel 1", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_KlubPilkarz_ArchwilaniPilkarzeIdPilkarz",

@@ -1,12 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballClubLibrary.Models
 {
@@ -31,11 +24,10 @@ namespace FootballClubLibrary.Models
         [MaxLength(30)]
         public string? WykonywanaFunkcja { get; set; }
 
-        public Guid? IdZarzadu { get; set; }
-
         public decimal Wynagrodzenie { get; set; }
 
-        [ForeignKey(nameof(IdZarzadu))]
+		public Guid? IdZarzadu { get; set; }
+		[ForeignKey(nameof(IdZarzadu))]
         public Zarzad? Zarzad { get; set; }
 
     }

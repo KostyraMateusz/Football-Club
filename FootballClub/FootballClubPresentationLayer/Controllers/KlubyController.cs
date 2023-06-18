@@ -1,7 +1,6 @@
 ﻿using BusinessLogicLayer.Interfaces;
 using FootballClubLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace FootballClubPresentationLayer.Controllers
 {
@@ -12,6 +11,12 @@ namespace FootballClubPresentationLayer.Controllers
         public KlubyController(IKlubService klubService)
         {
             this.klubService = klubService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var kluby = await klubService.DajKluby();
+            return View(kluby);
         }
 
         [HttpPost]
@@ -30,25 +35,6 @@ namespace FootballClubPresentationLayer.Controllers
             catch (Exception ex)
             {
                return NotFound(ex.Message);
-            }
-        }
-
-        [HttpPut]
-        [Route("api/Kluby/EdytujKlub/{id}")]
-        public async Task<ActionResult> EdytujKlub([FromBody] Klub klub)
-        {
-            try
-            {
-                if (klub == null)
-                {
-                    throw new Exception("");
-                }
-                await this.klubService.EdytujKlub(klub);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
             }
         }
 
@@ -73,8 +59,26 @@ namespace FootballClubPresentationLayer.Controllers
             }
         }
 
+		[HttpPut]
+		[Route("api/Kluby/EdytujKlub/{id}")]
+		public async Task<ActionResult> EdytujKlub([FromBody] Klub klub)
+		{
+			try
+			{
+				if (klub == null)
+				{
+					throw new Exception("");
+				}
+				await this.klubService.EdytujKlub(klub);
+				return Ok();
+			}
+			catch (Exception ex)
+			{
+				return NotFound(ex.Message);
+			}
+		}
 
-        [HttpGet]
+		[HttpGet]
         [Route("api/[controller]/DajKluby")]
         public async Task<ActionResult<IEnumerable<Pilkarz>>> DajKluby()
         {

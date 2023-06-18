@@ -1,26 +1,19 @@
-﻿using FootballClubLibrary.Repositories;
-using FootballClubLibrary.UnitOfWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FootballClubLibrary.UnitOfWork;
 using TestsFootballClub.DAL.DummyRepositories;
 
 namespace TestsFootballClub.DAL.Tests
 {
     public class UnitOfWorkTest
     {
-
         [Fact]
         public void TestUnitOfWork()
         {
-            //var klubRepository = new DummyKlubRepository();
-            //var pilkarzRepository = new DummyPilkarzRepository();
-            //var unitOfWork = new UnitOfWork(klubRepository, pilkarzRepository);
+            var klubRepository = new DummyKlubRepository();
+            var pilkarzRepository = new DummyPilkarzRepository();
+            var unitOfWork = new UnitOfWork(klubRepository, pilkarzRepository);
 
-            //Assert.Same(klubRepository, unitOfWork.KlubRepository);
-            //Assert.Same(pilkarzRepository, unitOfWork.PilkarzRepository);
+            Assert.Same(klubRepository, unitOfWork.KlubRepository);
+            Assert.Same(pilkarzRepository, unitOfWork.PilkarzRepository);
         }
     }
 }

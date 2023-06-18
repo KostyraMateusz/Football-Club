@@ -1,13 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballClubLibrary.Models
 {
@@ -28,6 +20,5 @@ namespace FootballClubLibrary.Models
         public ICollection<Pilkarz>? ObecniPilkarze { get; set; }
 
         public Zarzad? Zarzad { get; set; }
-
     }
 }

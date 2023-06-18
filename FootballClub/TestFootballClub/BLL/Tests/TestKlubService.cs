@@ -1,5 +1,5 @@
 ﻿using BusinessLogicLayer.Services;
-using FootballClubLibrary.Intefaces;
+using FootballClubLibrary.Interfaces;
 using FootballClubLibrary.UnitOfWork;
 using Moq;
 using System;

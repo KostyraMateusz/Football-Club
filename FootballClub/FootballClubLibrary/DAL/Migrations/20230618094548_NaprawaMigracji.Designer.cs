@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FootballClubLibrary.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230420164745_UpdateMigration2")]
-    partial class UpdateMigration2
+    [Migration("20230618094548_NaprawaMigracji")]
+    partial class NaprawaMigracji
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,14 +49,14 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdKlub = new Guid("23da5e72-4b42-47ad-965e-5511cc772eae"),
+                            IdKlub = new Guid("d657d937-7263-4ab8-98c4-08bb6f8b994e"),
                             Nazwa = "Real Madryt",
                             Stadion = "Estadio Santiago Bernabéu",
                             Trofea = "Liga Mistrzów"
                         },
                         new
                         {
-                            IdKlub = new Guid("90fe8fab-b90e-4cd1-aa7c-12ab3b6040ad"),
+                            IdKlub = new Guid("193dbec0-d42c-4ad4-821c-a0e8f5987e38"),
                             Nazwa = "FC Barcelona",
                             Stadion = "Camp Nou",
                             Trofea = "La Liga"
@@ -101,7 +101,7 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdPilkarz = new Guid("5ed7ba86-5116-4da1-badb-61592d26ce74"),
+                            IdPilkarz = new Guid("e6bed5e7-725d-4464-aa40-742102e75fea"),
                             Imie = "Robert",
                             Nazwisko = "Lewandowski",
                             Pozycja = "Napastnik",
@@ -110,7 +110,7 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPilkarz = new Guid("eda062ba-e7b1-4e41-8c91-9b166880a497"),
+                            IdPilkarz = new Guid("89909247-6d01-49e3-ba77-4e08e4e7622b"),
                             Imie = "Sergio",
                             Nazwisko = "Busquets",
                             Pozycja = "Pomocnik",
@@ -158,7 +158,7 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdPracownik = new Guid("7a303c5a-b9f9-42b6-9a03-f51c6e2ad182"),
+                            IdPracownik = new Guid("136d34e9-8e2a-4458-b0d7-bf590ab84111"),
                             Imie = "Fiorentino",
                             Nazwisko = "Perez",
                             PESEL = "12345678901",
@@ -168,7 +168,7 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPracownik = new Guid("265c9b83-b7ba-4b18-8cf2-2b02973c1467"),
+                            IdPracownik = new Guid("2d544ac5-a381-4b9c-9fde-757df2086d47"),
                             Imie = "Carlo",
                             Nazwisko = "Carlo Ancelotti",
                             PESEL = "12345600101",
@@ -178,7 +178,7 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPracownik = new Guid("b3cc1806-b9a5-465b-8b51-d73dd2f70a76"),
+                            IdPracownik = new Guid("3428fe6e-bdd3-4398-86dd-d34731ecb70a"),
                             Imie = "Joan",
                             Nazwisko = "Laporta",
                             PESEL = "12345338901",
@@ -188,7 +188,7 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPracownik = new Guid("3a0e73ac-053b-4c05-a1fe-04e15d9d4ebb"),
+                            IdPracownik = new Guid("0bf71aa4-5b4e-4ff7-b809-d9ba9c6ab743"),
                             Imie = "Xavi",
                             Nazwisko = "Hernandez",
                             PESEL = "12345600101",
@@ -237,7 +237,7 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdStatystyka = new Guid("facef62e-d543-4593-bc68-ee153e121920"),
+                            IdStatystyka = new Guid("6d05db7f-cbc7-4b6c-a28b-0c9806584ec8"),
                             Asysty = 1,
                             CzerwoneKartki = 1,
                             Gole = 4,
@@ -248,7 +248,7 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdStatystyka = new Guid("4dc1af77-4d52-4a55-bd71-2dcc3e8a6252"),
+                            IdStatystyka = new Guid("437cc7db-3379-4c4b-84c9-ffa300b636a3"),
                             Asysty = 2,
                             CzerwoneKartki = 1,
                             Gole = 0,
@@ -286,7 +286,7 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdZarzad = new Guid("e47db833-127c-4b8c-8965-a2d35dd760db"),
+                            IdZarzad = new Guid("0421cded-5253-469c-9622-163f6b463997"),
                             Budzet = 2000m,
                             Cele = "Cel 1"
                         });

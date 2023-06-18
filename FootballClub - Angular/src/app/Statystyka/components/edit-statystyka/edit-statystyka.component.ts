@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { StatystykaResponse } from '../../Models/statystyka-response';
+import { StatystykaService } from 'src/app/Services/statystyka.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-statystyka',
@@ -6,5 +10,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./edit-statystyka.component.css']
 })
 export class EditStatystykaComponent {
+
+  form!: FormGroup;
+  statystyka?: StatystykaResponse;
+
+
 
 }
