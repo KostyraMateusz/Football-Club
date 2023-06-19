@@ -1,11 +1,5 @@
 ﻿using FootballClubLibrary.Interfaces;
-using FootballClubLibrary.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestsFootballClub.FakeRepositories
 {
@@ -52,7 +46,6 @@ namespace TestsFootballClub.FakeRepositories
             return pilkarze.Count();
         }
 
-        // Niewykorzystywane w FakePilkarzRepository
         public Task Save()
         {
             throw new NotImplementedException();

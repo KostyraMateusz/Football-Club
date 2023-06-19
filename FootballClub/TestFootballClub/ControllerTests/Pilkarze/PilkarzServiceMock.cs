@@ -1,17 +1,15 @@
 ﻿using BusinessLogicLayer.Interfaces;
-using FootballClubLibrary.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestsFootballClub.ControllerTests.Pilkarze
 {
     public class PilkarzServiceMock : IPilkarzService
     {
         List<Pilkarz> pilkarze = new List<Pilkarz>();
+
+        public PilkarzServiceMock(List<Pilkarz> pilkarze)
+        {
+            this.pilkarze = pilkarze;
+        }
 
         public async Task<IEnumerable<Pilkarz>> DajPilkarzy()
         {

@@ -56,7 +56,6 @@ namespace TestsFootballClub.FakeRepositories
             return kluby.Count();
         }
 
-        // Niewykorzystywane w FakePilkarzRepository
         public DbSet<Klub> GetDbSetKluby()
         {
             throw new NotImplementedException();
@@ -66,7 +65,5 @@ namespace TestsFootballClub.FakeRepositories
         {
             throw new NotImplementedException();
         }
-
-
     }
 }

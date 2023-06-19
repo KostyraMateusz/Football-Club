@@ -10,7 +10,7 @@ namespace TestsFootballClub.DAL.Tests
         {
             var klubRepository = new DummyKlubRepository();
             var pilkarzRepository = new DummyPilkarzRepository();
-            var unitOfWork = new UnitOfWork(klubRepository, pilkarzRepository);
+            var unitOfWork = new UnitOfWork(null, klubRepository, pilkarzRepository);
 
             Assert.Same(klubRepository, unitOfWork.KlubRepository);
             Assert.Same(pilkarzRepository, unitOfWork.PilkarzRepository);

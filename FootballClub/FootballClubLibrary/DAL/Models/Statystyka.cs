@@ -9,6 +9,10 @@ namespace FootballClubLibrary.Models
         [Key]
         public Guid IdStatystyka { get; set; }
 
+        public Guid? IdPilkarz { get; set; }
+        [ForeignKey(nameof(IdPilkarz))]
+        public Pilkarz? Pilkarz { get; set; }
+
         public string? Mecz { get; set; }
 
         public int Gole { get; set; }
@@ -26,10 +30,5 @@ namespace FootballClubLibrary.Models
 
         [Range(0, 10)]
         public double Ocena { get; set; }
-
-        public Guid? IdPilkarz { get; set; }
-
-        [ForeignKey(nameof(IdPilkarz))]
-        public Pilkarz? Pilkarz { get; set; }
     }
 }

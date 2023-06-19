@@ -1,14 +1,7 @@
 ﻿using BusinessLogicLayer.Interfaces;
-using FootballClubLibrary.Models;
 using FootballClubPresentationLayer.ControllersMVC;
-using FootballClubWeb.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestsFootballClub.ControllerTests.Kluby
 {
@@ -69,7 +62,7 @@ namespace TestsFootballClub.ControllerTests.Kluby
         public async Task TestDodajPilkarzaDoObecnych()
         {
             // Arrange
-            var klubMockService = new KlubServiceMock();
+            var klubMockService = new KlubServiceMock(null);
             var klubController = new KlubyControllerMVC(klubMockService);
             var pilkarz = new Pilkarz() { IdPilkarz = Guid.NewGuid(), Imie = "Piotr", Nazwisko = "Nowak" };
             var klub = new Klub() { IdKlub = Guid.NewGuid(), Nazwa = "Klub1", ObecniPilkarze = new List<Pilkarz> { } };
@@ -87,7 +80,7 @@ namespace TestsFootballClub.ControllerTests.Kluby
         public async Task TestDajStadionKlubu()
         {
             // Arrange
-            var klubMockService = new KlubServiceMock();
+            var klubMockService = new KlubServiceMock(null);
             var klubController = new KlubyControllerMVC(klubMockService);
             var klub = new Klub() { IdKlub = Guid.NewGuid(), Nazwa = "Atletico Madryt", Stadion = "Wanda Metropolitano" };
 
@@ -98,7 +91,6 @@ namespace TestsFootballClub.ControllerTests.Kluby
             // Assert
             Assert.IsType<ViewResult>(resultView);
             Assert.Equal(klub.Stadion, resultView.ViewData["Stadion"]);
-
         }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using FootballClubLibrary.Data;
 using FootballClubLibrary.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestsFootballClub.DAL.Tests
 {
@@ -28,7 +23,6 @@ namespace TestsFootballClub.DAL.Tests
             var klubs = await klubRepository.GetKluby();
             Assert.NotEmpty(klubs);
             Assert.Equal(2, klubs.Count());
-
         }
     }
 }

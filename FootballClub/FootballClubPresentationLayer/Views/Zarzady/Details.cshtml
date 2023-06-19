@@ -1,0 +1,29 @@
+﻿@model FootballClubLibrary.Models.Zarzad
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Szczegóły zarządu</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <div>
+            @Html.DisplayNameFor(model => model.Pracownicy)
+        </div>
+        <div>
+            @Html.DisplayFor(model => model.Budzet)
+        </div>
+        <div>
+            @Html.DisplayNameFor(model => model.Cele)
+        </div>
+        <div>
+            @Html.DisplayNameFor(model => model.IdKlubu)
+        </div>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdZarzad">Edytuj zarząd</a> |
+    <a asp-action="Index">Wróć do listy zarządów</a>
+</div>

@@ -1,0 +1,34 @@
+﻿@model FootballClubLibrary.Models.Zarzad
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Zarzad</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pracownicy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Budzet)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cele)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdKlubu)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdZarzad" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Wróć do listy zarządów</a>
+    </form>
+</div>
+
