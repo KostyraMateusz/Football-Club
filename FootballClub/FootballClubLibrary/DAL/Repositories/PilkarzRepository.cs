@@ -39,8 +39,8 @@ namespace FootballClubLibrary.Repositories
 
 		public async Task<IEnumerable<Pilkarz>> GetPilkarze()
 		{
-			var pilkarze = await this.dbContext.Pilkarze.ToListAsync();
-			return pilkarze;
+			var pilkarze = await this.dbContext.Pilkarze.Include(z => z.Klub).ToListAsync();
+            return pilkarze;
 		}
 
 		public async Task<Pilkarz> GetPilkarzById(Guid id)

@@ -13,53 +13,6 @@ namespace FootballClubPresentationLayer.Controllers
             this.zarzadService = zarzadService;
         }
 
-        // GET: Zarzady
-        public async Task<ActionResult> Index()
-        {
-            var zarzady = await this.zarzadService.DajZarzady();
-
-            return View(zarzady);
-        }
-
-        // GET: Zarzady/Details/5
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                var zarzady = await zarzadService.DajZarzady();
-                var zarzad = zarzady.FirstOrDefault(m => m.IdZarzad == id);
-                if (zarzad == null)
-                {
-                    return NotFound();
-                }
-
-                return View(zarzad);
-            }
-        }
-
-        // GET: Zarzady/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Zarzady/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdZarzad")] Zarzad zarzad)
-        {
-            if (ModelState.IsValid)
-            {
-                zarzadService.DodajZarzad(zarzad);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(zarzad);
-        }
-
         [HttpGet]
         [Route("api/[controller]/DajZarzady")]
         public async Task<ActionResult<Zarzad>> DajZarzady()
