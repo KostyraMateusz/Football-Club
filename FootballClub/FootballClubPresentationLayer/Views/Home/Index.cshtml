@@ -5,14 +5,12 @@
 <div class="text-center">
 
     <section id="hero">
-        <h2>Witaj w Szkółce piłkarskiej !!!</h2> 
-        <p>Nasza szkółka piłkarska to dynamiczna organizacja skupiająca się na rozwoju piłki nożnej. Celem jest rozwijanie talentów i promowanie sportu. Wprowadzamy nowych, potencjalnych przyszłych piłkarzy do ogólnej bazy piłkarzy, którzy w przyszłości będą mieli możliwość zostania zwerbowanymi do czołowych klubów piłkarskich.</p>
-    </section>
+        <h2 id="tytul">Witaj w Szkółce piłkarskiej</h2> 
+        <p>
+            Nasza szkółka piłkarska to dynamiczna organizacja skupiająca się na rozwoju piłki nożnej. Celem jest rozwijanie talentów i promowanie sportu. Wprowadzamy nowych, 
+            potencjalnych przyszłych piłkarzy do ogólnej bazy piłkarzy, którzy w przyszłości będą mieli możliwość zostania zwerbowanymi do czołowych klubów piłkarskich.
+        </p>
 
-    <br/>
-
-    <section id="club">
-        <h2>Cel powstania</h2>
         <p>
             Celem niniejszego projektu jest stworzenie aplikacji webowej dla klubu piłkarskiego, która umożliwi łatwy dostęp do różnorodnych informacji dotyczących klubu
             – obecnego zarządu oraz pracowników odpowiedzialnych za poprawne funkcjonowanie klubu, celów postawionych przez klub na aktualny sezon piłkarski oraz jego aktualnych
@@ -22,11 +20,33 @@
         </p>
     </section>
 
-    <br />
-
-    <section id="autors">
+    <section id="autorzy">
         <h2>Autorzy</h2>
-		<img src="~/css/zdjecieautorow.jpg" width="200px" height="200px"/>
+        <img src="~/css/zdjecieautorow.jpg" id="ZdjecieAutorow"/>
+
+        <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="img01">
+            <div id="caption"></div>
+        </div>
+
+        <script>
+            var modal = document.getElementById('myModal');
+            var img = document.getElementById('ZdjecieAutorow');
+            var modalImg = document.getElementById("img01");
+            var captionText = document.getElementById("caption");
+            img.onclick = function(){
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+            }
+
+            var span = document.getElementsByClassName("close")[0];
+
+            span.onclick = function() {
+            modal.style.display = "none";
+            }
+        </script>
     </section>
 
 </div>

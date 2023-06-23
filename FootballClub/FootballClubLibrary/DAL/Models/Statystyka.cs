@@ -1,12 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballClubLibrary.Models
 {
@@ -15,6 +10,10 @@ namespace FootballClubLibrary.Models
     {
         [Key]
         public Guid IdStatystyka { get; set; }
+
+        public Guid? IdPilkarz { get; set; }
+        [ForeignKey(nameof(IdPilkarz))]
+        public Pilkarz? Pilkarz { get; set; }
 
         public string? Mecz { get; set; }
 
@@ -33,10 +32,5 @@ namespace FootballClubLibrary.Models
 
         [Range(0, 10)]
         public double Ocena { get; set; }
-
-        public Guid? IdPilkarz { get; set; }
-
-        [ForeignKey(nameof(IdPilkarz))]
-        public Pilkarz? Pilkarz { get; set; }
     }
 }

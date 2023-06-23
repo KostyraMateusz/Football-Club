@@ -13,10 +13,15 @@ namespace FootballClubPresentationLayer.Controllers
             this.pilkarzService = pilkarzService;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            var pilkarze = await pilkarzService.DajPilkarzy();
+            return View(pilkarze);
+        }
 
         [HttpGet]
         [Route("api/[controller]/DajPilkarzy")]
-        public async Task<ActionResult<IEnumerable<Pilkarz>>> DajPilkarzy()
+        public async Task<ActionResult<Pilkarz>> DajPilkarzy()
         {
             try
             {

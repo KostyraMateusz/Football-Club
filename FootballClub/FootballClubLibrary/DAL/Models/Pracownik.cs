@@ -1,12 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballClubLibrary.Models
 {
@@ -16,10 +9,10 @@ namespace FootballClubLibrary.Models
         [Key]
         public Guid IdPracownik { get; set; }
 
-        [MaxLength(30)]
+        [StringLength(25, ErrorMessage = "Za dlugie imie !")]
         public string? Imie { get; set; }
 
-        [MaxLength(30)]
+        [StringLength(20, ErrorMessage = "Za dlugie nazwisko !")]
         public string? Nazwisko { get; set; }
 
         [RegularExpression(@"^\d{11}$")]
@@ -28,15 +21,13 @@ namespace FootballClubLibrary.Models
         [Range(16, 99)]
         public int Wiek { get; set; }
 
-        [MaxLength(30)]
+        [StringLength(40, ErrorMessage = "Zbyt dluga nazwa wykonywanej funkcji !")]
         public string? WykonywanaFunkcja { get; set; }
-
-        public Guid? IdZarzadu { get; set; }
 
         public decimal Wynagrodzenie { get; set; }
 
+        public Guid? IdZarzadu { get; set; }
         [ForeignKey(nameof(IdZarzadu))]
         public Zarzad? Zarzad { get; set; }
-
     }
 }

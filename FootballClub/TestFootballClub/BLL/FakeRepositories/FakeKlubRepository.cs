@@ -1,12 +1,5 @@
-﻿using FootballClubLibrary.Intefaces;
-using FootballClubLibrary.Models;
-using FootballClubLibrary.Repositories;
+﻿using FootballClubLibrary.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestsFootballClub.FakeRepositories
 {
@@ -63,7 +56,6 @@ namespace TestsFootballClub.FakeRepositories
             return kluby.Count();
         }
 
-        // Niewykorzystywane w FakePilkarzRepository
         public DbSet<Klub> GetDbSetKluby()
         {
             throw new NotImplementedException();
@@ -73,7 +65,5 @@ namespace TestsFootballClub.FakeRepositories
         {
             throw new NotImplementedException();
         }
-
-
     }
 }

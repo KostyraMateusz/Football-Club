@@ -1,29 +1,27 @@
-﻿
-using FootballClubLibrary.Data;
-using FootballClubLibrary.Intefaces;
+﻿using FootballClubLibrary.Data;
+using FootballClubLibrary.Interfaces;
 using FootballClubLibrary.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace FootballClubLibrary.Repositories
 {
     public class KlubRepository : IKlubRepository, IDisposable
     {
-        private readonly ApplicationDbContext dbContext;
-        private bool disposed = false;
+		private bool disposed = false;
+		private readonly ApplicationDbContext dbContext;
 
         public KlubRepository(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
 
-        public async Task CreateKlub(Klub? klub)
+		public DbSet<Klub> GetDbSetKluby()
+		{
+			var result = this.dbContext.Kluby;
+			return result;
+		}
+
+		public async Task CreateKlub(Klub klub)
         {
             await this.dbContext.Kluby.AddAsync(klub);
         }
@@ -34,20 +32,23 @@ namespace FootballClubLibrary.Repositories
             this.dbContext.Kluby.Remove(klub);
         }
 
-        public async Task<Klub> GetKlubById(Guid id)
-        {
-            return await this.dbContext.Kluby.FindAsync(id);
-        }
+		public async Task UpdateKlub(Klub klub)
+		{
+			this.dbContext.Entry(klub).State = EntityState.Modified;
+		}
 
-        public async Task<IEnumerable<Klub>> GetKluby()
-        {
-            return await this.dbContext.Kluby.ToListAsync();
-        }
+		public async Task<IEnumerable<Klub>> GetKluby()
+		{
+			var kluby = await this.dbContext.Kluby.ToListAsync();
+            return kluby;
+		}
 
-        public async Task UpdateKlub(Klub klub)
+		public async Task<Klub> GetKlubById(Guid id)
         {
-            this.dbContext.Entry(klub).State = EntityState.Modified;
-        }
+            var klub = await this.dbContext.Kluby.FindAsync(id);
+            return klub;
+
+		}
 
         public async Task DodajTrofeumKlubu(Guid id, string trofeum)
         {
@@ -55,7 +56,18 @@ namespace FootballClubLibrary.Repositories
             klub.Trofea += $"{trofeum}, ";
         }
 
-        public virtual void Dispose(bool disposing)
+		public async Task Save()
+		{
+			await this.dbContext.SaveChangesAsync();
+		}
+
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		public virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
             {
@@ -65,23 +77,6 @@ namespace FootballClubLibrary.Repositories
                 }
             }
             this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        public DbSet<Klub> GetDbSetKluby()
-        {
-            var result = this.dbContext.Kluby;
-            return result;
-        }
-
-        public async Task Save()
-        {
-            await this.dbContext.SaveChangesAsync();
         }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using BusinessLogicLayer.Interfaces;
 using FootballClubLibrary.Models;
 using FootballClubLibrary.UnitOfWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Services
 {
@@ -17,9 +12,20 @@ namespace BusinessLogicLayer.Services
         {
             this.unitOfWork = unitOfWork;
         }
+
         public async Task<IEnumerable<Zarzad>> DajZarzady()
         {
             return await this.unitOfWork.ZarzadRepository.GetZarzady();
+        }
+
+        public async Task DodajZarzad(Zarzad zarzad)
+        {
+            var foundZarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(zarzad.IdZarzad);
+            if (foundZarzad == null)
+            {
+                await this.unitOfWork.ZarzadRepository.CreateZarzad(zarzad);
+                await this.unitOfWork.Save();
+            }
         }
 
         public async Task<decimal> DajWynikFinansowyZarzadu(Guid IdZarzadu)

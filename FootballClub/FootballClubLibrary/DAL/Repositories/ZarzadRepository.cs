@@ -2,16 +2,11 @@
 using FootballClubLibrary.Interfaces;
 using FootballClubLibrary.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballClubLibrary.Repositories
 {
     public class ZarzadRepository : IZarzadRepository, IDisposable
-    {
+	{
         private readonly ApplicationDbContext dbContext;
         private bool disposed = false;
 
@@ -31,17 +26,18 @@ namespace FootballClubLibrary.Repositories
             this.dbContext.Zarzady.Remove(zarzad);
         }
 
-        public async Task<Zarzad> GetZarzadById(Guid id)
-        {
-            return await this.dbContext.Zarzady.FindAsync(id);
-        }
-
         public async Task<IEnumerable<Zarzad>> GetZarzady()
         {
-            return await this.dbContext.Zarzady.ToListAsync();
+            var zarzady = await this.dbContext.Zarzady.Include(z => z.Klub).ThenInclude( p => p.Zarzad.Pracownicy).ToListAsync();
+            return zarzady;
         }
 
-        public async Task UpdateZarzad(Zarzad zarzad)
+		public async Task<Zarzad> GetZarzadById(Guid id)
+		{
+			return await this.dbContext.Zarzady.FindAsync(id);
+		}
+
+		public async Task UpdateZarzad(Zarzad zarzad)
         {
             this.dbContext.Entry(zarzad).State = EntityState.Modified;
         }
