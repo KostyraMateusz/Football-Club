@@ -39,7 +39,7 @@ namespace FootballClubLibrary.Repositories
 
 		public async Task<IEnumerable<Pracownik>> GetPracownicy()
         {
-            var pracownicy = await this.dbContext.Pracownicy.ToListAsync();
+            var pracownicy = await dbContext.Pracownicy.Include(p => p.Zarzad).ThenInclude(z => z.Klub).ToListAsync();
             return pracownicy;
         }
 

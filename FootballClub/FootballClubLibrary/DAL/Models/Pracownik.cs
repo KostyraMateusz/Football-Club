@@ -21,7 +21,7 @@ namespace FootballClubLibrary.Models
         [Range(16, 99)]
         public int Wiek { get; set; }
 
-        [StringLength(20, ErrorMessage = "Zbyt dluga nazwa wykonywanej funkcji !")]
+        [StringLength(40, ErrorMessage = "Zbyt dluga nazwa wykonywanej funkcji !")]
         public string? WykonywanaFunkcja { get; set; }
 
         public decimal Wynagrodzenie { get; set; }

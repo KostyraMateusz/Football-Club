@@ -39,8 +39,8 @@ namespace FootballClubLibrary.Repositories
 
 		public async Task<IEnumerable<Statystyka>> GetStatystyki()
 		{
-			var statystyki = await this.dbContext.Statystyki.ToListAsync();
-			return statystyki;
+			var statystyki = await this.dbContext.Statystyki.Include(p => p.Pilkarz).ToListAsync();
+            return statystyki;
 		}
 
 		public async Task<Statystyka> GetStatystykaById(Guid id)
