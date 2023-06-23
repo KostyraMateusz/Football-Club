@@ -26,6 +26,8 @@ namespace TestsFootballClub.DAL.Tests
             Assert.NotSame(Benzema, Mbappé);
             Assert.Same("Napastnik", Benzema.Pozycja);
             Assert.Same("Mbappé", Mbappé.Nazwisko);
+
+            //Test do poprawy
         }
     }
 }

@@ -1,17 +1,8 @@
 ﻿using BusinessLogicLayer.Interfaces;
-using FootballClubLibrary.Models;
-using FootballClubPresentationLayer.Controllers;
 using FootballClubPresentationLayer.ControllersMVC;
-using FootballClubWeb.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestsFootballClub.ControllerTests.Kluby;
 
 namespace TestsFootballClub.ControllerTests.Pilkarze
 {
@@ -71,7 +62,7 @@ namespace TestsFootballClub.ControllerTests.Pilkarze
         public async Task TestDajArchiwalneKlubyPilkarza()
         {
             // Arrange
-            var pilkarzMockService = new PilkarzServiceMock();
+            var pilkarzMockService = new PilkarzServiceMock(null);
             var PilkarzController = new PilkarzeControllerMVC(pilkarzMockService);
             Klub ManchesterUnited = new Klub { IdKlub = Guid.NewGuid(), Nazwa = "Manchester United", Stadion = "Old Trafford" };
             Klub RealMadryt = new Klub { IdKlub = Guid.NewGuid(), Nazwa = "Real Madryt", Stadion = "Estadio Santiago Bernabéu" };
@@ -93,7 +84,7 @@ namespace TestsFootballClub.ControllerTests.Pilkarze
         public async Task TestDajStatystykiPilkarza()
         {
             // Arrange
-            var pilkarzMockService = new PilkarzServiceMock();
+            var pilkarzMockService = new PilkarzServiceMock(null);
             var PilkarzController = new PilkarzeControllerMVC(pilkarzMockService);
             List<Statystyka> statystyki = new List<Statystyka>()
             {

@@ -1,17 +1,7 @@
 ﻿using BusinessLogicLayer.Interfaces;
-using FootballClubLibrary.Models;
 using FootballClubPresentationLayer.Controllers;
-using FootballClubPresentationLayer.ControllersMVC;
-using FootballClubWeb.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PilkarzeController = FootballClubPresentationLayer.Controllers.PilkarzeController;
 
 namespace TestsFootballClub.ControllerTests.Pilkarze
 {
@@ -43,7 +33,6 @@ namespace TestsFootballClub.ControllerTests.Pilkarze
             Assert.Same(pilkarze, resultValue);
         }
 
-
         [Fact]
         public async Task TestDajPilkarzyBezKlubu()
         {
@@ -70,18 +59,18 @@ namespace TestsFootballClub.ControllerTests.Pilkarze
             Assert.Same(pilkarze, resultValue);
         }
 
-
         [Fact]
         public async Task TestDajArchiwalneKlubyPilkarza()
         {
             // Arrange
-            var pilkarzMockService = new PilkarzServiceMock();
             Klub ManchesterUnited = new Klub { IdKlub = Guid.NewGuid(), Nazwa = "Manchester United", Stadion = "Old Trafford" };
             Klub RealMadryt = new Klub { IdKlub = Guid.NewGuid(), Nazwa = "Real Madryt", Stadion = "Estadio Santiago Bernabéu" };
             Klub Juventus = new Klub { IdKlub = Guid.NewGuid(), Nazwa = "Juventus", Stadion = "Allianz Stadium" };
             Pilkarz CristianoRonaldo = new Pilkarz() { IdPilkarz = Guid.NewGuid(), Imie = "Cristiano", Nazwisko = "Ronaldo", Wiek = 38, Pozycja = "Napastnik", ArchiwalneKluby = new List<Klub> { ManchesterUnited, RealMadryt, Juventus } };
+            List<Pilkarz> pilkarze = new List<Pilkarz> { CristianoRonaldo };
 
             // Act
+            var pilkarzMockService = new PilkarzServiceMock(pilkarze);
             var PilkarzeController = new PilkarzeController(pilkarzMockService);
             var result = await PilkarzeController.DajArchiwalneKlubyPilkarza(CristianoRonaldo.IdPilkarz);
             var okObjectResult = result.Result as OkObjectResult;
@@ -94,20 +83,20 @@ namespace TestsFootballClub.ControllerTests.Pilkarze
             Assert.Equal(CristianoRonaldo.ArchiwalneKluby, resultValue);
         }
 
-
         [Fact]
         public async Task TestDajStatystykiPilkarza()
         {
             // Arrange
-            var pilkarzMockService = new PilkarzServiceMock();
             List<Statystyka> statystyki = new List<Statystyka>()
             {
                 new Statystyka(){ IdStatystyka = Guid.NewGuid(), Mecz = "Bayern vs PSG", Gole = 0, ZolteKartki = 1, CzerwoneKartki = 0, Asysty = 0, PrzebiegnietyDystans = 8.4, Ocena = 5.5, IdPilkarz = null, Pilkarz = null },
                 new Statystyka(){ IdStatystyka = Guid.NewGuid(), Mecz = "PSG vs Ajaccio", Gole = 3, ZolteKartki = 0, CzerwoneKartki = 0, Asysty = 1, PrzebiegnietyDystans = 10.7, Ocena = 8.8, IdPilkarz = null, Pilkarz = null }
             };
             Pilkarz KylianMbappé = new Pilkarz() { IdPilkarz = Guid.NewGuid(), Imie = "Kylian", Nazwisko = "Mbappé", Wiek = 24, Pozycja = "Napastnik", Statystyki = statystyki, ArchiwalneKluby = null, Wynagrodzenie = 350000, IdKlubu = null };
+            List<Pilkarz> pilkarze = new List<Pilkarz> { KylianMbappé };
 
             // Act
+            var pilkarzMockService = new PilkarzServiceMock(pilkarze);
             var PilkarzeController = new PilkarzeController(pilkarzMockService);
             var result = await PilkarzeController.DajStatystykiPilkarza(KylianMbappé.IdPilkarz);
             var okObjectResult = result.Result as OkObjectResult;

@@ -18,6 +18,16 @@ namespace BusinessLogicLayer.Services
             return await this.unitOfWork.ZarzadRepository.GetZarzady();
         }
 
+        public async Task DodajZarzad(Zarzad zarzad)
+        {
+            var foundZarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(zarzad.IdZarzad);
+            if (foundZarzad == null)
+            {
+                await this.unitOfWork.ZarzadRepository.CreateZarzad(zarzad);
+                await this.unitOfWork.Save();
+            }
+        }
+
         public async Task<decimal> DajWynikFinansowyZarzadu(Guid IdZarzadu)
         {
             var zarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(IdZarzadu);

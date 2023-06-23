@@ -9,14 +9,16 @@ namespace FootballClubLibrary.Models
         [Key]
         public Guid IdZarzad { get; set; }
 
-        public ICollection<Pracownik>? Pracownicy { get; set; }
-
-		public decimal Budzet { get; set; }
-
-        public string Cele { get; set; }
-
+        public Guid? IdKlubu { get; set; }
+        [ForeignKey(nameof(IdKlubu))]
         public Klub? Klub { get; set; }
 
-        public Guid? IdKlubu { get; set; }
+        public ICollection<Pracownik>? Pracownicy { get; set; }
+
+        [Required]
+        public decimal Budzet { get; set; }
+
+        [Required]
+        public string Cele { get; set; }
     }
 }

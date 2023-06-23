@@ -15,15 +15,24 @@ namespace FootballClubLibrary.UnitOfWork
         private IStatystykaRepository statystykaRepository;
         private IZarzadRepository zarzadRepository;
 
-        public UnitOfWork(ApplicationDbContext _context)
+        public UnitOfWork(ApplicationDbContext _context, IKlubRepository klubRepository = null, IPilkarzRepository pilkarzRepository = null)
         {
-            this._context = _context;
-        }
+            if (_context != null)
+            {
+                this._context = _context;
+            }
+            else
+            {
+                if (klubRepository != null)
+                {
+                    this.klubRepository = klubRepository;
+                }
 
-        public UnitOfWork(IKlubRepository klubRepository, IPilkarzRepository pilkarzRepository)
-        {
-            this.klubRepository = klubRepository;
-            this.pilkarzRepository = pilkarzRepository;
+                if (pilkarzRepository != null)
+                {
+                    this.pilkarzRepository = pilkarzRepository;
+                }
+            }
         }
 
         public IKlubRepository KlubRepository

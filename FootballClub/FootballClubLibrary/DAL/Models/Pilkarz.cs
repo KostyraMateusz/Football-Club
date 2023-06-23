@@ -9,27 +9,26 @@ namespace FootballClubLibrary.Models
         [Key]
         public Guid IdPilkarz { get; set; }
 
-        [MaxLength(30)]
+        [StringLength(25, ErrorMessage = "Za długie imie !")]
         public string Imie { get; set; }
-        
-        [MaxLength(30)]
+
+        [StringLength(25, ErrorMessage = "Za długie nazwisko !")]
         public string Nazwisko { get; set; }
 
         [Range(16,50)]
         public int Wiek { get; set; }
 
-        [MaxLength(30)]
+        [StringLength(20, ErrorMessage = "Zbyt długa nazwa pozycji !")]
         public string? Pozycja { get; set; }
 
-        public ICollection<Statystyka>? Statystyki { get; set; }
+        public decimal Wynagrodzenie { get; set; }
+
+        public Guid? IdKlubu { get; set; }
+        [ForeignKey(nameof(IdKlubu))]
+        public Klub? Klub { get; set; }
 
         public ICollection<Klub>? ArchiwalneKluby { get; set; }
 
-		public decimal Wynagrodzenie { get; set; }
-
-        public Guid? IdKlubu { get; set; }
-
-        [ForeignKey(nameof(IdKlubu))]
-        public Klub? Klub { get; set; }
+        public ICollection<Statystyka>? Statystyki { get; set; }
     }
 }

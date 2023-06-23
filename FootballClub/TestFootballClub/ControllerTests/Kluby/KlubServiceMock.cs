@@ -1,22 +1,16 @@
 ﻿using BusinessLogicLayer.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestsFootballClub.ControllerTests.Kluby
 {
     public class KlubServiceMock : IKlubService
     {
-        List<Klub> kluby = new List<Klub>()
-        {
-            new Klub(){IdKlub = Guid.NewGuid(), Nazwa = "Klub1"},
-            new Klub(){IdKlub = Guid.NewGuid(), Nazwa = "Klub2"},
-            new Klub(){IdKlub = Guid.NewGuid(), Nazwa = "Klub3"},
-            new Klub(){IdKlub = Guid.NewGuid(), Nazwa = "Klub4"}
+        List<Klub> kluby = new List<Klub>();
 
-        };
+        public KlubServiceMock(List<Klub> kluby)
+        {
+            this.kluby = kluby;
+        }
+
         public async Task<IEnumerable<Klub>> DajKluby()
         {
             return await Task.FromResult(this.kluby);
