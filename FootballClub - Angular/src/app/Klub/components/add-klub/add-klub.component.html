@@ -1,4 +1,4 @@
-<div class="add-container">
+<div class="form-container">
     <h1>Dodaj nowy klub</h1>
     <form [formGroup]="klub" (ngSubmit)="DodajKlub()">
         <mat-form-field>
@@ -12,30 +12,35 @@
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Obecni Piłkarze</mat-label>
-            <mat-select formControlName="ObecniPilkarze" multiple>
-                <mat-option *ngFor="let pilkarz of this.pilkarze" [value]="pilkarz">
-                    {{ pilkarz.Nazwisko }}</mat-option>
-            </mat-select>
+            <mat-label>Trofea</mat-label>
+            <input matInput formControlName="Trofea">
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Archiwalni Piłkarze</mat-label>
-            <mat-select formControlName="ArchiwalniPilkarze" multiple>
+            <mat-label>Obecni Piłkarze</mat-label>
+            <mat-select formControlName="ObecniPilkarze" multiple>
                 <mat-option *ngFor="let pilkarz of this.pilkarze" [value]="pilkarz">
-                    {{ pilkarz.Nazwisko }}</mat-option>
+                    {{ pilkarz.nazwisko }}</mat-option>
             </mat-select>
         </mat-form-field>
 
         <!-- <mat-form-field>
-            <mat-label>Zarzad</mat-label>
-            <mat-select formControlName="Zarzad">
-                <mat-option *ngFor="let zarzad of this.zarzady" [value]="zarzad">
-                    {{ zarzad.Nazwa }}</mat-option>
+            <mat-label>Archiwalni Piłkarze</mat-label>
+            <mat-select formControlName="ArchiwalniPilkarze" multiple>
+                <mat-option *ngFor="let pilkarz of this.pilkarze" [value]="pilkarz">
+                    {{ pilkarz.nazwisko }}</mat-option>
             </mat-select>
         </mat-form-field> -->
 
-        <button type="submit" mat-button>Dodaj pilkarza</button>
+        <mat-form-field>
+            <mat-label>Zarzad</mat-label>
+            <mat-select formControlName="Zarzad">
+                <mat-option *ngFor="let zarzad of this.zarzady" [value]="zarzad">
+                    {{ zarzad.idZarzad }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button type="submit" mat-button>Dodaj klub</button>
     </form>
 
 

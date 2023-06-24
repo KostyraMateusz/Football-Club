@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PracownikResponse } from '../../Models/pracownik-response';
 import { PracownikService } from 'src/app/Services/pracownik.service';
+import { Pracownik } from '../../Models/pracownik.model';
 
 @Component({
   selector: 'app-pracownik-list',
@@ -9,7 +9,7 @@ import { PracownikService } from 'src/app/Services/pracownik.service';
 })
 export class PracownikListComponent implements OnInit {
 
-  pracownicy: PracownikResponse[] = [];
+  pracownicy: Pracownik[] = [];
   displayedColumns: string[] = ['Imie', 'Nazwisko', 'PESEL', 'Wiek', 'Wykonywana Funkcja', 'Wynagrodzenie'];
 
   constructor(private pracownikService: PracownikService) {

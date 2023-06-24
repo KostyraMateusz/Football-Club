@@ -1,6 +1,6 @@
-import { ZarzadResponse } from "src/app/Zarzad/Models/zarzad-response";
+import { Zarzad } from "src/app/Zarzad/Models/zarzad.model";
 
-export interface PracownikResponse {
+export interface Pracownik {
     IdPracownik: number;
     Imie: string;
     Nazwisko: string;
@@ -8,5 +8,6 @@ export interface PracownikResponse {
     Wiek: number;
     WykonywanaFunkcja: string;
     Wynagrodzenie: number;
-    IdZarzadu: ZarzadResponse;
+    IdZarzadu: Zarzad;
 }
+

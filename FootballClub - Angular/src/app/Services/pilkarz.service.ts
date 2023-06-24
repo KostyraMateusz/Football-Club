@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PilkarzResponse } from '../Pilkarz/Models/pilkarz-response';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { Pilkarz } from '../Pilkarz/Models/pilkarz.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,49 +14,49 @@ export class PilkarzService {
   }
   constructor(private httpClient: HttpClient) { }
 
-  DajPilkarzy(): Observable<PilkarzResponse[]> {
-    return this.httpClient.get<PilkarzResponse[]>(environment.url + 'Pilkarze/DajPilkarzy');
+  DajPilkarzy(): Observable<Pilkarz[]> {
+    return this.httpClient.get<Pilkarz[]>(environment.url + 'Pilkarze/DajPilkarzy');
   }
 
-  DajArchiwalneKlubyPilkarza(idPilkarz: number): Observable<PilkarzResponse[]> {
-    return this.httpClient.get<PilkarzResponse[]>(environment.url + 'Pilkarze/DajArchiwalneKlubyPilkarza/' + idPilkarz);
+  DajArchiwalneKlubyPilkarza(idPilkarz: number): Observable<Pilkarz[]> {
+    return this.httpClient.get<Pilkarz[]>(environment.url + 'Pilkarze/DajArchiwalneKlubyPilkarza/' + idPilkarz);
   }
 
-  DajStatystykePilkarza(idStatystyka: number, idPilkarz: number): Observable<PilkarzResponse[]> {
-    return this.httpClient.get<PilkarzResponse[]>(environment.url + 'Pilkarze/DajStatystykePilkarza/' + idStatystyka + ',' + idPilkarz);
+  DajStatystykePilkarza(idStatystyka: number, idPilkarz: number): Observable<Pilkarz[]> {
+    return this.httpClient.get<Pilkarz[]>(environment.url + 'Pilkarze/DajStatystykePilkarza/' + idStatystyka + ',' + idPilkarz);
   }
 
-  DajStatystykiPilkarza(idPilkarz: number): Observable<PilkarzResponse[]> {
-    return this.httpClient.get<PilkarzResponse[]>(environment.url + 'Pilkarze/DajStatystykiPilkarza/' + idPilkarz);
+  DajStatystykiPilkarza(idPilkarz: number): Observable<Pilkarz[]> {
+    return this.httpClient.get<Pilkarz[]>(environment.url + 'Pilkarze/DajStatystykiPilkarza/' + idPilkarz);
   }
 
-  DajNajlepszeStatystykiPilkarza(idPilkarz: number): Observable<PilkarzResponse[]> {
-    return this.httpClient.get<PilkarzResponse[]>(environment.url + 'Pilkarze/DajNajlepszeStatystykiPilkarza/' + idPilkarz);
+  DajNajlepszeStatystykiPilkarza(idPilkarz: number): Observable<Pilkarz[]> {
+    return this.httpClient.get<Pilkarz[]>(environment.url + 'Pilkarze/DajNajlepszeStatystykiPilkarza/' + idPilkarz);
   }
 
-  DajPilkarzyBezKlubu(): Observable<PilkarzResponse[]> {
-    return this.httpClient.get<PilkarzResponse[]>(environment.url + 'Pilkarze/DajPilkarzyBezKlubu');
+  DajPilkarzyBezKlubu(): Observable<Pilkarz[]> {
+    return this.httpClient.get<Pilkarz[]>(environment.url + 'Pilkarze/DajPilkarzyBezKlubu');
   }
 
-  ZmienPozycjePilkarza(idPilkarz: number, pozycja: string): Observable<PilkarzResponse> {
-    return this.httpClient.put<PilkarzResponse>(environment.url + '/' + idPilkarz, pozycja);
+  ZmienPozycjePilkarza(idPilkarz: number, pozycja: string): Observable<Pilkarz> {
+    return this.httpClient.put<Pilkarz>(environment.url + '/' + idPilkarz, pozycja);
   }
 
   /*
-  getOne(id: number): Observable<PilkarzResponse> {
-    return this.httpClient.get<PilkarzResponse>(environment.url + '/' + id);
+  getOne(id: number): Observable<Pilkarz> {
+    return this.httpClient.get<Pilkarz>(environment.url + '/' + id);
   }
 
   delete(id: number): Observable<boolean> {
     return this.httpClient.delete<boolean>(environment.url + '/' + id);
   }
 
-  post(req: PilkarzRequest): Observable<PilkarzResponse> {
-    return this.httpClient.post<PilkarzResponse>(environment.url, req);
+  post(req: PilkarzRequest): Observable<Pilkarz> {
+    return this.httpClient.post<Pilkarz>(environment.url, req);
   }
 
-  put(id: number, req: PilkarzRequest): Observable<PilkarzResponse> {
-    return this.httpClient.put<PilkarzResponse>(environment.url + '/' + id, req);
+  put(id: number, req: PilkarzRequest): Observable<Pilkarz> {
+    return this.httpClient.put<Pilkarz>(environment.url + '/' + id, req);
   }
   */
 }

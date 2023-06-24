@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ZarzadResponse } from '../Zarzad/Models/zarzad-response';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Zarzad } from '../Zarzad/Models/zarzad.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +14,11 @@ export class ZarzadService {
   }
   constructor(private httpClient: HttpClient) { }
 
-  DajZarzady(): Observable<ZarzadResponse[]> {
-    return this.httpClient.get<ZarzadResponse[]>(environment.url + '/DajZarzady');
+  DajZarzady(): Observable<Zarzad[]> {
+    return this.httpClient.get<Zarzad[]>(environment.url + 'Zarzady/DajZarzady');
   }
 
-  DajWynikFinansowy(IdZarzadu: number): Observable<ZarzadResponse[]> {
-    return this.httpClient.get<ZarzadResponse[]>(environment.url + '/DajWynikFinansowy/' + IdZarzadu);
+  DajWynikFinansowy(IdZarzadu: number): Observable<Zarzad[]> {
+    return this.httpClient.get<Zarzad[]>(environment.url + 'Zarzady/DajWynikFinansowy/' + IdZarzadu);
   }
 }

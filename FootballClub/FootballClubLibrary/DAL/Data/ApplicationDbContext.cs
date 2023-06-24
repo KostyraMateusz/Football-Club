@@ -1,5 +1,6 @@
 ﻿using FootballClubLibrary.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Collections.ObjectModel;
 using System.Drawing;
@@ -14,12 +15,18 @@ namespace FootballClubLibrary.Data
         public DbSet<Statystyka> Statystyki { get; set; }
         public DbSet<Zarzad> Zarzady { get; set; }
 
-        public ApplicationDbContext(DbContextOptions options) : base(options) { }
+        public ApplicationDbContext() : base()
+        {
+
+        }
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=FootballClub;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.NavigationBaseIncludeIgnored));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -89,7 +96,7 @@ namespace FootballClubLibrary.Data
             // mock data
             modelBuilder.Entity<Klub>().HasData(
                 new Klub() { IdKlub = klubRealMadrytId, Nazwa = "Real Madryt", Stadion = "Estadio Santiago Bernabéu", Trofea = "Liga Mistrzów (13 razy), Primera División (34 razy), Puchar Króla (19 razy), Superpuchar Hiszpanii (11 razy)", ObecniPilkarze = new Collection<Pilkarz> { }, ArchwilaniPilkarze = new Collection<Pilkarz> { }, Zarzad = null },
-                new Klub() { IdKlub = klubFCBarcelonaId,  Nazwa = "FC Barcelona", Stadion = "Camp Nou", Trofea = "Liga Mistrzów (5 razy), Primera División (26 razy), Puchar Króla (31 razy), Superpuchar Hiszpanii (13 razy)", ObecniPilkarze = new Collection<Pilkarz> { }, ArchwilaniPilkarze = new Collection<Pilkarz> { }, Zarzad = null },
+                new Klub() { IdKlub = klubFCBarcelonaId, Nazwa = "FC Barcelona", Stadion = "Camp Nou", Trofea = "Liga Mistrzów (5 razy), Primera División (26 razy), Puchar Króla (31 razy), Superpuchar Hiszpanii (13 razy)", ObecniPilkarze = new Collection<Pilkarz> { }, ArchwilaniPilkarze = new Collection<Pilkarz> { }, Zarzad = null },
                 new Klub() { IdKlub = klubJuventusId, Nazwa = "Juventus", Stadion = "Allianz Stadium", Trofea = "Liga Mistrzów (2 razy), Serie A (36 razy), Puchar Włoch (14 razy), Superpuchar Włoch (9 razy)", ObecniPilkarze = new Collection<Pilkarz> { }, ArchwilaniPilkarze = new Collection<Pilkarz> { }, Zarzad = null }
             );
 
@@ -138,9 +145,9 @@ namespace FootballClubLibrary.Data
             );
 
             modelBuilder.Entity<Zarzad>().HasData(
-                new Zarzad() { IdZarzad = ZarzadRealMadrytId, Pracownicy = null,  Budzet = 2500000, Cele = "Liga Mistrzów, Superpuchar Hiszpanii, Naprawa murawy, Renowacja krzesełek, Nowy młody napastnik", IdKlubu = klubRealMadrytId },
-                new Zarzad() { IdZarzad = zarzadFCBarcelonaId, Pracownicy = null,Budzet = 2000000, Cele = "Liga Mistrzów, Primera División, Puchar Króla, Odnowienie akademii młodzieżowej, Wzmocnienie składu", IdKlubu = klubFCBarcelonaId },
-                new Zarzad() { IdZarzad = zarzadJuventusId, Pracownicy = null,  Budzet = 1800000, Cele = "Liga Mistrzów, Serie A, Puchar Włoch, Akademia młodzieżowa, Rozwój infrastruktury", IdKlubu = klubJuventusId }
+                new Zarzad() { IdZarzad = ZarzadRealMadrytId, Pracownicy = null, Budzet = 2500000, Cele = "Liga Mistrzów, Superpuchar Hiszpanii, Naprawa murawy, Renowacja krzesełek, Nowy młody napastnik", IdKlubu = klubRealMadrytId },
+                new Zarzad() { IdZarzad = zarzadFCBarcelonaId, Pracownicy = null, Budzet = 2000000, Cele = "Liga Mistrzów, Primera División, Puchar Króla, Odnowienie akademii młodzieżowej, Wzmocnienie składu", IdKlubu = klubFCBarcelonaId },
+                new Zarzad() { IdZarzad = zarzadJuventusId, Pracownicy = null, Budzet = 1800000, Cele = "Liga Mistrzów, Serie A, Puchar Włoch, Akademia młodzieżowa, Rozwój infrastruktury", IdKlubu = klubJuventusId }
             );
         }
     }

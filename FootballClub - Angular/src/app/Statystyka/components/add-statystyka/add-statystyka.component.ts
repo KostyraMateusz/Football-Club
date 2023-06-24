@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PilkarzRequest } from 'src/app/Pilkarz/Models/pilkarz-request';
+import { Pilkarz } from 'src/app/Pilkarz/Models/pilkarz.model';
 import { PilkarzService } from 'src/app/Services/pilkarz.service';
 import { StatystykaService } from 'src/app/Services/statystyka.service';
 
@@ -11,7 +11,7 @@ import { StatystykaService } from 'src/app/Services/statystyka.service';
 })
 export class AddStatystykaComponent implements OnInit{
 
-  pilkarze: PilkarzRequest[] = [];
+  pilkarze: Pilkarz[] = [];
 
   statystyka = new FormGroup({
     Mecz: new FormControl('', Validators.required),
