@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { KlubRequest } from 'src/app/Klub/Models/klub-request';
+import { Klub } from 'src/app/Klub/Models/klub.model';
 import { KlubService } from 'src/app/Services/klub.service';
 import { PilkarzService } from 'src/app/Services/pilkarz.service';
 import { StatystykaService } from 'src/app/Services/statystyka.service';
-import { StatystykaRequest } from 'src/app/Statystyka/Models/statystyka-request';
+import { Statystyka } from 'src/app/Statystyka/Models/statystyka.model';
 
 @Component({
   selector: 'app-add-pilkarz',
@@ -13,8 +13,8 @@ import { StatystykaRequest } from 'src/app/Statystyka/Models/statystyka-request'
 })
 export class AddPilkarzComponent implements OnInit {
 
-  statystyki: StatystykaRequest[] = [];
-  archiwalneKluby: KlubRequest[] = [];
+  statystyki: Statystyka[] = [];
+  archiwalneKluby: Klub[] = [];
 
   pilkarz = new FormGroup({
     Imie: new FormControl('', Validators.required),
@@ -36,7 +36,7 @@ export class AddPilkarzComponent implements OnInit {
     this.getKluby();
   }
 
-  getStatystyki() : void{
+  getStatystyki(): void {
     this.statystykiService.DajStatystyki().subscribe(res => {
       this.statystyki = res;
       console.log(this.statystyki);

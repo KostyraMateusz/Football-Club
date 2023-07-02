@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 import { KlubListComponent } from './Klub/components/klub-list/klub-list.component';
 import { AddKlubComponent } from './Klub/components/add-klub/add-klub.component';
@@ -53,7 +54,8 @@ import { AddStatystykaComponent } from './Statystyka/components/add-statystyka/a
     MatButtonModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

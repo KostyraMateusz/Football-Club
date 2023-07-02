@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FootballClubPresentationLayer.Controllers
 {
-    public class StatystykiController : Controller
+    [ApiController]
+    public class StatystykiController : ControllerBase
     {
         private readonly IStatystykaService statystykaService;
 
@@ -13,15 +14,9 @@ namespace FootballClubPresentationLayer.Controllers
             this.statystykaService = statystykaService;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            var statystyki = await statystykaService.DajStatystyki();
-            return View(statystyki);
-        }
-
         [HttpGet]
         [Route("api/[controller]/DajStatystyki")]
-        public async Task<ActionResult<Statystyka>> DajStatystyki()
+        public async Task<ActionResult<IEnumerable<Statystyka>>> DajStatystyki()
         {
             try
             {

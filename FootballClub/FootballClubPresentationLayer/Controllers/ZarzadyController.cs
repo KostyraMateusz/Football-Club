@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FootballClubPresentationLayer.Controllers
 {
-    public class ZarzadyController : Controller
+    [ApiController]
+    public class ZarzadyController : ControllerBase
     {
         private readonly IZarzadService zarzadService;
 
@@ -15,7 +16,7 @@ namespace FootballClubPresentationLayer.Controllers
 
         [HttpGet]
         [Route("api/[controller]/DajZarzady")]
-        public async Task<ActionResult<Zarzad>> DajZarzady()
+        public async Task<ActionResult<IEnumerable<Zarzad>>> DajZarzady()
         {
             try
             {

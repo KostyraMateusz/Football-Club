@@ -17,16 +17,16 @@ const routes: Routes = [
   { path: "", component: KlubListComponent },
   { path: "Kluby", component: KlubListComponent },
   { path: "Kluby/DodajKlub", component: AddKlubComponent },
-  { path: "Kluby/EdytujKlub", component: EditKlubComponent },
+  { path: "Kluby/EdytujKlub/:id", component: EditKlubComponent },
   { path: "Pilkarze", component: PilkarzListComponent },
   { path: "Pilkarze/DodajPilkarza", component: AddPilkarzComponent },
-  { path: "Pilkarze/EdytujPilkarza", component: EditPilkarzComponent },
+  { path: "Pilkarze/EdytujPilkarza/:id", component: EditPilkarzComponent },
   { path: "Pracownicy", component: PracownikListComponent },
   { path: "Pracownicy/DodajPracownika", component: AddPracownikComponent },
-  { path: "Pracownicy/EdytujPracownika", component: EditPracownikComponent },
+  { path: "Pracownicy/EdytujPracownika/:id", component: EditPracownikComponent },
   { path: "Statystyki", component: StatystykaListComponent },
   { path: "Statystyki/DodajStatystyke", component: AddStatystykaComponent },
-  { path: "Statystyki/EdytujStatystyke", component: EditStatystykaComponent }
+  { path: "Statystyki/EdytujStatystyke/:id", component: EditStatystykaComponent }
 ];
 
 @NgModule({

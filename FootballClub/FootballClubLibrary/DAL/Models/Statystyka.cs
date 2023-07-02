@@ -14,7 +14,7 @@ namespace FootballClubLibrary.Models
         public Guid? IdPilkarz { get; set; }
         [ForeignKey(nameof(IdPilkarz))]
         public Pilkarz? Pilkarz { get; set; }
-
+        
         public string? Mecz { get; set; }
 
         public int Gole { get; set; }

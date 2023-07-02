@@ -1,9 +1,11 @@
 ﻿using BusinessLogicLayer.Interfaces;
+using FootballClubLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FootballClubPresentationLayer.Controllers
 {
-    public class PracownicyController : Controller
+    [ApiController]
+    public class PracownicyController : ControllerBase
     {
         private readonly IPracownikService pracownikService;
 
@@ -12,15 +14,9 @@ namespace FootballClubPresentationLayer.Controllers
             this.pracownikService = pracownikService;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            var pracownicy = await pracownikService.DajPracownikow();
-            return View(pracownicy);
-        }
-
         [HttpGet]
         [Route("api/[controller]/DajPracownikow")]
-        public async Task<ActionResult<decimal>> DajPracownikow()
+        public async Task<ActionResult<IEnumerable<Pracownik>>> DajPracownikow()
         {
             try
             {

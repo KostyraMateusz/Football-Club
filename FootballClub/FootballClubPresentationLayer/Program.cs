@@ -4,6 +4,7 @@ using FootballClubLibrary.Data;
 using FootballClubLibrary.Interfaces;
 using FootballClubLibrary.Repositories;
 using FootballClubLibrary.UnitOfWork;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,9 +23,16 @@ builder.Services.AddScoped<IStatystykaService, StatystykaService>();
 builder.Services.AddScoped<IZarzadService, ZarzadService>();
 
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddControllers().AddJsonOptions(opt =>
+{
+    opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 builder.Services.AddCors(p => p.AddPolicy("CorsPolicy", build =>
 {
-    build.WithOrigins("http://localhost:7160").AllowAnyMethod().AllowAnyHeader();
+    build.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
 }));
 
 // Add services to the container.
@@ -39,7 +47,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseCors("CorsPolicy");
 app.UseSwagger();
 app.UseSwaggerUI();
 
@@ -47,8 +54,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseCors("CorsPolicy");
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",
