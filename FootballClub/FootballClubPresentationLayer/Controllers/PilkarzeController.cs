@@ -1,10 +1,12 @@
 ﻿using BusinessLogicLayer.Interfaces;
 using FootballClubLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace FootballClubPresentationLayer.Controllers
 {
-    public class PilkarzeController : Controller
+    [ApiController]
+    public class PilkarzeController : ControllerBase
     {
         private readonly IPilkarzService pilkarzService;
 
@@ -13,15 +15,9 @@ namespace FootballClubPresentationLayer.Controllers
             this.pilkarzService = pilkarzService;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            var pilkarze = await pilkarzService.DajPilkarzy();
-            return View(pilkarze);
-        }
-
         [HttpGet]
         [Route("api/[controller]/DajPilkarzy")]
-        public async Task<ActionResult<Pilkarz>> DajPilkarzy()
+        public async Task<ActionResult<IEnumerable<Pilkarz>>> DajPilkarzy()
         {
             try
             {
@@ -157,11 +153,11 @@ namespace FootballClubPresentationLayer.Controllers
                     throw new Exception();
                 }
                 await this.pilkarzService.ZmienPozycjePilkarza(pilkarz, pozycja);
-                return RedirectToAction("Index");
+                return Ok("Index");
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
     }

@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FootballClubPresentationLayer.Controllers
 {
-    public class KlubyController : Controller
+    [ApiController]
+    public class KlubyController : ControllerBase
     {
         private readonly IKlubService klubService;
 
@@ -13,14 +14,8 @@ namespace FootballClubPresentationLayer.Controllers
             this.klubService = klubService;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            var kluby = await klubService.DajKluby();
-            return View(kluby);
-        }
-
         [HttpPost]
-        [Route("api/Kluby/NowyKlub")]
+        [Route("api/Kluby/DodajKlub")]
         public async Task<ActionResult> UtworzKlub([FromBody] Klub klub)
         {
             try
@@ -85,6 +80,25 @@ namespace FootballClubPresentationLayer.Controllers
             try
             {
                 var result = await this.klubService.DajKluby();
+                if (result == null)
+                {
+                    throw new Exception("");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/DajKlub/{IdKlubu}")]
+        public async Task<ActionResult<IEnumerable<Pilkarz>>> DajKluby([FromRoute] Guid IdKlubu)
+        {
+            try
+            {
+                var result = await this.klubService.DajKlub(IdKlubu: IdKlubu);
                 if (result == null)
                 {
                     throw new Exception("");

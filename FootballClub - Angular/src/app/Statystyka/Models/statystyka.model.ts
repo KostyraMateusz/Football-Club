@@ -1,6 +1,6 @@
-import { PilkarzResponse } from "src/app/Pilkarz/Models/pilkarz-response";
+import { Pilkarz } from "src/app/Pilkarz/Models/pilkarz.model";
 
-export interface StatystykaResponse {
+export interface Statystyka {
     IdStatystyka: number;
     Mecz: string;
     Gole: number;
@@ -9,5 +9,5 @@ export interface StatystykaResponse {
     CzerwoneKartki: number;
     PrzebiegnietyDystans: number;
     Ocena: number;
-    IdPilkarz: PilkarzResponse;
+    IdPilkarz: Pilkarz;
 }

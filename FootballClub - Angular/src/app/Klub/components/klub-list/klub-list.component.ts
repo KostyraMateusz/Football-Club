@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KlubService } from 'src/app/Services/klub.service';
-import { KlubResponse } from '../../Models/klub-response';
+import { Klub } from '../../Models/klub.model';
 
 @Component({
   selector: 'app-klub-list',
@@ -9,8 +9,8 @@ import { KlubResponse } from '../../Models/klub-response';
 })
 export class KlubListComponent implements OnInit {
 
-  kluby: KlubResponse[] = [];
-  displayedColumns: string[] = ['Nazwa', 'Stadion', 'Trofea', 'Archiwalni Piłkarze', 'Obecni Piłkarze'];
+  kluby: Klub[] = [];
+  displayedColumns: string[] = ['Nazwa', 'Stadion', 'Trofea', 'Archiwalni Piłkarze', 'Obecni Piłkarze', 'Edytuj', 'Usuń'];
 
   constructor(private klubService: KlubService) {
     this.getKluby();

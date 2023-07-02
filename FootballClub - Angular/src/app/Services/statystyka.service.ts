@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { StatystykaResponse } from '../Statystyka/Models/statystyka-response';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Statystyka } from '../Statystyka/Models/statystyka.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,23 +14,23 @@ export class StatystykaService {
   }
   constructor(private httpClient: HttpClient) { }
 
-  DajStatystyki(): Observable<StatystykaResponse[]>{
-    return this.httpClient.get<StatystykaResponse[]>(environment.url + 'Statystyki/DajStatystyki');
+  DajStatystyki(): Observable<Statystyka[]> {
+    return this.httpClient.get<Statystyka[]>(environment.url + 'Statystyki/DajStatystyki');
   }
 
-  DajStatystykeMeczu(mecz: string): Observable<StatystykaResponse[]> {
-    return this.httpClient.get<StatystykaResponse[]>(environment.url + '/DajStatystykeMeczu/' + mecz);
+  DajStatystykeMeczu(mecz: string): Observable<Statystyka[]> {
+    return this.httpClient.get<Statystyka[]>(environment.url + 'Statystyki/DajStatystykeMeczu/' + mecz);
   }
 
-  DajStatystkiZoltejKartki(): Observable<StatystykaResponse[]> {
-    return this.httpClient.get<StatystykaResponse[]>(environment.url + '/DajStatystkiZoltejKartki');
+  DajStatystkiZoltejKartki(): Observable<Statystyka[]> {
+    return this.httpClient.get<Statystyka[]>(environment.url + 'Statystyki/DajStatystkiZoltejKartki');
   }
 
-  DajStatystykiCzerwonychKartek(): Observable<StatystykaResponse[]> {
-    return this.httpClient.get<StatystykaResponse[]>(environment.url + '/DajStatystykiCzerwonychKartek');
+  DajStatystykiCzerwonychKartek(): Observable<Statystyka[]> {
+    return this.httpClient.get<Statystyka[]>(environment.url + 'Statystyki/DajStatystykiCzerwonychKartek');
   }
 
-  DajStatystykiNajdluzszePrzebiegnieteDystanse(): Observable<StatystykaResponse[]> {
-    return this.httpClient.get<StatystykaResponse[]>(environment.url + '/DajStatystykiNajdluzszePrzebiegnieteDystanse');
+  DajStatystykiNajdluzszePrzebiegnieteDystanse(): Observable<Statystyka[]> {
+    return this.httpClient.get<Statystyka[]>(environment.url + 'Statystyki/DajStatystykiNajdluzszePrzebiegnieteDystanse');
   }
 }

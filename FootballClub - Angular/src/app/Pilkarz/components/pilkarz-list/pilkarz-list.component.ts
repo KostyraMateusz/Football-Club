@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PilkarzResponse } from '../../Models/pilkarz-response';
 import { PilkarzService } from 'src/app/Services/pilkarz.service';
+import { Pilkarz } from '../../Models/pilkarz.model';
 
 @Component({
   selector: 'app-pilkarz-list',
@@ -9,7 +9,7 @@ import { PilkarzService } from 'src/app/Services/pilkarz.service';
 })
 export class PilkarzListComponent implements OnInit {
 
-  pilkarze: PilkarzResponse[] = [];
+  pilkarze: Pilkarz[] = [];
   displayedColumns: string[] = ['Imie', 'Nazwisko', 'Wiek', 'Pozycja', 'Wynagrodzenie', 'Statystyki', 'ArchiwalneKluby'];
 
   constructor(private pilkarzService: PilkarzService) {
