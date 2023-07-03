@@ -18,6 +18,8 @@ namespace FootballClubLibrary.Models
         public ICollection<Pracownik>? Pracownicy { get; set; }
 
         [Required]
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
         public decimal Budzet { get; set; }
 
         [Required]

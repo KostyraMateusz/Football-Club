@@ -9,8 +9,8 @@ namespace FootballClubLibrary.Interfaces
 		Task CreateZarzad(Zarzad zarzad);
 		Task DeleteZarzad(Guid id);
 		Task UpdateZarzad(Zarzad zarzad);
-		Task<IEnumerable<Zarzad>> GetZarzady();
         Task<Zarzad> GetZarzadById(Guid id);
+        Task<IEnumerable<Zarzad>> GetZarzady();
         Task Save();
     }
 }

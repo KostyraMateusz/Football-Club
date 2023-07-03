@@ -13,6 +13,11 @@ namespace FootballClubPresentationLayer.ControllersMVC
             this.pilkarzService = pilkarzService;
         }
 
+        public IActionResult Index()
+        {
+            return DajPilkarzy();
+        }
+
         public IActionResult DajPilkarzy()
         {
             var pilkarze = this.pilkarzService.DajPilkarzy().Result.ToList();

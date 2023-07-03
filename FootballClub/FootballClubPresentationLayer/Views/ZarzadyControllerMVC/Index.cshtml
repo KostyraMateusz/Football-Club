@@ -12,16 +12,13 @@
         <thead>
             <tr class="name-of-headers">
                 <th>
-                    @Html.DisplayNameFor(model => model.Pracownicy)
+                    @Html.DisplayNameFor(model => model.Klub)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Budzet)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Cele)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Klub)
                 </th>
                 <th>
                     <p>Akcje</p>
@@ -33,21 +30,20 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Pracownicy)
+                        @Html.DisplayFor(modelItem => item.Klub.Nazwa)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Budzet)
+                        @item.Budzet.ToString("N2", System.Globalization.CultureInfo.InvariantCulture)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Cele)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Klub.Nazwa)
-                    </td>
-                    <td>
                         <a asp-action="Edit" asp-route-id="@item.IdZarzad">Edit</a> |
                         <a asp-action="Details" asp-route-id="@item.IdZarzad">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.IdZarzad">Delete</a>
+                        <a asp-action="Delete" asp-route-id="@item.IdZarzad">Delete</a> |
+                        <a asp-action="ZmienBudzetZarzadu" asp-route-id="@item.IdZarzad">Zmień budżet</a> |
+                        <a asp-action="DodajCelZarzadu" asp-route-id="@item.IdZarzad">Zmień cele</a>
                     </td>
                 </tr>
             }

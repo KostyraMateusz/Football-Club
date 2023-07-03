@@ -35,19 +35,20 @@ namespace FootballClubLibrary.Repositories
 		public async Task UpdatePilkarz(Pilkarz pilkarz)
 		{
 			this.dbContext.Entry(pilkarz).State = EntityState.Modified;
-		}
+            await this.dbContext.SaveChangesAsync();
+        }
 
-		public async Task<IEnumerable<Pilkarz>> GetPilkarze()
-		{
-			var pilkarze = await this.dbContext.Pilkarze.Include(z => z.Klub).ToListAsync();
-            return pilkarze;
-		}
-
-		public async Task<Pilkarz> GetPilkarzById(Guid id)
+        public async Task<Pilkarz> GetPilkarzById(Guid id)
         {
             var pilkarz = await this.dbContext.Pilkarze.FindAsync(id);
             return pilkarz;
         }
+
+        public async Task<IEnumerable<Pilkarz>> GetPilkarze()
+		{
+			var pilkarze = await this.dbContext.Pilkarze.Include(z => z.Klub).ToListAsync();
+            return pilkarze;
+		}
 
 		public async Task Save()
 		{

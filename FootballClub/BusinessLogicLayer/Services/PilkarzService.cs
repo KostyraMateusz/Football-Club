@@ -13,6 +13,39 @@ namespace BusinessLogicLayer.Services
             this.unitOfWork = unitOfWork;
         }
 
+        public async Task DodajPilkarza(Pilkarz pilkarz)
+        {
+            var foundPilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(pilkarz.IdPilkarz);
+            if (foundPilkarz == null)
+            {
+                await this.unitOfWork.PilkarzRepository.CreatePilkarz(pilkarz);
+                await this.unitOfWork.Save();
+            }
+        }
+
+        public async Task UsunPilkarza(Guid IdPilkarz)
+        {
+            var foundPilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(IdPilkarz);
+            if (foundPilkarz != null)
+            {
+                await this.unitOfWork.PilkarzRepository.DeletePilkarz(IdPilkarz);
+            }
+        }
+
+        public async Task EdytujPilkarza(Pilkarz pilkarz)
+        {
+            if (pilkarz != null)
+            {
+                await this.unitOfWork.PilkarzRepository.UpdatePilkarz(pilkarz);
+            }
+        }
+
+        public async Task<Pilkarz> DajPilkarza(Guid IdPilkarz)
+        {
+            var pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(IdPilkarz);
+            return pilkarz;
+        }
+
         public async Task<IEnumerable<Pilkarz>> DajPilkarzy()
         {
             return await this.unitOfWork.PilkarzRepository.GetPilkarze();
@@ -31,13 +64,7 @@ namespace BusinessLogicLayer.Services
             return result;
         }
 
-		public async Task<IEnumerable<Statystyka>> DajStatystykiPilkarza(Pilkarz pilkarz)
-		{
-			var result = pilkarz.Statystyki;
-			return result;
-		}
-
-		public async Task<Statystyka> DajStatystykePilkarza(Pilkarz pilkarz, Guid IdStatystyka)
+        public async Task<Statystyka> DajStatystykePilkarza(Pilkarz pilkarz, Guid IdStatystyka)
         {
             var result = pilkarz.Statystyki?.First(s => s.IdStatystyka == IdStatystyka);
             return result;
@@ -48,6 +75,12 @@ namespace BusinessLogicLayer.Services
             var result = pilkarz.Statystyki?.OrderByDescending(p => p.Ocena).Take(5).ToList();
             return result;
         }
+
+        public async Task<IEnumerable<Statystyka>> DajStatystykiPilkarza(Pilkarz pilkarz)
+		{
+			var result = pilkarz.Statystyki;
+			return result;
+		}
 
 		public async Task ZmienPozycjePilkarza(Pilkarz pilkarz, string pozycja)
 		{
@@ -61,5 +94,5 @@ namespace BusinessLogicLayer.Services
 			}
 			await this.unitOfWork.Save();
 		}
-	}
+    }
 }

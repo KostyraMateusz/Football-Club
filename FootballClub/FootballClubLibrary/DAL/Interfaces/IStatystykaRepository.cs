@@ -9,8 +9,8 @@ namespace FootballClubLibrary.Interfaces
 		Task CreateStatystyka(Statystyka statystyka);
 		Task DeleteStatystyka(Guid id);
 		Task UpdateStatystyka(Statystyka statystyka);
-		Task<IEnumerable<Statystyka>> GetStatystyki();
         Task<Statystyka> GetStatystykaById(Guid id);
+        Task<IEnumerable<Statystyka>> GetStatystyki();
         Task Save();
     }
 }

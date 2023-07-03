@@ -13,6 +13,11 @@ namespace FootballClubPresentationLayer.ControllersMVC
             this.klubService = klubService;
         }
 
+        public IActionResult Index()
+        {
+            return DajKluby();
+        }
+
         public IActionResult DajKluby()
         {
             var kluby = this.klubService.DajKluby().Result.ToList();

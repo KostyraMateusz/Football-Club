@@ -9,8 +9,8 @@ namespace FootballClubLibrary.Interfaces
 		Task CreateKlub(Klub klub);
 		Task DeleteKlub(Guid id);
 		Task UpdateKlub(Klub klub);
-		Task<IEnumerable<Klub>>GetKluby();
         Task<Klub> GetKlubById(Guid id);
+        Task<IEnumerable<Klub>>GetKluby();
 		Task DodajTrofeumKlubu(Guid id, string trofeum);
 		Task Save();
     }
