@@ -13,6 +13,39 @@ namespace BusinessLogicLayer.Services
             this.unitOfWork = unitOfWork;
         }
 
+        public async Task DodajStatystyke(Statystyka statystyka)
+        {
+            var foundStatystyka = await this.unitOfWork.StatystykaRepository.GetStatystykaById(statystyka.IdStatystyka);
+            if (foundStatystyka == null)
+            {
+                await this.unitOfWork.StatystykaRepository.CreateStatystyka(statystyka);
+                await this.unitOfWork.Save();
+            }
+        }
+
+        public async Task UsunStatystyke(Guid IdStatystyka)
+        {
+            var foundStatystyka = await this.unitOfWork.StatystykaRepository.GetStatystykaById(IdStatystyka);
+            if (foundStatystyka != null)
+            {
+                await this.unitOfWork.StatystykaRepository.DeleteStatystyka(IdStatystyka);
+            }
+        }
+
+        public async Task EdytujStatystyke(Statystyka statystyka)
+        {
+            if (statystyka != null)
+            {
+                await this.unitOfWork.StatystykaRepository.UpdateStatystyka(statystyka);
+            }
+        }
+
+        public async Task<Statystyka> DajStatystyke(Guid IdStatystyka)
+        {
+            var statystyka = await this.unitOfWork.StatystykaRepository.GetStatystykaById(IdStatystyka);
+            return statystyka;
+        }
+
         public async Task<IEnumerable<Statystyka>> DajStatystyki()
         {
             return await this.unitOfWork.StatystykaRepository.GetStatystyki();

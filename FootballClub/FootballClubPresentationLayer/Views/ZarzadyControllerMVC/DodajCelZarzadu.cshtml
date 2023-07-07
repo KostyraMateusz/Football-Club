@@ -1,0 +1,41 @@
+﻿@model FootballClubLibrary.Models.Zarzad
+
+@{
+    ViewData["Title"] = "Zmien budżet zarządu";
+}
+
+<h1>Zmien cele zarządu</h1>
+
+<div>
+    <hr />
+    <form asp-action="DodajCelZarzadu">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="IdZarzad" />
+        <div class="form-group">
+            <label asp-for="Klub.Nazwa" class="control-label"></label>
+            <input asp-for="Klub.Nazwa" class="form-control" readonly />
+            <span asp-validation-for="Klub.Nazwa" class="text-danger"></span>
+        </div>
+
+        <br />
+
+        <div class="form-group">
+            <label asp-for="Cele" class="control-label"></label>
+            <input asp-for="Cele" class="form-control" />
+            <span asp-validation-for="Cele" class="text-danger"></span>
+        </div>
+
+        <br /><hr />
+
+        <div class="form-group">
+            <input type="submit" value="Zmień cele" class="btn btn-primary" /> | 
+            <a asp-action="Index">Wróć do listy zarządów</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

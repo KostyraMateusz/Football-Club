@@ -15,6 +15,12 @@ namespace FootballClubLibrary.Repositories
             this.dbContext = dbContext;
         }
 
+        public DbSet<Zarzad> GetDbSetZarzady()
+        {
+            var result = this.dbContext.Zarzady;
+            return result;
+        }
+
         public async Task CreateZarzad(Zarzad zarzad)
         {
             await this.dbContext.Zarzady.AddAsync(zarzad);
@@ -26,20 +32,32 @@ namespace FootballClubLibrary.Repositories
             this.dbContext.Zarzady.Remove(zarzad);
         }
 
+        public async Task UpdateZarzad(Zarzad zarzad)
+        {
+            this.dbContext.Entry(zarzad).State = EntityState.Modified;
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task<Zarzad> GetZarzadById(Guid id)
+        {
+            return await this.dbContext.Zarzady.FindAsync(id);
+        }
+
         public async Task<IEnumerable<Zarzad>> GetZarzady()
         {
             var zarzady = await this.dbContext.Zarzady.Include(z => z.Klub).ThenInclude( p => p.Zarzad.Pracownicy).ToListAsync();
             return zarzady;
         }
 
-		public async Task<Zarzad> GetZarzadById(Guid id)
-		{
-			return await this.dbContext.Zarzady.FindAsync(id);
-		}
-
-		public async Task UpdateZarzad(Zarzad zarzad)
+        public async Task Save()
         {
-            this.dbContext.Entry(zarzad).State = EntityState.Modified;
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         public virtual void Dispose(bool disposing)
@@ -52,23 +70,6 @@ namespace FootballClubLibrary.Repositories
                 }
             }
             this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        public async Task Save()
-        {
-            await this.dbContext.SaveChangesAsync();
-        }
-
-        public DbSet<Zarzad> GetDbSetZarzady()
-        {
-            var result = this.dbContext.Zarzady;
-            return result;
         }
     }
 }

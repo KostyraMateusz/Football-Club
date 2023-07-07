@@ -6,6 +6,12 @@ namespace TestsFootballClub.FakeRepositories
     public class FakeKlubRepository : IKlubRepository
     {
         private List<Klub> kluby = new List<Klub>();
+
+        public DbSet<Klub> GetDbSetKluby()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task CreateKlub(Klub klub)
         {
             kluby.Add(klub);
@@ -16,6 +22,16 @@ namespace TestsFootballClub.FakeRepositories
         {
             var klub = await Task.FromResult(kluby.Find(k => k.IdKlub == id));
             kluby.Remove(klub);
+            return;
+        }
+
+        public async Task UpdateKlub(Klub klub)
+        {
+            var index = await Task.FromResult(kluby.FindIndex(p => p.IdKlub == klub.IdKlub));
+            if (index != -1)
+            {
+                kluby[index] = klub;
+            }
             return;
         }
 
@@ -31,16 +47,6 @@ namespace TestsFootballClub.FakeRepositories
             return kluby;
         }
 
-        public async Task UpdateKlub(Klub klub)
-        {
-            var index = await Task.FromResult(kluby.FindIndex(p => p.IdKlub == klub.IdKlub));
-            if (index != -1)
-            {
-                kluby[index] = klub;
-            }
-            return;
-        }
-
         public async Task DodajTrofeumKlubu(Guid id, string trofeum)
         {
             var klub = await Task.FromResult(this.kluby.Find(k=>k.IdKlub == id));
@@ -54,11 +60,6 @@ namespace TestsFootballClub.FakeRepositories
         public int IleJestKlubow()
         {
             return kluby.Count();
-        }
-
-        public DbSet<Klub> GetDbSetKluby()
-        {
-            throw new NotImplementedException();
         }
 
         public Task Save()

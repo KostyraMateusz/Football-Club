@@ -9,8 +9,8 @@ namespace FootballClubLibrary.Interfaces
 		Task CreatePilkarz(Pilkarz pilkarz);
 		Task DeletePilkarz(Guid id);
 		Task UpdatePilkarz(Pilkarz pilkarz);
-		Task<IEnumerable<Pilkarz>> GetPilkarze();
         Task<Pilkarz> GetPilkarzById(Guid id);
+        Task<IEnumerable<Pilkarz>> GetPilkarze();
         Task Save();
     }
 }
