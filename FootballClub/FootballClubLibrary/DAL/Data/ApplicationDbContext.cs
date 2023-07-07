@@ -1,9 +1,7 @@
 ﻿using FootballClubLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore.Metadata;
 using System.Collections.ObjectModel;
-using System.Drawing;
 
 namespace FootballClubLibrary.Data
 {
@@ -15,18 +13,18 @@ namespace FootballClubLibrary.Data
         public DbSet<Statystyka> Statystyki { get; set; }
         public DbSet<Zarzad> Zarzady { get; set; }
 
-        public ApplicationDbContext() : base()
-        {
-
-        }
+        public ApplicationDbContext() : base() { }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=FootballClub;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            optionsBuilder.UseSqlServer(connectionString);
-            optionsBuilder.ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.NavigationBaseIncludeIgnored));
+            if (!optionsBuilder.IsConfigured)
+            {
+                var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=FootballClub;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                optionsBuilder.UseSqlServer(connectionString);
+                optionsBuilder.ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.NavigationBaseIncludeIgnored));
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -71,10 +69,8 @@ namespace FootballClubLibrary.Data
             // Klucze dla klubu
             var klubRealMadrytId = Guid.NewGuid();
             var ZarzadRealMadrytId = Guid.NewGuid();
-
             var klubFCBarcelonaId = Guid.NewGuid();
             var zarzadFCBarcelonaId = Guid.NewGuid();
-
             var klubJuventusId = Guid.NewGuid();
             var zarzadJuventusId = Guid.NewGuid();
 
@@ -114,18 +110,6 @@ namespace FootballClubLibrary.Data
                 new Pilkarz { IdPilkarz = ViniciusJunior, Imie = "Vinicius", Nazwisko = "Junior", Wiek = 21, Pozycja = "Napastnik", Statystyki = null, ArchiwalneKluby = null, Wynagrodzenie = 180000, IdKlubu = klubRealMadrytId }
             );
 
-            modelBuilder.Entity<Pracownik>().HasData(
-                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Fiorentino", Nazwisko = "Perez", PESEL = "12345600101", Wiek = 77, WykonywanaFunkcja = "Prezes", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 420000 },
-                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Carlo", Nazwisko = "Ancelotti", PESEL = "23456700202", Wiek = 64, WykonywanaFunkcja = "Trener", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 350000 },
-                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Davide", Nazwisko = "Ancelotti", PESEL = "34567800303", Wiek = 33, WykonywanaFunkcja = "Asystent trenera", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 300000 },
-                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Luis", Nazwisko = "Llopis", PESEL = "45678900404", Wiek = 58, WykonywanaFunkcja = "Trener Bramkarzy", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 150000 },
-                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Javier", Nazwisko = "Mallo", PESEL = "56789000505", Wiek = 46, WykonywanaFunkcja = "Trener przygotowania fizycznego", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 1250000 },
-                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Antonio", Nazwisko = "Pintus", PESEL = "67890100606", Wiek = 60, WykonywanaFunkcja = "Trener przygotowania fizycznego", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 125000 },
-                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Simone", Nazwisko = "Montanaro", PESEL = "78901200707", Wiek = 51, WykonywanaFunkcja = "Trener analityk", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 140000 },
-                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Iker", Nazwisko = "Casillas", PESEL = "89012300808", Wiek = 42, WykonywanaFunkcja = "Wice-prezes zarządu", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 200000 },
-                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Juni", Nazwisko = "Calafat", PESEL = "90123400909", Wiek = 50, WykonywanaFunkcja = "Szef skautingu", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 200000 }
-            );
-
             modelBuilder.Entity<Statystyka>().HasData(
                 new Statystyka { IdStatystyka = Guid.NewGuid(), Mecz = "Real Madrid vs Atletico Madrid", Gole = 1, ZolteKartki = 0, CzerwoneKartki = 0, Asysty = 0, PrzebiegnietyDystans = 9.2, Ocena = 8.1, IdPilkarz = KarimBenzema },
                 new Statystyka { IdStatystyka = Guid.NewGuid(), Mecz = "Real Madrid vs FC Barcelona", Gole = 0, ZolteKartki = 1, CzerwoneKartki = 0, Asysty = 1, PrzebiegnietyDystans = 8.4, Ocena = 7.5, IdPilkarz = LukaModric },
@@ -145,9 +129,23 @@ namespace FootballClubLibrary.Data
             );
 
             modelBuilder.Entity<Zarzad>().HasData(
-                new Zarzad() { IdZarzad = ZarzadRealMadrytId, Pracownicy = null, Budzet = 2500000, Cele = "Liga Mistrzów, Superpuchar Hiszpanii, Naprawa murawy, Renowacja krzesełek, Nowy młody napastnik", IdKlubu = klubRealMadrytId },
-                new Zarzad() { IdZarzad = zarzadFCBarcelonaId, Pracownicy = null, Budzet = 2000000, Cele = "Liga Mistrzów, Primera División, Puchar Króla, Odnowienie akademii młodzieżowej, Wzmocnienie składu", IdKlubu = klubFCBarcelonaId },
-                new Zarzad() { IdZarzad = zarzadJuventusId, Pracownicy = null, Budzet = 1800000, Cele = "Liga Mistrzów, Serie A, Puchar Włoch, Akademia młodzieżowa, Rozwój infrastruktury", IdKlubu = klubJuventusId }
+                new Zarzad() { IdZarzad = ZarzadRealMadrytId, Pracownicy = new List<Pracownik>(), Budzet = 2500000, Cele = "Liga Mistrzów, Superpuchar Hiszpanii, Naprawa murawy, Renowacja krzesełek, Nowy młody napastnik", IdKlubu = klubRealMadrytId },
+                new Zarzad() { IdZarzad = zarzadFCBarcelonaId, Pracownicy = new List<Pracownik>(), Budzet = 2000000, Cele = "Liga Mistrzów, Primera División, Puchar Króla, Odnowienie akademii młodzieżowej, Wzmocnienie składu", IdKlubu = klubFCBarcelonaId },
+                new Zarzad() { IdZarzad = zarzadJuventusId, Pracownicy = new List<Pracownik>(), Budzet = 1800000, Cele = "Liga Mistrzów, Serie A, Puchar Włoch, Akademia młodzieżowa, Rozwój infrastruktury", IdKlubu = klubJuventusId }
+            );
+
+            modelBuilder.Entity<Pracownik>().HasData(
+                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Fiorentino", Nazwisko = "Perez", PESEL = "12345600101", Wiek = 77, WykonywanaFunkcja = "Prezes", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 420000 },
+                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Carlo", Nazwisko = "Ancelotti", PESEL = "23456700202", Wiek = 64, WykonywanaFunkcja = "Trener", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 350000 },
+                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Davide", Nazwisko = "Ancelotti", PESEL = "34567800303", Wiek = 33, WykonywanaFunkcja = "Asystent trenera", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 300000 },
+                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Luis", Nazwisko = "Llopis", PESEL = "45678900404", Wiek = 58, WykonywanaFunkcja = "Trener Bramkarzy", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 150000 },
+                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Javier", Nazwisko = "Mallo", PESEL = "56789000505", Wiek = 46, WykonywanaFunkcja = "Trener przygotowania fizycznego", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 1250000 },
+                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Antonio", Nazwisko = "Pintus", PESEL = "67890100606", Wiek = 60, WykonywanaFunkcja = "Trener przygotowania fizycznego", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 125000 },
+                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Simone", Nazwisko = "Montanaro", PESEL = "78901200707", Wiek = 51, WykonywanaFunkcja = "Trener analityk", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 140000 },
+                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Iker", Nazwisko = "Casillas", PESEL = "89012300808", Wiek = 42, WykonywanaFunkcja = "Wice-prezes zarządu", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 200000 },
+                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Juni", Nazwisko = "Calafat", PESEL = "90123400909", Wiek = 50, WykonywanaFunkcja = "Szef skautingu", IdZarzadu = ZarzadRealMadrytId, Wynagrodzenie = 200000 },
+                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Mateusz", Nazwisko = "Kostyra", PESEL = "780124500909", Wiek = 23, WykonywanaFunkcja = "", IdZarzadu = null, Wynagrodzenie = 10000000 },
+                new Pracownik() { IdPracownik = Guid.NewGuid(), Imie = "Stanisław", Nazwisko = "Kluczewski", PESEL = "45423402949", Wiek = 23, WykonywanaFunkcja = "", IdZarzadu = null, Wynagrodzenie = 5000000 }
             );
         }
     }

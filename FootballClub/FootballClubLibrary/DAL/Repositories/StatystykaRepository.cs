@@ -35,19 +35,20 @@ namespace FootballClubLibrary.Repositories
 		public async Task UpdateStatystyka(Statystyka statystyka)
 		{
 			this.dbContext.Entry(statystyka).State = EntityState.Modified;
-		}
+            await this.dbContext.SaveChangesAsync();
+        }
 
-		public async Task<IEnumerable<Statystyka>> GetStatystyki()
-		{
-			var statystyki = await this.dbContext.Statystyki.Include(p => p.Pilkarz).ToListAsync();
-            return statystyki;
-		}
-
-		public async Task<Statystyka> GetStatystykaById(Guid id)
+        public async Task<Statystyka> GetStatystykaById(Guid id)
         {
             var statystyka = await this.dbContext.Statystyki.FindAsync(id);
             return statystyka;
         }
+
+        public async Task<IEnumerable<Statystyka>> GetStatystyki()
+		{
+			var statystyki = await this.dbContext.Statystyki.Include(p => p.Pilkarz).ToListAsync();
+            return statystyki;
+		}
 
 		public async Task Save()
 		{

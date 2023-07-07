@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FootballClubLibrary.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230624101055_UpdateMigration24062023")]
-    partial class UpdateMigration24062023
+    [Migration("20230705164234_Migracja")]
+    partial class Migracja
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,21 +50,21 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdKlub = new Guid("93aef9fc-6263-4bd6-8d03-25f783298d4c"),
+                            IdKlub = new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"),
                             Nazwa = "Real Madryt",
                             Stadion = "Estadio Santiago Bernabéu",
                             Trofea = "Liga Mistrzów (13 razy), Primera División (34 razy), Puchar Króla (19 razy), Superpuchar Hiszpanii (11 razy)"
                         },
                         new
                         {
-                            IdKlub = new Guid("3bad4552-ed17-45ad-b7e1-efdc4bacca9a"),
+                            IdKlub = new Guid("60b76cbe-81e7-49a9-b0d0-7032296a7e69"),
                             Nazwa = "FC Barcelona",
                             Stadion = "Camp Nou",
                             Trofea = "Liga Mistrzów (5 razy), Primera División (26 razy), Puchar Króla (31 razy), Superpuchar Hiszpanii (13 razy)"
                         },
                         new
                         {
-                            IdKlub = new Guid("5f719cd7-19c9-45cb-b6f0-c78882a81a23"),
+                            IdKlub = new Guid("5128b21a-e6b9-4aef-8c1e-307a6fe57980"),
                             Nazwa = "Juventus",
                             Stadion = "Allianz Stadium",
                             Trofea = "Liga Mistrzów (2 razy), Serie A (36 razy), Puchar Włoch (14 razy), Superpuchar Włoch (9 razy)"
@@ -109,8 +109,8 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdPilkarz = new Guid("79d4458a-909d-418b-aa28-c718e39362dd"),
-                            IdKlubu = new Guid("93aef9fc-6263-4bd6-8d03-25f783298d4c"),
+                            IdPilkarz = new Guid("2dc9b501-b8e8-406d-b1dd-a2d75c09bb6c"),
+                            IdKlubu = new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"),
                             Imie = "Thibaut",
                             Nazwisko = "Courtois",
                             Pozycja = "Bramkarz",
@@ -119,8 +119,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPilkarz = new Guid("c99d07b2-b064-4f99-927e-c75892e89322"),
-                            IdKlubu = new Guid("93aef9fc-6263-4bd6-8d03-25f783298d4c"),
+                            IdPilkarz = new Guid("4b4c693d-0d59-4095-88a4-d5e90b9edb94"),
+                            IdKlubu = new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"),
                             Imie = "Dani",
                             Nazwisko = "Carvajal",
                             Pozycja = "Obrońca",
@@ -129,8 +129,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPilkarz = new Guid("94dc432f-2df7-4569-ad14-247149913d3c"),
-                            IdKlubu = new Guid("93aef9fc-6263-4bd6-8d03-25f783298d4c"),
+                            IdPilkarz = new Guid("2bfc2dab-fa67-464b-9a67-2accef09a8e6"),
+                            IdKlubu = new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"),
                             Imie = "Raphael",
                             Nazwisko = "Varane",
                             Pozycja = "Obrońca",
@@ -139,8 +139,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPilkarz = new Guid("ef335694-b7aa-40ce-b9d7-f7450cf03fe7"),
-                            IdKlubu = new Guid("93aef9fc-6263-4bd6-8d03-25f783298d4c"),
+                            IdPilkarz = new Guid("5480053a-38f1-416b-9e5d-3cca81a3ec3e"),
+                            IdKlubu = new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"),
                             Imie = "Eder",
                             Nazwisko = "Militao",
                             Pozycja = "Obrońca",
@@ -149,8 +149,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPilkarz = new Guid("7df92ca1-32ff-41ad-8de4-5572a16f169b"),
-                            IdKlubu = new Guid("93aef9fc-6263-4bd6-8d03-25f783298d4c"),
+                            IdPilkarz = new Guid("a38cbad7-8cce-472e-8501-4c56197461dd"),
+                            IdKlubu = new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"),
                             Imie = "Ferland",
                             Nazwisko = "Mendy",
                             Pozycja = "Obrońca",
@@ -159,8 +159,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPilkarz = new Guid("243c318a-ef37-4cc4-922f-32fe35877921"),
-                            IdKlubu = new Guid("93aef9fc-6263-4bd6-8d03-25f783298d4c"),
+                            IdPilkarz = new Guid("18abe966-c138-442d-af8a-066f8ed8ff82"),
+                            IdKlubu = new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"),
                             Imie = "Carlos Henrique",
                             Nazwisko = "Casimiro",
                             Pozycja = "Pomocnik",
@@ -169,8 +169,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPilkarz = new Guid("e4d51f0a-bc05-4386-8f80-f7c1ea2cc06c"),
-                            IdKlubu = new Guid("93aef9fc-6263-4bd6-8d03-25f783298d4c"),
+                            IdPilkarz = new Guid("dcc261ab-9650-484f-b246-68185e9b1fec"),
+                            IdKlubu = new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"),
                             Imie = "Toni",
                             Nazwisko = "Kroos",
                             Pozycja = "Pomocnik",
@@ -179,8 +179,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPilkarz = new Guid("23fad9ad-3f30-476d-9385-61beade997e4"),
-                            IdKlubu = new Guid("93aef9fc-6263-4bd6-8d03-25f783298d4c"),
+                            IdPilkarz = new Guid("913390be-a78f-4359-b86e-fcadf9e04f4b"),
+                            IdKlubu = new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"),
                             Imie = "Luka",
                             Nazwisko = "Modrić",
                             Pozycja = "Pomocnik",
@@ -189,8 +189,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPilkarz = new Guid("66dc3b6a-6457-4713-b803-f0c3037570fd"),
-                            IdKlubu = new Guid("93aef9fc-6263-4bd6-8d03-25f783298d4c"),
+                            IdPilkarz = new Guid("43eb151c-6670-4c49-b7a4-c6fa596f9672"),
+                            IdKlubu = new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"),
                             Imie = "Marco",
                             Nazwisko = "Asensio",
                             Pozycja = "Pomocnik",
@@ -199,8 +199,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPilkarz = new Guid("4b36ff41-13a3-4863-921e-848f68200f93"),
-                            IdKlubu = new Guid("93aef9fc-6263-4bd6-8d03-25f783298d4c"),
+                            IdPilkarz = new Guid("dacee609-350b-4063-9ab0-3b45e5d7f56c"),
+                            IdKlubu = new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"),
                             Imie = "Karim",
                             Nazwisko = "Benzema",
                             Pozycja = "Napastnik",
@@ -209,8 +209,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPilkarz = new Guid("5e569d43-8919-4133-ba4d-6c809ff257a7"),
-                            IdKlubu = new Guid("93aef9fc-6263-4bd6-8d03-25f783298d4c"),
+                            IdPilkarz = new Guid("92078c5b-86f8-462a-8e44-17e394929fd0"),
+                            IdKlubu = new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"),
                             Imie = "Vinicius",
                             Nazwisko = "Junior",
                             Pozycja = "Napastnik",
@@ -258,8 +258,8 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdPracownik = new Guid("ee72c56f-773a-4ec8-a78b-1133cb71f916"),
-                            IdZarzadu = new Guid("937da978-a2a5-481c-9df4-5bc4db79d052"),
+                            IdPracownik = new Guid("7d6a550a-583e-4a18-a1bf-14422268dc18"),
+                            IdZarzadu = new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"),
                             Imie = "Fiorentino",
                             Nazwisko = "Perez",
                             PESEL = "12345600101",
@@ -269,8 +269,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPracownik = new Guid("5ee22d1c-0087-413f-a0e3-d041448dda33"),
-                            IdZarzadu = new Guid("937da978-a2a5-481c-9df4-5bc4db79d052"),
+                            IdPracownik = new Guid("b079260d-4783-4a45-814a-091523e3dc06"),
+                            IdZarzadu = new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"),
                             Imie = "Carlo",
                             Nazwisko = "Ancelotti",
                             PESEL = "23456700202",
@@ -280,8 +280,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPracownik = new Guid("9e6ba0fe-5dcb-4337-840b-0b28b42e6ad1"),
-                            IdZarzadu = new Guid("937da978-a2a5-481c-9df4-5bc4db79d052"),
+                            IdPracownik = new Guid("a07af027-d1ec-41ac-a25f-8776df952f1b"),
+                            IdZarzadu = new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"),
                             Imie = "Davide",
                             Nazwisko = "Ancelotti",
                             PESEL = "34567800303",
@@ -291,8 +291,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPracownik = new Guid("fc473cd9-54ee-4258-a536-1bcd2ac44375"),
-                            IdZarzadu = new Guid("937da978-a2a5-481c-9df4-5bc4db79d052"),
+                            IdPracownik = new Guid("720d475b-d529-4159-b218-7ed97f479cf8"),
+                            IdZarzadu = new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"),
                             Imie = "Luis",
                             Nazwisko = "Llopis",
                             PESEL = "45678900404",
@@ -302,8 +302,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPracownik = new Guid("ffccc730-c6df-4492-8653-3c3f8a1e49d0"),
-                            IdZarzadu = new Guid("937da978-a2a5-481c-9df4-5bc4db79d052"),
+                            IdPracownik = new Guid("cc2f7e66-f2c1-4724-8bb9-3e6ffa67681a"),
+                            IdZarzadu = new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"),
                             Imie = "Javier",
                             Nazwisko = "Mallo",
                             PESEL = "56789000505",
@@ -313,8 +313,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPracownik = new Guid("e75399cf-3349-4a04-b8f4-0b85b82893f5"),
-                            IdZarzadu = new Guid("937da978-a2a5-481c-9df4-5bc4db79d052"),
+                            IdPracownik = new Guid("bf4e794b-5997-43a3-8b20-5b2517305bd5"),
+                            IdZarzadu = new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"),
                             Imie = "Antonio",
                             Nazwisko = "Pintus",
                             PESEL = "67890100606",
@@ -324,8 +324,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPracownik = new Guid("be8a9a05-42a9-422b-8b8f-e4f33c664f5e"),
-                            IdZarzadu = new Guid("937da978-a2a5-481c-9df4-5bc4db79d052"),
+                            IdPracownik = new Guid("c575ff03-5339-486e-b94e-f2a20df4ccb1"),
+                            IdZarzadu = new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"),
                             Imie = "Simone",
                             Nazwisko = "Montanaro",
                             PESEL = "78901200707",
@@ -335,8 +335,8 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPracownik = new Guid("452b528e-a715-4a96-a174-477234c7644b"),
-                            IdZarzadu = new Guid("937da978-a2a5-481c-9df4-5bc4db79d052"),
+                            IdPracownik = new Guid("c49f0b4f-8a6b-4bd5-b3c8-97987e40a6dc"),
+                            IdZarzadu = new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"),
                             Imie = "Iker",
                             Nazwisko = "Casillas",
                             PESEL = "89012300808",
@@ -346,14 +346,34 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdPracownik = new Guid("727c0eba-84b7-486f-8d9d-31dac844f033"),
-                            IdZarzadu = new Guid("937da978-a2a5-481c-9df4-5bc4db79d052"),
+                            IdPracownik = new Guid("3362e435-2147-4e11-a0a7-2031a40c72ea"),
+                            IdZarzadu = new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"),
                             Imie = "Juni",
                             Nazwisko = "Calafat",
                             PESEL = "90123400909",
                             Wiek = 50,
                             WykonywanaFunkcja = "Szef skautingu",
                             Wynagrodzenie = 200000m
+                        },
+                        new
+                        {
+                            IdPracownik = new Guid("11ba2f3f-b9d6-4229-aab2-4897f495fdc8"),
+                            Imie = "Mateusz",
+                            Nazwisko = "Kostyra",
+                            PESEL = "780124500909",
+                            Wiek = 23,
+                            WykonywanaFunkcja = "",
+                            Wynagrodzenie = 10000000m
+                        },
+                        new
+                        {
+                            IdPracownik = new Guid("29103e4b-c8ef-478b-bd5f-724707b4add2"),
+                            Imie = "Stanisław",
+                            Nazwisko = "Kluczewski",
+                            PESEL = "45423402949",
+                            Wiek = 23,
+                            WykonywanaFunkcja = "",
+                            Wynagrodzenie = 5000000m
                         });
                 });
 
@@ -396,11 +416,11 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdStatystyka = new Guid("dbb3ebd0-6cc7-4d55-b581-c42ed90235c9"),
+                            IdStatystyka = new Guid("6021c88f-7ba4-4c93-b73b-7fbf4385bead"),
                             Asysty = 0,
                             CzerwoneKartki = 0,
                             Gole = 1,
-                            IdPilkarz = new Guid("4b36ff41-13a3-4863-921e-848f68200f93"),
+                            IdPilkarz = new Guid("dacee609-350b-4063-9ab0-3b45e5d7f56c"),
                             Mecz = "Real Madrid vs Atletico Madrid",
                             Ocena = 8.0999999999999996,
                             PrzebiegnietyDystans = 9.1999999999999993,
@@ -408,11 +428,11 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdStatystyka = new Guid("4718a420-14a3-4a63-b0e7-ff1395006405"),
+                            IdStatystyka = new Guid("99af6f3c-e95b-47d4-9e6d-b4311a6e2068"),
                             Asysty = 1,
                             CzerwoneKartki = 0,
                             Gole = 0,
-                            IdPilkarz = new Guid("23fad9ad-3f30-476d-9385-61beade997e4"),
+                            IdPilkarz = new Guid("913390be-a78f-4359-b86e-fcadf9e04f4b"),
                             Mecz = "Real Madrid vs FC Barcelona",
                             Ocena = 7.5,
                             PrzebiegnietyDystans = 8.4000000000000004,
@@ -420,11 +440,11 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdStatystyka = new Guid("894eabde-b0d6-420f-aeea-d30be8c20316"),
+                            IdStatystyka = new Guid("9eb65a17-d04f-42c7-88f9-390f9570333e"),
                             Asysty = 2,
                             CzerwoneKartki = 0,
                             Gole = 1,
-                            IdPilkarz = new Guid("66dc3b6a-6457-4713-b803-f0c3037570fd"),
+                            IdPilkarz = new Guid("43eb151c-6670-4c49-b7a4-c6fa596f9672"),
                             Mecz = "Real Madrid vs PSG",
                             Ocena = 8.6999999999999993,
                             PrzebiegnietyDystans = 9.8000000000000007,
@@ -432,11 +452,11 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdStatystyka = new Guid("b2a581bf-bd39-4686-ae06-3f8ca857a67a"),
+                            IdStatystyka = new Guid("900e4775-ca1f-4716-8ea2-8dad5f291324"),
                             Asysty = 1,
                             CzerwoneKartki = 0,
                             Gole = 0,
-                            IdPilkarz = new Guid("7df92ca1-32ff-41ad-8de4-5572a16f169b"),
+                            IdPilkarz = new Guid("a38cbad7-8cce-472e-8501-4c56197461dd"),
                             Mecz = "Real Madrid vs Liverpool",
                             Ocena = 7.9000000000000004,
                             PrzebiegnietyDystans = 8.5999999999999996,
@@ -444,11 +464,11 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdStatystyka = new Guid("fc30d473-1f15-49e1-bffa-649ec1fefdfb"),
+                            IdStatystyka = new Guid("c76437a8-ec60-499f-979f-b40d4b5548c4"),
                             Asysty = 0,
                             CzerwoneKartki = 0,
                             Gole = 0,
-                            IdPilkarz = new Guid("243c318a-ef37-4cc4-922f-32fe35877921"),
+                            IdPilkarz = new Guid("18abe966-c138-442d-af8a-066f8ed8ff82"),
                             Mecz = "Real Madrid vs Bayern Monachium",
                             Ocena = 7.2999999999999998,
                             PrzebiegnietyDystans = 8.1999999999999993,
@@ -456,11 +476,11 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdStatystyka = new Guid("b94bf4ab-751c-4ea7-8e6e-9f9ce51b4071"),
+                            IdStatystyka = new Guid("f77f4547-aa4f-411e-95ce-19c8978dec5c"),
                             Asysty = 1,
                             CzerwoneKartki = 0,
                             Gole = 1,
-                            IdPilkarz = new Guid("4b36ff41-13a3-4863-921e-848f68200f93"),
+                            IdPilkarz = new Guid("dacee609-350b-4063-9ab0-3b45e5d7f56c"),
                             Mecz = "Real Madrid vs Sevilla",
                             Ocena = 8.0,
                             PrzebiegnietyDystans = 9.0999999999999996,
@@ -468,11 +488,11 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdStatystyka = new Guid("adeeb94f-7f37-4f11-9926-c594a2827b86"),
+                            IdStatystyka = new Guid("2a104f8c-7ded-4f48-8b7d-d591d0169349"),
                             Asysty = 0,
                             CzerwoneKartki = 0,
                             Gole = 2,
-                            IdPilkarz = new Guid("23fad9ad-3f30-476d-9385-61beade997e4"),
+                            IdPilkarz = new Guid("913390be-a78f-4359-b86e-fcadf9e04f4b"),
                             Mecz = "Real Madrid vs Valencia",
                             Ocena = 8.1999999999999993,
                             PrzebiegnietyDystans = 8.5,
@@ -480,11 +500,11 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdStatystyka = new Guid("8a56e3c8-5601-4faa-9a56-dfde8c813539"),
+                            IdStatystyka = new Guid("1f5d6e69-68de-401a-93b5-45482061c5c3"),
                             Asysty = 2,
                             CzerwoneKartki = 0,
                             Gole = 1,
-                            IdPilkarz = new Guid("66dc3b6a-6457-4713-b803-f0c3037570fd"),
+                            IdPilkarz = new Guid("43eb151c-6670-4c49-b7a4-c6fa596f9672"),
                             Mecz = "Real Madrid vs Atalanta",
                             Ocena = 8.5,
                             PrzebiegnietyDystans = 9.6999999999999993,
@@ -492,11 +512,11 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdStatystyka = new Guid("4c677113-7f0f-4fea-b98b-2fd4ce40c6dc"),
+                            IdStatystyka = new Guid("946475d5-6713-4f0f-b2e9-57b0cac3b3ef"),
                             Asysty = 1,
                             CzerwoneKartki = 0,
                             Gole = 0,
-                            IdPilkarz = new Guid("7df92ca1-32ff-41ad-8de4-5572a16f169b"),
+                            IdPilkarz = new Guid("a38cbad7-8cce-472e-8501-4c56197461dd"),
                             Mecz = "Real Madrid vs Chelsea",
                             Ocena = 7.7999999999999998,
                             PrzebiegnietyDystans = 8.9000000000000004,
@@ -504,11 +524,11 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdStatystyka = new Guid("c6a650e1-e02c-4c32-ba55-bbfd076ce4b6"),
+                            IdStatystyka = new Guid("62e3c6c2-2e58-48ae-a00c-5ae840e1a2eb"),
                             Asysty = 0,
                             CzerwoneKartki = 0,
                             Gole = 1,
-                            IdPilkarz = new Guid("243c318a-ef37-4cc4-922f-32fe35877921"),
+                            IdPilkarz = new Guid("18abe966-c138-442d-af8a-066f8ed8ff82"),
                             Mecz = "Real Madrid vs Juventus",
                             Ocena = 7.5999999999999996,
                             PrzebiegnietyDystans = 8.3000000000000007,
@@ -516,11 +536,11 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdStatystyka = new Guid("0d444821-0b14-48f1-8c44-056696203c13"),
+                            IdStatystyka = new Guid("91aa9200-21ba-4716-a7a5-1c393e28c044"),
                             Asysty = 1,
                             CzerwoneKartki = 0,
                             Gole = 1,
-                            IdPilkarz = new Guid("4b36ff41-13a3-4863-921e-848f68200f93"),
+                            IdPilkarz = new Guid("dacee609-350b-4063-9ab0-3b45e5d7f56c"),
                             Mecz = "Real Madrid vs AC Milan",
                             Ocena = 8.3000000000000007,
                             PrzebiegnietyDystans = 9.4000000000000004,
@@ -528,11 +548,11 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdStatystyka = new Guid("a42299b8-ce76-44c5-bb4c-1450c8b42d03"),
+                            IdStatystyka = new Guid("0e29c631-890d-4386-b83a-a2201c34c4e3"),
                             Asysty = 2,
                             CzerwoneKartki = 0,
                             Gole = 0,
-                            IdPilkarz = new Guid("23fad9ad-3f30-476d-9385-61beade997e4"),
+                            IdPilkarz = new Guid("913390be-a78f-4359-b86e-fcadf9e04f4b"),
                             Mecz = "Real Madrid vs Manchester City",
                             Ocena = 8.5999999999999996,
                             PrzebiegnietyDystans = 9.5999999999999996,
@@ -540,11 +560,11 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdStatystyka = new Guid("30191131-c5d6-4b1b-b3e1-bc26442b9075"),
+                            IdStatystyka = new Guid("3bb929e5-ade1-421d-8d43-0f970bd3c34b"),
                             Asysty = 0,
                             CzerwoneKartki = 0,
                             Gole = 1,
-                            IdPilkarz = new Guid("66dc3b6a-6457-4713-b803-f0c3037570fd"),
+                            IdPilkarz = new Guid("43eb151c-6670-4c49-b7a4-c6fa596f9672"),
                             Mecz = "Real Madrid vs Arsenal",
                             Ocena = 7.9000000000000004,
                             PrzebiegnietyDystans = 8.6999999999999993,
@@ -552,11 +572,11 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdStatystyka = new Guid("eb3a31e0-f319-4058-8fda-5b65904eb439"),
+                            IdStatystyka = new Guid("2b7fcb6d-730a-44ec-8090-3c2fe14bb3f7"),
                             Asysty = 1,
                             CzerwoneKartki = 0,
                             Gole = 0,
-                            IdPilkarz = new Guid("7df92ca1-32ff-41ad-8de4-5572a16f169b"),
+                            IdPilkarz = new Guid("a38cbad7-8cce-472e-8501-4c56197461dd"),
                             Mecz = "Real Madrid vs Tottenham",
                             Ocena = 7.7000000000000002,
                             PrzebiegnietyDystans = 8.8000000000000007,
@@ -564,11 +584,11 @@ namespace FootballClubLibrary.Migrations
                         },
                         new
                         {
-                            IdStatystyka = new Guid("8c19a1b6-7802-4e9f-91b5-10be6d847a58"),
+                            IdStatystyka = new Guid("9705e34a-38ac-44fa-9a04-3ad5bbc585d0"),
                             Asysty = 0,
                             CzerwoneKartki = 0,
                             Gole = 1,
-                            IdPilkarz = new Guid("243c318a-ef37-4cc4-922f-32fe35877921"),
+                            IdPilkarz = new Guid("18abe966-c138-442d-af8a-066f8ed8ff82"),
                             Mecz = "Real Madrid vs Inter Milan",
                             Ocena = 7.7999999999999998,
                             PrzebiegnietyDystans = 8.5,
@@ -603,24 +623,24 @@ namespace FootballClubLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            IdZarzad = new Guid("937da978-a2a5-481c-9df4-5bc4db79d052"),
+                            IdZarzad = new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"),
                             Budzet = 2500000m,
                             Cele = "Liga Mistrzów, Superpuchar Hiszpanii, Naprawa murawy, Renowacja krzesełek, Nowy młody napastnik",
-                            IdKlubu = new Guid("93aef9fc-6263-4bd6-8d03-25f783298d4c")
+                            IdKlubu = new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1")
                         },
                         new
                         {
-                            IdZarzad = new Guid("cc967b17-a571-4c4a-82c7-9f279f25409e"),
+                            IdZarzad = new Guid("77b3ccb5-4c02-4725-bb10-43872e315398"),
                             Budzet = 2000000m,
                             Cele = "Liga Mistrzów, Primera División, Puchar Króla, Odnowienie akademii młodzieżowej, Wzmocnienie składu",
-                            IdKlubu = new Guid("3bad4552-ed17-45ad-b7e1-efdc4bacca9a")
+                            IdKlubu = new Guid("60b76cbe-81e7-49a9-b0d0-7032296a7e69")
                         },
                         new
                         {
-                            IdZarzad = new Guid("31f70c25-a087-446f-90c3-518b6f72f0cf"),
+                            IdZarzad = new Guid("08713cb3-6e15-4b34-b0cd-8a7a95060a00"),
                             Budzet = 1800000m,
                             Cele = "Liga Mistrzów, Serie A, Puchar Włoch, Akademia młodzieżowa, Rozwój infrastruktury",
-                            IdKlubu = new Guid("5f719cd7-19c9-45cb-b6f0-c78882a81a23")
+                            IdKlubu = new Guid("5128b21a-e6b9-4aef-8c1e-307a6fe57980")
                         });
                 });
 

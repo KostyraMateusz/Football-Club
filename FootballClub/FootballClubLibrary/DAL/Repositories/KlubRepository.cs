@@ -35,19 +35,19 @@ namespace FootballClubLibrary.Repositories
 		public async Task UpdateKlub(Klub klub)
 		{
 			this.dbContext.Entry(klub).State = EntityState.Modified;
-		}
+            await this.dbContext.SaveChangesAsync();
+        }
 
-		public async Task<IEnumerable<Klub>> GetKluby()
-		{
-			var kluby = await this.dbContext.Kluby.ToListAsync();
-            return kluby;
-		}
-
-		public async Task<Klub> GetKlubById(Guid id)
+        public async Task<Klub> GetKlubById(Guid id)
         {
             var klub = await this.dbContext.Kluby.FindAsync(id);
             return klub;
+        }
 
+        public async Task<IEnumerable<Klub>> GetKluby()
+		{
+			var kluby = await this.dbContext.Kluby.ToListAsync();
+            return kluby;
 		}
 
         public async Task DodajTrofeumKlubu(Guid id, string trofeum)

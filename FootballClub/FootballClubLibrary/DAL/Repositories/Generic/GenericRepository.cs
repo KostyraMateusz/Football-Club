@@ -31,15 +31,15 @@ namespace FootballClubLibrary.Repositories.Generic
 			this.dbContext.Entry(entity).State = EntityState.Modified;
 		}
 
-		public virtual IEnumerable<TEntity> GetAll()
-        {
-            IQueryable<TEntity> query = this.dbSet;
-            return query.ToList();
-        }
-        
         public virtual TEntity GetById(object id)
         {
             return dbSet.Find(id);
+        }
+
+        public virtual IEnumerable<TEntity> GetAll()
+        {
+            IQueryable<TEntity> query = this.dbSet;
+            return query.ToList();
         }
     }
 }

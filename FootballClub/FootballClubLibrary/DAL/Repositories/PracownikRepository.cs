@@ -35,18 +35,19 @@ namespace FootballClubLibrary.Repositories
 		public async Task UpdatePracownik(Pracownik pracownik)
 		{
 			this.dbContext.Entry(pracownik).State = EntityState.Modified;
-		}
-
-		public async Task<IEnumerable<Pracownik>> GetPracownicy()
-        {
-            var pracownicy = await dbContext.Pracownicy.Include(p => p.Zarzad).ThenInclude(z => z.Klub).ToListAsync();
-            return pracownicy;
+            await this.dbContext.SaveChangesAsync();
         }
 
         public async Task<Pracownik> GetPracownikById(Guid id)
         {
-           var pracownik = await this.dbContext.Pracownicy.FindAsync(id);
-           return pracownik;
+            var pracownik = await this.dbContext.Pracownicy.FindAsync(id);
+            return pracownik;
+        }
+
+        public async Task<IEnumerable<Pracownik>> GetPracownicy()
+        {
+            var pracownicy = await dbContext.Pracownicy.Include(p => p.Zarzad).ThenInclude(z => z.Klub).ToListAsync();
+            return pracownicy;
         }
 
 		public async Task Save()

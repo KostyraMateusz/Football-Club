@@ -13,11 +13,6 @@ namespace BusinessLogicLayer.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Zarzad>> DajZarzady()
-        {
-            return await this.unitOfWork.ZarzadRepository.GetZarzady();
-        }
-
         public async Task DodajZarzad(Zarzad zarzad)
         {
             var foundZarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(zarzad.IdZarzad);
@@ -26,6 +21,34 @@ namespace BusinessLogicLayer.Services
                 await this.unitOfWork.ZarzadRepository.CreateZarzad(zarzad);
                 await this.unitOfWork.Save();
             }
+        }
+
+        public async Task UsunZarzad(Guid IdZarzadu)
+        {
+            var foundClub = await this.unitOfWork.ZarzadRepository.GetZarzadById(IdZarzadu);
+            if (foundClub != null)
+            {
+                await this.unitOfWork.ZarzadRepository.DeleteZarzad(IdZarzadu);
+            }
+        }
+
+        public async Task EdytujZarzad(Zarzad zarzad)
+        {
+            if (zarzad != null)
+            {
+                await this.unitOfWork.ZarzadRepository.UpdateZarzad(zarzad);
+            }
+        }
+
+        public async Task<Zarzad> DajZarzad(Guid IdZarzadu)
+        {
+            var zarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(IdZarzadu);
+            return zarzad;
+        }
+
+        public async Task<IEnumerable<Zarzad>> DajZarzady()
+        {
+            return await this.unitOfWork.ZarzadRepository.GetZarzady();
         }
 
         public async Task<decimal> DajWynikFinansowyZarzadu(Guid IdZarzadu)
@@ -46,7 +69,7 @@ namespace BusinessLogicLayer.Services
             var zarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(IdZarzadu);
             if (cel != "")
             {
-                zarzad.Cele += ", " + cel;
+                zarzad.Cele = cel;
             }
             else
             {
@@ -61,6 +84,7 @@ namespace BusinessLogicLayer.Services
             var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(PracownikId);
             if (pracownik != null)
             {
+                pracownik.IdZarzadu = zarzad.IdZarzad;
                 zarzad.Pracownicy?.Add(pracownik);
             } 
             else

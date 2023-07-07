@@ -84,27 +84,8 @@ namespace TestsFootballClub.BLL.Tests
         [Fact]
         public void TestSprawdzDwaKluby()
         {
-            Klub klub = new Klub()
-            {
-                IdKlub = Guid.NewGuid(),
-                ArchwilaniPilkarze = null,
-                ObecniPilkarze = new List<Pilkarz>(),
-                Stadion = "Stadion1",
-                Trofea = "La Liga",
-                Nazwa = "Klub1",
-                Zarzad = new Zarzad()
-            };
-
-            Klub klub2 = new Klub()
-            {
-                IdKlub = Guid.NewGuid(),
-                ArchwilaniPilkarze = null,
-                ObecniPilkarze = new List<Pilkarz>(),
-                Stadion = "Stadion2",
-                Trofea = "La Liga",
-                Nazwa = "Klub2",
-                Zarzad = new Zarzad()
-            };
+            Klub klub = new Klub() { IdKlub = Guid.NewGuid(),  ArchwilaniPilkarze = null, ObecniPilkarze = new List<Pilkarz>(), Stadion = "Stadion1",  Trofea = "La Liga", Nazwa = "Klub1", Zarzad = new Zarzad() };
+            Klub klub2 = new Klub() { IdKlub = Guid.NewGuid(),  ArchwilaniPilkarze = null, ObecniPilkarze = new List<Pilkarz>(), Stadion = "Stadion2", Trofea = "La Liga",  Nazwa = "Klub2", Zarzad = new Zarzad() };
 
             Mock<IKlubRepository> _mockKlubRepository = new Mock<IKlubRepository>();
             _mockKlubRepository.Setup(x => x.GetKluby())

@@ -35,6 +35,7 @@ namespace TestsFootballClub.ControllerTests.Pilkarze
         [Fact]
         public async Task TestDajPilkarzyBezKlubu()
         {
+            // Arrange
             Mock<IPilkarzService> mockPilkarzService = new Mock<IPilkarzService>();
             Klub RealMadryt = new Klub { IdKlub = Guid.NewGuid(), Nazwa = "Real Madryt", Stadion = "Estadio Santiago Bernabéu", Trofea = "Liga Mistrzów", ObecniPilkarze = new List<Pilkarz> { }, ArchwilaniPilkarze = new Collection<Pilkarz> { }, Zarzad = null };
             List<Pilkarz> pilkarze = new List<Pilkarz>()

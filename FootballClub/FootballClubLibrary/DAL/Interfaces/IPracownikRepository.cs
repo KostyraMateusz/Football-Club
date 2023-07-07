@@ -9,8 +9,8 @@ namespace FootballClubLibrary.Interfaces
 		Task CreatePracownik(Pracownik pracownik);
 		Task DeletePracownik(Guid id);
 		Task UpdatePracownik(Pracownik pracownik);
-		Task<IEnumerable<Pracownik>> GetPracownicy();
         Task<Pracownik> GetPracownikById(Guid id);
+        Task<IEnumerable<Pracownik>> GetPracownicy();
         Task Save();
     }
 }

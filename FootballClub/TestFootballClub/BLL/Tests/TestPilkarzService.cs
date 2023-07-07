@@ -33,30 +33,8 @@ namespace TestsFootballClub.Tests
             var unitOfWork = new UnitOfWork(null, null, pilkarzRepo);
             var pilkarzService = new PilkarzService(unitOfWork);
 
-            Klub OlympiqueLyon = new Klub()
-            {
-                IdKlub = Guid.NewGuid(),
-                ArchwilaniPilkarze = null,
-                ObecniPilkarze = new List<Pilkarz>(),
-                Stadion = "Groupama Arena",
-                Trofea = "Mistrzostwo Francji",
-                Nazwa = "Olympique Lyon",
-                Zarzad = new Zarzad()
-            };
-
-            Pilkarz Benzema = new Pilkarz
-            {
-                IdPilkarz = Guid.NewGuid(),
-                Imie = "Karim",
-                Nazwisko = "Benzema",
-                Wiek = 35,
-                Pozycja = "Pomocnik",
-                Statystyki = null,
-                ArchiwalneKluby = new Collection<Klub> { OlympiqueLyon },
-                Wynagrodzenie = 440000,
-                IdKlubu = null
-            };
-
+            Klub OlympiqueLyon = new Klub() { IdKlub = Guid.NewGuid(),  ArchwilaniPilkarze = null, ObecniPilkarze = new List<Pilkarz>(),  Stadion = "Groupama Arena", Trofea = "Mistrzostwo Francji", Nazwa = "Olympique Lyon", Zarzad = new Zarzad() };
+            Pilkarz Benzema = new Pilkarz { IdPilkarz = Guid.NewGuid(), Imie = "Karim",  Nazwisko = "Benzema",  Wiek = 35, Pozycja = "Pomocnik", Statystyki = null, ArchiwalneKluby = new Collection<Klub> { OlympiqueLyon }, Wynagrodzenie = 440000, IdKlubu = null };
             Collection<Klub> listaArchiwalnych = new Collection<Klub>();
             listaArchiwalnych.Add(OlympiqueLyon);
 
@@ -84,31 +62,8 @@ namespace TestsFootballClub.Tests
         [Fact]
         public void TestPorownajDwochPilkarzy()
         {
-            Pilkarz Benzema = new Pilkarz
-            {
-                IdPilkarz = Guid.NewGuid(),
-                Imie = "Karim",
-                Nazwisko = "Benzema",
-                Wiek = 35,
-                Pozycja = "Napastnik",
-                Statystyki = null,
-                ArchiwalneKluby = null,
-                Wynagrodzenie = 440000,
-                IdKlubu = null
-            };
-
-            Pilkarz Mbappé = new Pilkarz
-            {
-                IdPilkarz = Guid.NewGuid(),
-                Imie = "Kylian",
-                Nazwisko = "Mbappé",
-                Wiek = 24,
-                Pozycja = "Napastnik",
-                Statystyki = null,
-                ArchiwalneKluby = null,
-                Wynagrodzenie = 350000,
-                IdKlubu = null
-            };
+            Pilkarz Benzema = new Pilkarz { IdPilkarz = Guid.NewGuid(), Imie = "Karim", Nazwisko = "Benzema", Wiek = 35,  Pozycja = "Napastnik", Statystyki = null, ArchiwalneKluby = null, Wynagrodzenie = 440000, IdKlubu = null };
+            Pilkarz Mbappé = new Pilkarz { IdPilkarz = Guid.NewGuid(), Imie = "Kylian", Nazwisko = "Mbappé", Wiek = 24, Pozycja = "Napastnik", Statystyki = null, ArchiwalneKluby = null, Wynagrodzenie = 350000, IdKlubu = null };
 
             Mock<IPilkarzRepository> _mockPilkarzeRepository = new Mock<IPilkarzRepository>();
             _mockPilkarzeRepository.Setup(x => x.GetPilkarze())

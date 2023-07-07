@@ -1,20 +1,20 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 #footer {
@@ -34,13 +34,13 @@ body {
     border-radius: 15%;
 }
 
-#hero p {
-    padding: 25px;
-    padding-top: 0px;
-    text-align: justify;
-    font-size: 18px;
-    color: #666;
-}
+    #hero p {
+        padding: 25px;
+        padding-top: 0px;
+        text-align: justify;
+        font-size: 18px;
+        color: #666;
+    }
 
 #tytul {
     text-shadow: 4px 4px 5px grey;
@@ -61,9 +61,9 @@ body {
     transition: 0.3s;
 }
 
-#ZdjecieAutorow:hover {
-    opacity: 0.7;
-}
+    #ZdjecieAutorow:hover {
+        opacity: 0.7;
+    }
 
 .modal {
     display: none;
@@ -122,8 +122,12 @@ body {
     transition: 0.3s;
 }
 
-.close:hover, .close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
+    .close:hover, .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+#nazwa {
+    font-weight: bold;
 }

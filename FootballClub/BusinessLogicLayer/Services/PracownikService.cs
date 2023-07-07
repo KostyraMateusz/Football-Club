@@ -13,6 +13,39 @@ namespace BusinessLogicLayer.Services
             this.unitOfWork = unitOfWork;
         }
 
+        public async Task DodajPracownika(Pracownik pracownik)
+        {
+            var foundPracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(pracownik.IdPracownik);
+            if (foundPracownik == null)
+            {
+                await this.unitOfWork.PracownikRepository.CreatePracownik(pracownik);
+                await this.unitOfWork.Save();
+            }
+        }
+
+        public async Task UsunPracownika(Guid IdPracownika)
+        {
+            var foundClub = await this.unitOfWork.PracownikRepository.GetPracownikById(IdPracownika);
+            if (foundClub != null)
+            {
+                await this.unitOfWork.PracownikRepository.DeletePracownik(IdPracownika);
+            }
+        }
+
+        public async Task EdytujPracownika(Pracownik pracownik)
+        {
+            if (pracownik != null)
+            {
+                await this.unitOfWork.PracownikRepository.UpdatePracownik(pracownik);
+            }
+        }
+
+        public async Task<Pracownik> DajPracownika(Guid IdPracownika)
+        {
+            var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(IdPracownika);
+            return pracownik;
+        }
+
         public async Task<IEnumerable<Pracownik>> DajPracownikow()
         {
             return await this.unitOfWork.PracownikRepository.GetPracownicy();
