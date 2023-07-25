@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Pilkarz } from 'src/app/Pilkarz/Models/pilkarz.model';
 import { KlubService } from 'src/app/Services/klub.service';
@@ -14,20 +14,12 @@ import { Zarzad } from 'src/app/Zarzad/Models/zarzad.model';
 })
 export class AddKlubComponent implements OnInit {
 
-  klub = new FormGroup({
-    Nazwa: new FormControl('', Validators.required),
-    Stadion: new FormControl('', Validators.required),
-    Trofea: new FormControl('', Validators.required),
-    ArchiwalniPilkarze: new FormControl('', Validators.required),
-    ObecniPilkarze: new FormControl('', Validators.required),
-    Zarzad: new FormControl('', Validators.required),
-  });
-
   pilkarze: Pilkarz[] = [];
   zarzady: Zarzad[] = [];
+  klub!: FormGroup;
 
-
-  constructor(private klubService: KlubService, private pilkarzService: PilkarzService, private zarzadService: ZarzadService) {
+  constructor(private klubService: KlubService, private pilkarzService: PilkarzService, private zarzadService: ZarzadService,
+    private formBuilder: FormBuilder) {
     this.getPilkarze();
     this.getZarzady();
   }
@@ -35,6 +27,14 @@ export class AddKlubComponent implements OnInit {
   ngOnInit(): void {
     this.getPilkarze();
     this.getZarzady();
+    this.klub = new FormGroup({
+      Nazwa: new FormControl('', Validators.required),
+      Stadion: new FormControl('', Validators.required),
+      Trofea: new FormControl('', Validators.required),
+      ArchiwalniPilkarze: new FormControl('', Validators.required),
+      ObecniPilkarze: new FormControl('', Validators.required),
+      Zarzad: new FormControl('', Validators.required),
+    });
   }
 
 
@@ -54,6 +54,7 @@ export class AddKlubComponent implements OnInit {
 
   DodajKlub(): void {
     console.log(this.klub.value);
+    this.klub.value.Zarzad = null;
     this.klubService.DodajKlub(this.klub.value).subscribe(res => {
       console.log("Klub został dodany");
     })

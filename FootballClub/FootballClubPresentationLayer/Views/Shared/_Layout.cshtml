@@ -3,41 +3,43 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Football Club</title>
+    <title>El madridista - panel główny</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FootballClubPresentationLayer.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="HomeControllerMVC" asp-action="Index">Football Club</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+        <nav class="nav-bar">
+            <div class="nav-container">
+                <div class="nav-space">
+                    <img src="~/css/img/fans.jpg" class="fan-icon"/>
+                    <a class="nav-title" asp-area="" asp-controller="HomeControllerMVC" asp-action="Index">El madridista - panel główny</a>
+                </div>
+                <div class="navbar">
+                    <ul class="list">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="HomeControllerMVC" asp-action="Index">Home</a>
+                            <a asp-area="" asp-controller="HomeControllerMVC" asp-action="Index">Paneł główny</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="KlubyControllerMVC" asp-action="Index">Kluby</a>
+                            <a class="nav-a" href="http://localhost:4200/Kluby">Kluby</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PilkarzeControllerMVC" asp-action="Index">Pilkarze</a>
+                            <a class="nav-a" href="http://localhost:4200/Pilkarze">Piłkarze</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PracownicyControllerMVC" asp-action="Index">Pracownicy</a>
+                            <a class="nav-a" href="http://localhost:4200/Pracownicy">Pracownicy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="StatystykiControllerMVC" asp-action="Index">Statystyki</a>
+                            <a class="nav-a"  href="http://localhost:4200/Statystyki">Statystyki</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ZarzadyControllerMVC" asp-action="Index">Zarzady</a>
+                            <a asp-area="" asp-controller="ZarzadyControllerMVC" asp-action="Index">Zarządy</a>
                         </li>
                     </ul>
+                </div>
+                <div class="space">
+                    <h1></h1>
                 </div>
             </div>
         </nav>
@@ -48,7 +50,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted" id="footer">
+    <footer class="footer" id="footer">
         <div class="container">
             <a>Stanisław Kluczewski & Mateusz Kostyra 2023</a>
         </div>

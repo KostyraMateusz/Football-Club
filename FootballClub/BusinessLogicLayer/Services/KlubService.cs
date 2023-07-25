@@ -88,7 +88,7 @@ namespace BusinessLogicLayer.Services
                 return;
             }
             klub.ObecniPilkarze?.Remove(_pilkarz);
-            klub.ArchwilaniPilkarze?.Add(_pilkarz);
+            klub.ArchiwalniPilkarze?.Add(_pilkarz);
             await this.unitOfWork.Save();
         }
 
@@ -109,14 +109,14 @@ namespace BusinessLogicLayer.Services
         public async Task<Pilkarz> DajArchiwalnegoPilkarza(Guid IdKlubu, Guid IdPilkarza)
         {
             var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
-            var pilkarz = klub.ArchwilaniPilkarze.First(p => p.IdPilkarz == IdPilkarza);
+            var pilkarz = klub.ArchiwalniPilkarze.First(p => p.IdPilkarz == IdPilkarza);
             return pilkarz;
         }
 
         public async Task<IEnumerable<Pilkarz>> DajArchiwalnychPilkarzy(Guid IdKlubu)
 		{
 			var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
-			var result = klub.ArchwilaniPilkarze.ToList();
+			var result = klub.ArchiwalniPilkarze.ToList();
 			return result;
 		}
 

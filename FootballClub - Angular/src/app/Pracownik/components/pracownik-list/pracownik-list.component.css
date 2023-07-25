@@ -8,15 +8,23 @@
 }
 
 table {
-    width: 700px;
+    width: 80%;
     text-align: center;
     border: 1px solid black;
 }
 
-
 th,
 tr {
-    border: 1px solid darkgoldenrod;
+    border: 1px solid rgb(134, 20, 162);
+}
+
+th {
+    background-color: rgb(134, 20, 162);
+    color: black;
+}
+
+td {
+    border: 0.5px solid rgb(134, 20, 162);
 }
 
 .mat-mdc-row .mat-mdc-cell {
@@ -36,10 +44,6 @@ tr {
     font-weight: bold;
 }
 
-a {
-    text-decoration: none;
-    color: darkgoldenrod;
-}
 
 .panel {
     margin-top: 10px;
@@ -48,4 +52,23 @@ a {
 
 button {
     border: 1px solid darkgoldenrod;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: darkgoldenrod;
+}
+
+button:hover {
+    border: 1px solid black;
+    transition: 0.3s;
+    color: white;
+    background-color: rgb(134, 20, 162);
+}
+
+mat-icon {
+    color: darkgoldenrod;
+}
+
+mat-icon:hover {
+    color: white;
+    transition: 0.3s;
 }
