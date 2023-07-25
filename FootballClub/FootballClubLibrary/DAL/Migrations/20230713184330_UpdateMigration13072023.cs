@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FootballClubLibrary.Migrations
 {
     /// <inheritdoc />
-    public partial class Migracja : Migration
+    public partial class UpdateMigration13072023 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -74,11 +74,11 @@ namespace FootballClubLibrary.Migrations
                 columns: table => new
                 {
                     ArchiwalneKlubyIdKlub = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ArchwilaniPilkarzeIdPilkarz = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ArchiwalniPilkarzeIdPilkarz = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_KlubPilkarz", x => new { x.ArchiwalneKlubyIdKlub, x.ArchwilaniPilkarzeIdPilkarz });
+                    table.PrimaryKey("PK_KlubPilkarz", x => new { x.ArchiwalneKlubyIdKlub, x.ArchiwalniPilkarzeIdPilkarz });
                     table.ForeignKey(
                         name: "FK_KlubPilkarz_Kluby_ArchiwalneKlubyIdKlub",
                         column: x => x.ArchiwalneKlubyIdKlub,
@@ -86,8 +86,8 @@ namespace FootballClubLibrary.Migrations
                         principalColumn: "IdKlub",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_KlubPilkarz_Pilkarze_ArchwilaniPilkarzeIdPilkarz",
-                        column: x => x.ArchwilaniPilkarzeIdPilkarz,
+                        name: "FK_KlubPilkarz_Pilkarze_ArchiwalniPilkarzeIdPilkarz",
+                        column: x => x.ArchiwalniPilkarzeIdPilkarz,
                         principalTable: "Pilkarze",
                         principalColumn: "IdPilkarz",
                         onDelete: ReferentialAction.Cascade);
@@ -145,20 +145,15 @@ namespace FootballClubLibrary.Migrations
             migrationBuilder.InsertData(
                 table: "Kluby",
                 columns: new[] { "IdKlub", "Nazwa", "Stadion", "Trofea" },
-                values: new object[,]
-                {
-                    { new Guid("5128b21a-e6b9-4aef-8c1e-307a6fe57980"), "Juventus", "Allianz Stadium", "Liga Mistrzów (2 razy), Serie A (36 razy), Puchar Włoch (14 razy), Superpuchar Włoch (9 razy)" },
-                    { new Guid("60b76cbe-81e7-49a9-b0d0-7032296a7e69"), "FC Barcelona", "Camp Nou", "Liga Mistrzów (5 razy), Primera División (26 razy), Puchar Króla (31 razy), Superpuchar Hiszpanii (13 razy)" },
-                    { new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"), "Real Madryt", "Estadio Santiago Bernabéu", "Liga Mistrzów (13 razy), Primera División (34 razy), Puchar Króla (19 razy), Superpuchar Hiszpanii (11 razy)" }
-                });
+                values: new object[] { new Guid("69e5b988-64a8-463e-a79f-a887186e7133"), "Real Madryt", "Estadio Santiago Bernabéu", "Liga Mistrzów (13 razy), Primera División (34 razy), Puchar Króla (19 razy), Superpuchar Hiszpanii (11 razy)" });
 
             migrationBuilder.InsertData(
                 table: "Pracownicy",
                 columns: new[] { "IdPracownik", "IdZarzadu", "Imie", "Nazwisko", "PESEL", "Wiek", "WykonywanaFunkcja", "Wynagrodzenie" },
                 values: new object[,]
                 {
-                    { new Guid("11ba2f3f-b9d6-4229-aab2-4897f495fdc8"), null, "Mateusz", "Kostyra", "780124500909", 23, "", 10000000m },
-                    { new Guid("29103e4b-c8ef-478b-bd5f-724707b4add2"), null, "Stanisław", "Kluczewski", "45423402949", 23, "", 5000000m }
+                    { new Guid("21dc9cf5-97a2-4c13-be18-905c70fd9249"), null, "Stanisław", "Kluczewski", "45423402949", 23, "", 5000000m },
+                    { new Guid("f9a87cd8-b08e-4208-a01b-aab2737f2d21"), null, "Mateusz", "Kostyra", "780124500909", 23, "", 10000000m }
                 });
 
             migrationBuilder.InsertData(
@@ -166,43 +161,38 @@ namespace FootballClubLibrary.Migrations
                 columns: new[] { "IdPilkarz", "IdKlubu", "Imie", "Nazwisko", "Pozycja", "Wiek", "Wynagrodzenie" },
                 values: new object[,]
                 {
-                    { new Guid("18abe966-c138-442d-af8a-066f8ed8ff82"), new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"), "Carlos Henrique", "Casimiro", "Pomocnik", 29, 280000m },
-                    { new Guid("2bfc2dab-fa67-464b-9a67-2accef09a8e6"), new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"), "Raphael", "Varane", "Obrońca", 28, 300000m },
-                    { new Guid("2dc9b501-b8e8-406d-b1dd-a2d75c09bb6c"), new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"), "Thibaut", "Courtois", "Bramkarz", 29, 350000m },
-                    { new Guid("43eb151c-6670-4c49-b7a4-c6fa596f9672"), new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"), "Marco", "Asensio", "Pomocnik", 25, 240000m },
-                    { new Guid("4b4c693d-0d59-4095-88a4-d5e90b9edb94"), new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"), "Dani", "Carvajal", "Obrońca", 29, 250000m },
-                    { new Guid("5480053a-38f1-416b-9e5d-3cca81a3ec3e"), new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"), "Eder", "Militao", "Obrońca", 23, 200000m },
-                    { new Guid("913390be-a78f-4359-b86e-fcadf9e04f4b"), new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"), "Luka", "Modrić", "Pomocnik", 35, 350000m },
-                    { new Guid("92078c5b-86f8-462a-8e44-17e394929fd0"), new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"), "Vinicius", "Junior", "Napastnik", 21, 180000m },
-                    { new Guid("a38cbad7-8cce-472e-8501-4c56197461dd"), new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"), "Ferland", "Mendy", "Obrońca", 26, 220000m },
-                    { new Guid("dacee609-350b-4063-9ab0-3b45e5d7f56c"), new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"), "Karim", "Benzema", "Napastnik", 33, 450000m },
-                    { new Guid("dcc261ab-9650-484f-b246-68185e9b1fec"), new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1"), "Toni", "Kroos", "Pomocnik", 31, 320000m }
+                    { new Guid("118390b9-cd9d-4ffe-9c2e-6b746016eb4f"), new Guid("69e5b988-64a8-463e-a79f-a887186e7133"), "Karim", "Benzema", "Napastnik", 33, 450000m },
+                    { new Guid("1a74fc12-a7b4-4b83-bd74-6af2a1991bbd"), new Guid("69e5b988-64a8-463e-a79f-a887186e7133"), "Toni", "Kroos", "Pomocnik", 31, 320000m },
+                    { new Guid("2d868922-95b0-4b37-8cf2-852a036f7dd3"), new Guid("69e5b988-64a8-463e-a79f-a887186e7133"), "Vinicius", "Junior", "Napastnik", 21, 180000m },
+                    { new Guid("2da34696-0b0c-40bf-8297-0ee2c237b171"), new Guid("69e5b988-64a8-463e-a79f-a887186e7133"), "Thibaut", "Courtois", "Bramkarz", 29, 350000m },
+                    { new Guid("876922e3-f0c1-4955-b61a-683614df94d9"), new Guid("69e5b988-64a8-463e-a79f-a887186e7133"), "Raphael", "Varane", "Obrońca", 28, 300000m },
+                    { new Guid("8bc7eed6-3989-421b-b3d3-2ba1c726abe7"), new Guid("69e5b988-64a8-463e-a79f-a887186e7133"), "Carlos Henrique", "Casimiro", "Pomocnik", 29, 280000m },
+                    { new Guid("a0bfb11d-de5a-415b-b997-0f475aef3410"), new Guid("69e5b988-64a8-463e-a79f-a887186e7133"), "Luka", "Modrić", "Pomocnik", 35, 350000m },
+                    { new Guid("dbc2a5b4-502f-4432-884c-d5eefd2215ea"), new Guid("69e5b988-64a8-463e-a79f-a887186e7133"), "Dani", "Carvajal", "Obrońca", 29, 250000m },
+                    { new Guid("e8aab1ed-4154-4d80-8508-30938b0d0ac7"), new Guid("69e5b988-64a8-463e-a79f-a887186e7133"), "Marco", "Asensio", "Pomocnik", 25, 240000m },
+                    { new Guid("e937a556-bb5d-451c-a7da-6892d6689fde"), new Guid("69e5b988-64a8-463e-a79f-a887186e7133"), "Ferland", "Mendy", "Obrońca", 26, 220000m },
+                    { new Guid("ebbaa349-d2db-4974-a746-8bbd0cbfa72c"), new Guid("69e5b988-64a8-463e-a79f-a887186e7133"), "Eder", "Militao", "Obrońca", 23, 200000m }
                 });
 
             migrationBuilder.InsertData(
                 table: "Zarzady",
                 columns: new[] { "IdZarzad", "Budzet", "Cele", "IdKlubu" },
-                values: new object[,]
-                {
-                    { new Guid("08713cb3-6e15-4b34-b0cd-8a7a95060a00"), 1800000m, "Liga Mistrzów, Serie A, Puchar Włoch, Akademia młodzieżowa, Rozwój infrastruktury", new Guid("5128b21a-e6b9-4aef-8c1e-307a6fe57980") },
-                    { new Guid("77b3ccb5-4c02-4725-bb10-43872e315398"), 2000000m, "Liga Mistrzów, Primera División, Puchar Króla, Odnowienie akademii młodzieżowej, Wzmocnienie składu", new Guid("60b76cbe-81e7-49a9-b0d0-7032296a7e69") },
-                    { new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"), 2500000m, "Liga Mistrzów, Superpuchar Hiszpanii, Naprawa murawy, Renowacja krzesełek, Nowy młody napastnik", new Guid("92e4cb05-cce9-449d-8e39-fba252c47ba1") }
-                });
+                values: new object[] { new Guid("e8932636-9a42-4a88-a723-91d22a143688"), 2500000m, "Liga Mistrzów, Superpuchar Hiszpanii, Naprawa murawy, Renowacja krzesełek, Nowy młody napastnik", new Guid("69e5b988-64a8-463e-a79f-a887186e7133") });
 
             migrationBuilder.InsertData(
                 table: "Pracownicy",
                 columns: new[] { "IdPracownik", "IdZarzadu", "Imie", "Nazwisko", "PESEL", "Wiek", "WykonywanaFunkcja", "Wynagrodzenie" },
                 values: new object[,]
                 {
-                    { new Guid("3362e435-2147-4e11-a0a7-2031a40c72ea"), new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"), "Juni", "Calafat", "90123400909", 50, "Szef skautingu", 200000m },
-                    { new Guid("720d475b-d529-4159-b218-7ed97f479cf8"), new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"), "Luis", "Llopis", "45678900404", 58, "Trener Bramkarzy", 150000m },
-                    { new Guid("7d6a550a-583e-4a18-a1bf-14422268dc18"), new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"), "Fiorentino", "Perez", "12345600101", 77, "Prezes", 420000m },
-                    { new Guid("a07af027-d1ec-41ac-a25f-8776df952f1b"), new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"), "Davide", "Ancelotti", "34567800303", 33, "Asystent trenera", 300000m },
-                    { new Guid("b079260d-4783-4a45-814a-091523e3dc06"), new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"), "Carlo", "Ancelotti", "23456700202", 64, "Trener", 350000m },
-                    { new Guid("bf4e794b-5997-43a3-8b20-5b2517305bd5"), new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"), "Antonio", "Pintus", "67890100606", 60, "Trener przygotowania fizycznego", 125000m },
-                    { new Guid("c49f0b4f-8a6b-4bd5-b3c8-97987e40a6dc"), new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"), "Iker", "Casillas", "89012300808", 42, "Wice-prezes zarządu", 200000m },
-                    { new Guid("c575ff03-5339-486e-b94e-f2a20df4ccb1"), new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"), "Simone", "Montanaro", "78901200707", 51, "Trener analityk", 140000m },
-                    { new Guid("cc2f7e66-f2c1-4724-8bb9-3e6ffa67681a"), new Guid("99a3bae0-86f7-4a8d-ae5d-cb890d86e41b"), "Javier", "Mallo", "56789000505", 46, "Trener przygotowania fizycznego", 1250000m }
+                    { new Guid("3537f55c-5364-4755-bdd7-63414616e1e6"), new Guid("e8932636-9a42-4a88-a723-91d22a143688"), "Juni", "Calafat", "90123400909", 50, "Szef skautingu", 200000m },
+                    { new Guid("5a2e7acb-87d9-49ed-8106-154dadeaa880"), new Guid("e8932636-9a42-4a88-a723-91d22a143688"), "Iker", "Casillas", "89012300808", 42, "Wice-prezes zarządu", 200000m },
+                    { new Guid("7d341121-ca99-4279-af65-d0cb6bb0087b"), new Guid("e8932636-9a42-4a88-a723-91d22a143688"), "Davide", "Ancelotti", "34567800303", 33, "Asystent trenera", 300000m },
+                    { new Guid("a095a065-753e-4fc7-8920-3f501d0c5541"), new Guid("e8932636-9a42-4a88-a723-91d22a143688"), "Antonio", "Pintus", "67890100606", 60, "Trener przygotowania fizycznego", 125000m },
+                    { new Guid("a62be811-a336-42d3-b765-0fe66854ec19"), new Guid("e8932636-9a42-4a88-a723-91d22a143688"), "Simone", "Montanaro", "78901200707", 51, "Trener analityk", 140000m },
+                    { new Guid("ba24b49b-23ab-4d5a-9b34-1384ca464055"), new Guid("e8932636-9a42-4a88-a723-91d22a143688"), "Fiorentino", "Perez", "12345600101", 77, "Prezes", 420000m },
+                    { new Guid("bc940a4c-4246-47ab-b8b1-68a8258134ce"), new Guid("e8932636-9a42-4a88-a723-91d22a143688"), "Javier", "Mallo", "56789000505", 46, "Trener przygotowania fizycznego", 1250000m },
+                    { new Guid("d21c4a5e-fde8-43f7-93ca-31dc4c1d4e7b"), new Guid("e8932636-9a42-4a88-a723-91d22a143688"), "Luis", "Llopis", "45678900404", 58, "Trener Bramkarzy", 150000m },
+                    { new Guid("e9483534-398d-445e-9864-76eeb496e3c5"), new Guid("e8932636-9a42-4a88-a723-91d22a143688"), "Carlo", "Ancelotti", "23456700202", 64, "Trener", 350000m }
                 });
 
             migrationBuilder.InsertData(
@@ -210,27 +200,27 @@ namespace FootballClubLibrary.Migrations
                 columns: new[] { "IdStatystyka", "Asysty", "CzerwoneKartki", "Gole", "IdPilkarz", "Mecz", "Ocena", "PrzebiegnietyDystans", "ZolteKartki" },
                 values: new object[,]
                 {
-                    { new Guid("0e29c631-890d-4386-b83a-a2201c34c4e3"), 2, 0, 0, new Guid("913390be-a78f-4359-b86e-fcadf9e04f4b"), "Real Madrid vs Manchester City", 8.5999999999999996, 9.5999999999999996, 1 },
-                    { new Guid("1f5d6e69-68de-401a-93b5-45482061c5c3"), 2, 0, 1, new Guid("43eb151c-6670-4c49-b7a4-c6fa596f9672"), "Real Madrid vs Atalanta", 8.5, 9.6999999999999993, 0 },
-                    { new Guid("2a104f8c-7ded-4f48-8b7d-d591d0169349"), 0, 0, 2, new Guid("913390be-a78f-4359-b86e-fcadf9e04f4b"), "Real Madrid vs Valencia", 8.1999999999999993, 8.5, 1 },
-                    { new Guid("2b7fcb6d-730a-44ec-8090-3c2fe14bb3f7"), 1, 0, 0, new Guid("a38cbad7-8cce-472e-8501-4c56197461dd"), "Real Madrid vs Tottenham", 7.7000000000000002, 8.8000000000000007, 2 },
-                    { new Guid("3bb929e5-ade1-421d-8d43-0f970bd3c34b"), 0, 0, 1, new Guid("43eb151c-6670-4c49-b7a4-c6fa596f9672"), "Real Madrid vs Arsenal", 7.9000000000000004, 8.6999999999999993, 0 },
-                    { new Guid("6021c88f-7ba4-4c93-b73b-7fbf4385bead"), 0, 0, 1, new Guid("dacee609-350b-4063-9ab0-3b45e5d7f56c"), "Real Madrid vs Atletico Madrid", 8.0999999999999996, 9.1999999999999993, 0 },
-                    { new Guid("62e3c6c2-2e58-48ae-a00c-5ae840e1a2eb"), 0, 0, 1, new Guid("18abe966-c138-442d-af8a-066f8ed8ff82"), "Real Madrid vs Juventus", 7.5999999999999996, 8.3000000000000007, 1 },
-                    { new Guid("900e4775-ca1f-4716-8ea2-8dad5f291324"), 1, 0, 0, new Guid("a38cbad7-8cce-472e-8501-4c56197461dd"), "Real Madrid vs Liverpool", 7.9000000000000004, 8.5999999999999996, 2 },
-                    { new Guid("91aa9200-21ba-4716-a7a5-1c393e28c044"), 1, 0, 1, new Guid("dacee609-350b-4063-9ab0-3b45e5d7f56c"), "Real Madrid vs AC Milan", 8.3000000000000007, 9.4000000000000004, 0 },
-                    { new Guid("946475d5-6713-4f0f-b2e9-57b0cac3b3ef"), 1, 0, 0, new Guid("a38cbad7-8cce-472e-8501-4c56197461dd"), "Real Madrid vs Chelsea", 7.7999999999999998, 8.9000000000000004, 2 },
-                    { new Guid("9705e34a-38ac-44fa-9a04-3ad5bbc585d0"), 0, 0, 1, new Guid("18abe966-c138-442d-af8a-066f8ed8ff82"), "Real Madrid vs Inter Milan", 7.7999999999999998, 8.5, 1 },
-                    { new Guid("99af6f3c-e95b-47d4-9e6d-b4311a6e2068"), 1, 0, 0, new Guid("913390be-a78f-4359-b86e-fcadf9e04f4b"), "Real Madrid vs FC Barcelona", 7.5, 8.4000000000000004, 1 },
-                    { new Guid("9eb65a17-d04f-42c7-88f9-390f9570333e"), 2, 0, 1, new Guid("43eb151c-6670-4c49-b7a4-c6fa596f9672"), "Real Madrid vs PSG", 8.6999999999999993, 9.8000000000000007, 0 },
-                    { new Guid("c76437a8-ec60-499f-979f-b40d4b5548c4"), 0, 0, 0, new Guid("18abe966-c138-442d-af8a-066f8ed8ff82"), "Real Madrid vs Bayern Monachium", 7.2999999999999998, 8.1999999999999993, 1 },
-                    { new Guid("f77f4547-aa4f-411e-95ce-19c8978dec5c"), 1, 0, 1, new Guid("dacee609-350b-4063-9ab0-3b45e5d7f56c"), "Real Madrid vs Sevilla", 8.0, 9.0999999999999996, 0 }
+                    { new Guid("2c8d31c3-2247-4cd0-ad75-e1b0a1d5304c"), 1, 0, 1, new Guid("118390b9-cd9d-4ffe-9c2e-6b746016eb4f"), "Real Madrid vs AC Milan", 8.3000000000000007, 9.4000000000000004, 0 },
+                    { new Guid("358c2012-3793-40d0-8a2f-055091b49269"), 1, 0, 0, new Guid("e937a556-bb5d-451c-a7da-6892d6689fde"), "Real Madrid vs Tottenham", 7.7000000000000002, 8.8000000000000007, 2 },
+                    { new Guid("36fd27ab-a9d4-467c-b3c4-ddbeca8f5e4f"), 0, 0, 1, new Guid("8bc7eed6-3989-421b-b3d3-2ba1c726abe7"), "Real Madrid vs Juventus", 7.5999999999999996, 8.3000000000000007, 1 },
+                    { new Guid("38346b2a-697d-4bad-8642-3f4601fad59a"), 1, 0, 0, new Guid("e937a556-bb5d-451c-a7da-6892d6689fde"), "Real Madrid vs Liverpool", 7.9000000000000004, 8.5999999999999996, 2 },
+                    { new Guid("41608104-3c88-4e4a-acc8-426dde65c245"), 1, 0, 0, new Guid("e937a556-bb5d-451c-a7da-6892d6689fde"), "Real Madrid vs Chelsea", 7.7999999999999998, 8.9000000000000004, 2 },
+                    { new Guid("48920484-c8e2-4b90-8e1f-f1deab7ebc5a"), 1, 0, 0, new Guid("a0bfb11d-de5a-415b-b997-0f475aef3410"), "Real Madrid vs FC Barcelona", 7.5, 8.4000000000000004, 1 },
+                    { new Guid("8810851a-c1e6-44c3-a2cc-c0e704b8cb4e"), 0, 0, 1, new Guid("e8aab1ed-4154-4d80-8508-30938b0d0ac7"), "Real Madrid vs Arsenal", 7.9000000000000004, 8.6999999999999993, 0 },
+                    { new Guid("9c59f9e0-51cd-4735-aeca-69240a615e18"), 0, 0, 0, new Guid("8bc7eed6-3989-421b-b3d3-2ba1c726abe7"), "Real Madrid vs Bayern Monachium", 7.2999999999999998, 8.1999999999999993, 1 },
+                    { new Guid("c1e61d8e-cc17-4dfa-aacd-ac8b4125c2e8"), 1, 0, 1, new Guid("118390b9-cd9d-4ffe-9c2e-6b746016eb4f"), "Real Madrid vs Sevilla", 8.0, 9.0999999999999996, 0 },
+                    { new Guid("cd0946b3-cd2c-4ccc-986a-d7b79d7bb418"), 0, 0, 1, new Guid("8bc7eed6-3989-421b-b3d3-2ba1c726abe7"), "Real Madrid vs Inter Milan", 7.7999999999999998, 8.5, 1 },
+                    { new Guid("d2158caa-2a28-4771-b435-b076296bcef2"), 0, 0, 1, new Guid("118390b9-cd9d-4ffe-9c2e-6b746016eb4f"), "Real Madrid vs Atletico Madrid", 8.0999999999999996, 9.1999999999999993, 0 },
+                    { new Guid("d83b6e83-c96a-4a52-993d-30e41ae4ebfe"), 0, 0, 2, new Guid("a0bfb11d-de5a-415b-b997-0f475aef3410"), "Real Madrid vs Valencia", 8.1999999999999993, 8.5, 1 },
+                    { new Guid("ead3b68d-8278-4a10-94a0-28d92eac1ea3"), 2, 0, 1, new Guid("e8aab1ed-4154-4d80-8508-30938b0d0ac7"), "Real Madrid vs PSG", 8.6999999999999993, 9.8000000000000007, 0 },
+                    { new Guid("f3b603e2-6e4a-4d57-bce8-3394985b3b28"), 2, 0, 0, new Guid("a0bfb11d-de5a-415b-b997-0f475aef3410"), "Real Madrid vs Manchester City", 8.5999999999999996, 9.5999999999999996, 1 },
+                    { new Guid("f5558643-195b-4e51-9739-8dbabbc74c6f"), 2, 0, 1, new Guid("e8aab1ed-4154-4d80-8508-30938b0d0ac7"), "Real Madrid vs Atalanta", 8.5, 9.6999999999999993, 0 }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_KlubPilkarz_ArchwilaniPilkarzeIdPilkarz",
+                name: "IX_KlubPilkarz_ArchiwalniPilkarzeIdPilkarz",
                 table: "KlubPilkarz",
-                column: "ArchwilaniPilkarzeIdPilkarz");
+                column: "ArchiwalniPilkarzeIdPilkarz");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pilkarze_IdKlubu",

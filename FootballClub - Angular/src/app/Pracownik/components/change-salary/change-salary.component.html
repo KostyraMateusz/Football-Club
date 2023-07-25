@@ -1,0 +1,21 @@
+<div class="add-container">
+    <h1>Wybierz pracownika i zmień jego funkcje</h1>
+    <form [formGroup]="pracownik" (ngSubmit)="ZmienWynagrodzenie()">
+
+        <mat-form-field>
+            <mat-label>Pracownik</mat-label>
+            <mat-select formControlName="idPracownik" multiple>
+                <mat-option *ngFor="let p of this.pracownicy" [value]="p.idPracownik">
+                    {{ p.imie + " " + p.nazwisko }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Wynagrodzenie</mat-label>
+            <input matInput formControlName="wynagrodzenie" type="number">
+        </mat-form-field>
+
+        <button type=" submit" mat-button>Zmień pensje pracownika</button>
+    </form>
+
+</div>

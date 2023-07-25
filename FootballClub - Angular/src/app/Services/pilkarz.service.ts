@@ -14,6 +14,19 @@ export class PilkarzService {
   }
   constructor(private httpClient: HttpClient) { }
 
+  DodajPilkarza(pilkarza: any): Observable<void> {
+    return this.httpClient.post<void>(environment.url + "Pilkarze/DodajPilkarza", pilkarza);
+  }
+
+  EdytujPilkarza(id: string, pilkarza: any): Observable<void> {
+    return this.httpClient.put<void>(environment.url + "Pilkarze/EdytujPilkarza/" + id, pilkarza);
+  }
+
+  DeletePilkarza(id: string): Observable<void> {
+    return this.httpClient.delete<void>(environment.url + "Pilkarze/UsunPilkarza/" + id);
+  }
+
+
   DajPilkarzy(): Observable<Pilkarz[]> {
     return this.httpClient.get<Pilkarz[]>(environment.url + 'Pilkarze/DajPilkarzy');
   }
@@ -41,22 +54,4 @@ export class PilkarzService {
   ZmienPozycjePilkarza(idPilkarz: number, pozycja: string): Observable<Pilkarz> {
     return this.httpClient.put<Pilkarz>(environment.url + '/' + idPilkarz, pozycja);
   }
-
-  /*
-  getOne(id: number): Observable<Pilkarz> {
-    return this.httpClient.get<Pilkarz>(environment.url + '/' + id);
-  }
-
-  delete(id: number): Observable<boolean> {
-    return this.httpClient.delete<boolean>(environment.url + '/' + id);
-  }
-
-  post(req: PilkarzRequest): Observable<Pilkarz> {
-    return this.httpClient.post<Pilkarz>(environment.url, req);
-  }
-
-  put(id: number, req: PilkarzRequest): Observable<Pilkarz> {
-    return this.httpClient.put<Pilkarz>(environment.url + '/' + id, req);
-  }
-  */
 }

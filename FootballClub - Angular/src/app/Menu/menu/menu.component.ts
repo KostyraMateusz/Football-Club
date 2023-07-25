@@ -9,7 +9,7 @@ import { DatePipe } from '@angular/common';
 export class MenuComponent implements OnInit {
 
   myDate = new Date();
-  title: string = "FootballClub";
+  title: string = "El Madrista - panel statystyczny";
 
   ngOnInit(): void {
   }

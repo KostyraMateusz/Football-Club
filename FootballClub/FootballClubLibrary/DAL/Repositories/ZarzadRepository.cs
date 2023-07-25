@@ -45,7 +45,7 @@ namespace FootballClubLibrary.Repositories
 
         public async Task<IEnumerable<Zarzad>> GetZarzady()
         {
-            var zarzady = await this.dbContext.Zarzady.Include(z => z.Klub).ThenInclude( p => p.Zarzad.Pracownicy).ToListAsync();
+            var zarzady = await this.dbContext.Zarzady.Include(z => z.Klub).Include( p => p.Pracownicy).ToListAsync();
             return zarzady;
         }
 

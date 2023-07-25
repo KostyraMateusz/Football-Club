@@ -1,6 +1,6 @@
 <div class="add-container">
     <h1>Dodaj nową statystyke</h1>
-    <form [formGroup]="statystyka" (ngSubmit)="DodajStatystyke()">
+    <form [formGroup]="this.statystyka" (ngSubmit)="DodajStatystyke()" *ngIf="this.statystyka">
         <mat-form-field>
             <mat-label>Mecz</mat-label>
             <input matInput formControlName="Mecz">
@@ -38,8 +38,8 @@
 
         <mat-form-field>
             <mat-label>Pilkarz</mat-label>
-            <mat-select formControlName="Pilkarz" multiple>
-                <mat-option *ngFor="let pilkarz of this.pilkarze" [value]="pilkarz">
+            <mat-select formControlName="IdPilkarz" multiple>
+                <mat-option *ngFor="let pilkarz of this.pilkarze" [value]="pilkarz.idPilkarz">
                     {{ pilkarz.nazwisko }}</mat-option>
             </mat-select>
         </mat-form-field>

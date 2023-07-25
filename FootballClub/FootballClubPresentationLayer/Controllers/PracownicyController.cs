@@ -14,6 +14,65 @@ namespace FootballClubPresentationLayer.Controllers
             this.pracownikService = pracownikService;
         }
 
+        [HttpPost]
+        [Route("api/Pracownicy/DodajPracownika")]
+        public async Task<ActionResult> UtworzPracownika([FromBody] Pracownik pracownik)
+        {
+            try
+            {
+                if (pracownik == null)
+                {
+                    throw new Exception("");
+                }
+                await this.pracownikService.DodajPracownika(pracownik);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("api/Pracownicy/UsunPracownika/{IdPracownika}")]
+        public async Task<ActionResult> UsunPracownika([FromRoute] Guid IdPracownika)
+        {
+            try
+            {
+                var pracownicy = await this.pracownikService.DajPracownikow();
+                var pracownik = pracownicy.First(k => k.IdPracownik == IdPracownika);
+                if (pracownik == null)
+                {
+                    throw new Exception("");
+                }
+                await this.pracownikService.UsunPracownika(IdPracownika);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("api/Pracownicy/EdytujPracownika/{id}")]
+        public async Task<ActionResult> EdytujPracownika([FromBody] Pracownik pracownik)
+        {
+            try
+            {
+                if (pracownik == null)
+                {
+                    throw new Exception("");
+                }
+                await this.pracownikService.EdytujPracownika(pracownik);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
         [HttpGet]
         [Route("api/[controller]/DajPracownikow")]
         public async Task<ActionResult<IEnumerable<Pracownik>>> DajPracownikow()
@@ -54,8 +113,8 @@ namespace FootballClubPresentationLayer.Controllers
 
 
         [HttpPut]
-        [Route("api/[controller]/ZmienWynagrodzenie")]
-        public async Task<ActionResult> ZmienWynagrodzenie([FromRoute] Guid IdPracownik, decimal wynagrodzenie)
+        [Route("api/[controller]/ZmienWynagrodzeniePracownika/{IdPracownik}")]
+        public async Task<ActionResult> ZmienWynagrodzenie([FromRoute] Guid IdPracownik, [FromBody]decimal wynagrodzenie)
         {
             try
             {

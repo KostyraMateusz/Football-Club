@@ -1,1 +1,49 @@
-<p>edit-statystyka works!</p>
+<div class="form-container">
+    <h1>Edytuj wybrany klub</h1>
+    <form [formGroup]="this.statystyka" (ngSubmit)="EdytujStatystyke()">
+
+        <mat-form-field>
+            <mat-label>IdStatystyka</mat-label>
+            <input matInput formControlName="IdStatystyka" [value]="this.statystyka.value.IdStatystyka" [disabled]="true">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Mecz</mat-label>
+            <input matInput formControlName=" Mecz" [value]="this.statystyka.value.Mecz">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Gole</mat-label>
+            <input matInput formControlName="Gole" [value]="this.statystyka.value.Gole">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Asysty</mat-label>
+            <input matInput formControlName="Asysty" [value]="this.statystyka.value.Asysty">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>ZolteKartki</mat-label>
+            <input matInput formControlName="ZolteKartki" [value]="this.statystyka.value.ZolteKartki">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>CzerwoneKartki</mat-label>
+            <input matInput formControlName="CzerwoneKartki" [value]="this.statystyka.value.CzerwoneKartki">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>PrzebiegnietyDystans</mat-label>
+            <input matInput formControlName="PrzebiegnietyDystans" [value]="this.statystyka.value.PrzebiegnietyDystans">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Ocena</mat-label>
+            <input matInput formControlName="Ocena" [value]="this.statystyka.value.Ocena">
+        </mat-form-field>
+
+        <button type="submit" mat-button>Edytuj Piłkarza</button>
+    </form>
+
+
+</div>

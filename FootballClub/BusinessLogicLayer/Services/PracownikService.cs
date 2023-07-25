@@ -25,10 +25,11 @@ namespace BusinessLogicLayer.Services
 
         public async Task UsunPracownika(Guid IdPracownika)
         {
-            var foundClub = await this.unitOfWork.PracownikRepository.GetPracownikById(IdPracownika);
-            if (foundClub != null)
+            var foundPracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(IdPracownika);
+            if (foundPracownik != null)
             {
                 await this.unitOfWork.PracownikRepository.DeletePracownik(IdPracownika);
+                await this.unitOfWork.Save();
             }
         }
 
