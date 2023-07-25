@@ -17,7 +17,7 @@ namespace FootballClubLibrary.Models
 
         public string Trofea { get; set; }
 
-        public ICollection<Pilkarz>? ArchwilaniPilkarze { get; set; }
+        public ICollection<Pilkarz>? ArchiwalniPilkarze { get; set; }
 
         public ICollection<Pilkarz>? ObecniPilkarze { get; set; }
 

@@ -6,16 +6,16 @@
     background-color: black;
     padding-top: 5px;
     text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-bottom: 2px solid darkgoldenrod;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid rgb(134, 20, 162);
 }
 
 .title h1 {
     font-size: 1.15rem;
     letter-spacing: 0.05rem;
-    border-right: 2px solid darkgoldenrod;
-    border-left: 2px solid darkgoldenrod;
+    border-right: 2px solid rgb(134, 20, 162);
     font-weight: 400;
     margin-left: 10px;
     padding: 0px 10px 0px 10px;
@@ -31,9 +31,8 @@
 .nav-bar-list a {
     margin-left: 10px;
     margin-right: 10px;
-    border-radius: 5px;
     padding: 10px 10px 10px 10px;
-    border: 1px solid darkgoldenrod;
+    border-right: 2px solid rgb(134, 20, 162);
     font-weight: 300;
     letter-spacing: 0.03rem;
     text-decoration: none;
@@ -41,9 +40,8 @@
 }
 
 .nav-bar-list a:hover {
-    background-color: rgb(233, 233, 233);
-    color: black;
-    border: 1px solid darkgoldenrod;
+    background-color: rgb(148, 6, 93);
+    color: white;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.5s;
 }

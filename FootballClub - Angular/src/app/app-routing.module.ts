@@ -12,6 +12,9 @@ import { EditPracownikComponent } from './Pracownik/components/edit-pracownik/ed
 import { StatystykaListComponent } from './Statystyka/components/statystyka-list/statystyka-list.component';
 import { AddStatystykaComponent } from './Statystyka/components/add-statystyka/add-statystyka.component';
 import { EditStatystykaComponent } from './Statystyka/components/edit-statystyka/edit-statystyka.component';
+import { ChangeSalaryComponent } from './Pracownik/components/change-salary/change-salary.component';
+import { ChangeFunctionComponent } from './Pracownik/components/change-function/change-function.component';
+import { ChangeAgeComponent } from './Pracownik/components/change-age/change-age.component';
 
 const routes: Routes = [
   { path: "", component: KlubListComponent },
@@ -24,9 +27,12 @@ const routes: Routes = [
   { path: "Pracownicy", component: PracownikListComponent },
   { path: "Pracownicy/DodajPracownika", component: AddPracownikComponent },
   { path: "Pracownicy/EdytujPracownika/:id", component: EditPracownikComponent },
+  { path: "Pracownicy/ZmienPensjePracownika", component: ChangeSalaryComponent },
+  { path: "Pracownicy/ZmienFunkcjePracownika", component: ChangeFunctionComponent },
+  { path: "Pracownicy/ZmienWiekPracownika", component: ChangeAgeComponent },
   { path: "Statystyki", component: StatystykaListComponent },
   { path: "Statystyki/DodajStatystyke", component: AddStatystykaComponent },
-  { path: "Statystyki/EdytujStatystyke/:id", component: EditStatystykaComponent }
+  { path: "Statystyki/EdytujStatystyke/:id", component: EditStatystykaComponent },
 ];
 
 @NgModule({

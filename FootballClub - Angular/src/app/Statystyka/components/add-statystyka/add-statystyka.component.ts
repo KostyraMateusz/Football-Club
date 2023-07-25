@@ -1,35 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Pilkarz } from 'src/app/Pilkarz/Models/pilkarz.model';
 import { PilkarzService } from 'src/app/Services/pilkarz.service';
 import { StatystykaService } from 'src/app/Services/statystyka.service';
+import { Statystyka } from '../../Models/statystyka.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-statystyka',
   templateUrl: './add-statystyka.component.html',
   styleUrls: ['./add-statystyka.component.css']
 })
-export class AddStatystykaComponent implements OnInit{
+export class AddStatystykaComponent implements OnInit {
 
   pilkarze: Pilkarz[] = [];
+  statystyka!: FormGroup;
+  nowaStatystyka!: Statystyka;
 
-  statystyka = new FormGroup({
-    Mecz: new FormControl('', Validators.required),
-    Gole: new FormControl('', Validators.required),
-    Asysty: new FormControl('', Validators.required),
-    ZolteKartki: new FormControl('', Validators.required),
-    CzerwoneKartki: new FormControl('', Validators.required),
-    PrzebiegnietyDystans: new FormControl('', Validators.required),
-    Ocena: new FormControl('', Validators.required),
-    Pilkarz: new FormControl('', Validators.required)
-  });
-
-  constructor(private statystykaService: StatystykaService, private pilkarzService: PilkarzService) {
+  constructor(private statystykaService: StatystykaService, private pilkarzService: PilkarzService,
+    private formBuilder: FormBuilder, private router: Router) {
     this.getPilkarze();
   }
 
   ngOnInit(): void {
     this.getPilkarze();
+    this.statystyka = this.formBuilder.group({
+      Mecz: this.formBuilder.control(this.nowaStatystyka?.mecz, Validators.required),
+      Gole: this.formBuilder.control(this.nowaStatystyka?.gole, Validators.required),
+      Asysty: this.formBuilder.control(this.nowaStatystyka?.asysty, Validators.required),
+      ZolteKartki: this.formBuilder.control(this.nowaStatystyka?.zolteKartki, Validators.required),
+      CzerwoneKartki: this.formBuilder.control(this.nowaStatystyka?.czerwoneKartki, Validators.required),
+      PrzebiegnietyDystans: this.formBuilder.control(this.nowaStatystyka?.przebiegnietyDystans, Validators.required),
+      Ocena: this.formBuilder.control(this.nowaStatystyka?.ocena, Validators.required),
+      IdPilkarz: this.formBuilder.control(this.nowaStatystyka?.idPilkarz, Validators.required)
+    });
   }
 
   getPilkarze(): void {
@@ -40,6 +44,14 @@ export class AddStatystykaComponent implements OnInit{
   }
 
   DodajStatystyke(): void {
-    console.log(this.statystyka);
+
+    let id = this.statystyka.value.IdPilkarz[0];
+    console.log(id);
+    this.statystyka.value.IdPilkarz = id;
+    console.log(this.statystyka.value);
+    this.statystykaService.DodajStatystyke(this.statystyka.value).subscribe(res => {
+      console.log("Dodano nową statystykę!");
+      this.router.navigateByUrl("/Statystyki");
+    })
   }
 }

@@ -14,9 +14,9 @@ router-outlet {
 footer {
     background-color: black;
     margin-bottom: 0px;
-    margin-top: 800px;
+    margin-top: 700px;
     height: 35px;
-    border-top: 2px solid darkgoldenrod;
+    border-top: 2px solid rgb(134, 20, 162);
     text-align: center;
     color: whitesmoke;
     padding-top: 10px;
