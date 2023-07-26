@@ -17,8 +17,8 @@ namespace TestsFootballClub.DAL.Tests
 
             Assert.NotNull(klubRepository);
 
-            await klubRepository.CreateKlub(new Klub() { IdKlub = new Guid(), Nazwa = "Real Madryt", Stadion = "Estadio Santiago Bernabéu", Trofea = "Liga Mistrzów (13 razy), Primera División (34 razy), Puchar Króla (19 razy), Superpuchar Hiszpanii (11 razy)", ObecniPilkarze = new Collection<Pilkarz> { }, ArchwilaniPilkarze = new Collection<Pilkarz> { }, Zarzad = null });
-            await klubRepository.CreateKlub(new Klub() { IdKlub = new Guid(), Nazwa = "FC Barcelona", Stadion = "Camp Nou", Trofea = "Liga Mistrzów (5 razy), Primera División (26 razy), Puchar Króla (31 razy), Superpuchar Hiszpanii (13 razy)", ObecniPilkarze = new Collection<Pilkarz> { }, ArchwilaniPilkarze = new Collection<Pilkarz> { }, Zarzad = null });
+            await klubRepository.CreateKlub(new Klub() { IdKlub = new Guid(), Nazwa = "Real Madryt", Stadion = "Estadio Santiago Bernabéu", Trofea = "Liga Mistrzów (13 razy), Primera División (34 razy), Puchar Króla (19 razy), Superpuchar Hiszpanii (11 razy)", ObecniPilkarze = new Collection<Pilkarz> { }, ArchiwalniPilkarze = new Collection<Pilkarz> { }, Zarzad = null });
+            await klubRepository.CreateKlub(new Klub() { IdKlub = new Guid(), Nazwa = "FC Barcelona", Stadion = "Camp Nou", Trofea = "Liga Mistrzów (5 razy), Primera División (26 razy), Puchar Króla (31 razy), Superpuchar Hiszpanii (13 razy)", ObecniPilkarze = new Collection<Pilkarz> { }, ArchiwalniPilkarze = new Collection<Pilkarz> { }, Zarzad = null });
             await klubRepository.Save();
 
             var klubs = await klubRepository.GetKluby();

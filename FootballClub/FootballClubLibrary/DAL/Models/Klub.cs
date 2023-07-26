@@ -9,7 +9,7 @@ namespace FootballClubLibrary.Models
         [Key]
         public Guid IdKlub { get; set; }
 
-        [StringLength(20, ErrorMessage = "Za długa nazwa klubu !")]
+        [StringLength(30, ErrorMessage = "Za długa nazwa klubu !")]
         public string? Nazwa { get; set; }
 
         [StringLength(30, ErrorMessage= "Za dluga nazwa stadionu !")]

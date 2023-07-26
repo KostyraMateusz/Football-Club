@@ -16,10 +16,13 @@ namespace BusinessLogicLayer.Services
         public async Task DodajZarzad(Zarzad zarzad)
         {
             var foundZarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(zarzad.IdZarzad);
+            var foundKlub = await this.unitOfWork.KlubRepository.GetKlubById(zarzad.IdKlubu);
+
             if (foundZarzad == null)
             {
+                var zarzad2 = await this.unitOfWork.ZarzadRepository.GetZarzadById(foundKlub.Zarzad.IdZarzad);
+                await this.unitOfWork.ZarzadRepository.DeleteZarzad(foundKlub.Zarzad.IdZarzad);
                 await this.unitOfWork.ZarzadRepository.CreateZarzad(zarzad);
-                await this.unitOfWork.Save();
             }
         }
 
@@ -29,6 +32,7 @@ namespace BusinessLogicLayer.Services
             if (foundClub != null)
             {
                 await this.unitOfWork.ZarzadRepository.DeleteZarzad(IdZarzadu);
+                await this.unitOfWork.Save();
             }
         }
 
@@ -37,6 +41,7 @@ namespace BusinessLogicLayer.Services
             if (zarzad != null)
             {
                 await this.unitOfWork.ZarzadRepository.UpdateZarzad(zarzad);
+                await this.unitOfWork.Save();
             }
         }
 
@@ -87,6 +92,21 @@ namespace BusinessLogicLayer.Services
                 pracownik.IdZarzadu = zarzad.IdZarzad;
                 zarzad.Pracownicy?.Add(pracownik);
             } 
+            else
+            {
+                return;
+            }
+            await this.unitOfWork.Save();
+        }
+
+        public async Task UsunCzlonkaZarzadu(Guid IdZarzadu, Guid PracownikId)
+        {
+            var zarzad = await this.unitOfWork.ZarzadRepository.GetZarzadById(IdZarzadu);
+            var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(PracownikId);
+            if (pracownik != null)
+            {
+                pracownik.IdZarzadu = null;
+            }
             else
             {
                 return;

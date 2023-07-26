@@ -24,7 +24,7 @@ namespace TestsFootballClub.DAL.DummyRepositories
             throw new NotImplementedException();
         }
 
-        public Task<Klub> GetKlubById(Guid id)
+        public Task<Klub> GetKlubById(Guid? id)
         {
             throw new NotImplementedException();
         }

@@ -37,7 +37,7 @@ namespace TestsFootballClub.ControllerTests.Pilkarze
         {
             // Arrange
             Mock<IPilkarzService> mockPilkarzService = new Mock<IPilkarzService>();
-            Klub RealMadryt = new Klub { IdKlub = Guid.NewGuid(), Nazwa = "Real Madryt", Stadion = "Estadio Santiago Bernabéu", Trofea = "Liga Mistrzów", ObecniPilkarze = new List<Pilkarz> { }, ArchwilaniPilkarze = new Collection<Pilkarz> { }, Zarzad = null };
+            Klub RealMadryt = new Klub { IdKlub = Guid.NewGuid(), Nazwa = "Real Madryt", Stadion = "Estadio Santiago Bernabéu", Trofea = "Liga Mistrzów", ObecniPilkarze = new List<Pilkarz> { }, ArchiwalniPilkarze = new Collection<Pilkarz> { }, Zarzad = null };
             List<Pilkarz> pilkarze = new List<Pilkarz>()
             {
                 new Pilkarz(){ IdPilkarz = Guid.NewGuid(), Imie = "Karim", Nazwisko = "Benzema", Wiek = 35, Pozycja = "Napastnik", Statystyki = new List<Statystyka>{ }, ArchiwalneKluby = new List<Klub>{ }, Wynagrodzenie = 440000, IdKlubu = RealMadryt.IdKlub },

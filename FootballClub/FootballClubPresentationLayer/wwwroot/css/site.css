@@ -1,5 +1,7 @@
 html {
     font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -8,21 +10,19 @@ html {
     }
 }
 
-html {
-    position: relative;
-    min-height: 100%;
-}
-
 body {
     margin-bottom: 60px;
 }
 
-.footer {
-    border-top: 2px solid darkmagenta;
-    background-color: #e4d6e6;
+a {
+    text-decoration: none;
+    color: black;
 }
 
-#footer {
+
+/* Stopka */
+.footer {
+    border-top: 2px solid darkmagenta;
     background-color: black;
     text-align: center;
     color: white;
@@ -30,20 +30,8 @@ body {
     margin-top: 20px;
 }
 
-#hero {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    border-radius: 3px;
-}
 
-    #hero p {
-        padding: 25px;
-        padding-top: 0px;
-        text-align: justify;
-        font-size: 18px;
-        color: #666;
-    }
-
+/* Tytul - Witaj w krainie Królewskich */
 #tytul {
     color: black;
     font-weight: 300;
@@ -52,19 +40,39 @@ body {
     letter-spacing: 0.12rem;
 }
 
+
+/* Opis projektu */
+#hero {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 3px;
+}
+
+#hero p {
+    padding: 25px;
+    padding-top: 0px;
+    text-align: justify;
+    font-size: 18px;
+    color: #666;
+}
+
+
+/* Autorzy - Napis */
 #autorzy {
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-    #autorzy h2 {
-        color: black;
-        font-weight: 300;
-        font-size: 1.7rem;
-        text-decoration: underline 2px darkmagenta;
-        letter-spacing: 0.12rem;
-    }
+#autorzy h2 {
+    color: black;
+    font-weight: 300;
+    font-size: 1.7rem;
+    text-decoration: underline 2px darkmagenta;
+    letter-spacing: 0.12rem;
+}
 
+
+/* Zdjêcie autorów - animacja */
 #ZdjecieAutorow {
     width: 400px;
     height: 400px;
@@ -73,22 +81,9 @@ body {
     transition: 0.3s;
 }
 
-    #ZdjecieAutorow:hover {
-        opacity: 0.7;
-        cursor: pointer;
-    }
-
-.fan-icon {
-    border: 1px solid darkmagenta;
-    margin-right: 5px;
-    width: 50px;
-    height: 50px;
-}
-
-.nav-title {
-    border-left: 1px solid #dda722;
-    border-right: 1px solid #dda722;
-    padding: 0px 10px 0px 10px;
+#ZdjecieAutorow:hover {
+    opacity: 0.7;
+    cursor: pointer;
 }
 
 .modal {
@@ -110,20 +105,6 @@ body {
     display: block;
     width: 80%;
     max-width: 700px;
-}
-
-#caption {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-    text-align: center;
-    color: #ccc;
-    padding: 10px 0;
-    height: 150px;
-}
-
-.modal-content, #caption {
     animation-name: zoom;
     animation-duration: 0.6s;
 }
@@ -148,41 +129,31 @@ body {
     transition: 0.3s;
 }
 
-    .close:hover, .close:focus {
-        color: #bbb;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-#nazwa {
-    font-weight: bold;
+.close:hover, .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.nav-item {
+
+/* Ikona karty */
+.icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+
+/* Ikona fanów */
+.fan-icon {
+    border: 1px solid darkmagenta;
     margin-right: 5px;
-    margin-left: 5px;
-    color: white;
-    text-decoration: none;
-/*    border-left: 1px solid #dda722;*/
-    border-right: 1px solid #dda722;
-    padding: 0px 10px 0px 0px;
+    width: 50px;
+    height: 50px;
 }
 
 
-a {
-    text-decoration: none;
-    color: white;
-}
-
-.nav-a{
-    color: white;
-    text-decoration: none;
-}
-
-a[b-wjqs8pvswk] {
-    color: #0077cc;
-}
-
+/* Pasek nawigacyjny (navbar) */
 .nav-bar {
     background-color: black;
     color: white;
@@ -193,12 +164,16 @@ a[b-wjqs8pvswk] {
     margin-bottom: 20px;
 }
 
+
+/* Pasek nawigacyjny - kontener */
 .nav-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
+
+/* Stylizacja listy elementów */
 .list {
     list-style: none;
     flex-direction: row;
@@ -212,12 +187,141 @@ a[b-wjqs8pvswk] {
     padding-left: 0px;
 }
 
-    .list li {
-        margin: 0px 5px 0px 5px;
-        padding: 0px 10px 0px 10px;
-    }
+.list li {
+    margin: 0px 5px 0px 5px;
+    padding: 0px 10px 0px 10px;
+}
 
-a:hover, a[b-wjqs8pvswk]:hover {
-    color: magenta;
+
+/* Pasek nawigacyjny - linki */
+.nav-item {
+    margin-right: 5px;
+    margin-left: 5px;
+    color: white;
+    text-decoration: none;
+    border-right: 1px solid #dda722;
+    padding: 0px 10px 0px 0px;
+}
+
+.nav-a{
+    color: white !important;
+    text-decoration: none;
+}
+
+.nav-a:hover{
+    color: magenta !important;
     transition: 0.3s;
 }
+
+
+/** Zarz¹d **/
+.zarzad-container {
+    border-top: 2px solid darkmagenta;
+    border-bottom: 2px solid darkmagenta;
+    margin-bottom: 20px;
+}
+
+.zarzad-item {
+    margin: 10px;
+    font-size: 18px;
+}
+
+.action-button {
+    padding: 10px;
+    height: 46px;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    border: 1px solid darkmagenta;
+    display: inline-block;
+}
+
+.action-button:hover {
+    transition: 0.3s;
+    color: darkmagenta;
+}
+
+input {
+    height: 50px;
+    display: inline-block;
+}
+
+input:hover {
+    transition: 0.3s;
+    color: darkmagenta;
+}
+
+
+/* Index */
+.panel {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.zarzad-button {
+    border: 1px solid darkgoldenrod;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: darkgoldenrod;
+}
+
+.zarzad-button:hover {
+    border: 1px solid black;
+    transition: 0.3s;
+    color: white;
+    background-color: rgb(134, 20, 162);
+}
+
+#button-menu:hover{
+    color: white;
+}
+
+.list-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+table, th, td {
+    border: 2px solid darkmagenta;
+    padding: 10px;
+}
+
+tr:hover {
+    background-color: black;
+    color: white;
+}
+
+thead tr:hover {
+    background-color: initial;
+    color: initial;
+}
+
+.img-action{
+    text-align: center;
+}
+
+/* Details */
+.nazwa {
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    pointer-events: none;
+}
+
+#delete-button:hover{
+    background-color: red;
+    color: white;
+}
+
+.button-container {
+    display: flex;
+}
+
+    .button-container a {
+        margin-right: 10px;
+    }

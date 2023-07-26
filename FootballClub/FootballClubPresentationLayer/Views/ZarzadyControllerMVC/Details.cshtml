@@ -2,33 +2,28 @@
 
 @{
     ViewData["Title"] = "Details";
+    var aktualnyZarząd = @Model.IdZarzad;
     CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
     CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
 }
 
 <h1>Szczegóły zarządu</h1>
 
-<div>
-    <hr />
+<div class="zarzad-container">
+    <div class="zarzad-item">
+        <a class="nazwa"> Nazwa klubu: </a> @Model.Klub.Nazwa
+    </div>
 
-    <a id="nazwa">IdZarządu:</a> @Model.IdZarzad
-    
-    <br />
-
-    <a id="nazwa">Nazwa klubu:</a> @Model.Klub.Nazwa
-    
-    <br />
-
-    <div>
-        <a id="nazwa">Pracownicy:</a>
+    <div class="zarzad-item">
+        <a class="nazwa">Pracownicy:</a>
         @if (@Model.Pracownicy != null)
         {
-            <ul>
+            <ol type="1">
                 @foreach (var pracownik in Model.Pracownicy)
                 {
-                    <li>@pracownik.Imie @pracownik.Nazwisko</li>
+                    <li>@pracownik.Imie @pracownik.Nazwisko (@pracownik.WykonywanaFunkcja)</li>
                 }
-            </ul>
+            </ol>
         }
         else
         {
@@ -36,16 +31,19 @@
         }
     </div>
 
-    <a id="nazwa">Budzet:</a> @Model.Budzet.ToString("N2", System.Globalization.CultureInfo.InvariantCulture)
+    <div class="zarzad-item">
+        <a class="nazwa"> Budzet: </a> @Model.Budzet.ToString("N2", System.Globalization.CultureInfo.InvariantCulture) €
+    </div>
     
-    <br />
-
-    <a id="nazwa">Cele:</a> @Model.Cele
-
-    <br /><hr />
+    <div class="zarzad-item">
+        <a class="nazwa">Cele:</a> @Model.Cele
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdZarzad">Edytuj zarząd</a> |
-    <a asp-action="DodajCzlonkaZarzadu" asp-route-id="@Model?.IdZarzad">Dodaj członka do zarządu</a> |
-    <a asp-action="Index">Wróć do listy zarządów</a>
+<div class="button-container">
+    <a class="action-button" asp-action="Index">Wróć do listy zarządów</a>
+    <a class="action-button" asp-action="ZmienBudzetZarzaduID" asp-route-id="@Model.IdZarzad">Zmień budżet</a>
+    <a class="action-button" asp-action="DodajCelZarzaduID" asp-route-id="@Model.IdZarzad">Zmień cele</a>
+    <a class="action-button" asp-action="DodajCzlonkaZarzaduID" asp-route-id="@Model.IdZarzad">Dodaj pracownika</a>
+    <a class="action-button" asp-action="UsunCzlonkaZarzaduID" asp-route-id="@Model.IdZarzad">Usuń pracownika</a>
+    <a class="action-button" id="delete-button" asp-action="Delete" asp-route-id="@Model.IdZarzad">Usuń zarząd</a>
 </div>

@@ -35,7 +35,7 @@ namespace TestsFootballClub.FakeRepositories
             return;
         }
 
-        public async Task<Klub> GetKlubById(Guid id)
+        public async Task<Klub> GetKlubById(Guid? id)
         {
             var klub = await Task.FromResult(kluby.Find(k => k.IdKlub == id));
             return klub;

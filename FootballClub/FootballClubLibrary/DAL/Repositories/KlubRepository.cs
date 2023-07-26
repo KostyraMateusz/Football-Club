@@ -38,7 +38,7 @@ namespace FootballClubLibrary.Repositories
             await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task<Klub> GetKlubById(Guid id)
+        public async Task<Klub> GetKlubById(Guid? id)
         {
             var klub = await this.dbContext.Kluby.FindAsync(id);
             return klub;

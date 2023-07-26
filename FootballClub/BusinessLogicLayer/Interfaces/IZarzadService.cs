@@ -12,6 +12,7 @@ namespace BusinessLogicLayer.Interfaces
         Task<decimal> DajWynikFinansowyZarzadu(Guid IdZarzadu);
         Task DodajCelZarzadu(Guid IdZarzadu, string cel);
         Task DodajCzlonkaZarzadu(Guid IdZarzadu, Guid PracownikId);
+        Task UsunCzlonkaZarzadu(Guid IdZarzadu, Guid PracownikId);
         Task ZmienBudzetZarzadu(Guid IdZarzadu, decimal budget);
     }
 }

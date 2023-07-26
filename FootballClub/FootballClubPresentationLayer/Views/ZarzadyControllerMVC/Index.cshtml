@@ -4,57 +4,80 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Zarządy</h1>
+<div class="list-container">
+    <div class="panel">
+        <button class="zarzad-button">
+            <a asp-action="Create" id="button-menu"> Dodaj zarząd </a>
+        </button>
+        <button class="zarzad-button">
+            <a asp-action="ZmienBudzetZarzadu" id="button-menu"> Zmień budżet </a>
+        </button>
+        <button class="zarzad-button">
+            <a asp-action="DodajCelZarzadu" id="button-menu"> Zmień cele </a>
+        </button>
+        <button class="zarzad-button">
+            <a asp-action="DodajCzlonkaZarzadu" id="button-menu"> Dodaj pracownika </a>
+        </button>
+        <button class="zarzad-button">
+            <a asp-action="UsunCzlonkaZarzadu" id="button-menu"> Usuń pracownika </a>
+        </button>
+    </div>
 
-@if (Model.Count() > 0)
-{
-    <table id="table" class="table table-striped table-dark table-bordered table-hover table-sm">
-        <thead>
-            <tr class="name-of-headers">
-                <th>
-                    @Html.DisplayNameFor(model => model.Klub)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Budzet)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Cele)
-                </th>
-                <th>
-                    <p>Akcje</p>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Klub.Nazwa)
-                    </td>
-                    <td>
-                        @item.Budzet.ToString("N2", System.Globalization.CultureInfo.InvariantCulture)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Cele)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.IdZarzad">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.IdZarzad">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.IdZarzad">Delete</a> |
-                        <a asp-action="ZmienBudzetZarzadu" asp-route-id="@item.IdZarzad">Zmień budżet</a> |
-                        <a asp-action="DodajCelZarzadu" asp-route-id="@item.IdZarzad">Zmień cele</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="table-container">
+        @if (Model.Count() > 0)
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Klub</th>
+                        <th>Budżet</th>
+                        <th>Cele</th>
+                        <th>Szczegóły</th>
+                        <th>Edytuj</th>
+                        <th>Usuń</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="table-row">
+                            <td class="table-item">
+                                @item.Klub.Nazwa
+                            </td>
 
-    <p>
-        <a asp-action="Create">Dodaj nowy</a>
-    </p>
-}
-else
-{
-    <p>Brak zarządów!</p>
-}
+                            <td class="table-item">
+                                @item.Budzet.ToString("N2", System.Globalization.CultureInfo.InvariantCulture) €
+                            </td>
+
+                            <td class="table-item">
+                                @item.Cele
+                            </td>
+
+                            <td class="img-action">
+                                <a asp-action="Details" asp-route-id="@item.IdZarzad">
+                                    <img src="~/css/img/details.jpg" id="details" />
+                                </a>
+                            </td>
+                            <td class="img-action">
+                                <a asp-action="Edit" asp-route-id="@item.IdZarzad">
+                                    <img src="~/css/img/edit.jpg" id="edit" />
+                                </a>
+                            </td>
+                            <td class="img-action">
+                                <a asp-action="Delete" asp-route-id="@item.IdZarzad">
+                                    <img src="~/css/img/delete.jpg" id="delete" />
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>Brak zarządów!</p>
+        }
+    </div>
+</div>
+
+<script src="~/js/Index.js"></script>
