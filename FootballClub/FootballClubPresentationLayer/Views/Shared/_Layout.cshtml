@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>El madridista - panel główny</title>
+    <title>El madridista - panel statystyczny</title>
+    <link rel="shortcut icon" href="~/css/img/fans.jpg">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FootballClubPresentationLayer.styles.css" asp-append-version="true" />
@@ -14,12 +15,12 @@
             <div class="nav-container">
                 <div class="nav-space">
                     <img src="~/css/img/fans.jpg" class="fan-icon"/>
-                    <a class="nav-title" asp-area="" asp-controller="HomeControllerMVC" asp-action="Index">El madridista - panel główny</a>
+                    <a class="nav-a" asp-area="" asp-controller="HomeControllerMVC" asp-action="Index">El madridista - panel statystyczny</a>
                 </div>
                 <div class="navbar">
                     <ul class="list">
                         <li class="nav-item">
-                            <a asp-area="" asp-controller="HomeControllerMVC" asp-action="Index">Paneł główny</a>
+                            <a class="nav-a" asp-area="" asp-controller="HomeControllerMVC" asp-action="Index">Paneł główny</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-a" href="http://localhost:4200/Kluby">Kluby</a>
@@ -34,7 +35,7 @@
                             <a class="nav-a"  href="http://localhost:4200/Statystyki">Statystyki</a>
                         </li>
                         <li class="nav-item">
-                            <a asp-area="" asp-controller="ZarzadyControllerMVC" asp-action="Index">Zarządy</a>
+                            <a class="nav-a" asp-area="" asp-controller="ZarzadyControllerMVC" asp-action="Index">Zarządy</a>
                         </li>
                     </ul>
                 </div>
@@ -50,7 +51,7 @@
         </main>
     </div>
 
-    <footer class="footer" id="footer">
+    <footer class="footer">
         <div class="container">
             <a>Stanisław Kluczewski & Mateusz Kostyra 2023</a>
         </div>

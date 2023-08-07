@@ -12,23 +12,16 @@
         <input type="hidden" asp-for="IdZarzad" />
 
         <div class="zarzad-item">
-            <label asp-for="Klub.Nazwa" class="control-label">Klub</label>
-            <select id="klub" asp-for="Klub.Nazwa" name="id" class="form-control">
-                <option value="" disabled selected hidden>Wybierz klub</option>
-                @foreach (var zarzad in ViewBag.Zarzady)
-                {
-                    <option value="@zarzad.IdZarzad"> @zarzad.Klub.Nazwa </option>
-                }
-            </select>
+            <label asp-for="Klub.Nazwa" class="control-label">Nazwa klubu</label>
+            <input asp-for="Klub.Nazwa" class="form-control" readonly />
             <span asp-validation-for="Klub.Nazwa" class="text-danger"></span>
         </div>
 
         <div class="zarzad-item">
             <label asp-for="Cele" class="control-label">Cele</label>
-            <input id="Cele" asp-for="Cele" class="form-control" />
+            <input asp-for="Cele" class="form-control" />
             <span asp-validation-for="Cele" class="text-danger"></span>
         </div>
-
     </div>
 
     <div class="form-group">
@@ -38,6 +31,7 @@
 </form>
 
 @section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="~/js/Dodajcelzarzadu.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

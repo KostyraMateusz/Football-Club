@@ -53,8 +53,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpPost]
-        [Route("api/[controller]/DodajCelZarzadu/{IdZarzadu}, {cel}")]
-        public async Task<ActionResult> DodajCelZarzadu([FromRoute] Guid IdZarzadu, string cel)
+        [Route("api/[controller]/DodajCelZarzadu/{IdZarzadu}")]
+        public async Task<ActionResult> DodajCelZarzadu([FromRoute] Guid IdZarzadu, [FromBody] string cel)
         {
             try
             {

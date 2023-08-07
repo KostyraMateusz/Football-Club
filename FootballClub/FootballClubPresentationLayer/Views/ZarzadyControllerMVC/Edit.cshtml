@@ -7,41 +7,52 @@
 }
 
 <h1>Edytuj zarząd</h1>
-<div>
-    <hr />
-    <form asp-action="Edit">
+
+<form asp-action="Edit">
+    <div class="zarzad-container">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="IdZarzad" />
-        <div class="form-group">
-            <label asp-for="IdKlubu" class="control-label"></label>
-            <select asp-for="IdKlubu" class="form-control" asp-items="ViewBag.IdKlubu"></select>
-            <span asp-validation-for="Klub" class="text-danger"></span>
+
+        <div class="zarzad-item">
+            <label asp-for="Klub.Nazwa" class="control-label">Nazwa klubu</label>
+            <input asp-for="Klub.Nazwa" class="form-control" readonly />
+            <span asp-validation-for="Klub.Nazwa" class="text-danger"></span>
         </div>
 
-        <br />
+        <div class="zarzad-item">
+            <label asp-for="Pracownicy" class="control-label"></label>
+            <select multiple name="wybraniPracownicy" asp-for="Pracownicy" class="form-control">
+                @foreach (var pracownik in ViewBag.PracownicyZarzadu)
+                {
+                    <option value="@pracownik.IdPracownik" selected> @pracownik.Imie @pracownik.Nazwisko</option>
+                }
+                @foreach (var pracownik in ViewBag.Pracownicy)
+                {
+                    <option value="@pracownik.IdPracownik"> @pracownik.Imie @pracownik.Nazwisko</option>
+                }
+            </select>
+            <span asp-validation-for="Pracownicy" class="text-danger"></span>
+        </div>
 
-        <div class="form-group">
-            <label asp-for="Budzet" class="control-label"></label>
+        <div class="zarzad-item">
+            <label asp-for="Budzet" class="control-label">Budżet</label>
             <input asp-for="Budzet" class="form-control" />
             <span asp-validation-for="Budzet" class="text-danger"></span>
         </div>
 
-        <br />
-
-        <div class="form-group">
-            <label asp-for="Cele" class="control-label"></label>
-            <input asp-for="Cele" class="form-control" />
+        <div class="zarzad-item">
+            <label asp-for="Cele" class="control-label">Cele</label>
+            <input id="Cele" asp-for="Cele" class="form-control" />
             <span asp-validation-for="Cele" class="text-danger"></span>
         </div>
 
-        <br/><hr />
+    </div>
 
-        <div class="form-group">
-            <input type="submit" value="Edytuj zarząd" class="btn btn-primary" /> |
-            <a asp-action="Index">Wróć do listy zarządów</a>
-        </div>
-    </form>
-</div>
+    <div class="form-group">
+        <a class="action-button" asp-action="Index">Wróć do listy zarządów</a>
+        <input type="submit" value="Edytuj zarząd" class="action-button" />
+    </div>
+</form>
 
 @section Scripts {
     @{

@@ -12,20 +12,19 @@
         <input type="hidden" asp-for="IdZarzad" />
 
         <div class="zarzad-item">
-            <label asp-for="Klub.Nazwa" class="control-label">Klub</label>
-            <select id="klub" asp-for="Klub.Nazwa" name="id" class="form-control">
-                <option value="" disabled selected hidden>Wybierz klub</option>
-                @foreach (var zarzad in ViewBag.Zarzady)
-                {
-                    <option value="@zarzad.IdZarzad"> @zarzad.Klub.Nazwa </option>
-                }
-            </select>
+            <label asp-for="Klub.Nazwa" class="control-label">Nazwa klubu</label>
+            <input asp-for="Klub.Nazwa" class="form-control" readonly />
             <span asp-validation-for="Klub.Nazwa" class="text-danger"></span>
         </div>
 
-        <div class="zarzad-item">
-            <label asp-for="Pracownicy" class="control-label">Nowy pracownik</label>
-            <select id="Pracownicy" asp-for="Pracownicy" name="wybranypracownik" class="form-control"></select>
+        <div class="form-group">
+            <label asp-for="Pracownicy" class="control-label"></label>
+            <select asp-for="Pracownicy" name="wybranypracownik" class="form-control">
+                @foreach (var pracownik in ViewBag.Pracownicy)
+                {
+                    <option value="@pracownik.IdPracownik"> @pracownik.Imie @pracownik.Nazwisko</option>
+                }
+            </select>
             <span asp-validation-for="Pracownicy" class="text-danger"></span>
         </div>
 
@@ -38,6 +37,7 @@
 </form>
 
 @section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="~/js/DodajCzlonkaZarzadu.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

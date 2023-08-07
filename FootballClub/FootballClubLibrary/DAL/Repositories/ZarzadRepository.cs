@@ -24,6 +24,7 @@ namespace FootballClubLibrary.Repositories
         public async Task CreateZarzad(Zarzad zarzad)
         {
             await this.dbContext.Zarzady.AddAsync(zarzad);
+            this.Save();
         }
 
         public async Task DeleteZarzad(Guid id)
@@ -35,12 +36,11 @@ namespace FootballClubLibrary.Repositories
         public async Task UpdateZarzad(Zarzad zarzad)
         {
             this.dbContext.Entry(zarzad).State = EntityState.Modified;
-            await this.dbContext.SaveChangesAsync();
         }
 
         public async Task<Zarzad> GetZarzadById(Guid id)
         {
-            return await this.dbContext.Zarzady.FindAsync(id);
+            return await this.dbContext.Zarzady.Include(z => z.Klub).Include(p => p.Pracownicy).FirstOrDefaultAsync(z => z.IdZarzad == id);
         }
 
         public async Task<IEnumerable<Zarzad>> GetZarzady()

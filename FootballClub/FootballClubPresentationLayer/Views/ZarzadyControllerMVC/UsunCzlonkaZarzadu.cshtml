@@ -1,12 +1,12 @@
 ﻿@model FootballClubLibrary.Models.Zarzad
 
 @{
-    ViewData["Title"] = "Dodaj członka do zarządu";
+    ViewData["Title"] = "Usuń członka do zarządu";
 }
 
-<h1>Dodaj członka do zarządu</h1>
+<h1>Usuń członka do zarządu</h1>
 
-<form asp-action="DodajCzlonkaZarzaduID">
+<form asp-action="UsunCzlonkaZarzaduID">
     <div class="zarzad-container">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="IdZarzad" />
@@ -24,7 +24,7 @@
         </div>
 
         <div class="zarzad-item">
-            <label asp-for="Pracownicy" class="control-label">Nowy pracownik</label>
+            <label asp-for="Pracownicy" class="control-label">Pracownicy zarządu</label>
             <select id="Pracownicy" asp-for="Pracownicy" name="wybranypracownik" class="form-control"></select>
             <span asp-validation-for="Pracownicy" class="text-danger"></span>
         </div>
@@ -33,11 +33,11 @@
 
     <div class="form-group">
         <a class="action-button" asp-action="Index">Wróć do listy zarządów</a>
-        <input type="submit" value="Dodaj pracownika" class="action-button" />
+        <input type="submit" value="Usuń pracownika" class="action-button" />
     </div>
 </form>
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="~/js/DodajCzlonkaZarzadu.js"></script>
+    <script src="~/js/usunczlonkazarzadu.js"></script>
 }

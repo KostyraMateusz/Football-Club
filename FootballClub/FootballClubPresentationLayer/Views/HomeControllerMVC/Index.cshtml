@@ -13,7 +13,7 @@
         </p>
         <p>
             Dzięki stworzeniu takiej aplikacji, fani będą mieli możliwość przeglądania aktualnych wyników meczów, statystyk piłkarzy, a także możliwość poznania historii klubu
-            i jego wcześniejszych osiągnięć. <strong>Hala Madrid!</strong>
+            i jego wcześniejszych osiągnięć. <strong>¡Hala Madrid!</strong>
         </p>
     </section>
 
@@ -23,18 +23,15 @@
         <div id="myModal" class="modal">
             <span class="close">&times;</span>
             <img class="modal-content" id="img01">
-            <div id="caption"></div>
         </div>
 
         <script>
             var modal = document.getElementById('myModal');
             var img = document.getElementById('ZdjecieAutorow');
             var modalImg = document.getElementById("img01");
-            var captionText = document.getElementById("caption");
             img.onclick = function () {
                 modal.style.display = "block";
                 modalImg.src = this.src;
-                captionText.innerHTML = this.alt;
             }
 
             var span = document.getElementsByClassName("close")[0];

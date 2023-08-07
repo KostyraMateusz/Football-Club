@@ -19,7 +19,7 @@ namespace TestsFootballClub.ControllerTests.Kluby
                 new Pilkarz(){IdPilkarz = Guid.NewGuid(), Imie="Zbigniew", Nazwisko = "Boniek"},
                 new Pilkarz(){IdPilkarz = Guid.NewGuid(), Imie="Grzegorz", Nazwisko = "Lato"}
             };
-            var klub = new Klub() { IdKlub = Guid.NewGuid(), Nazwa = "Reprezentacja Polski", ArchwilaniPilkarze = pilkarze };
+            var klub = new Klub() { IdKlub = Guid.NewGuid(), Nazwa = "Reprezentacja Polski", ArchiwalniPilkarze = pilkarze };
             mockKlubService.Setup(x => x.DajArchiwalnychPilkarzy(klub.IdKlub))
                            .ReturnsAsync(pilkarze);
 
@@ -33,7 +33,7 @@ namespace TestsFootballClub.ControllerTests.Kluby
             Assert.NotNull(okObjectResult);
             var resultValue = okObjectResult.Value;
             Assert.IsType<OkObjectResult>(result.Result);
-            Assert.Same(klub.ArchwilaniPilkarze, resultValue);
+            Assert.Same(klub.ArchiwalniPilkarze, resultValue);
         }
 
         [Fact]

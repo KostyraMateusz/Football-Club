@@ -17,7 +17,7 @@ namespace FootballClubLibrary.Models
 
         public ICollection<Pracownik>? Pracownicy { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole Budżet jest wymagane !")]
         [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
         public decimal Budzet { get; set; }
