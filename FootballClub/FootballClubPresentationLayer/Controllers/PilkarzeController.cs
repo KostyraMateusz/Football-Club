@@ -16,8 +16,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpPost]
-        [Route("api/Pilkarze/DodajPracownika")]
-        public async Task<ActionResult> UtworzPilkarz([FromBody] Pilkarz pilkarz)
+        [Route("api/Pilkarze/DodajPilkarza")]
+        public async Task<ActionResult> UtworzPilkarza([FromBody] Pilkarz pilkarz)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace FootballClubPresentationLayer.Controllers
 
         [HttpDelete]
         [Route("api/Pilkarze/UsunPilkarza/{IdPilkarza}")]
-        public async Task<ActionResult> UsunPracownika([FromRoute] Guid IdPilkarza)
+        public async Task<ActionResult> UsunPilkarza([FromRoute] Guid IdPilkarza)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace FootballClubPresentationLayer.Controllers
 
         [HttpPut]
         [Route("api/Pilkarze/EdytujPilkarza/{id}")]
-        public async Task<ActionResult> EdytujPracownika([FromBody] Pilkarz pilkarz)
+        public async Task<ActionResult> EdytujPilkarza([FromBody] Pilkarz pilkarz)
         {
             try
             {
@@ -200,7 +200,7 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpPut]
-        [Route("api/[controller]/ZmienPozycjePilkarza")]
+        [Route("api/[controller]/ZmienPozycjePilkarza/{IdPilkarza}")]
         public async Task<ActionResult> ZmienPozycjePilkarza([FromRoute] Guid IdPilkarza, string pozycja)
         {
             try

@@ -3,27 +3,28 @@ import { KlubService } from 'src/app/Services/klub.service';
 import { Klub } from '../../Models/klub.model';
 
 @Component({
-  selector: 'app-klub-list',
-  templateUrl: './klub-list.component.html',
-  styleUrls: ['./klub-list.component.css']
+  selector: 'app-others-klub-list',
+  templateUrl: './others-klub-list.component.html',
+  styleUrls: ['./others-klub-list.component.css']
 })
-export class KlubListComponent implements OnInit {
+export class OthersKlubListComponent implements OnInit {
 
-  kluby: Klub[] = [];
+  otherClubs: Klub[] = [];
   displayedColumns: string[] = ['Nazwa', 'Stadion', 'Trofea', 'Archiwalni Piłkarze', 'Obecni Piłkarze', 'Edytuj', 'Usuń'];
-
   constructor(private klubService: KlubService) {
-    this.getKluby();
+    this.getOtherClubs();
   }
 
   ngOnInit(): void {
-    this.getKluby();
+    this.getOtherClubs();
   }
 
-  getKluby() {
+  getOtherClubs(): void {
     this.klubService.DajKluby().subscribe(res => {
-      this.kluby = res;
-      console.log(this.kluby);
+      this.otherClubs = res.filter(k => !k.nazwa.includes('Real Madryt'));
+      console.log(this.otherClubs);
     })
   }
+
+
 }

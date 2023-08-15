@@ -13,8 +13,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 
-import { KlubListComponent } from './Klub/components/klub-list/klub-list.component';
+import { KlubDetailsComponent } from './Klub/components/klub-details/klub-details.component';
 import { AddKlubComponent } from './Klub/components/add-klub/add-klub.component';
 import { EditKlubComponent } from './Klub/components/edit-klub/edit-klub.component';
 import { MenuComponent } from './Menu/menu/menu.component';
@@ -30,11 +32,17 @@ import { AddStatystykaComponent } from './Statystyka/components/add-statystyka/a
 import { ChangeFunctionComponent } from './Pracownik/components/change-function/change-function.component';
 import { ChangeSalaryComponent } from './Pracownik/components/change-salary/change-salary.component';
 import { ChangeAgeComponent } from './Pracownik/components/change-age/change-age.component';
+import { OthersKlubListComponent } from './Klub/components/others-klub-list/others-klub-list.component';
+import { AddArchivalPlayerComponent } from './Klub/components/add-archival-player/add-archival-player.component';
+import { AddCurrentPlayerComponent } from './Klub/components/add-current-player/add-current-player.component';
+import { ChangePositionComponent } from './Pilkarz/components/change-position/change-position.component';
+import { BestStatisticsComponent } from './Pilkarz/components/best-statistics/best-statistics.component';
+import { PilkarzStatisticsComponent } from './Pilkarz/components/pilkarz-statistics/pilkarz-statistics.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    KlubListComponent,
+    KlubDetailsComponent,
     AddKlubComponent,
     EditKlubComponent,
     MenuComponent,
@@ -49,7 +57,13 @@ import { ChangeAgeComponent } from './Pracownik/components/change-age/change-age
     AddStatystykaComponent,
     ChangeFunctionComponent,
     ChangeSalaryComponent,
-    ChangeAgeComponent
+    ChangeAgeComponent,
+    OthersKlubListComponent,
+    AddArchivalPlayerComponent,
+    AddCurrentPlayerComponent,
+    ChangePositionComponent,
+    BestStatisticsComponent,
+    PilkarzStatisticsComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +79,9 @@ import { ChangeAgeComponent } from './Pracownik/components/change-age/change-age
     MatInputModule,
     MatIconModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatListModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

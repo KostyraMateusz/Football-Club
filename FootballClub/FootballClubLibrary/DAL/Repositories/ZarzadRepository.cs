@@ -24,7 +24,7 @@ namespace FootballClubLibrary.Repositories
         public async Task CreateZarzad(Zarzad zarzad)
         {
             await this.dbContext.Zarzady.AddAsync(zarzad);
-            this.Save();
+            await this.Save();
         }
 
         public async Task DeleteZarzad(Guid id)

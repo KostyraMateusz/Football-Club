@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Klub } from '../Klub/Models/klub.model';
 import { Pilkarz } from '../Pilkarz/Models/pilkarz.model';
-import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -36,15 +35,15 @@ export class KlubService {
     return this.httpClient.get<Klub[]>(environment.url + 'Kluby/DajKluby');
   }
 
-  DajArchiwalnegoPilkarza(IdKlubu: number, IdPilkarz: number): Observable<Pilkarz[]> {
+  DajArchiwalnegoPilkarza(IdKlubu: string, IdPilkarz: string): Observable<Pilkarz[]> {
     return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajArchiwalnegoPilkarza/' + IdKlubu + ',' + IdPilkarz);
   }
 
-  DajArchiwalnychPilkarzy(IdKlubu: number): Observable<Pilkarz[]> {
+  DajArchiwalnychPilkarzy(IdKlubu: string): Observable<Pilkarz[]> {
     return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajArchiwalnychPilkarzy/' + IdKlubu);
   }
 
-  DajObecnegoPilkarza(IdKlubu: number, IdPilkarz: number): Observable<Pilkarz[]> {
+  DajObecnegoPilkarza(IdKlubu: string, IdPilkarz: string): Observable<Pilkarz[]> {
     return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajObecnegoPilkarza/' + IdKlubu + ',' + IdPilkarz);
   }
 
@@ -60,11 +59,15 @@ export class KlubService {
     return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajStadionKlubu/' + IdKlubu);
   }
 
-  // DodajPilkarzaDoObecnych(IdPilkarza: number, IdKlubu: number): Observable<KlubResponse> {
-  //   return this.httpClient.post<KlubResponse>(environment.url + '/DodajPilkarzaDoObecnych/', IdPilkarza, IdKlubu);
-  // }
+  DodajPilkarzaDoObecnych(IdKlubu: string, pilkarz: Pilkarz): Observable<void> {
+    return this.httpClient.post<void>(environment.url + 'Kluby/' + IdKlubu + '/DodajPilkarzaDoObecnych', pilkarz);
+  }
 
-  // UsunPilkarzaZObecnych(IdPilkarza: number, IdKlubu: number): Observable<KlubResponse> {
-  //   return this.httpClient.post<KlubResponse>(environment.url + '/UsunPilkarzaZObecnych/', IdPilkarza, IdKlubu);
-  // }
+  UsunPilkarzaZObecnych(IdPilkarza: string, IdKlubu: string): Observable<void> {
+    return this.httpClient.delete<void>(environment.url + 'Kluby/UsunPilkarzaZObecnych/' + IdPilkarza + ',' + IdKlubu);
+  }
+
+  DodajPilkarzaDoArchiwalnych(Pilkarz: Pilkarz, IdKlubu: string): Observable<void> {
+    return this.httpClient.post<void>(environment.url + 'Kluby/' + IdKlubu + '/DodajPilkarzaDoArchiwalnych/', Pilkarz);
+  }
 }

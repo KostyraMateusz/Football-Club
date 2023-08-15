@@ -12,6 +12,12 @@
     border-bottom: 2px solid rgb(134, 20, 162);
 }
 
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .title h1 {
     font-size: 1.15rem;
     letter-spacing: 0.05rem;

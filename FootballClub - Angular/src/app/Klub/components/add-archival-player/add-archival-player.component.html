@@ -1,0 +1,22 @@
+<div class="add-container">
+    <h1>Wybierz klub i piłkarza do grupy archiwalnych piłkarzy</h1>
+    <form [formGroup]="form" (ngSubmit)="DodajPilkarzaDoArchiwalnych()">
+        <mat-form-field>
+            <mat-label>Klub</mat-label>
+            <mat-select formControlName="idKlub">
+                <mat-option *ngFor="let k of this.kluby" [value]="k.idKlub">
+                    {{ k.nazwa }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Piłkarz</mat-label>
+            <mat-select formControlName="idPilkarz">
+                <mat-option *ngFor="let p of this.pilkarze" [value]="p.idPilkarz">
+                    {{ p.imie + " " + p.nazwisko }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button type=" submit" mat-stroked-button>Dodaj piłkarza</button>
+    </form>
+
+</div>

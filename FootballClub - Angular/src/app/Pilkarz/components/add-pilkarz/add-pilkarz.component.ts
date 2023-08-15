@@ -15,6 +15,8 @@ export class AddPilkarzComponent implements OnInit {
 
   statystyki: Statystyka[] = [];
   archiwalneKluby: Klub[] = [];
+  obecnyKlubReal!: Klub;
+  idKlub!: string;
 
   pilkarz = new FormGroup({
     Imie: new FormControl('', Validators.required),
@@ -24,11 +26,13 @@ export class AddPilkarzComponent implements OnInit {
     Wynagrodzenie: new FormControl('', Validators.required),
     Statystyki: new FormControl('', Validators.required),
     ArchiwalneKluby: new FormControl('', Validators.required),
+    IdKlub: new FormControl('', Validators.required)
   });
 
   constructor(private pilkarzService: PilkarzService, private klubyService: KlubService, private statystykiService: StatystykaService) {
     this.getStatystyki();
     this.getKluby();
+    this.getObecnyKlubReal();
   }
 
   ngOnInit(): void {
@@ -39,18 +43,28 @@ export class AddPilkarzComponent implements OnInit {
   getStatystyki(): void {
     this.statystykiService.DajStatystyki().subscribe(res => {
       this.statystyki = res;
-      console.log(this.statystyki);
     })
+  }
+
+  getObecnyKlubReal(): void {
+    console.log(this.archiwalneKluby);
+    let klub = this.archiwalneKluby.find(k => k.nazwa.includes("Real Madryt"));
+    console.log(klub);
+    console.log(klub?.idKlub);
   }
 
   getKluby(): void {
     this.klubyService.DajKluby().subscribe(res => {
       this.archiwalneKluby = res;
-      console.log(this.archiwalneKluby);
     })
   }
 
   DodajPilkarza(): void {
-    console.log(this.pilkarz);
+    console.log(this.pilkarz.value);
+    this.pilkarz.value.IdKlub = '';
+    this.pilkarzService.DodajPilkarza(this.pilkarz.value).subscribe(res => {
+      console.log("Utworzono nowego piłkarza")
+    })
   }
+
 }
