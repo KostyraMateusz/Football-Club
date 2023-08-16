@@ -1,0 +1,82 @@
+<div class="list-container">
+    <div class="panel">
+        <button mat-button>
+            <a routerLink="/Statystyki/DodajStatystyke">Dodaj statystyke</a>
+        </button>
+        <button mat-button (click)="DajStatystykiZolteKartki()">
+            Daj statystyki żółtych kartek
+        </button>
+        <button mat-button (click)=" DajStatystykiCzerwonejKartki()">
+            Daj statystyki czerwonych kartek
+        </button>
+        <button mat-button (click)="DajNajlepszeStatystyki()">
+            Daj najlepsze statystyki
+        </button>
+
+    </div>
+    <div class="table-container">
+        <table mat-table [dataSource]="statystyki" class="mat-elevation-z8 demo-table">
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <ng-container matColumnDef="Pilkarz">
+                <th mat-header-cell *matHeaderCellDef>Pilkarz</th>
+                <td mat-cell *matCellDef="let element">{{element.pilkarz.imie + " " + element.pilkarz. nazwisko}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Mecz">
+                <th mat-header-cell *matHeaderCellDef>Mecz</th>
+                <td mat-cell *matCellDef="let element">{{element.mecz}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Gole">
+                <th mat-header-cell *matHeaderCellDef>Gole</th>
+                <td mat-cell *matCellDef="let element">{{element.gole}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Asysty">
+                <th mat-header-cell *matHeaderCellDef>Asysty</th>
+                <td mat-cell *matCellDef="let element">{{element.asysty}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Zolte Kartki">
+                <th mat-header-cell *matHeaderCellDef>ZolteKartki</th>
+                <td mat-cell *matCellDef="let element">{{element.zolteKartki}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Czerwone Kartki">
+                <th mat-header-cell *matHeaderCellDef>CzerwoneKartki</th>
+                <td mat-cell *matCellDef="let element">{{element.czerwoneKartki}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Przebiegniety Dystans">
+                <th mat-header-cell *matHeaderCellDef>PrzebiegnietyDystans</th>
+                <td mat-cell *matCellDef="let element">{{element.przebiegnietyDystans}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Ocena">
+                <th mat-header-cell *matHeaderCellDef>Ocena</th>
+                <td mat-cell *matCellDef="let element">{{element.ocena}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Edytuj">
+                <th mat-header-cell *matHeaderCellDef>Edytuj</th>
+                <td mat-cell *matCellDef="let element">
+                    <a [routerLink]="['/Statystyki/EdytujStatystyke/', element.idStatystyka]">
+                        <mat-icon aria-hidden="false" aria-label="edit" fontIcon="edit">edit</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Usuń">
+                <th mat-header-cell *matHeaderCellDef>Usuń</th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-icon aria-hidden="false" aria-label="delete" fontIcon="delete_forever"
+                        (click)="usunStatysyke(element.idStatystyka)">delete_forever</mat-icon>
+                </td>
+            </ng-container>
+
+        </table>
+    </div>
+</div>

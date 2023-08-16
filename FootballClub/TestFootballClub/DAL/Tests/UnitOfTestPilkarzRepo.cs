@@ -1,36 +1,28 @@
 ﻿using FootballClubLibrary.Data;
 using FootballClubLibrary.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestsFootballClub.DAL.Tests
 {
     public class UnitOfTestPilkarzRepo
     {
         [Fact]
-        public void TestPilkarzy()
+        public async void TestPilkarzy()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: "Testowa").Options;
             var pilkarzContext = new ApplicationDbContext(options);
             PilkarzRepository pilkarzRepository = new PilkarzRepository(pilkarzContext);
-
             Assert.NotNull(pilkarzRepository);
 
-            Pilkarz Benzema = new Pilkarz { IdPilkarz = Guid.NewGuid(), Imie = "Karim", Nazwisko = "Benzema", Wiek = 35, Pozycja = "Pomocnik", Statystyki = null, ArchiwalneKluby = null, Wynagrodzenie = 240000, IdKlubu = null };
-            Pilkarz Mbappé = new Pilkarz { IdPilkarz = Guid.NewGuid(), Imie = "Kylian", Nazwisko = "Mekambe ", Wiek = 24, Pozycja = "Napastnik", Statystyki = null, ArchiwalneKluby = null, Wynagrodzenie = 350000, IdKlubu = null };
+            await pilkarzRepository.CreatePilkarz(new Pilkarz() { IdPilkarz = Guid.NewGuid(), Imie = "Karim", Nazwisko = "Benzema", Wiek = 35, Pozycja = "Napastnik", Statystyki = null, ArchiwalneKluby = null, Wynagrodzenie = 240000, IdKlubu = null });
+            await pilkarzRepository.CreatePilkarz(new Pilkarz { IdPilkarz = Guid.NewGuid(), Imie = "Kylian", Nazwisko = "Mekambe ", Wiek = 24, Pozycja = "Napastnik", Statystyki = null, ArchiwalneKluby = null, Wynagrodzenie = 350000, IdKlubu = null });
+            await pilkarzRepository.CreatePilkarz(new Pilkarz { IdPilkarz = Guid.NewGuid(), Imie = "Vinicius", Nazwisko = "Junior", Wiek = 21, Pozycja = "Napastnik", Statystyki = null, ArchiwalneKluby = null, Wynagrodzenie = 180000, IdKlubu = null });
+            await pilkarzRepository.Save();
 
-            Benzema.Pozycja = "Napastnik";
-            Mbappé.Nazwisko = "Mbappé";
-            pilkarzRepository.Save();
-
-            Assert.NotSame(Benzema, Mbappé);
-            Assert.Same("Napastnik", Benzema.Pozycja);
-            Assert.Same("Mbappé", Mbappé.Nazwisko);
+            var pilkarze = await pilkarzRepository.GetPilkarze();
+            Assert.NotEmpty(pilkarze);
+            Assert.Equal(3, pilkarze.Count());
         }
     }
 }

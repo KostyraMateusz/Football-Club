@@ -1,0 +1,42 @@
+<div class="list-container">
+    <div class="panel">
+        <button mat-button>
+            <a routerLink="/Kluby/InneKluby">Przejdź do innych klubów</a>
+        </button>
+    </div>
+    <div class="klub-details">
+        <mat-card class="example-card">
+            <img mat-card-image src="assets/img/real.png" width="250" height="250" alt="Photo of Real Madrid">
+            <mat-card-title>Real Madrid Club de Fútbol</mat-card-title>
+            <mat-card-subtitle>Los Galacticos</mat-card-subtitle>
+        </mat-card>
+
+        <mat-list>
+            <mat-list-item>
+                <span matListItemTitle>Nazwa Klubu</span>
+                <span matListItemLine>{{this.real?.nazwa }}</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span matListItemTitle>Stadion</span>
+                <span matListItemLine>{{this.real?.stadion}}</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span matListItemTitle>Trofea</span>
+                <span matListItemLine>{{this.real?.trofea}}</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span matListItemTitle>Archiwalni Piłkarze</span>
+                <span matListItemLine *ngFor="let archiwalnyPilkarz of this.real?.archiwalniPilkarze">
+                    {{archiwalnyPilkarz.imie + " " + archiwalnyPilkarz.nazwisko}}
+                </span>
+            </mat-list-item>
+            <mat-list-item>
+                <span matListItemTitle>Obecni Piłkarze</span>
+                <span matListItemLine *ngFor="let obecnyPilkarz of this.real?.obecniPilkarze">
+                    {{obecnyPilkarz.imie + " " + obecnyPilkarz.nazwisko}}
+                </span>
+            </mat-list-item>
+        </mat-list>
+
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<FootballClubLibrary.Models.Statystyka>
+<h1>Statystyki</h1>
+
+@if (Model.Count() > 0)
+{
+    <table id="table" class="table table-striped table-dark table-bordered table-hover table-sm">
+        <thead>
+            <tr class="name-of-headers">
+                <th>Mecz</th>
+                <th>Piłkarz</th>
+                <th>Gole</th>
+                <th>Asysty</th>
+                <th>Żółte kartki</th>
+                <th>Czerwone kartki</th>
+                <th>Przebiegniety dystans</th>
+                <th>Ocena</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var statystyka in Model)
+            {
+                <tr>
+                    <td>@statystyka.Mecz</td>
+                    <td>@statystyka.Pilkarz.Imie @statystyka.Pilkarz.Nazwisko</td>
+                    <td>@statystyka.Gole</td>
+                    <td>@statystyka.Asysty</td>
+                    <td>@statystyka.ZolteKartki</td>
+                    <td>@statystyka.CzerwoneKartki</td>
+                    <td>@statystyka.PrzebiegnietyDystans</td>
+                    <td>@statystyka.Ocena</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Brak statystyk!</p>
+}
+

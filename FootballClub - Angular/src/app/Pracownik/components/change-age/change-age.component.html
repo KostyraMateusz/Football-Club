@@ -1,0 +1,21 @@
+<div class="add-container">
+    <button type="submit" mat-button (click)="getBack()">Powrót do głównej</button>
+    <h1>Wybierz pracownika i zmień jego wiek</h1>
+    <form [formGroup]="pracownik" (ngSubmit)=" ZmienWiekPracownika()">
+        <mat-form-field>
+            <mat-label>Pracownik</mat-label>
+            <mat-select formControlName="idPracownik">
+                <mat-option *ngFor="let p of this.pracownicy" [value]="p.idPracownik">
+                    {{ p.imie + " " + p.nazwisko }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Wiek</mat-label>
+            <input matInput formControlName="wiek" type="number">
+        </mat-form-field>
+
+        <button type="submit" mat-button>Zmień wiek pracownika</button>
+    </form>
+
+</div>

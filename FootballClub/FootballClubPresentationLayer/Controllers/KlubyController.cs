@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FootballClubPresentationLayer.Controllers
 {
-    public class KlubyController : Controller
+    [ApiController]
+    public class KlubyController : ControllerBase
     {
         private readonly IKlubService klubService;
 
@@ -13,10 +14,101 @@ namespace FootballClubPresentationLayer.Controllers
             this.klubService = klubService;
         }
 
-        public async Task<IActionResult> DajKluby()
+        [HttpPost]
+        [Route("api/Kluby/DodajKlub")]
+        public async Task<ActionResult> UtworzKlub([FromBody] Klub klub)
         {
-            var kluby = await this.klubService.DajKluby();
-            return Ok(kluby);
+            try
+            {
+                if (klub == null)
+                {
+                    throw new Exception("");
+                }
+                await this.klubService.DodajKlub(klub);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+               return NotFound(ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("api/Kluby/UsunKlub/{id}")]
+        public async Task<ActionResult> UsunKlub([FromRoute] Guid IdKlubu)
+        {
+            try
+            {
+                var kluby = await this.klubService.DajKluby();
+                var klub = kluby.First(k=> k.IdKlub == IdKlubu);
+                if (klub == null)
+                {
+                    throw new Exception("");
+                }
+                await this.klubService.UsunKlub(IdKlubu);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+		[HttpPut]
+		[Route("api/Kluby/EdytujKlub/{id}")]
+		public async Task<ActionResult> EdytujKlub([FromBody] Klub klub)
+		{
+			try
+			{
+				if (klub == null)
+				{
+					throw new Exception("");
+				}
+				await this.klubService.EdytujKlub(klub);
+				return Ok();
+			}
+			catch (Exception ex)
+			{
+				return NotFound(ex.Message);
+			}
+		}
+
+		[HttpGet]
+        [Route("api/[controller]/DajKluby")]
+        public async Task<ActionResult<IEnumerable<Pilkarz>>> DajKluby()
+        {
+            try
+            {
+                var result = await this.klubService.DajKluby();
+                if (result == null)
+                {
+                    throw new Exception("");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("api/[controller]/DajKlub/{IdKlubu}")]
+        public async Task<ActionResult<IEnumerable<Pilkarz>>> DajKluby([FromRoute] Guid IdKlubu)
+        {
+            try
+            {
+                var result = await this.klubService.DajKlub(IdKlubu: IdKlubu);
+                if (result == null)
+                {
+                    throw new Exception("");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpGet]
@@ -101,8 +193,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpPost]
-        [Route("api/[controller]/DodajPilkarzaDoObecnych/{IdPilkarza}, {IdKlubu}")]
-        public async Task<ActionResult> DodajPilkarzaDoObecnych([FromRoute] Pilkarz pilkarz, [FromRoute] Guid IdKlubu)
+        [Route("api/[controller]/{IdKlubu}/DodajPilkarzaDoObecnych/")]
+        public async Task<ActionResult> DodajPilkarzaDoObecnych([FromRoute] Guid IdKlubu, [FromBody]Pilkarz pilkarz)
         {
             try
             {
@@ -132,6 +224,25 @@ namespace FootballClubPresentationLayer.Controllers
                     throw new Exception("");
                 }
                 await this.klubService.UsunPilkarzaZObecnych(IdPilkarza, IdKlubu);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("api/[controller]/{IdKlubu}/DodajPilkarzaDoArchiwalnych/")]
+        public async Task<ActionResult> DodajPilkarzaDoArchiwalnych([FromBody] Pilkarz pilkarz, [FromRoute] Guid IdKlubu)
+        {
+            try
+            {
+                if (pilkarz.Equals(null) || IdKlubu.Equals(null))
+                {
+                    throw new Exception("");
+                }
+                await this.klubService.DodajPilkarzaDoArchiwalncyh(pilkarz.IdPilkarz, IdKlubu);
                 return Ok();
             }
             catch (Exception ex)

@@ -1,17 +1,8 @@
 ﻿using BusinessLogicLayer.Interfaces;
-using FootballClubLibrary.Models;
-using FootballClubPresentationLayer.Controllers;
 using FootballClubPresentationLayer.ControllersMVC;
-using FootballClubWeb.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestsFootballClub.ControllerTests.Kluby;
 
 namespace TestsFootballClub.ControllerTests.Pilkarze
 {
@@ -44,8 +35,9 @@ namespace TestsFootballClub.ControllerTests.Pilkarze
         [Fact]
         public async Task TestDajPilkarzyBezKlubu()
         {
+            // Arrange
             Mock<IPilkarzService> mockPilkarzService = new Mock<IPilkarzService>();
-            Klub RealMadryt = new Klub { IdKlub = Guid.NewGuid(), Nazwa = "Real Madryt", Stadion = "Estadio Santiago Bernabéu", Trofea = "Liga Mistrzów", ObecniPilkarze = new List<Pilkarz> { }, ArchwilaniPilkarze = new Collection<Pilkarz> { }, Zarzad = null };
+            Klub RealMadryt = new Klub { IdKlub = Guid.NewGuid(), Nazwa = "Real Madryt", Stadion = "Estadio Santiago Bernabéu", Trofea = "Liga Mistrzów", ObecniPilkarze = new List<Pilkarz> { }, ArchiwalniPilkarze = new Collection<Pilkarz> { }, Zarzad = null };
             List<Pilkarz> pilkarze = new List<Pilkarz>()
             {
                 new Pilkarz(){ IdPilkarz = Guid.NewGuid(), Imie = "Karim", Nazwisko = "Benzema", Wiek = 35, Pozycja = "Napastnik", Statystyki = new List<Statystyka>{ }, ArchiwalneKluby = new List<Klub>{ }, Wynagrodzenie = 440000, IdKlubu = RealMadryt.IdKlub },
@@ -71,7 +63,7 @@ namespace TestsFootballClub.ControllerTests.Pilkarze
         public async Task TestDajArchiwalneKlubyPilkarza()
         {
             // Arrange
-            var pilkarzMockService = new PilkarzServiceMock();
+            var pilkarzMockService = new PilkarzServiceMock(null);
             var PilkarzController = new PilkarzeControllerMVC(pilkarzMockService);
             Klub ManchesterUnited = new Klub { IdKlub = Guid.NewGuid(), Nazwa = "Manchester United", Stadion = "Old Trafford" };
             Klub RealMadryt = new Klub { IdKlub = Guid.NewGuid(), Nazwa = "Real Madryt", Stadion = "Estadio Santiago Bernabéu" };
@@ -93,7 +85,7 @@ namespace TestsFootballClub.ControllerTests.Pilkarze
         public async Task TestDajStatystykiPilkarza()
         {
             // Arrange
-            var pilkarzMockService = new PilkarzServiceMock();
+            var pilkarzMockService = new PilkarzServiceMock(null);
             var PilkarzController = new PilkarzeControllerMVC(pilkarzMockService);
             List<Statystyka> statystyki = new List<Statystyka>()
             {

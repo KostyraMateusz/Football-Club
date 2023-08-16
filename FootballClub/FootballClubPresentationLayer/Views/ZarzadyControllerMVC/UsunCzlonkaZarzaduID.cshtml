@@ -1,0 +1,43 @@
+﻿@model FootballClubLibrary.Models.Zarzad
+
+@{
+    ViewData["Title"] = "Usuń członka do zarządu";
+}
+
+<h1>Usuń członka do zarządu</h1>
+
+<form asp-action="UsunCzlonkaZarzaduID">
+    <div class="zarzad-container">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="IdZarzad" />
+
+        <div class="zarzad-item">
+            <label asp-for="Klub.Nazwa" class="control-label">Nazwa klubu</label>
+            <input asp-for="Klub.Nazwa" class="form-control" readonly />
+            <span asp-validation-for="Klub.Nazwa" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Pracownicy" class="control-label"></label>
+            <select asp-for="Pracownicy" name="wybranypracownik" class="form-control">
+                @foreach (var pracownik in ViewBag.Pracownicy)
+                {
+                    <option value="@pracownik.IdPracownik"> @pracownik.Imie @pracownik.Nazwisko</option>
+                }
+            </select>
+            <span asp-validation-for="Pracownicy" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <a class="action-button" asp-action="Index">Wróć do listy zarządów</a>
+        <input type="submit" value="Usuń pracownika" class="action-button" />
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

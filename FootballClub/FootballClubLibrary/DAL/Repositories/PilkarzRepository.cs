@@ -2,33 +2,42 @@
 using FootballClubLibrary.Interfaces;
 using FootballClubLibrary.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballClubLibrary.Repositories
 {
     public class PilkarzRepository : IPilkarzRepository, IDisposable
     {
-        private readonly ApplicationDbContext dbContext;
-        private bool disposed = false;
+		private bool disposed = false;
+		private readonly ApplicationDbContext dbContext;
 
         public PilkarzRepository(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
 
-        public async Task CreatePilkarz(Pilkarz pilkarz)
+		public DbSet<Pilkarz> GetDbSetPilkarze()
+		{
+			var result = this.dbContext.Pilkarze;
+			return result;
+		}
+
+		public async Task CreatePilkarz(Pilkarz pilkarz)
         {
             await this.dbContext.Pilkarze.AddAsync(pilkarz);
+            await this.Save();
         }
 
         public async Task DeletePilkarz(Guid id)
         {
             var pilkarz = await this.dbContext.Pilkarze.FindAsync(id);
             this.dbContext.Pilkarze.Remove(pilkarz);
+            await this.Save();
+        }
+
+		public async Task UpdatePilkarz(Pilkarz pilkarz)
+		{
+			this.dbContext.Entry(pilkarz).State = EntityState.Modified;
+            await this.Save();
         }
 
         public async Task<Pilkarz> GetPilkarzById(Guid id)
@@ -38,17 +47,23 @@ namespace FootballClubLibrary.Repositories
         }
 
         public async Task<IEnumerable<Pilkarz>> GetPilkarze()
-        {
-            var pilkarze = await this.dbContext.Pilkarze.ToListAsync();
+		{
+			var pilkarze = await this.dbContext.Pilkarze.Include(z => z.Klub).ToListAsync();
             return pilkarze;
-        }
+		}
 
-        public async Task UpdatePilkarz(Pilkarz pilkarz)
-        {
-            this.dbContext.Entry(pilkarz).State = EntityState.Modified;
-        }
+		public async Task Save()
+		{
+			await this.dbContext.SaveChangesAsync();
+		}
 
-        public virtual void Dispose(bool disposing)
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		public virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
             {
@@ -58,23 +73,6 @@ namespace FootballClubLibrary.Repositories
                 }
             }
             this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        public async Task Save()
-        {
-            await this.dbContext.SaveChangesAsync();
-        }
-
-        public DbSet<Pilkarz> GetDbSetPilkarze()
-        {
-            var result = this.dbContext.Pilkarze;
-            return result;
         }
     }
 }

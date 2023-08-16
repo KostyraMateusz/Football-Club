@@ -1,0 +1,45 @@
+﻿<div class="text-center">
+
+    <section id="hero">
+        <h2 id="tytul">Witaj w krainie Królewskich</h2>
+        <p>
+            Nasza szkółka piłkarska to dynamiczna organizacja skupiająca się na rozwoju piłki nożnej. Celem jest rozwijanie talentów i promowanie sportu. Wprowadzamy nowych,
+            potencjalnych przyszłych piłkarzy do ogólnej bazy piłkarzy, którzy w przyszłości będą mieli możliwość zostania zwerbowanymi do czołowych klubów piłkarskich.
+        </p>
+
+        <p>
+            Celem niniejszego projektu jest stworzenie aplikacji webowej dla klubu piłkarskiego, która umożliwi łatwy dostęp do różnorodnych informacji dotyczących klubu
+            – obecnego zarządu oraz pracowników odpowiedzialnych za poprawne funkcjonowanie klubu. 
+        </p>
+        <p>
+            Dzięki stworzeniu takiej aplikacji, fani będą mieli możliwość przeglądania aktualnych wyników meczów, statystyk piłkarzy, a także możliwość poznania historii klubu
+            i jego wcześniejszych osiągnięć. <strong>¡Hala Madrid!</strong>
+        </p>
+    </section>
+
+    <section id="autorzy">
+        <h2>Autorzy</h2>
+        <img src="~/css/img/zdjecieautorow.jpg" id="ZdjecieAutorow" />
+        <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="img01">
+        </div>
+
+        <script>
+            var modal = document.getElementById('myModal');
+            var img = document.getElementById('ZdjecieAutorow');
+            var modalImg = document.getElementById("img01");
+            img.onclick = function () {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            }
+
+            var span = document.getElementsByClassName("close")[0];
+
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+        </script>
+    </section>
+
+</div>

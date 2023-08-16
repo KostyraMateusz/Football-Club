@@ -1,11 +1,6 @@
 ﻿using BusinessLogicLayer.Interfaces;
 using FootballClubLibrary.Models;
 using FootballClubLibrary.UnitOfWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Services
 {
@@ -16,6 +11,40 @@ namespace BusinessLogicLayer.Services
         public PracownikService(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
+        }
+
+        public async Task DodajPracownika(Pracownik pracownik)
+        {
+            var foundPracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(pracownik.IdPracownik);
+            if (foundPracownik == null)
+            {
+                await this.unitOfWork.PracownikRepository.CreatePracownik(pracownik);
+                await this.unitOfWork.Save();
+            }
+        }
+
+        public async Task UsunPracownika(Guid IdPracownika)
+        {
+            var foundPracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(IdPracownika);
+            if (foundPracownik != null)
+            {
+                await this.unitOfWork.PracownikRepository.DeletePracownik(IdPracownika);
+                await this.unitOfWork.Save();
+            }
+        }
+
+        public async Task EdytujPracownika(Pracownik pracownik)
+        {
+            if (pracownik != null)
+            {
+                await this.unitOfWork.PracownikRepository.UpdatePracownik(pracownik);
+            }
+        }
+
+        public async Task<Pracownik> DajPracownika(Guid IdPracownika)
+        {
+            var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(IdPracownika);
+            return pracownik;
         }
 
         public async Task<IEnumerable<Pracownik>> DajPracownikow()
@@ -37,26 +66,26 @@ namespace BusinessLogicLayer.Services
             await this.unitOfWork.Save();
         }
 
-        public async Task ZmienWiekPracownika(Guid IdPracownika, int wiek)
+		public async Task ZmienWynagrodzenie(Guid IdPracownika, decimal wynagrodzenie)
+		{
+			var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(IdPracownika);
+			if (wynagrodzenie > 0)
+			{
+				pracownik.Wynagrodzenie = wynagrodzenie;
+			}
+			else
+			{
+				return;
+			}
+			await this.unitOfWork.Save();
+		}
+
+		public async Task ZmienWiekPracownika(Guid IdPracownika, int wiek)
         {
             var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(IdPracownika);
             if (wiek >= 16 && wiek <= 99)
             {
                 pracownik.Wiek = wiek;
-            }
-            else
-            {
-                return;
-            }
-            await this.unitOfWork.Save();
-        }
-
-        public async Task ZmienWynagrodzenie(Guid IdPracownika, decimal wynagrodzenie)
-        {
-            var pracownik = await this.unitOfWork.PracownikRepository.GetPracownikById(IdPracownika);
-            if (wynagrodzenie > 0)
-            {
-                pracownik.Wynagrodzenie = wynagrodzenie;
             }
             else
             {

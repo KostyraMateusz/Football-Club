@@ -2,16 +2,11 @@
 using FootballClubLibrary.Interfaces;
 using FootballClubLibrary.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FootballClubLibrary.Repositories
 {
     public class ZarzadRepository : IZarzadRepository, IDisposable
-    {
+	{
         private readonly ApplicationDbContext dbContext;
         private bool disposed = false;
 
@@ -20,9 +15,16 @@ namespace FootballClubLibrary.Repositories
             this.dbContext = dbContext;
         }
 
+        public DbSet<Zarzad> GetDbSetZarzady()
+        {
+            var result = this.dbContext.Zarzady;
+            return result;
+        }
+
         public async Task CreateZarzad(Zarzad zarzad)
         {
             await this.dbContext.Zarzady.AddAsync(zarzad);
+            await this.Save();
         }
 
         public async Task DeleteZarzad(Guid id)
@@ -31,19 +33,31 @@ namespace FootballClubLibrary.Repositories
             this.dbContext.Zarzady.Remove(zarzad);
         }
 
+        public async Task UpdateZarzad(Zarzad zarzad)
+        {
+            this.dbContext.Entry(zarzad).State = EntityState.Modified;
+        }
+
         public async Task<Zarzad> GetZarzadById(Guid id)
         {
-            return await this.dbContext.Zarzady.FindAsync(id);
+            return await this.dbContext.Zarzady.Include(z => z.Klub).Include(p => p.Pracownicy).FirstOrDefaultAsync(z => z.IdZarzad == id);
         }
 
         public async Task<IEnumerable<Zarzad>> GetZarzady()
         {
-            return await this.dbContext.Zarzady.ToListAsync();
+            var zarzady = await this.dbContext.Zarzady.Include(z => z.Klub).Include( p => p.Pracownicy).ToListAsync();
+            return zarzady;
         }
 
-        public async Task UpdateZarzad(Zarzad zarzad)
+        public async Task Save()
         {
-            this.dbContext.Entry(zarzad).State = EntityState.Modified;
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         public virtual void Dispose(bool disposing)
@@ -56,23 +70,6 @@ namespace FootballClubLibrary.Repositories
                 }
             }
             this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        public async Task Save()
-        {
-            await this.dbContext.SaveChangesAsync();
-        }
-
-        public DbSet<Zarzad> GetDbSetZarzady()
-        {
-            var result = this.dbContext.Zarzady;
-            return result;
         }
     }
 }

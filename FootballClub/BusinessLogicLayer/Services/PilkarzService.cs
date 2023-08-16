@@ -1,11 +1,6 @@
 ﻿using BusinessLogicLayer.Interfaces;
 using FootballClubLibrary.Models;
 using FootballClubLibrary.UnitOfWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Services
 {
@@ -18,9 +13,49 @@ namespace BusinessLogicLayer.Services
             this.unitOfWork = unitOfWork;
         }
 
+        public async Task DodajPilkarza(Pilkarz pilkarz)
+        {
+            var foundPilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(pilkarz.IdPilkarz);
+            if (foundPilkarz == null)
+            {
+                await this.unitOfWork.PilkarzRepository.CreatePilkarz(pilkarz);
+                await this.unitOfWork.Save();
+            }
+        }
+
+        public async Task UsunPilkarza(Guid IdPilkarz)
+        {
+            var foundPilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(IdPilkarz);
+            if (foundPilkarz != null)
+            {
+                await this.unitOfWork.PilkarzRepository.DeletePilkarz(IdPilkarz);
+            }
+        }
+
+        public async Task EdytujPilkarza(Pilkarz pilkarz)
+        {
+            if (pilkarz != null)
+            {
+                await this.unitOfWork.PilkarzRepository.UpdatePilkarz(pilkarz);
+            }
+        }
+
+        public async Task<Pilkarz> DajPilkarza(Guid IdPilkarz)
+        {
+            var pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(IdPilkarz);
+            return pilkarz;
+        }
+
         public async Task<IEnumerable<Pilkarz>> DajPilkarzy()
         {
             return await this.unitOfWork.PilkarzRepository.GetPilkarze();
+        }
+
+        public async Task<IEnumerable<Pilkarz>> DajPilkarzyBezKlubu()
+        {
+            var pilkarze = await this.unitOfWork.PilkarzRepository.GetPilkarze();
+            var result = pilkarze.Where(p => p.IdKlubu == null && p.Klub == null);
+            return result;
         }
 
         public async Task<IEnumerable<Klub>> DajArchiwalneKlubyPilkarza(Pilkarz pilkarz)
@@ -35,9 +70,24 @@ namespace BusinessLogicLayer.Services
             return result;
         }
 
+        public async Task<IEnumerable<Statystyka>> DajNajlepszeStatystykiPilkarza(Pilkarz pilkarz)
+        {
+            var result = pilkarz.Statystyki?.OrderByDescending(p => p.Ocena).Take(5).ToList();
+            if (result.Count() < 5)
+            {
+                return pilkarz.Statystyki;
+            }
+            return result;
+        }
+
         public async Task<IEnumerable<Statystyka>> DajStatystykiPilkarza(Pilkarz pilkarz)
         {
-            var result = pilkarz.Statystyki;
+            var statystyki = await this.unitOfWork.StatystykaRepository.GetStatystyki();
+            var result = statystyki.Where(s => s.Pilkarz == pilkarz).ToList();
+            if (result == null)
+            {
+                return pilkarz.Statystyki;
+            }
             return result;
         }
 
@@ -52,19 +102,6 @@ namespace BusinessLogicLayer.Services
                 return;
             }
             await this.unitOfWork.Save();
-        }
-
-        public async Task<IEnumerable<Statystyka>> DajNajlepszeStatystykiPilkarza(Pilkarz pilkarz)
-        {
-            var result = pilkarz.Statystyki?.OrderByDescending(p => p.Ocena).Take(5).ToList();
-            return result;
-        }
-
-        public async Task<IEnumerable<Pilkarz>> DajPilkarzyBezKlubu()
-        {
-            var pilkarze = await this.unitOfWork.PilkarzRepository.GetPilkarze();
-            var result = pilkarze.Where(p => p.IdKlubu == null && p.Klub == null);
-            return result;
         }
     }
 }

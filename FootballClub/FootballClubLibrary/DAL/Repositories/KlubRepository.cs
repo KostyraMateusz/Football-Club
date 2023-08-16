@@ -1,61 +1,168 @@
-﻿
-using FootballClubLibrary.Data;
-using FootballClubLibrary.Intefaces;
+﻿using FootballClubLibrary.Data;
+using FootballClubLibrary.Interfaces;
 using FootballClubLibrary.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace FootballClubLibrary.Repositories
 {
     public class KlubRepository : IKlubRepository, IDisposable
     {
-        private readonly ApplicationDbContext dbContext;
-        private bool disposed = false;
+		private bool disposed = false;
+		private readonly ApplicationDbContext dbContext;
 
         public KlubRepository(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
 
-        public async Task CreateKlub(Klub? klub)
+		public DbSet<Klub> GetDbSetKluby()
+		{
+			var result = this.dbContext.Kluby;
+			return result;
+		}
+
+		public async Task CreateKlub(Klub klub)
         {
+            if(klub.ArchiwalniPilkarze == null)
+            {
+                klub.ArchiwalniPilkarze = new List<Pilkarz>() { };
+            }
+
+            if(klub.ObecniPilkarze == null)
+            {
+                klub.ObecniPilkarze = new List<Pilkarz>() { };
+            }
             await this.dbContext.Kluby.AddAsync(klub);
+            await this.Save();
         }
 
         public async Task DeleteKlub(Guid id)
         {
             var klub = await this.dbContext.Kluby.FindAsync(id);
             this.dbContext.Kluby.Remove(klub);
+            await this.Save();
         }
 
-        public async Task<Klub> GetKlubById(Guid id)
+		public async Task UpdateKlub(Klub klub)
+		{
+			this.dbContext.Entry(klub).State = EntityState.Modified;
+            await this.Save();
+        }
+
+        public async Task<Klub> GetKlubById(Guid? id)
         {
-            return await this.dbContext.Kluby.FindAsync(id);
+            var klub = await this.dbContext.Kluby.FindAsync(id);
+            return klub;
         }
 
         public async Task<IEnumerable<Klub>> GetKluby()
-        {
-            return await this.dbContext.Kluby.ToListAsync();
-        }
-
-        public async Task UpdateKlub(Klub klub)
-        {
-            this.dbContext.Entry(klub).State = EntityState.Modified;
-        }
+		{
+			var kluby = await this.dbContext.Kluby.ToListAsync();
+            return kluby;
+		}
 
         public async Task DodajTrofeumKlubu(Guid id, string trofeum)
         {
             var klub = await this.dbContext.Kluby.FindAsync(id);
             klub.Trofea += $"{trofeum}, ";
+            await this.Save();
         }
 
-        public virtual void Dispose(bool disposing)
+        public async Task DodajPilkarzaDoObecnych(Klub klub, Pilkarz pilkarz)
+        {
+            bool czyPilkarzJestWObecnych = klub.ObecniPilkarze == null ? false : (klub.ObecniPilkarze.Contains(pilkarz));
+            if (pilkarz == null || klub == null || czyPilkarzJestWObecnych == true)
+            {
+                return;
+            }
+
+            if (klub.ObecniPilkarze == null)
+            {
+                klub.ObecniPilkarze = new List<Pilkarz>() { };
+            }
+
+            klub.ObecniPilkarze.Add(pilkarz);
+            pilkarz.IdKlubu = klub.IdKlub;
+
+            if (klub.ArchiwalniPilkarze != null)
+            {
+                if (klub.ArchiwalniPilkarze.Contains(pilkarz))
+                {
+                    klub.ArchiwalniPilkarze.Remove(pilkarz);
+                }
+            }
+            await this.Save();
+        }
+
+        public async Task DodajPilkarzaDoArchiwalnych(Klub klub, Pilkarz pilkarz)
+        {
+            if (pilkarz == null || klub == null)
+            {
+                return;
+            }
+
+            if (klub.ObecniPilkarze == null)
+            {
+                klub.ObecniPilkarze = new List<Pilkarz>() { };
+            }
+
+            if (klub.ArchiwalniPilkarze == null)
+            {
+                klub.ArchiwalniPilkarze = new List<Pilkarz>() { };
+            }
+
+            if (!klub.ArchiwalniPilkarze.Contains(pilkarz))
+            {
+                if (klub.ObecniPilkarze.Contains(pilkarz))
+                {
+                    klub?.ObecniPilkarze.Remove(pilkarz);
+                }
+                klub.ArchiwalniPilkarze.Add(pilkarz);
+                pilkarz.ArchiwalneKluby?.Add(klub);
+                await this.Save();
+            }
+        }
+
+        public async Task UsunPilkarzaZObecnych(Klub klub, Pilkarz pilkarz)
+        {
+            bool czyPilkarzJestWObecnych = klub.ObecniPilkarze == null ? false : (klub.ObecniPilkarze.Contains(pilkarz));
+            if (pilkarz == null || klub == null || czyPilkarzJestWObecnych == false)
+            {
+                return;
+            }
+            klub.ObecniPilkarze?.Remove(pilkarz);
+            klub.ArchiwalniPilkarze?.Add(pilkarz);
+            await this.Save();
+        }
+
+        public async Task DodajPilkarzyDoObecnych(Klub klub, List<Pilkarz> pilkarze)
+        {
+            if (klub == null || pilkarze == null)
+            {
+                return;
+            }
+            foreach (var pilkarz in pilkarze)
+            {
+                if (pilkarz != null)
+                {
+                    klub?.ObecniPilkarze.Add(pilkarz);
+                }
+            }
+            await this.Save();
+        }
+
+        public async Task Save()
+		{
+			await this.dbContext.SaveChangesAsync();
+		}
+
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		public virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
             {
@@ -67,21 +174,6 @@ namespace FootballClubLibrary.Repositories
             this.disposed = true;
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
 
-        public DbSet<Klub> GetDbSetKluby()
-        {
-            var result = this.dbContext.Kluby;
-            return result;
-        }
-
-        public async Task Save()
-        {
-            await this.dbContext.SaveChangesAsync();
-        }
     }
 }

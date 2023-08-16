@@ -1,10 +1,12 @@
 ﻿using BusinessLogicLayer.Interfaces;
 using FootballClubLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace FootballClubPresentationLayer.Controllers
 {
-    public class PilkarzeController : Controller
+    [ApiController]
+    public class PilkarzeController : ControllerBase
     {
         private readonly IPilkarzService pilkarzService;
 
@@ -13,13 +15,64 @@ namespace FootballClubPresentationLayer.Controllers
             this.pilkarzService = pilkarzService;
         }
 
-
-        public async Task<ActionResult> Index()
+        [HttpPost]
+        [Route("api/Pilkarze/DodajPilkarza")]
+        public async Task<ActionResult> UtworzPilkarza([FromBody] Pilkarz pilkarz)
         {
-            var pilkarze = await this.pilkarzService.DajPilkarzy();
-            return Ok(pilkarze);
+            try
+            {
+                if (pilkarz == null)
+                {
+                    throw new Exception("");
+                }
+                await this.pilkarzService.DodajPilkarza(pilkarz);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
+        [HttpDelete]
+        [Route("api/Pilkarze/UsunPilkarza/{IdPilkarza}")]
+        public async Task<ActionResult> UsunPilkarza([FromRoute] Guid IdPilkarza)
+        {
+            try
+            {
+                var pilkarze = await this.pilkarzService.DajPilkarzy();
+                var pracownik = pilkarze.First(k => k.IdPilkarz == IdPilkarza);
+                if (pracownik == null)
+                {
+                    throw new Exception("");
+                }
+                await this.pilkarzService.UsunPilkarza(IdPilkarza);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("api/Pilkarze/EdytujPilkarza/{id}")]
+        public async Task<ActionResult> EdytujPilkarza([FromBody] Pilkarz pilkarz)
+        {
+            try
+            {
+                if (pilkarz == null)
+                {
+                    throw new Exception("");
+                }
+                await this.pilkarzService.EdytujPilkarza(pilkarz);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
 
         [HttpGet]
         [Route("api/[controller]/DajPilkarzy")]
@@ -147,8 +200,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpPut]
-        [Route("api/[controller]/ZmienPozycjePilkarza")]
-        public async Task<ActionResult> ZmienPozycjePilkarza([FromRoute] Guid IdPilkarza, string pozycja)
+        [Route("api/[controller]/ZmienPozycjePilkarza/{IdPilkarza}")]
+        public async Task<ActionResult> ZmienPozycjePilkarza([FromRoute] Guid IdPilkarza, [FromBody] string pozycja)
         {
             try
             {
@@ -159,11 +212,11 @@ namespace FootballClubPresentationLayer.Controllers
                     throw new Exception();
                 }
                 await this.pilkarzService.ZmienPozycjePilkarza(pilkarz, pozycja);
-                return RedirectToAction("Index");
+                return Ok();
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return NotFound(ex.Message);
             }
         }
     }

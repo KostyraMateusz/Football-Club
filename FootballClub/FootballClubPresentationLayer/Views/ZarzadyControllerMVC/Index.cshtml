@@ -1,0 +1,83 @@
+﻿@model IEnumerable<FootballClubLibrary.Models.Zarzad>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="list-container">
+    <div class="panel">
+        <button class="zarzad-button">
+            <a asp-action="Create" id="button-menu"> Dodaj zarząd </a>
+        </button>
+        <button class="zarzad-button">
+            <a asp-action="ZmienBudzetZarzadu" id="button-menu"> Zmień budżet </a>
+        </button>
+        <button class="zarzad-button">
+            <a asp-action="DodajCelZarzadu" id="button-menu"> Zmień cele </a>
+        </button>
+        <button class="zarzad-button">
+            <a asp-action="DodajCzlonkaZarzadu" id="button-menu"> Dodaj pracownika </a>
+        </button>
+        <button class="zarzad-button">
+            <a asp-action="UsunCzlonkaZarzadu" id="button-menu"> Usuń pracownika </a>
+        </button>
+    </div>
+
+    <div class="table-container">
+        @if (Model.Count() > 0)
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Klub</th>
+                        <th>Budżet</th>
+                        <th>Cele</th>
+                        <th>Szczegóły</th>
+                        <th>Edytuj</th>
+                        <th>Usuń</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="table-row">
+                            <td class="table-item">
+                                @item.Klub.Nazwa
+                            </td>
+
+                            <td class="table-item">
+                                @item.Budzet.ToString("N2", System.Globalization.CultureInfo.InvariantCulture) €
+                            </td>
+
+                            <td class="table-item">
+                                @item.Cele
+                            </td>
+
+                            <td class="img-action">
+                                <a asp-action="Details" asp-route-id="@item.IdZarzad">
+                                    <img src="~/css/img/details.jpg" id="details" />
+                                </a>
+                            </td>
+                            <td class="img-action">
+                                <a asp-action="Edit" asp-route-id="@item.IdZarzad">
+                                    <img src="~/css/img/edit.jpg" id="edit" />
+                                </a>
+                            </td>
+                            <td class="img-action">
+                                <a asp-action="Delete" asp-route-id="@item.IdZarzad">
+                                    <img src="~/css/img/delete.jpg" id="delete" />
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>Brak zarządów!</p>
+        }
+    </div>
+</div>
+
+<script src="~/js/Index.js"></script>

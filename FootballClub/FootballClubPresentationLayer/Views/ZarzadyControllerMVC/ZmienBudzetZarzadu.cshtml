@@ -1,0 +1,43 @@
+﻿@model FootballClubLibrary.Models.Zarzad
+
+@{
+    ViewData["Title"] = "Zmien budżet zarządu";
+}
+
+<h1>Zmien budżet zarządu</h1>
+
+<form asp-action="ZmienBudzetZarzaduID">
+    <div class="zarzad-container">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="IdZarzad" />
+
+        <div class="zarzad-item">
+            <label asp-for="Klub.Nazwa" class="control-label">Klub</label>
+            <select id="klub" asp-for="Klub.Nazwa" name="id" class="form-control">
+                <option value="" disabled selected hidden>Wybierz klub</option>
+                @foreach (var zarzad in ViewBag.Zarzady)
+                {
+                    <option value="@zarzad.IdZarzad"> @zarzad.Klub.Nazwa </option>
+                }
+            </select>
+            <span asp-validation-for="Klub.Nazwa" class="text-danger"></span>
+        </div>
+
+        <div class="zarzad-item">
+            <label asp-for="Budzet" class="control-label">Budżet</label>
+            <input id="Budzet" asp-for="Budzet" class="form-control" />
+            <span asp-validation-for="Budzet" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <a class="action-button" asp-action="Index">Wróć do listy zarządów</a>
+        <input type="submit" value="Zmień budżet" class="action-button" />
+    </div>
+</form>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/zmienbudzetzarzadu.js"></script>
+}

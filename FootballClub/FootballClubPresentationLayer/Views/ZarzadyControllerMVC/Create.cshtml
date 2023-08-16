@@ -1,0 +1,61 @@
+﻿@model FootballClubLibrary.Models.Zarzad
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Utwórz nowy zarząd</h1>
+
+<form asp-action="Create">
+    <div class="zarzad-container">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="IdZarzad" />
+
+        <div class="zarzad-item">
+            <label asp-for="Klub.Nazwa" class="control-label">Klub</label>
+            <select id="klub" asp-for="Klub.Nazwa" name="id" class="form-control">
+                <option value="" disabled selected hidden>Wybierz klub</option>
+                @foreach (var zarzad in ViewBag.Zarzady)
+                {
+                    <option value="@zarzad.IdKlubu"> @zarzad.Klub.Nazwa </option>
+                }
+            </select>
+            <span asp-validation-for="Klub.Nazwa" class="text-danger"></span>
+        </div>
+
+        <div class="zarzad-item">
+            <label asp-for="Pracownicy" class="control-label"></label>
+            <select multiple name="wybraniPracownicy" class="form-control">
+                @foreach (var pracownik in ViewBag.Pracownicy)
+                {
+                    <option value="@pracownik.IdPracownik"> @pracownik.Imie @pracownik.Nazwisko</option>
+                }
+            </select>
+            <span asp-validation-for="Pracownicy" class="text-danger"></span>
+        </div>
+
+        <div class="zarzad-item">
+            <label asp-for="Budzet" class="control-label"></label>
+            <input asp-for="Budzet" class="form-control" type="number" step="0.01" />
+            <span asp-validation-for="Budzet" class="text-danger"></span>
+        </div>
+
+        <div class="zarzad-item">
+            <label asp-for="Cele" class="control-label"></label>
+            <input asp-for="Cele" class="form-control" />
+            <span asp-validation-for="Cele" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <a class="action-button" asp-action="Index">Wróć do listy zarządów</a>
+        <input type="submit" value="Utwórz zarząd" class="action-button" />
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

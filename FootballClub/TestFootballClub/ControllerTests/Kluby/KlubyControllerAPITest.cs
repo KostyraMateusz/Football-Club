@@ -1,19 +1,12 @@
 ﻿using BusinessLogicLayer.Interfaces;
-using FootballClubLibrary.Models;
 using FootballClubPresentationLayer.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestsFootballClub.ControllerTests.Kluby
 {
     public class KlubyControllerAPITest
     {
-
         [Fact]
         public async Task TestDajArchiwlanychPilkarzyKlubu()
         {
@@ -26,7 +19,7 @@ namespace TestsFootballClub.ControllerTests.Kluby
                 new Pilkarz(){IdPilkarz = Guid.NewGuid(), Imie="Zbigniew", Nazwisko = "Boniek"},
                 new Pilkarz(){IdPilkarz = Guid.NewGuid(), Imie="Grzegorz", Nazwisko = "Lato"}
             };
-            var klub = new Klub() { IdKlub = Guid.NewGuid(), Nazwa = "Reprezentacja Polski", ArchwilaniPilkarze = pilkarze };
+            var klub = new Klub() { IdKlub = Guid.NewGuid(), Nazwa = "Reprezentacja Polski", ArchiwalniPilkarze = pilkarze };
             mockKlubService.Setup(x => x.DajArchiwalnychPilkarzy(klub.IdKlub))
                            .ReturnsAsync(pilkarze);
 
@@ -40,7 +33,7 @@ namespace TestsFootballClub.ControllerTests.Kluby
             Assert.NotNull(okObjectResult);
             var resultValue = okObjectResult.Value;
             Assert.IsType<OkObjectResult>(result.Result);
-            Assert.Same(klub.ArchwilaniPilkarze, resultValue);
+            Assert.Same(klub.ArchiwalniPilkarze, resultValue);
         }
 
         [Fact]
@@ -70,36 +63,38 @@ namespace TestsFootballClub.ControllerTests.Kluby
         public async Task TestDodajPilkarzaDoObecnych()
         {
             // Arrange
-            var mockKlubService = new KlubServiceMock();
             var pilkarz = new Pilkarz() { IdPilkarz = Guid.NewGuid(), Imie = "Antoine", Nazwisko = "Griezmann" };
-            var klub = new Klub() { IdKlub = Guid.NewGuid(), Nazwa = "Atletico Madryt", Stadion = "Wanda Metropolitano", ObecniPilkarze = new List<Pilkarz> { } };
-            
+            var AtleticoMadryt = new Klub() { IdKlub = Guid.NewGuid(), Nazwa = "Atletico Madryt", Stadion = "Wanda Metropolitano", ObecniPilkarze = new List<Pilkarz> { } };
+            List<Klub> kluby = new List<Klub> { AtleticoMadryt };
+
             // Act
+            var mockKlubService = new KlubServiceMock(kluby);
             var klubyController = new KlubyController(mockKlubService);
-            await klubyController.DodajPilkarzaDoObecnych(pilkarz, klub.IdKlub);
+            await klubyController.DodajPilkarzaDoObecnych(pilkarz, AtleticoMadryt.IdKlub);
 
             // Assert
-            Assert.Equal(klub?.ObecniPilkarze.Count(), 1);
-            Assert.Equal(klub?.ObecniPilkarze.Contains(pilkarz), true);
+            Assert.Equal(AtleticoMadryt?.ObecniPilkarze.Count(), 1);
+            Assert.Equal(AtleticoMadryt?.ObecniPilkarze.Contains(pilkarz), true);
         }
 
         [Fact]
         public async Task TestDajTrofaKlubu()
         {
             // Arrange
-            var mockKlubService = new KlubServiceMock();
-            var klub = new Klub() { IdKlub = Guid.NewGuid(), Nazwa = "Atletico Madryt", Trofea = "La Liga" };
+            var AtleticoMadryt = new Klub() { IdKlub = Guid.NewGuid(), Nazwa = "Atletico Madryt", Trofea = "La Liga" };
+            List<Klub> kluby = new List<Klub> { AtleticoMadryt };
 
             // Act
+            var mockKlubService = new KlubServiceMock(kluby);
             var klubyController = new KlubyController(mockKlubService);
-            var result  = await klubyController.DajTrofeaKlubu(klub.IdKlub);
+            var result  = await klubyController.DajTrofeaKlubu(AtleticoMadryt.IdKlub);
             var okObjectResult = result.Result as OkObjectResult;
 
             // Assert
             Assert.NotNull(okObjectResult);
             var resultValue = okObjectResult.Value;
             Assert.IsType<OkObjectResult>(result.Result);
-            Assert.Same(klub.Trofea, resultValue);
+            Assert.Same(AtleticoMadryt.Trofea, resultValue);
         }
     }
 }

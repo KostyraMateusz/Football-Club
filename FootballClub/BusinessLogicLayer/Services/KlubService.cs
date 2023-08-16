@@ -1,12 +1,7 @@
 ﻿using BusinessLogicLayer.Interfaces;
 using FootballClubLibrary.Models;
 using FootballClubLibrary.UnitOfWork;
-using NuGet.Versioning;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace BusinessLogicLayer.Services
 {
@@ -19,64 +14,101 @@ namespace BusinessLogicLayer.Services
             this.unitOfWork = unitOfWork;
         }
 
+        public async Task DodajKlub(Klub klub)
+        {
+            var foundClub = await this.unitOfWork.KlubRepository.GetKlubById(klub.IdKlub);
+            if (foundClub == null)
+            {
+                await this.unitOfWork.KlubRepository.CreateKlub(klub);
+            }
+        }
+
+        public async Task UsunKlub(Guid IdKlubu)
+        {
+            var foundClub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
+            if (foundClub != null)
+            {
+                await this.unitOfWork.KlubRepository.DeleteKlub(IdKlubu);
+            }
+        }
+
+        public async Task EdytujKlub(Klub klub)
+        {
+            if (klub != null)
+            {
+                await this.unitOfWork.KlubRepository.UpdateKlub(klub);
+            }
+        }
+
+        public async Task<Klub> DajKlub(Guid IdKlubu)
+        {
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
+            return klub;
+        }
+
         public async Task<IEnumerable<Klub>> DajKluby()
         {
             return await this.unitOfWork.KlubRepository.GetKluby();
         }
 
-        public async Task<Pilkarz> DajArchiwalnegoPilkarza(Guid IdKlubu, Guid IdPilkarza)
+        public async Task DodajPilkarzaDoObecnych(Pilkarz pilkarz, Klub _klub)
         {
-            var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
-            var pilkarz = klub.ArchwilaniPilkarze.First(p => p.IdPilkarz == IdPilkarza);
-            return pilkarz;
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById(_klub.IdKlub);
+            await this.unitOfWork.KlubRepository.DodajPilkarzaDoObecnych(_klub, pilkarz);
+
         }
 
-        public async Task<IEnumerable<Pilkarz>> DajArchiwalnychPilkarzy(Guid IdKlubu)
+        public async Task DodajPilkarzyDoObecnych(List<Pilkarz> pilkarze, Klub klub)
         {
-            var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
-            var result = klub.ArchwilaniPilkarze.ToList();
-            if (result != null)
+            if (pilkarze.Count() > 0 && klub != null)
             {
-                return result;
+                await this.unitOfWork.KlubRepository.DodajPilkarzyDoObecnych(klub, pilkarze);
             }
             else
             {
-                return null;
+                return;
             }
+        }
 
+        public async Task UsunPilkarzaZObecnych(Guid PilkarzId, Guid IdKlubu)
+        {
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
+            var _pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(PilkarzId);
+            await this.unitOfWork.KlubRepository.UsunPilkarzaZObecnych(klub, _pilkarz);
         }
 
         public async Task<Pilkarz> DajObecnegoPilkarza(Guid IdKlubu, Guid IdPilkarza)
         {
             var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
             var result = klub.ObecniPilkarze.First(p => p.IdPilkarz == IdPilkarza);
-            if (result != null)
-            {
-                return result;
-            }
-            else
-            {
-                return null;
-            }
+            return result;
         }
+
         public async Task<IEnumerable<Pilkarz>> DajObecnychPilkarzy(Klub _klub)
         {
             var klub = await this.unitOfWork.KlubRepository.GetKlubById(_klub.IdKlub);
             var result = klub.ObecniPilkarze?.ToList();
-            if (result != null)
-            {
-                return result;
-            }
-            else
-            {
-                return null;
-            }
+            return result;
+        }
+
+        public async Task<Pilkarz> DajArchiwalnegoPilkarza(Guid IdKlubu, Guid IdPilkarza)
+        {
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
+            var pilkarz = klub.ArchiwalniPilkarze.First(p => p.IdPilkarz == IdPilkarza);
+            return pilkarz;
+        }
+
+        public async Task<IEnumerable<Pilkarz>> DajArchiwalnychPilkarzy(Guid IdKlubu)
+        {
+            var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
+            var result = klub.ArchiwalniPilkarze.ToList();
+            return result;
         }
 
         public async Task<string> DajStadionKlubu(Klub _klub)
         {
             var klub = await this.unitOfWork.KlubRepository.GetKlubById(_klub.IdKlub);
-            return klub?.Stadion;
+            return klub.Stadion;
         }
 
         public async Task<string> DajTrofeaKlubu(Klub _klub)
@@ -85,45 +117,12 @@ namespace BusinessLogicLayer.Services
             return klub.Trofea;
         }
 
-        public async Task DodajPilkarzaDoObecnych(Pilkarz pilkarz, Klub _klub)
+        public async Task DodajPilkarzaDoArchiwalncyh(Guid IdPilkarza, Guid IdKlubu)
         {
-            var klub = await this.unitOfWork.KlubRepository.GetKlubById(_klub.IdKlub);
-            bool czyPilkarzJestWObecnych = klub.ObecniPilkarze == null ? false : (klub.ObecniPilkarze.Contains(pilkarz));
-            if (pilkarz == null || klub == null || czyPilkarzJestWObecnych == true)
-            {
-                return;
-            }
-            klub.ObecniPilkarze?.Add(pilkarz);
-            await this.unitOfWork.Save();
-        }
-
-        public async Task UsunPilkarzaZObecnych(Guid PilkarzId, Guid IdKlubu)
-        {
+            var pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(IdPilkarza);
             var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
-            var _pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(PilkarzId);
-            bool czyPilkarzJestWObecnych = klub.ObecniPilkarze == null ? false : (klub.ObecniPilkarze.Contains(_pilkarz));
-            if (_pilkarz == null || klub == null || czyPilkarzJestWObecnych == false)
-            {
-                return;
-            }
-            klub.ObecniPilkarze?.Remove(_pilkarz);
-            klub.ArchwilaniPilkarze?.Add(_pilkarz);
-            await this.unitOfWork.Save();
-        }
+            await this.unitOfWork.KlubRepository.DodajPilkarzaDoArchiwalnych(klub, pilkarz);
 
-        public async Task DodajPilkarzyDoObecnych(List<Pilkarz> pilkarze, Klub klub)
-        {
-            if (klub == null || pilkarze == null)
-            {
-                return;
-            }
-            foreach(var pilkarz in pilkarze)
-            {
-                if(pilkarz != null)
-                {
-                    klub?.ObecniPilkarze?.Add(pilkarz);
-                }
-            }
         }
     }
 }

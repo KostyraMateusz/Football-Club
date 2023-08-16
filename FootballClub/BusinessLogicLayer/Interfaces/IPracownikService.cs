@@ -1,14 +1,13 @@
 ﻿using FootballClubLibrary.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Interfaces
 {
     public interface IPracownikService
     {
+        Task DodajPracownika(Pracownik pracownik);
+        Task UsunPracownika(Guid IdPracownika);
+        Task EdytujPracownika(Pracownik pracownik);
+        Task<Pracownik> DajPracownika(Guid IdPracownika);
         Task<IEnumerable<Pracownik>> DajPracownikow();
         Task ZmienFunkcjePracownika(Guid IdPracownik, string funkcja);
         Task ZmienWynagrodzenie(Guid IdPracownik, decimal wynagrodzenie);

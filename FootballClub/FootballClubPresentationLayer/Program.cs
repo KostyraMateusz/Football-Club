@@ -1,10 +1,10 @@
 using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Services;
 using FootballClubLibrary.Data;
-using FootballClubLibrary.Intefaces;
 using FootballClubLibrary.Interfaces;
 using FootballClubLibrary.Repositories;
 using FootballClubLibrary.UnitOfWork;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,12 +15,25 @@ builder.Services.AddScoped<IZarzadRepository, ZarzadRepository>();
 builder.Services.AddScoped<IPilkarzRepository, PilkarzRepository>();
 builder.Services.AddScoped<IPracownikRepository, PracownikRepository>();
 builder.Services.AddScoped<IStatystykaRepository, StatystykaRepository>();
+
 builder.Services.AddScoped<IKlubService, KlubService>();
 builder.Services.AddScoped<IPilkarzService, PilkarzService>();
 builder.Services.AddScoped<IPracownikService, PracownikService>();
 builder.Services.AddScoped<IStatystykaService, StatystykaService>();
-builder.Services.AddScoped<IZarzadRepository, ZarzadRepository>();
+builder.Services.AddScoped<IZarzadService, ZarzadService>();
+
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddControllers().AddJsonOptions(opt =>
+{
+    opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
+builder.Services.AddCors(p => p.AddPolicy("CorsPolicy", build =>
+{
+    build.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+}));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -41,11 +54,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseCors("CorsPolicy");
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=HomeControllerMVC}/{action=Index}/{id?}");
 
 app.Run();

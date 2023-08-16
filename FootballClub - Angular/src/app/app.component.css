@@ -1,0 +1,24 @@
+html,
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 100px;
+    font-size: 0.7rem;
+}
+
+router-outlet {
+    min-height: calc(100vh - 70px);
+}
+
+footer {
+    background-color: black;
+    margin-bottom: 0px;
+    margin-top: 500px;
+    height: 35px;
+    border-top: 2px solid rgb(134, 20, 162);
+    text-align: center;
+    color: whitesmoke;
+    padding-top: 10px;
+    letter-spacing: 0.02rem;
+}

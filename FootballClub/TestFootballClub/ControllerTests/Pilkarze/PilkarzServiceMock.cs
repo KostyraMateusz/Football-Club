@@ -1,11 +1,4 @@
 ﻿using BusinessLogicLayer.Interfaces;
-using FootballClubLibrary.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestsFootballClub.ControllerTests.Pilkarze
 {
@@ -13,9 +6,40 @@ namespace TestsFootballClub.ControllerTests.Pilkarze
     {
         List<Pilkarz> pilkarze = new List<Pilkarz>();
 
+        public PilkarzServiceMock(List<Pilkarz> pilkarze)
+        {
+            this.pilkarze = pilkarze;
+        }
+
+        public Task DodajPilkarza(Pilkarz pilkarz)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UsunPilkarza(Guid IdPilkarz)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task EdytujPilkarza(Pilkarz pilkarz)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Pilkarz> DajPilkarza(Guid IdPilkarz)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<Pilkarz>> DajPilkarzy()
         {
             return await Task.FromResult(this.pilkarze.ToList());
+        }
+
+        public async Task<IEnumerable<Pilkarz>> DajPilkarzyBezKlubu()
+        {
+            var piłkarzeBezKlubu = await Task.FromResult(this.pilkarze.Where(p => p.IdKlubu == null).ToList());
+            return await Task.FromResult(piłkarzeBezKlubu.ToList());
         }
 
         public async Task<IEnumerable<Klub>> DajArchiwalneKlubyPilkarza(Pilkarz pilkarz)
@@ -29,6 +53,12 @@ namespace TestsFootballClub.ControllerTests.Pilkarze
             return await Task.FromResult(statystyka);
         }
 
+        public async Task<IEnumerable<Statystyka>> DajNajlepszeStatystykiPilkarza(Pilkarz pilkarz)
+        {
+            var statystyki = pilkarz.Statystyki?.OrderByDescending(s => s.Ocena);
+            return await Task.FromResult(statystyki?.ToList());
+        }
+
         public async Task<IEnumerable<Statystyka>> DajStatystykiPilkarza(Pilkarz pilkarz)
         {
             return await Task.FromResult(pilkarz.Statystyki?.ToList());
@@ -40,18 +70,6 @@ namespace TestsFootballClub.ControllerTests.Pilkarze
             {
                 pilkarz.Pozycja = pozycja;
             }
-        }
-
-        public async Task<IEnumerable<Statystyka>> DajNajlepszeStatystykiPilkarza(Pilkarz pilkarz)
-        {
-            var statystyki = pilkarz.Statystyki?.OrderByDescending(s => s.Ocena);
-            return await Task.FromResult(statystyki?.ToList());
-        }
-
-        public async Task<IEnumerable<Pilkarz>> DajPilkarzyBezKlubu()
-        {
-            var piłkarzeBezKlubu = await Task.FromResult(this.pilkarze.Where(p => p.IdKlubu == null).ToList());
-            return await Task.FromResult(piłkarzeBezKlubu.ToList());
         }
     }
 }

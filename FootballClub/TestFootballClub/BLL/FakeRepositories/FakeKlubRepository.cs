@@ -1,18 +1,17 @@
-﻿using FootballClubLibrary.Intefaces;
-using FootballClubLibrary.Models;
-using FootballClubLibrary.Repositories;
+﻿using FootballClubLibrary.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestsFootballClub.FakeRepositories
 {
     public class FakeKlubRepository : IKlubRepository
     {
         private List<Klub> kluby = new List<Klub>();
+
+        public DbSet<Klub> GetDbSetKluby()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task CreateKlub(Klub klub)
         {
             kluby.Add(klub);
@@ -26,7 +25,17 @@ namespace TestsFootballClub.FakeRepositories
             return;
         }
 
-        public async Task<Klub> GetKlubById(Guid id)
+        public async Task UpdateKlub(Klub klub)
+        {
+            var index = await Task.FromResult(kluby.FindIndex(p => p.IdKlub == klub.IdKlub));
+            if (index != -1)
+            {
+                kluby[index] = klub;
+            }
+            return;
+        }
+
+        public async Task<Klub> GetKlubById(Guid? id)
         {
             var klub = await Task.FromResult(kluby.Find(k => k.IdKlub == id));
             return klub;
@@ -36,16 +45,6 @@ namespace TestsFootballClub.FakeRepositories
         {
             var kluby = await Task.FromResult(this.kluby);
             return kluby;
-        }
-
-        public async Task UpdateKlub(Klub klub)
-        {
-            var index = await Task.FromResult(kluby.FindIndex(p => p.IdKlub == klub.IdKlub));
-            if (index != -1)
-            {
-                kluby[index] = klub;
-            }
-            return;
         }
 
         public async Task DodajTrofeumKlubu(Guid id, string trofeum)
@@ -63,17 +62,9 @@ namespace TestsFootballClub.FakeRepositories
             return kluby.Count();
         }
 
-        // Niewykorzystywane w FakePilkarzRepository
-        public DbSet<Klub> GetDbSetKluby()
-        {
-            throw new NotImplementedException();
-        }
-
         public Task Save()
         {
             throw new NotImplementedException();
         }
-
-
     }
 }

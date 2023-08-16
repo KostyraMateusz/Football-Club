@@ -1,0 +1,23 @@
+<div class="form-container">
+    <h1>Dodaj nowy klub</h1>
+    <form [formGroup]="klub" (ngSubmit)="DodajKlub()">
+        <mat-form-field>
+            <mat-label>Nazwa</mat-label>
+            <input matInput formControlName="nazwa">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Stadion</mat-label>
+            <input matInput formControlName="stadion">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Trofea</mat-label>
+            <input matInput formControlName="trofea">
+        </mat-form-field>
+
+        <button type="submit" mat-button>Dodaj klub</button>
+    </form>
+
+
+</div>

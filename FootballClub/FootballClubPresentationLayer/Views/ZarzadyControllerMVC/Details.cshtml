@@ -1,0 +1,49 @@
+﻿@model FootballClubLibrary.Models.Zarzad
+
+@{
+    ViewData["Title"] = "Details";
+    var aktualnyZarząd = @Model.IdZarzad;
+    CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+    CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
+}
+
+<h1>Szczegóły zarządu</h1>
+
+<div class="zarzad-container">
+    <div class="zarzad-item">
+        <a class="nazwa"> Nazwa klubu: </a> @Model.Klub.Nazwa
+    </div>
+
+    <div class="zarzad-item">
+        <a class="nazwa">Pracownicy:</a>
+        @if (@Model.Pracownicy != null)
+        {
+            <ol type="1">
+                @foreach (var pracownik in Model.Pracownicy)
+                {
+                    <li>@pracownik.Imie @pracownik.Nazwisko (@pracownik.WykonywanaFunkcja)</li>
+                }
+            </ol>
+        }
+        else
+        {
+            <a>Brak pracowników</a>
+        }
+    </div>
+
+    <div class="zarzad-item">
+        <a class="nazwa"> Budzet: </a> @Model.Budzet.ToString("N2", System.Globalization.CultureInfo.InvariantCulture) €
+    </div>
+    
+    <div class="zarzad-item">
+        <a class="nazwa">Cele:</a> @Model.Cele
+    </div>
+</div>
+<div class="button-container">
+    <a class="action-button" asp-action="Index">Wróć do listy zarządów</a>
+    <a class="action-button" asp-action="ZmienBudzetZarzaduID" asp-route-id="@Model.IdZarzad">Zmień budżet</a>
+    <a class="action-button" asp-action="DodajCelZarzaduID" asp-route-id="@Model.IdZarzad">Zmień cele</a>
+    <a class="action-button" asp-action="DodajCzlonkaZarzaduID" asp-route-id="@Model.IdZarzad">Dodaj pracownika</a>
+    <a class="action-button" asp-action="UsunCzlonkaZarzaduID" asp-route-id="@Model.IdZarzad">Usuń pracownika</a>
+    <a class="action-button" id="delete-button" asp-action="Delete" asp-route-id="@Model.IdZarzad">Usuń zarząd</a>
+</div>

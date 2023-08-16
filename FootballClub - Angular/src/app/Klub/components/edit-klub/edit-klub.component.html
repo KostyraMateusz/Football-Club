@@ -1,0 +1,39 @@
+<div class="form-container">
+    <h1>Edytuj wybrany klub</h1>
+    <form [formGroup]="klub" (ngSubmit)="EdytujKlub()">
+        <mat-form-field>
+            <mat-label>Nazwa</mat-label>
+            <input matInput formControlName="nazwa" [value]="this.klub.value.Nazwa">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Stadion</mat-label>
+            <input matInput formControlName="stadion" [value]="this.klub.value.Stadion">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Trofea</mat-label>
+            <input matInput formControlName="trofea" [value]="this.klub.value.Trofea">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Obecni Piłkarze</mat-label>
+            <mat-select formControlName="obecniPilkarze" multiple [value]="this.klub.value.ObecniPilkarze">
+                <mat-option *ngFor="let pilkarz of this.pilkarze" [value]="pilkarz">
+                    {{ pilkarz.nazwisko }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Archiwalni Piłkarze</mat-label>
+            <mat-select formControlName="archiwalniPilkarze" multiple [value]="this.klub.value.ArchiwalniPilkarze">
+                <mat-option *ngFor="let pilkarz of this.pilkarze" [value]="pilkarz">
+                    {{ pilkarz.nazwisko }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button type="submit" mat-button>Dodaj klub</button>
+    </form>
+
+
+</div>

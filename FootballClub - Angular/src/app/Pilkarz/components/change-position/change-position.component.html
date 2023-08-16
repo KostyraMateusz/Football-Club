@@ -1,0 +1,23 @@
+<div class="add-container">
+    <button type="submit" mat-button (click)="getBack()">Powrót do głównej</button>
+    <h1>Wybierz piłkarza i zmień jego pozycję</h1>
+    <form [formGroup]="pilkarz" (ngSubmit)=" ZmienPozycjePilkarza()">
+        <mat-form-field>
+            <mat-label>Piłkarz</mat-label>
+            <mat-select formControlName="idPilkarz">
+                <mat-option *ngFor="let p of this.pilkarze" [value]="p.idPilkarz">
+                    {{ p.imie + " " + p.nazwisko }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Pozycja</mat-label>
+            <mat-select formControlName="pozycja">
+                <mat-option *ngFor="let p of this.pozycje" [value]="p">
+                    {{ p }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button type="submit" mat-button>Zmień pozycję piłkarza</button>
+    </form>
+</div>

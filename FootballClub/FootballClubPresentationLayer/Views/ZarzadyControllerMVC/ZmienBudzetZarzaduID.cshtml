@@ -1,0 +1,39 @@
+﻿@model FootballClubLibrary.Models.Zarzad
+
+@{
+    ViewData["Title"] = "Zmien budżet zarządu";
+    CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+    CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
+}
+
+<h1>Zmien budżet zarządu</h1>
+
+<form asp-action="ZmienBudzetZarzaduID">
+    <div class="zarzad-container">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="IdZarzad" />
+
+        <div class="zarzad-item">
+            <label asp-for="Klub.Nazwa" class="control-label">Nazwa klubu</label>
+            <input asp-for="Klub.Nazwa" class="form-control" readonly />
+            <span asp-validation-for="Klub.Nazwa" class="text-danger"></span>
+        </div>
+
+        <div class="zarzad-item">
+            <label asp-for="Budzet" class="control-label">Budżet</label>
+            <input asp-for="Budzet" class="form-control" />
+            <span asp-validation-for="Budzet" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <a asp-action="Index" class="action-button" >Wróć do listy zarządów</a>
+        <input type="submit" value="Zmień budżet" class="action-button" />
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
