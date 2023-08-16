@@ -15,6 +15,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDividerModule } from '@angular/material/divider';
+
 
 import { KlubDetailsComponent } from './Klub/components/klub-details/klub-details.component';
 import { AddKlubComponent } from './Klub/components/add-klub/add-klub.component';
@@ -81,7 +84,9 @@ import { PilkarzStatisticsComponent } from './Pilkarz/components/pilkarz-statist
     MatPaginatorModule,
     MatSortModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressBarModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

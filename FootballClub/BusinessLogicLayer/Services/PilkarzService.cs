@@ -51,14 +51,14 @@ namespace BusinessLogicLayer.Services
             return await this.unitOfWork.PilkarzRepository.GetPilkarze();
         }
 
-		public async Task<IEnumerable<Pilkarz>> DajPilkarzyBezKlubu()
-		{
-			var pilkarze = await this.unitOfWork.PilkarzRepository.GetPilkarze();
-			var result = pilkarze.Where(p => p.IdKlubu == null && p.Klub == null);
-			return result;
-		}
+        public async Task<IEnumerable<Pilkarz>> DajPilkarzyBezKlubu()
+        {
+            var pilkarze = await this.unitOfWork.PilkarzRepository.GetPilkarze();
+            var result = pilkarze.Where(p => p.IdKlubu == null && p.Klub == null);
+            return result;
+        }
 
-		public async Task<IEnumerable<Klub>> DajArchiwalneKlubyPilkarza(Pilkarz pilkarz)
+        public async Task<IEnumerable<Klub>> DajArchiwalneKlubyPilkarza(Pilkarz pilkarz)
         {
             var result = pilkarz.ArchiwalneKluby?.ToList();
             return result;
@@ -73,26 +73,35 @@ namespace BusinessLogicLayer.Services
         public async Task<IEnumerable<Statystyka>> DajNajlepszeStatystykiPilkarza(Pilkarz pilkarz)
         {
             var result = pilkarz.Statystyki?.OrderByDescending(p => p.Ocena).Take(5).ToList();
+            if (result.Count() < 5)
+            {
+                return pilkarz.Statystyki;
+            }
             return result;
         }
 
         public async Task<IEnumerable<Statystyka>> DajStatystykiPilkarza(Pilkarz pilkarz)
-		{
-			var result = pilkarz.Statystyki;
-			return result;
-		}
+        {
+            var statystyki = await this.unitOfWork.StatystykaRepository.GetStatystyki();
+            var result = statystyki.Where(s => s.Pilkarz == pilkarz).ToList();
+            if (result == null)
+            {
+                return pilkarz.Statystyki;
+            }
+            return result;
+        }
 
-		public async Task ZmienPozycjePilkarza(Pilkarz pilkarz, string pozycja)
-		{
-			if (pozycja != "")
-			{
-				pilkarz.Pozycja = pozycja;
-			}
-			else
-			{
-				return;
-			}
-			await this.unitOfWork.Save();
-		}
+        public async Task ZmienPozycjePilkarza(Pilkarz pilkarz, string pozycja)
+        {
+            if (pozycja != "")
+            {
+                pilkarz.Pozycja = pozycja;
+            }
+            else
+            {
+                return;
+            }
+            await this.unitOfWork.Save();
+        }
     }
 }

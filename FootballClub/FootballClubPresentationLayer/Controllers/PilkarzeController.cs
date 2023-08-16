@@ -201,7 +201,7 @@ namespace FootballClubPresentationLayer.Controllers
 
         [HttpPut]
         [Route("api/[controller]/ZmienPozycjePilkarza/{IdPilkarza}")]
-        public async Task<ActionResult> ZmienPozycjePilkarza([FromRoute] Guid IdPilkarza, string pozycja)
+        public async Task<ActionResult> ZmienPozycjePilkarza([FromRoute] Guid IdPilkarza, [FromBody] string pozycja)
         {
             try
             {
@@ -212,7 +212,7 @@ namespace FootballClubPresentationLayer.Controllers
                     throw new Exception();
                 }
                 await this.pilkarzService.ZmienPozycjePilkarza(pilkarz, pozycja);
-                return Ok("Index");
+                return Ok();
             }
             catch (Exception ex)
             {

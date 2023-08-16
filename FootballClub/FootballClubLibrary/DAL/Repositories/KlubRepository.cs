@@ -101,9 +101,13 @@ namespace FootballClubLibrary.Repositories
                 return;
             }
 
-            if (klub.ObecniPilkarze == null || klub.ArchiwalniPilkarze == null)
+            if (klub.ObecniPilkarze == null)
             {
                 klub.ObecniPilkarze = new List<Pilkarz>() { };
+            }
+
+            if (klub.ArchiwalniPilkarze == null)
+            {
                 klub.ArchiwalniPilkarze = new List<Pilkarz>() { };
             }
 
@@ -113,7 +117,8 @@ namespace FootballClubLibrary.Repositories
                 {
                     klub?.ObecniPilkarze.Remove(pilkarz);
                 }
-                klub?.ArchiwalniPilkarze.Add(pilkarz);
+                klub.ArchiwalniPilkarze.Add(pilkarz);
+                pilkarz.ArchiwalneKluby?.Add(klub);
                 await this.Save();
             }
         }

@@ -1,4 +1,3 @@
-import { Pilkarz } from "src/app/Pilkarz/Models/pilkarz.model";
 
 export interface Statystyka {
     idStatystyka: number;
