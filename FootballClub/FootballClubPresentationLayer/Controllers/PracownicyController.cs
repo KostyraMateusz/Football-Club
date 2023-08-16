@@ -93,8 +93,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpPut]
-        [Route("api/[controller]/ZmienFunkcjePracownika")]
-        public async Task<ActionResult> ZmienFunkcjePracownika([FromRoute] Guid IdPracownik, string funkcja)
+        [Route("api/[controller]/ZmienFunkcjePracownika/{IdPracownik}")]
+        public async Task<ActionResult> ZmienFunkcjePracownika([FromRoute] Guid IdPracownik, [FromBody]string funkcja)
         {
             try
             {
@@ -133,8 +133,8 @@ namespace FootballClubPresentationLayer.Controllers
 
 
         [HttpPut]
-        [Route("api/[controller]/ZmienWiekPracownika")]
-        public async Task<ActionResult> ZmienWiekPracownika([FromRoute] Guid IdPracownik, int wiek)
+        [Route("api/[controller]/ZmienWiekPracownika/{IdPracownik}")]
+        public async Task<ActionResult> ZmienWiekPracownika([FromRoute] Guid IdPracownik, [FromBody]int wiek)
         {
             try
             {

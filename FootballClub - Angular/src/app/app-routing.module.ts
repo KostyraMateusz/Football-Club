@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { KlubListComponent } from './Klub/components/klub-list/klub-list.component';
+import { KlubDetailsComponent } from './Klub/components/klub-details/klub-details.component';
 import { AddKlubComponent } from './Klub/components/add-klub/add-klub.component';
 import { EditKlubComponent } from './Klub/components/edit-klub/edit-klub.component';
 import { PilkarzListComponent } from './Pilkarz/components/pilkarz-list/pilkarz-list.component';
@@ -15,15 +15,27 @@ import { EditStatystykaComponent } from './Statystyka/components/edit-statystyka
 import { ChangeSalaryComponent } from './Pracownik/components/change-salary/change-salary.component';
 import { ChangeFunctionComponent } from './Pracownik/components/change-function/change-function.component';
 import { ChangeAgeComponent } from './Pracownik/components/change-age/change-age.component';
+import { OthersKlubListComponent } from './Klub/components/others-klub-list/others-klub-list.component';
+import { AddArchivalPlayerComponent } from './Klub/components/add-archival-player/add-archival-player.component';
+import { AddCurrentPlayerComponent } from './Klub/components/add-current-player/add-current-player.component';
+import { ChangePositionComponent } from './Pilkarz/components/change-position/change-position.component';
+import { BestStatisticsComponent } from './Pilkarz/components/best-statistics/best-statistics.component';
+import { PilkarzStatisticsComponent } from './Pilkarz/components/pilkarz-statistics/pilkarz-statistics.component';
 
 const routes: Routes = [
-  { path: "", component: KlubListComponent },
-  { path: "Kluby", component: KlubListComponent },
+  { path: "", component: KlubDetailsComponent },
+  { path: "Klub/RealMadryt/Szczegoly", component: KlubDetailsComponent },
   { path: "Kluby/DodajKlub", component: AddKlubComponent },
   { path: "Kluby/EdytujKlub/:id", component: EditKlubComponent },
+  { path: "Kluby/InneKluby", component: OthersKlubListComponent },
+  { path: "Kluby/DodajPilkarzaDoArchiwalnych", component: AddArchivalPlayerComponent },
+  { path: "Kluby/DodajPilkarzaDoObecnych", component: AddCurrentPlayerComponent },
   { path: "Pilkarze", component: PilkarzListComponent },
   { path: "Pilkarze/DodajPilkarza", component: AddPilkarzComponent },
   { path: "Pilkarze/EdytujPilkarza/:id", component: EditPilkarzComponent },
+  { path: "Pilkarze/ZmienPozycjePilkarza", component: ChangePositionComponent },
+  { path: "Pilkarze/NajlepszeStatystykiPilkarza", component: BestStatisticsComponent },
+  { path: "Pilkarze/StatystykiPilkarza", component: PilkarzStatisticsComponent },
   { path: "Pracownicy", component: PracownikListComponent },
   { path: "Pracownicy/DodajPracownika", component: AddPracownikComponent },
   { path: "Pracownicy/EdytujPracownika/:id", component: EditPracownikComponent },

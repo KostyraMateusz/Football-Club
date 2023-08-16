@@ -36,7 +36,7 @@ a {
     color: black;
     font-weight: 300;
     font-size: 1.8rem;
-    text-decoration: underline 2px darkmagenta;
+    text-decoration: underline 1px gold;
     letter-spacing: 0.12rem;
 }
 
@@ -67,7 +67,7 @@ a {
     color: black;
     font-weight: 300;
     font-size: 1.7rem;
-    text-decoration: underline 2px darkmagenta;
+    text-decoration: underline 1px gold;
     letter-spacing: 0.12rem;
 }
 
@@ -76,7 +76,7 @@ a {
 #ZdjecieAutorow {
     width: 400px;
     height: 400px;
-    border: 2px solid #dda722;
+    border: 2px solid gold;
     padding: 5px;
     transition: 0.3s;
 }
@@ -199,7 +199,7 @@ a {
     margin-left: 5px;
     color: white;
     text-decoration: none;
-    border-right: 1px solid #dda722;
+    border-right: 1px solid #8d0b8d;
     padding: 0px 10px 0px 0px;
 }
 
@@ -209,7 +209,7 @@ a {
 }
 
 .nav-a:hover{
-    color: magenta !important;
+    color: #8d0b8d !important;
     transition: 0.3s;
 }
 

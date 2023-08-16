@@ -33,13 +33,16 @@ export class ChangeSalaryComponent implements OnInit {
     })
   }
 
+  getBack(): void {
+    this.router.navigateByUrl('/Pracownicy');
+  }
 
   ZmienWynagrodzenie(): void {
-    this.pracownik.value.idPracownik = this.pracownik.value.idPracownik?.at(0);
+    this.pracownik.value.idPracownik = this.pracownik.value.idPracownik;
     console.log(this.pracownik.value);
     if (this.pracownik.value.idPracownik && this.pracownik.value.wynagrodzenie) {
       this.pracownikService.ZmienPensjePracownika(this.pracownik.value.idPracownik, this.pracownik.value.wynagrodzenie).subscribe(res => {
-        this.router.navigateByUrl("/Pracownicy")
+        this.getBack();
       })
     }
 

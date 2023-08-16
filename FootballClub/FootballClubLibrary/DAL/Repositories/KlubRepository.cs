@@ -23,19 +23,30 @@ namespace FootballClubLibrary.Repositories
 
 		public async Task CreateKlub(Klub klub)
         {
+            if(klub.ArchiwalniPilkarze == null)
+            {
+                klub.ArchiwalniPilkarze = new List<Pilkarz>() { };
+            }
+
+            if(klub.ObecniPilkarze == null)
+            {
+                klub.ObecniPilkarze = new List<Pilkarz>() { };
+            }
             await this.dbContext.Kluby.AddAsync(klub);
+            await this.Save();
         }
 
         public async Task DeleteKlub(Guid id)
         {
             var klub = await this.dbContext.Kluby.FindAsync(id);
             this.dbContext.Kluby.Remove(klub);
+            await this.Save();
         }
 
 		public async Task UpdateKlub(Klub klub)
 		{
 			this.dbContext.Entry(klub).State = EntityState.Modified;
-            await this.dbContext.SaveChangesAsync();
+            await this.Save();
         }
 
         public async Task<Klub> GetKlubById(Guid? id)
@@ -54,9 +65,93 @@ namespace FootballClubLibrary.Repositories
         {
             var klub = await this.dbContext.Kluby.FindAsync(id);
             klub.Trofea += $"{trofeum}, ";
+            await this.Save();
         }
 
-		public async Task Save()
+        public async Task DodajPilkarzaDoObecnych(Klub klub, Pilkarz pilkarz)
+        {
+            bool czyPilkarzJestWObecnych = klub.ObecniPilkarze == null ? false : (klub.ObecniPilkarze.Contains(pilkarz));
+            if (pilkarz == null || klub == null || czyPilkarzJestWObecnych == true)
+            {
+                return;
+            }
+
+            if (klub.ObecniPilkarze == null)
+            {
+                klub.ObecniPilkarze = new List<Pilkarz>() { };
+            }
+
+            klub.ObecniPilkarze.Add(pilkarz);
+            pilkarz.IdKlubu = klub.IdKlub;
+
+            if (klub.ArchiwalniPilkarze != null)
+            {
+                if (klub.ArchiwalniPilkarze.Contains(pilkarz))
+                {
+                    klub.ArchiwalniPilkarze.Remove(pilkarz);
+                }
+            }
+            await this.Save();
+        }
+
+        public async Task DodajPilkarzaDoArchiwalnych(Klub klub, Pilkarz pilkarz)
+        {
+            if (pilkarz == null || klub == null)
+            {
+                return;
+            }
+
+            if (klub.ObecniPilkarze == null)
+            {
+                klub.ObecniPilkarze = new List<Pilkarz>() { };
+            }
+
+            if (klub.ArchiwalniPilkarze == null)
+            {
+                klub.ArchiwalniPilkarze = new List<Pilkarz>() { };
+            }
+
+            if (!klub.ArchiwalniPilkarze.Contains(pilkarz))
+            {
+                if (klub.ObecniPilkarze.Contains(pilkarz))
+                {
+                    klub?.ObecniPilkarze.Remove(pilkarz);
+                }
+                klub.ArchiwalniPilkarze.Add(pilkarz);
+                pilkarz.ArchiwalneKluby?.Add(klub);
+                await this.Save();
+            }
+        }
+
+        public async Task UsunPilkarzaZObecnych(Klub klub, Pilkarz pilkarz)
+        {
+            bool czyPilkarzJestWObecnych = klub.ObecniPilkarze == null ? false : (klub.ObecniPilkarze.Contains(pilkarz));
+            if (pilkarz == null || klub == null || czyPilkarzJestWObecnych == false)
+            {
+                return;
+            }
+            klub.ObecniPilkarze?.Remove(pilkarz);
+            klub.ArchiwalniPilkarze?.Add(pilkarz);
+            await this.Save();
+        }
+
+        public async Task DodajPilkarzyDoObecnych(Klub klub, List<Pilkarz> pilkarze)
+        {
+            if (klub == null || pilkarze == null)
+            {
+                return;
+            }
+            foreach (var pilkarz in pilkarze)
+            {
+                if (pilkarz != null)
+                {
+                    klub?.ObecniPilkarze.Add(pilkarz);
+                }
+            }
+            await this.Save();
+        }
+
+        public async Task Save()
 		{
 			await this.dbContext.SaveChangesAsync();
 		}
@@ -78,5 +173,7 @@ namespace FootballClubLibrary.Repositories
             }
             this.disposed = true;
         }
+
+
     }
 }

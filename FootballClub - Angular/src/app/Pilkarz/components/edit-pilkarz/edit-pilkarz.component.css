@@ -1,0 +1,9 @@
+button {
+    border: 1px solid darkgoldenrod;
+    text-decoration: none;
+}
+
+button:hover {
+    transition: 0.3s;
+    border: 1px solid gold;
+}

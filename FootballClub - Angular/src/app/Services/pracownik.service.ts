@@ -39,4 +39,8 @@ export class PracownikService {
   ZmienPensjePracownika(IdPracownik: string, pensja: number): Observable<void> {
     return this.httpClient.put<void>(environment.url + 'Pracownicy/ZmienWynagrodzeniePracownika/' + IdPracownik, pensja);
   }
+
+  ZmienWiekPracownika(IdPracownik: string, wiek: number): Observable<void> {
+    return this.httpClient.put<void>(environment.url + 'Pracownicy/ZmienWiekPracownika/' + IdPracownik, wiek);
+  }
 }

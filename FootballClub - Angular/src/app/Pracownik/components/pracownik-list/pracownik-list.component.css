@@ -54,14 +54,11 @@ button {
     border: 1px solid darkgoldenrod;
     margin-left: 10px;
     margin-right: 10px;
-    color: darkgoldenrod;
 }
 
 button:hover {
-    border: 1px solid black;
     transition: 0.3s;
-    color: white;
-    background-color: rgb(134, 20, 162);
+    border: 1px solid gold;
 }
 
 mat-icon {

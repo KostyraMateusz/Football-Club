@@ -10,7 +10,8 @@ import { Pilkarz } from '../../Models/pilkarz.model';
 export class PilkarzListComponent implements OnInit {
 
   pilkarze: Pilkarz[] = [];
-  displayedColumns: string[] = ['Imie', 'Nazwisko', 'Wiek', 'Pozycja', 'Wynagrodzenie', 'Statystyki', 'ArchiwalneKluby'];
+  displayedColumns: string[] = ['Imie', 'Nazwisko', 'Wiek', 'Pozycja', 'Wynagrodzenie', 'Statystyki', 'ArchiwalneKluby',
+    'Edytuj', 'Usuń'];
 
   constructor(private pilkarzService: PilkarzService) {
     this.getPilkarze();
@@ -25,5 +26,9 @@ export class PilkarzListComponent implements OnInit {
       this.pilkarze = res;
       console.log(this.pilkarze);
     })
+  }
+
+  usunPilkarza(idPilkarza: string): void {
+
   }
 }

@@ -28,12 +28,12 @@ export class EditKlubComponent implements OnInit {
     this.getZarzady();
 
     this.klub = new FormGroup({
-      Nazwa: new FormControl('', Validators.required),
-      Stadion: new FormControl('', Validators.required),
-      Trofea: new FormControl('', Validators.required),
-      ArchiwalniPilkarze: new FormControl('', Validators.required),
-      ObecniPilkarze: new FormControl('', Validators.required),
-      Zarzad: new FormControl('', Validators.required),
+      nazwa: new FormControl('', Validators.required),
+      stadion: new FormControl('', Validators.required),
+      trofea: new FormControl('', Validators.required),
+      archiwalniPilkarze: new FormControl('', Validators.required),
+      obecniPilkarze: new FormControl('', Validators.required),
+      zarzad: new FormControl('', Validators.required),
     });
   }
 
@@ -66,7 +66,7 @@ export class EditKlubComponent implements OnInit {
       this.klub.value.Stadion = this.foundKlub.stadion;
       this.klub.value.Trofea = this.foundKlub.trofea;
       this.klub.value.ObecniPilkarze = this.foundKlub.obecniPilkarze;
-      this.klub.value.ArchiwalniPilkarze = this.foundKlub.archwilaniPilkarze;
+      this.klub.value.ArchiwalniPilkarze = this.foundKlub.archiwalniPilkarze;
       this.klub.value.Zarzad = this.foundKlub.zarzad;
       console.log(this.klub.value);
     })

@@ -15,25 +15,19 @@ import { Zarzad } from 'src/app/Zarzad/Models/zarzad.model';
 export class AddKlubComponent implements OnInit {
 
   pilkarze: Pilkarz[] = [];
-  zarzady: Zarzad[] = [];
   klub!: FormGroup;
 
   constructor(private klubService: KlubService, private pilkarzService: PilkarzService, private zarzadService: ZarzadService,
     private formBuilder: FormBuilder) {
     this.getPilkarze();
-    this.getZarzady();
   }
 
   ngOnInit(): void {
     this.getPilkarze();
-    this.getZarzady();
     this.klub = new FormGroup({
-      Nazwa: new FormControl('', Validators.required),
-      Stadion: new FormControl('', Validators.required),
-      Trofea: new FormControl('', Validators.required),
-      ArchiwalniPilkarze: new FormControl('', Validators.required),
-      ObecniPilkarze: new FormControl('', Validators.required),
-      Zarzad: new FormControl('', Validators.required),
+      nazwa: new FormControl('', Validators.required),
+      stadion: new FormControl('', Validators.required),
+      trofea: new FormControl('', Validators.required),
     });
   }
 
@@ -41,20 +35,12 @@ export class AddKlubComponent implements OnInit {
   getPilkarze(): void {
     this.pilkarzService.DajPilkarzy().subscribe(res => {
       this.pilkarze = res;
-      //console.log(this.pilkarze);
-    })
-  }
-
-  getZarzady(): void {
-    this.zarzadService.DajZarzady().subscribe(res => {
-      this.zarzady = res;
-      //console.log(this.zarzady);
+      console.log(this.pilkarze);
     })
   }
 
   DodajKlub(): void {
     console.log(this.klub.value);
-    this.klub.value.Zarzad = null;
     this.klubService.DodajKlub(this.klub.value).subscribe(res => {
       console.log("Klub został dodany");
     })

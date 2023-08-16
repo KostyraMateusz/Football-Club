@@ -18,7 +18,6 @@ namespace FootballClubLibrary.Models
         [Range(16,50)]
         public int Wiek { get; set; }
 
-        [StringLength(20, ErrorMessage = "Zbyt długa nazwa pozycji !")]
         public string? Pozycja { get; set; }
 
         public decimal Wynagrodzenie { get; set; }
