@@ -1,0 +1,92 @@
+.list-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.klub-details {
+    text-align: justify;
+}
+
+th,
+tr {
+    border: 1px solid rgb(134, 20, 162);
+}
+
+th {
+    background-color: rgb(134, 20, 162);
+    color: black;
+}
+
+td {
+    border: 0.5px solid rgb(134, 20, 162);
+}
+
+.mat-mdc-row .mat-mdc-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+    border-color: darkgoldenrod;
+    background-color: black;
+    color: white;
+    transition: 0.3s;
+}
+
+.demo-row-is-clicked {
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.panel {
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+button {
+    border: 1px solid darkgoldenrod;
+    text-decoration: none;
+}
+
+button:hover {
+    transition: 0.3s;
+    border: 1px solid gold;
+}
+
+
+
+mat-icon {
+    color: darkgoldenrod;
+}
+
+mat-icon:hover {
+    color: white;
+    transition: 0.3s;
+}
+
+
+.example-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.example-card:hover {
+    box-shadow: 0px 0px 0px 2px gold;
+    transition: 0.3s;
+}
+
+mat-card-title {
+    margin: 5px 0px 5px 0px;
+}

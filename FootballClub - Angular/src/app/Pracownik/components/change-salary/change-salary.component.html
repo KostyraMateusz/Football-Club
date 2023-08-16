@@ -1,10 +1,10 @@
 <div class="add-container">
-    <h1>Wybierz pracownika i zmień jego funkcje</h1>
+    <button type="submit" mat-button (click)="getBack()">Powrót do głównej</button>
+    <h1>Wybierz pracownika i zmień jego pensję</h1>
     <form [formGroup]="pracownik" (ngSubmit)="ZmienWynagrodzenie()">
-
         <mat-form-field>
             <mat-label>Pracownik</mat-label>
-            <mat-select formControlName="idPracownik" multiple>
+            <mat-select formControlName="idPracownik">
                 <mat-option *ngFor="let p of this.pracownicy" [value]="p.idPracownik">
                     {{ p.imie + " " + p.nazwisko }}</mat-option>
             </mat-select>

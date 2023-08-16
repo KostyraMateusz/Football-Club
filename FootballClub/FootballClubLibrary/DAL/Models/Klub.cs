@@ -15,7 +15,7 @@ namespace FootballClubLibrary.Models
         [StringLength(30, ErrorMessage= "Za dluga nazwa stadionu !")]
         public string? Stadion { get; set; }
 
-        public string Trofea { get; set; }
+        public string? Trofea { get; set; }
 
         public ICollection<Pilkarz>? ArchiwalniPilkarze { get; set; }
 

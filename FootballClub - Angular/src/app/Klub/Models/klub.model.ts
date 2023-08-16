@@ -6,7 +6,7 @@ export interface Klub {
     nazwa: string;
     stadion: string;
     trofea: string;
-    archwilaniPilkarze: Pilkarz[];
+    archiwalniPilkarze: Pilkarz[];
     obecniPilkarze: Pilkarz[];
     zarzad: Zarzad;
 }

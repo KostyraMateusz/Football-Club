@@ -10,5 +10,5 @@ export interface Pilkarz {
     statystyki: Statystyka[];
     archiwalneKluby: Klub[];
     wynagrodzenie: number;
-    idKlubu: Klub;
+    idKlub: string;
 }

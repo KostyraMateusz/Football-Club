@@ -19,13 +19,13 @@ export class EditStatystykaComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder,
     private statystykaService: StatystykaService, private router: Router, private cdref: ChangeDetectorRef) {
-
+    this.getStatystyka();
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
       this.id = res['id'];
-      this.getStatystyka();
+
     })
 
     this.statystyka = this.formBuilder.group({
