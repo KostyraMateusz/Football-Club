@@ -15,7 +15,8 @@ namespace FootballClubLibrary.UnitOfWork
         private IStatystykaRepository statystykaRepository;
         private IZarzadRepository zarzadRepository;
 
-        public UnitOfWork(ApplicationDbContext _context, IKlubRepository klubRepository = null, IPilkarzRepository pilkarzRepository = null)
+        public UnitOfWork(ApplicationDbContext _context, IKlubRepository klubRepository = null, IPilkarzRepository pilkarzRepository = null,
+            IPracownikRepository pracownikRepository = null , IStatystykaRepository statystykaRepository = null, IZarzadRepository zarzadRepository = null)
         {
             if (_context != null)
             {
@@ -31,6 +32,21 @@ namespace FootballClubLibrary.UnitOfWork
                 if (pilkarzRepository != null)
                 {
                     this.pilkarzRepository = pilkarzRepository;
+                }
+
+                if (pracownikRepository != null)
+                {
+                    this.pracownikRepository = pracownikRepository;
+                }
+
+                if (statystykaRepository != null)
+                {
+                    this.statystykaRepository = statystykaRepository;
+                }
+
+                if (zarzadRepository != null)
+                {
+                    this.zarzadRepository = zarzadRepository;
                 }
             }
         }

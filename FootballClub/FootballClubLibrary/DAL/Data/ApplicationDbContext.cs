@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Collections.ObjectModel;
-using System.Drawing;
 
 namespace FootballClubLibrary.Data
 {
