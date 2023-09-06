@@ -85,5 +85,10 @@ namespace TestsFootballClub.ControllerTests.Kluby
         {
             return await Task.FromResult(klub.Trofea);
         }
+
+        public Task DodajPilkarzaDoArchiwalnych(Guid IdPilkarza, Guid IdKlubu)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
