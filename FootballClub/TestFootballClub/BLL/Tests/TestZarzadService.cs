@@ -43,7 +43,7 @@ namespace TestsFootballClub.BLL.Tests
         }
 
         [Fact]
-        public void TestUpdateStatystyka()
+        public void TestUpdateZarzad()
         {
             var zarzadRepo = new FakeZarzadRepository();
             var unitOfWork = new UnitOfWork(null, null, null, null, null, zarzadRepo);

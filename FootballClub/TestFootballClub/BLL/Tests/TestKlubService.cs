@@ -10,7 +10,7 @@ namespace TestsFootballClub.BLL.Tests
     public class TestKlubService
     {
         [Fact]
-        public void TestIleKlubow()
+        public void TestCreateKlubMOQ()
         {
             Mock<IKlubRepository> _mockKlubRepository = new Mock<IKlubRepository>();
             _mockKlubRepository.Setup(x => x.GetKluby())
@@ -155,9 +155,10 @@ namespace TestsFootballClub.BLL.Tests
             var unitOfWork = new UnitOfWork(null, klubRepo);
             var klubService = new KlubService(unitOfWork);
 
+            var idKlub = Guid.NewGuid();
             Klub RealMadryt = new Klub()
             {
-                IdKlub = Guid.NewGuid(),
+                IdKlub = idKlub,
                 Nazwa = "Real Madryt",
                 Stadion = "Estadio Santiago Bernabéu",
                 Trofea = "Liga Mistrzów (13 razy), Primera División (34 razy), Puchar Króla (19 razy), Superpuchar Hiszpanii (11 razy)",
@@ -187,7 +188,7 @@ namespace TestsFootballClub.BLL.Tests
             klubRepo?.CreateKlub(RealMadryt);
             klubService?.DodajPilkarzyDoObecnych(new List<Pilkarz>() { ViniciusJunior, ToniKroos, ViniciusJunior }, RealMadryt);
 
-            Assert.Equal(2, RealMadryt.ObecniPilkarze.Count());
+            Assert.Equal(2, klubRepo?.GetKlubById(RealMadryt.IdKlub).Result.ObecniPilkarze.Count);
         }
 
         [Fact]
