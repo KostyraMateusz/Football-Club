@@ -242,7 +242,7 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                await this.klubService.DodajPilkarzaDoArchiwalncyh(pilkarz.IdPilkarz, IdKlubu);
+                await this.klubService.DodajPilkarzaDoArchiwalnych(pilkarz.IdPilkarz, IdKlubu);
                 return Ok();
             }
             catch (Exception ex)

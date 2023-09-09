@@ -10,20 +10,65 @@ namespace TestsFootballClub.Tests
     public class TestPilkarzService
     {
         [Fact]
-        public void TestSprawdzIluJestPilkarzy()
+        public void TestCreatePilkarz()
         {
             var pilkarzRepo = new FakePilkarzRepository();
             var unitOfWork = new UnitOfWork(null, null, pilkarzRepo);
             var pilkarzService = new PilkarzService(unitOfWork);
 
-            pilkarzRepo?.CreatePilkarz(new Pilkarz { IdPilkarz = Guid.NewGuid(), Imie = "Karim", Nazwisko = "Benzema", Wiek = 35, Pozycja = "Napastnik", Statystyki = null, ArchiwalneKluby = null, Wynagrodzenie = 440000, IdKlubu = null });
-            Assert.Equal(1, pilkarzRepo?.IleJestPilkarzy());
+            pilkarzRepo?.CreatePilkarz(new Pilkarz());
+            Assert.Equal(1, pilkarzRepo?.GetPilkarze().Result.Count());
 
-            pilkarzRepo?.CreatePilkarz(new Pilkarz { IdPilkarz = Guid.NewGuid(), Imie = "Luka", Nazwisko = "Modrić", Wiek = 37, Pozycja = "Pomocnik", Statystyki = null, ArchiwalneKluby = null, Wynagrodzenie = 250000, IdKlubu = null });
-            Assert.Equal(2, pilkarzRepo?.IleJestPilkarzy());
+            pilkarzRepo?.CreatePilkarz(new Pilkarz());
+            Assert.Equal(2, pilkarzRepo?.GetPilkarze().Result.Count());
 
-            pilkarzRepo?.CreatePilkarz(new Pilkarz { IdPilkarz = Guid.NewGuid(), Imie = "Daniel", Nazwisko = "Carvajal", Wiek = 31, Pozycja = "Obrońca", Statystyki = null, ArchiwalneKluby = null, Wynagrodzenie = 190000, IdKlubu = null });
-            Assert.Equal(3, pilkarzRepo?.IleJestPilkarzy());
+            pilkarzRepo?.CreatePilkarz(new Pilkarz());
+            Assert.Equal(3, pilkarzRepo?.GetPilkarze().Result.Count());
+        }
+
+        [Fact]
+        public void TestDeletePilkarz()
+        {
+            var pilkarzRepo = new FakePilkarzRepository();
+            var unitOfWork = new UnitOfWork(null, null, pilkarzRepo);
+            var pilkarzService = new PilkarzService(unitOfWork);
+
+            var idPilkarz = Guid.NewGuid();
+
+            pilkarzRepo?.CreatePilkarz(new Pilkarz() { IdPilkarz = idPilkarz });
+            Assert.Equal(1, pilkarzRepo?.GetPilkarze().Result.Count());
+
+            pilkarzRepo?.CreatePilkarz(new Pilkarz());
+            Assert.Equal(2, pilkarzRepo?.GetPilkarze().Result.Count());
+
+            pilkarzRepo?.DeletePilkarz(idPilkarz);
+            Assert.Equal(1, pilkarzRepo?.GetPilkarze().Result.Count());
+        }
+
+        [Fact]
+        public void TestUpdatePilkarz()
+        {
+            var pilkarzRepo = new FakePilkarzRepository();
+            var unitOfWork = new UnitOfWork(null, null, pilkarzRepo);
+            var pilkarzService = new PilkarzService(unitOfWork);
+
+            var idPilkarz = Guid.NewGuid();
+            Pilkarz testowyPilkarz = new Pilkarz
+            {
+                IdPilkarz = idPilkarz,
+                Imie = "Vinicius",
+                Nazwisko = "Junior",
+                Wiek = 21,
+                Pozycja = "Obronca",
+                Wynagrodzenie = 420000
+            };
+
+            pilkarzRepo?.CreatePilkarz(testowyPilkarz);
+
+            testowyPilkarz.Pozycja = "Lewy skrzydłowy";
+            pilkarzRepo?.UpdatePilkarz(testowyPilkarz);
+
+            Assert.Equal(testowyPilkarz, pilkarzRepo?.GetPilkarzById(idPilkarz).Result);
         }
 
         [Fact]
@@ -40,7 +85,6 @@ namespace TestsFootballClub.Tests
 
             Assert.Same(Benzema.ArchiwalneKluby.ToString(), listaArchiwalnych.ToString());
         }
-
 
         [Fact]
         public void TestSprawdzIluJestPilkarzyMOQ()

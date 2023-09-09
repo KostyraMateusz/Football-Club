@@ -1,4 +1,5 @@
 ﻿using FootballClubLibrary.Interfaces;
+using FootballClubLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace TestsFootballClub.FakeRepositories
@@ -14,25 +15,31 @@ namespace TestsFootballClub.FakeRepositories
 
         public async Task CreateKlub(Klub klub)
         {
-            kluby.Add(klub);
-            return;
+            if(klub != null)
+            {
+                kluby.Add(klub);
+            }
         }
 
         public async Task DeleteKlub(Guid id)
         {
-            var klub = await Task.FromResult(kluby.Find(k => k.IdKlub == id));
-            kluby.Remove(klub);
-            return;
+            if(id != Guid.Empty)
+            {
+                var klub = await Task.FromResult(kluby.Find(k => k.IdKlub == id));
+                kluby.Remove(klub);
+            }
         }
 
         public async Task UpdateKlub(Klub klub)
         {
-            var index = await Task.FromResult(kluby.FindIndex(p => p.IdKlub == klub.IdKlub));
-            if (index != -1)
+            if( klub != null)
             {
-                kluby[index] = klub;
+                var index = await Task.FromResult(kluby.FindIndex(p => p.IdKlub == klub.IdKlub));
+                if (index != -1)
+                {
+                    kluby[index] = klub;
+                }
             }
-            return;
         }
 
         public async Task<Klub> GetKlubById(Guid? id)
@@ -49,17 +56,62 @@ namespace TestsFootballClub.FakeRepositories
 
         public async Task DodajTrofeumKlubu(Guid id, string trofeum)
         {
-            var klub = await Task.FromResult(this.kluby.Find(k=>k.IdKlub == id));
-            if (klub != null)
+            if (id != Guid.Empty && trofeum != null)
             {
-                klub.Trofea += $"{trofeum}, ";
+                var klub = await Task.FromResult(kluby.Find(k => k.IdKlub == id));
+                if (klub != null)
+                {
+                    klub.Trofea += $", {trofeum}";
+                }
             }
-            return;
         }
 
-        public int IleJestKlubow()
+        public async Task DodajPilkarzaDoObecnych(Klub klub, Pilkarz pilkarz)
         {
-            return kluby.Count();
+            if (klub != null && pilkarz != null)
+            {
+                if (klub.ObecniPilkarze.ToList().Find(p => p.IdPilkarz == pilkarz.IdPilkarz) == null)
+                {
+                    klub.ObecniPilkarze.Add(pilkarz);
+                }
+            }
+        }
+
+        public async Task DodajPilkarzyDoObecnych(Klub klub, List<Pilkarz> pilkarze)
+        {
+            if (klub != null && pilkarze != null)
+            {
+                for (int i = 0; i < pilkarze.Count; i++)
+                {
+                    if (klub.ObecniPilkarze.ToList().Find(p => p.IdPilkarz == pilkarze[i].IdPilkarz) == null)
+                    {
+                        klub.ObecniPilkarze.Add(pilkarze[i]);
+                    }
+                }
+            }
+        }
+
+        public async Task UsunPilkarzaZObecnych(Klub klub, Pilkarz pilkarz)
+        {
+            if(klub != null && pilkarz != null)
+            {
+                klub.ObecniPilkarze.Remove(pilkarz);
+            }
+        }
+
+        public async Task DodajPilkarzaDoArchiwalnych(Klub klub, Pilkarz pilkarz)
+        {
+            if(klub != null && pilkarz != null)
+            {
+                if(klub.ObecniPilkarze.ToList().Find(p => p.IdPilkarz == pilkarz.IdPilkarz) != null)
+                {
+                    klub.ObecniPilkarze.Remove(pilkarz);
+                    if(klub.ArchiwalniPilkarze.ToList().Find(p => p.IdPilkarz == pilkarz.IdPilkarz) != null)
+                    {
+                        klub.ArchiwalniPilkarze.Add(pilkarz);
+                    }
+                }
+            }
         }
 
         public Task Save()

@@ -43,5 +43,25 @@ namespace TestsFootballClub.DAL.DummyRepositories
         {
             throw new NotImplementedException();
         }
+
+        public Task DodajPilkarzaDoObecnych(Klub klub, Pilkarz pilkarz)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DodajPilkarzaDoArchiwalnych(Klub klub, Pilkarz pilkarz)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UsunPilkarzaZObecnych(Klub klub, Pilkarz pilkarz)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DodajPilkarzyDoObecnych(Klub klub, List<Pilkarz> pilkarze)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
