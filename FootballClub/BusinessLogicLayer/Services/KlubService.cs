@@ -1,7 +1,6 @@
 ﻿using BusinessLogicLayer.Interfaces;
 using FootballClubLibrary.Models;
 using FootballClubLibrary.UnitOfWork;
-using System.Collections.ObjectModel;
 
 namespace BusinessLogicLayer.Services
 {
@@ -117,12 +116,11 @@ namespace BusinessLogicLayer.Services
             return klub.Trofea;
         }
 
-        public async Task DodajPilkarzaDoArchiwalncyh(Guid IdPilkarza, Guid IdKlubu)
+        public async Task DodajPilkarzaDoArchiwalnych(Guid IdPilkarza, Guid IdKlubu)
         {
             var pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(IdPilkarza);
             var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
             await this.unitOfWork.KlubRepository.DodajPilkarzaDoArchiwalnych(klub, pilkarz);
-
         }
     }
 }

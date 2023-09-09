@@ -70,7 +70,7 @@ namespace TestsFootballClub.ControllerTests.Kluby
             // Act
             var mockKlubService = new KlubServiceMock(kluby);
             var klubyController = new KlubyController(mockKlubService);
-            await klubyController.DodajPilkarzaDoObecnych(pilkarz, AtleticoMadryt.IdKlub);
+            await klubyController.DodajPilkarzaDoObecnych(AtleticoMadryt.IdKlub, pilkarz);
 
             // Assert
             Assert.Equal(AtleticoMadryt?.ObecniPilkarze.Count(), 1);
