@@ -1,1 +1,38 @@
-<p>best-statistics works!</p>
+<div class="statistics-container">
+    <div class="add-container">
+        <button type="submit" mat-button (click)="getBack()">Powrót do głównej</button>
+        <h1>Wybierz piłkarza w celu poznania jego najlepszych statystyk</h1>
+        <form [formGroup]="this.pilkarz" (ngSubmit)="this.DajNajlepszeStatystkiPilkarza()">
+            <mat-form-field>
+                <mat-label>Piłkarz</mat-label>
+                <mat-select formControlName="idPilkarz">
+                    <mat-option *ngFor="let p of this.pilkarze" [value]="p.idPilkarz">
+                        {{ p.imie + " " + p.nazwisko }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button type="submit" mat-button>Daj statystyki piłkarza</button>
+        </form>
+    </div>
+    <div class="table-statistics">
+        <mat-card class="example-card" *ngFor="let s of this.statystyki">
+            <mat-card-header>
+                <mat-card-subtitle>Statystyka meczu</mat-card-subtitle>
+                <mat-card-title>{{s.mecz}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p><strong>Ilość goli:</strong> {{s.gole}}</p>
+                <p><strong>Ilość asyst:</strong> {{s.asysty}}</p>
+                <p><strong>Żółte kartki:</strong> {{s.zolteKartki}}</p>
+                <p><strong>Czerwone kartki:</strong> {{s.czerwoneKartki}}</p>
+                <p><strong>Przebiegnięty dystans:</strong> {{s.przebiegnietyDystans}}</p>
+                <p><strong style="color: rgb(236, 196, 14)">Ocena meczowa:</strong> {{s.ocena}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+            </mat-card-actions>
+            <mat-card-footer>
+                <mat-progress-bar mode="indeterminate" [color]="color"></mat-progress-bar>
+            </mat-card-footer>
+        </mat-card>
+        <p class="warning" *ngIf="this.statystyki?.length  == 0 ">Brak statystyk wybranego piłkarza</p>
+    </div>
+</div>

@@ -36,9 +36,8 @@ export class ChangePositionComponent implements OnInit {
   }
 
   ZmienPozycjePilkarza(): void {
-    console.log(this.pilkarz.value.pozycja);
     console.log(this.pilkarz.value);
-    this.pilkarzService.ZmienPozycjePilkarza(this.pilkarz.value.idPilkarz, this.pilkarz.value.pozycja).subscribe(res => {
+    this.pilkarzService.ZmienPozycjePilkarza(this.pilkarz.value.idPilkarz, JSON.stringify(this.pilkarz.value.pozycja)).subscribe(res => {
       console.log("Zmieniono pozycję piłkarza");
       this.getBack();
     })

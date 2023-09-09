@@ -32,11 +32,11 @@ namespace BusinessLogicLayer.Services
             }
         }
 
-        public async Task EdytujPilkarza(Pilkarz pilkarz)
+        public async Task EdytujPilkarza(Pilkarz pilkarz, Guid IdPilkarz)
         {
             if (pilkarz != null)
             {
-                await this.unitOfWork.PilkarzRepository.UpdatePilkarz(pilkarz);
+                await this.unitOfWork.PilkarzRepository.UpdatePilkarz(pilkarz, IdPilkarz);
             }
         }
 
@@ -72,8 +72,15 @@ namespace BusinessLogicLayer.Services
 
         public async Task<IEnumerable<Statystyka>> DajNajlepszeStatystykiPilkarza(Pilkarz pilkarz)
         {
-            var result = pilkarz.Statystyki?.OrderByDescending(p => p.Ocena).Take(5).ToList();
-            if (result.Count() < 5)
+            var statystyki = await this.unitOfWork.StatystykaRepository.GetStatystyki();
+            if (pilkarz.Statystyki == null)
+            {
+                pilkarz.Statystyki = new List<Statystyka>();
+                pilkarz.Statystyki = statystyki.Where(s => s.Pilkarz == pilkarz).ToList();
+                await this.unitOfWork.PilkarzRepository.Save();
+            }
+            var result = pilkarz.Statystyki.OrderByDescending(p => p.Ocena).Take(3);
+            if (result.Count() < 3)
             {
                 return pilkarz.Statystyki;
             }
@@ -83,7 +90,14 @@ namespace BusinessLogicLayer.Services
         public async Task<IEnumerable<Statystyka>> DajStatystykiPilkarza(Pilkarz pilkarz)
         {
             var statystyki = await this.unitOfWork.StatystykaRepository.GetStatystyki();
-            var result = statystyki.Where(s => s.Pilkarz == pilkarz).ToList();
+            if (pilkarz.Statystyki == null)
+            {
+                pilkarz.Statystyki = new List<Statystyka>();
+                pilkarz.Statystyki = statystyki.Where(s => s.Pilkarz == pilkarz).ToList();
+            }
+
+            var result = pilkarz.Statystyki;
+
             if (result == null)
             {
                 return pilkarz.Statystyki;

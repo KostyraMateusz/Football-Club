@@ -28,10 +28,14 @@ export class PilkarzService {
     return this.httpClient.delete<void>(environment.url + "Pilkarze/UsunPilkarza/" + id, this.httpOptions);
   }
 
-
   DajPilkarzy(): Observable<Pilkarz[]> {
     return this.httpClient.get<Pilkarz[]>(environment.url + 'Pilkarze/DajPilkarzy', this.httpOptions);
   }
+
+  DajPilkarza(id : string): Observable<Pilkarz> {
+    return this.httpClient.get<Pilkarz>(environment.url + 'Pilkarze/DajPilkarza/' + id, this.httpOptions);
+  }
+
 
   DajArchiwalneKlubyPilkarza(idPilkarz: string): Observable<Klub[]> {
     return this.httpClient.get<Klub[]>(environment.url + 'Pilkarze/DajArchiwalneKlubyPilkarza/' + idPilkarz, this.httpOptions);

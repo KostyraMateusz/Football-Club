@@ -16,23 +16,7 @@
             <input matInput formControlName="trofea" [value]="this.klub.value.Trofea">
         </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>Obecni Piłkarze</mat-label>
-            <mat-select formControlName="obecniPilkarze" multiple [value]="this.klub.value.ObecniPilkarze">
-                <mat-option *ngFor="let pilkarz of this.pilkarze" [value]="pilkarz">
-                    {{ pilkarz.nazwisko }}</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Archiwalni Piłkarze</mat-label>
-            <mat-select formControlName="archiwalniPilkarze" multiple [value]="this.klub.value.ArchiwalniPilkarze">
-                <mat-option *ngFor="let pilkarz of this.pilkarze" [value]="pilkarz">
-                    {{ pilkarz.nazwisko }}</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <button type="submit" mat-button>Dodaj klub</button>
+        <button type="submit" mat-button>Edytuj klub</button>
     </form>
 
 

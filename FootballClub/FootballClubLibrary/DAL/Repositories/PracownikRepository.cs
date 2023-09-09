@@ -32,9 +32,15 @@ namespace FootballClubLibrary.Repositories
             this.dbContext.Pracownicy.Remove(pracownik);
         }
 
-		public async Task UpdatePracownik(Pracownik pracownik)
+		public async Task UpdatePracownik(Pracownik pracownik, Guid id)
 		{
-			this.dbContext.Entry(pracownik).State = EntityState.Modified;
+            var prac = await this.dbContext.Pracownicy.FirstAsync(p => p.IdPracownik == id);
+            prac.Imie = pracownik.Imie;
+            prac.Nazwisko = pracownik.Nazwisko;
+            prac.PESEL = pracownik.PESEL;
+            prac.Wiek = pracownik.Wiek;
+            prac.WykonywanaFunkcja = pracownik.WykonywanaFunkcja;
+            prac.Wynagrodzenie = pracownik.Wynagrodzenie;
             await this.dbContext.SaveChangesAsync();
         }
 

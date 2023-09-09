@@ -97,7 +97,7 @@ namespace FootballClubWeb.Controllers
             {
                 try
                 {
-                    await this.unitOfWork.PracownikRepository.UpdatePracownik(pracownik);
+                    await this.unitOfWork.PracownikRepository.UpdatePracownik(pracownik,pracownik.IdPracownik);
                     await this.unitOfWork.PracownikRepository.Save();
                 }
                 catch (DbUpdateConcurrencyException)

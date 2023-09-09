@@ -36,8 +36,7 @@ td {
 
 .mat-mdc-row:hover .mat-mdc-cell {
     border-color: darkgoldenrod;
-    background-color: black;
-    color: white;
+    background-color: blanchedalmond;
     transition: 0.3s;
 }
 
@@ -74,6 +73,6 @@ mat-icon {
 }
 
 mat-icon:hover {
-    color: white;
+    color: black;
     transition: 0.3s;
 }

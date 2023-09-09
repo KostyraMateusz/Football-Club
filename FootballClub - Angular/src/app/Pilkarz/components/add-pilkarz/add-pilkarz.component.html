@@ -3,32 +3,32 @@
     <form [formGroup]="pilkarz" (ngSubmit)="DodajPilkarza()">
         <mat-form-field>
             <mat-label>Imie</mat-label>
-            <input matInput formControlName="Imie">
+            <input matInput formControlName="imie">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Nazwisko</mat-label>
-            <input matInput formControlName="Nazwisko">
+            <input matInput formControlName="nazwisko">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Wiek</mat-label>
-            <input matInput formControlName="Wiek">
+            <input matInput formControlName="wiek">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Pozycja</mat-label>
-            <input matInput formControlName="Pozycja">
+            <input matInput formControlName="pozycja">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Wynagrodzenie</mat-label>
-            <input matInput formControlName="Wynagrodzenie">
+            <input matInput formControlName="wynagrodzenie">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Statystyki</mat-label>
-            <mat-select formControlName="Statystyki" multiple>
+            <mat-select formControlName="statystyki" multiple>
                 <mat-option *ngFor="let statystyka of this.statystyki" [value]="statystyka">
                     {{ statystyka.mecz }}</mat-option>
             </mat-select>
@@ -36,7 +36,7 @@
 
         <mat-form-field>
             <mat-label>Archiwalne Kluby</mat-label>
-            <mat-select formControlName="ArchiwalneKluby" multiple>
+            <mat-select formControlName="archiwalneKluby" multiple>
                 <mat-option *ngFor="let klub of this.archiwalneKluby" [value]="klub">
                     {{ klub.nazwa }}</mat-option>
             </mat-select>

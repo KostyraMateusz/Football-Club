@@ -17,8 +17,8 @@ export class ChangeFunctionComponent implements OnInit {
   constructor(private pracownikService: PracownikService, private router: Router) {
     this.getPracownicy();
     this.pracownik = new FormGroup({
-      idPracownik: new FormControl('', Validators.required),
-      wykonywanaFunkcja: new FormControl('', Validators.required),
+      idPracownik: new FormControl<string>('', Validators.required),
+      wykonywanaFunkcja: new FormControl<string>('', Validators.required),
     });
   }
 
@@ -37,7 +37,9 @@ export class ChangeFunctionComponent implements OnInit {
   }
 
   ZmienFunkcjePracownika(): void {
-    this.pracownikService.ZmienFunkcjePracownika(this.pracownik.value.idPracownik, this.pracownik.value.wykonywanaFunkcja).subscribe(res => {
+
+
+    this.pracownikService.ZmienFunkcjePracownika(this.pracownik.value.idPracownik, JSON.stringify(this.pracownik.value.wykonywanaFunkcja)).subscribe(res => {
       this.getBack();
       console.log("Zmieniono funkcję pracownika");
     })

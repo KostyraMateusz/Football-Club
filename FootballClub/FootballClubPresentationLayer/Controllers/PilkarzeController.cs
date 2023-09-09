@@ -56,8 +56,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpPut]
-        [Route("api/Pilkarze/EdytujPilkarza/{id}")]
-        public async Task<ActionResult> EdytujPilkarza([FromBody] Pilkarz pilkarz)
+        [Route("api/Pilkarze/EdytujPilkarza/{IdPilkarza}")]
+        public async Task<ActionResult> EdytujPilkarza([FromBody] Pilkarz pilkarz, [FromRoute] Guid IdPilkarza)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                await this.pilkarzService.EdytujPilkarza(pilkarz);
+                await this.pilkarzService.EdytujPilkarza(pilkarz, IdPilkarza);
                 return Ok();
             }
             catch (Exception ex)
@@ -81,6 +81,26 @@ namespace FootballClubPresentationLayer.Controllers
             try
             {
                 var result = await this.pilkarzService.DajPilkarzy();
+                if (result == null)
+                {
+                    throw new Exception("");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+
+        [HttpGet]
+        [Route("api/[controller]/DajPilkarza/{IdPilkarza}")]
+        public async Task<ActionResult<IEnumerable<Pilkarz>>> DajPilkarza([FromRoute] Guid IdPilkarza)
+        {
+            try
+            {
+                var result = await this.pilkarzService.DajPilkarza(IdPilkarza);
                 if (result == null)
                 {
                     throw new Exception("");

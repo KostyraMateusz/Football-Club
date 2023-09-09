@@ -19,14 +19,14 @@ export class AddPilkarzComponent implements OnInit {
   idKlub!: string;
 
   pilkarz = new FormGroup({
-    Imie: new FormControl('', Validators.required),
-    Nazwisko: new FormControl('', Validators.required),
-    Wiek: new FormControl('', Validators.required),
-    Pozycja: new FormControl('', Validators.required),
-    Wynagrodzenie: new FormControl('', Validators.required),
-    Statystyki: new FormControl('', Validators.required),
-    ArchiwalneKluby: new FormControl('', Validators.required),
-    IdKlub: new FormControl('', Validators.required)
+    imie: new FormControl('', Validators.required),
+    nazwisko: new FormControl('', Validators.required),
+    wiek: new FormControl('', Validators.required),
+    pozycja: new FormControl('', Validators.required),
+    wynagrodzenie: new FormControl('', Validators.required),
+    statystyki: new FormControl('', Validators.required),
+    archiwalneKluby: new FormControl('', Validators.required),
+    idKlub: new FormControl('', Validators.required)
   });
 
   constructor(private pilkarzService: PilkarzService, private klubyService: KlubService, private statystykiService: StatystykaService) {
@@ -61,7 +61,7 @@ export class AddPilkarzComponent implements OnInit {
 
   DodajPilkarza(): void {
     console.log(this.pilkarz.value);
-    this.pilkarz.value.IdKlub = '';
+    this.pilkarz.value.idKlub = '';
     this.pilkarzService.DodajPilkarza(this.pilkarz.value).subscribe(res => {
       console.log("Utworzono nowego piłkarza")
     })
