@@ -64,7 +64,7 @@ namespace FootballClubLibrary.Repositories
         public async Task DodajTrofeumKlubu(Guid id, string trofeum)
         {
             var klub = await this.dbContext.Kluby.FindAsync(id);
-            klub.Trofea += $"{trofeum}, ";
+            klub.Trofea += $", {trofeum}";
             await this.Save();
         }
 

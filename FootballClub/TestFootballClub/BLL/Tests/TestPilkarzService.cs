@@ -80,8 +80,7 @@ namespace TestsFootballClub.Tests
 
             Klub OlympiqueLyon = new Klub() { IdKlub = Guid.NewGuid(), ArchiwalniPilkarze = null, ObecniPilkarze = new List<Pilkarz>(),  Stadion = "Groupama Arena", Trofea = "Mistrzostwo Francji", Nazwa = "Olympique Lyon", Zarzad = new Zarzad() };
             Pilkarz Benzema = new Pilkarz { IdPilkarz = Guid.NewGuid(), Imie = "Karim",  Nazwisko = "Benzema",  Wiek = 35, Pozycja = "Pomocnik", Statystyki = null, ArchiwalneKluby = new Collection<Klub> { OlympiqueLyon }, Wynagrodzenie = 440000, IdKlubu = null };
-            Collection<Klub> listaArchiwalnych = new Collection<Klub>();
-            listaArchiwalnych.Add(OlympiqueLyon);
+            Collection<Klub> listaArchiwalnych = new Collection<Klub>() { OlympiqueLyon };
 
             Assert.Same(Benzema.ArchiwalneKluby.ToString(), listaArchiwalnych.ToString());
         }
