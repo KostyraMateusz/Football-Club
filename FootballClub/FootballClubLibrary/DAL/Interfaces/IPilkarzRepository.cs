@@ -8,7 +8,7 @@ namespace FootballClubLibrary.Interfaces
 		DbSet<Pilkarz> GetDbSetPilkarze();
 		Task CreatePilkarz(Pilkarz pilkarz);
 		Task DeletePilkarz(Guid id);
-		Task UpdatePilkarz(Pilkarz pilkarz);
+		Task UpdatePilkarz(Pilkarz pilkarz, Guid IdPilkarz);
         Task<Pilkarz> GetPilkarzById(Guid id);
         Task<IEnumerable<Pilkarz>> GetPilkarze();
         Task Save();

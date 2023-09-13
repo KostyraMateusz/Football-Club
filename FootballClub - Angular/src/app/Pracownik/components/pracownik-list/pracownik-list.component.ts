@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, Component, OnInit } from '@angular/core';
 import { PracownikService } from 'src/app/Services/pracownik.service';
 import { Pracownik } from '../../Models/pracownik.model';
 import { Router } from '@angular/router';
@@ -12,17 +12,20 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
   templateUrl: './pracownik-list.component.html',
   styleUrls: ['./pracownik-list.component.css']
 })
-export class PracownikListComponent implements OnInit, AfterViewInit {
+export class PracownikListComponent implements OnInit, AfterViewInit, AfterContentChecked {
 
   sort!: MatSort;
   paginator!: MatPaginator;
-  pracownicy: Pracownik[] = [];
+  dataSource: Pracownik[] = [];
   displayedColumns: string[] = ['Imie', 'Nazwisko', 'PESEL', 'Wiek', 'Wykonywana Funkcja', 'Wynagrodzenie', 'Edytuj', 'Usuń'];
   datasource!: MatTableDataSource<Pracownik>;
 
   constructor(private pracownikService: PracownikService, private router: Router, private _liveAnnouncer: LiveAnnouncer) {
     this.getPracownicy();
-    this.datasource = new MatTableDataSource(this.pracownicy);
+    this.datasource = new MatTableDataSource(this.dataSource);
+  }
+  ngAfterContentChecked(): void {
+    this.datasource.sort = this.sort
   }
 
   ngAfterViewInit(): void {
@@ -32,8 +35,8 @@ export class PracownikListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getPracownicy();
-    this.datasource = new MatTableDataSource(this.pracownicy);
-    console.log(this.pracownicy);
+    this.datasource = new MatTableDataSource(this.dataSource);
+    console.log(this.dataSource);
   }
 
 
@@ -47,11 +50,10 @@ export class PracownikListComponent implements OnInit, AfterViewInit {
 
   getPracownicy() {
     this.pracownikService.DajPracownikow().subscribe(res => {
-      this.pracownicy = res;
-      console.log(this.pracownicy);
+      this.dataSource = res;
+      console.log(this.dataSource);
     })
   }
-
 
   usunPracownika(idPracownik: string): void {
     this.pracownikService.DeletePracownika(idPracownik).subscribe(res => {
@@ -59,7 +61,6 @@ export class PracownikListComponent implements OnInit, AfterViewInit {
       this.router.navigateByUrl("/Pracownicy");
     })
   }
-
 
   PrzejdzDoDodaj(): void {
     this.router.navigateByUrl("Pracownicy/DodajPracownika");

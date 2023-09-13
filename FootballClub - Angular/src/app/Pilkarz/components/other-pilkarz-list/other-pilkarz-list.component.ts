@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PilkarzService } from 'src/app/Services/pilkarz.service';
 import { Pilkarz } from '../../Models/pilkarz.model';
 
 @Component({
-  selector: 'app-pilkarz-list',
-  templateUrl: './pilkarz-list.component.html',
-  styleUrls: ['./pilkarz-list.component.css']
+  selector: 'app-other-pilkarz-list',
+  templateUrl: './other-pilkarz-list.component.html',
+  styleUrls: ['./other-pilkarz-list.component.css']
 })
-export class PilkarzListComponent implements OnInit {
+export class OtherPilkarzListComponent {
+
 
   pilkarze: Pilkarz[] = [];
   displayedColumns: string[] = ['Imie', 'Nazwisko', 'Wiek', 'Pozycja', 'Wynagrodzenie', 'Klub', 'ArchiwalneKluby',
@@ -23,7 +24,7 @@ export class PilkarzListComponent implements OnInit {
 
   getPilkarze() {
     this.pilkarzService.DajPilkarzy().subscribe(res => {
-      this.pilkarze = res.filter(p => p.klub?.nazwa === "Real Madryt");
+      this.pilkarze = res.filter(p => p.klub?.nazwa !== "Real Madryt");
       console.log(this.pilkarze);
     })
   }

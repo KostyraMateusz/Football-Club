@@ -18,7 +18,7 @@ export class AddKlubComponent implements OnInit {
   klub!: FormGroup;
 
   constructor(private klubService: KlubService, private pilkarzService: PilkarzService, private zarzadService: ZarzadService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder, private router: Router) {
     this.getPilkarze();
   }
 
@@ -43,6 +43,11 @@ export class AddKlubComponent implements OnInit {
     console.log(this.klub.value);
     this.klubService.DodajKlub(this.klub.value).subscribe(res => {
       console.log("Klub został dodany");
+      this.router.navigateByUrl("/Kluby/InneKluby");
     })
+  }
+
+  getBack(): void{
+    this.router.navigateByUrl("/Kluby/InneKluby");
   }
 }

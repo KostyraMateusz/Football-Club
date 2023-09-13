@@ -4,6 +4,7 @@ import { Pilkarz } from '../../Models/pilkarz.model';
 import { PilkarzService } from 'src/app/Services/pilkarz.service';
 import { Router } from '@angular/router';
 import { Statystyka } from 'src/app/Statystyka/Models/statystyka.model';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
   selector: 'app-pilkarz-statistics',
@@ -15,6 +16,7 @@ export class PilkarzStatisticsComponent implements OnInit {
   pilkarz!: FormGroup;
   pilkarze!: Pilkarz[];
   statystyki!: Statystyka[];
+  color: ThemePalette = 'accent';
 
   constructor(private pilkarzService: PilkarzService, private router: Router) {
     this.pilkarz = new FormGroup({

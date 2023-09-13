@@ -6,7 +6,7 @@ namespace BusinessLogicLayer.Interfaces
     {
         Task DodajPracownika(Pracownik pracownik);
         Task UsunPracownika(Guid IdPracownika);
-        Task EdytujPracownika(Pracownik pracownik);
+        Task EdytujPracownika(Pracownik pracownik, Guid id);
         Task<Pracownik> DajPracownika(Guid IdPracownika);
         Task<IEnumerable<Pracownik>> DajPracownikow();
         Task ZmienFunkcjePracownika(Guid IdPracownik, string funkcja);

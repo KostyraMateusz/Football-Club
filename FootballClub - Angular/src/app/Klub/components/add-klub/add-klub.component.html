@@ -1,4 +1,5 @@
 <div class="form-container">
+    <button type="submit" mat-button (click)="getBack()">Powrót do głównej</button>
     <h1>Dodaj nowy klub</h1>
     <form [formGroup]="klub" (ngSubmit)="DodajKlub()">
         <mat-form-field>

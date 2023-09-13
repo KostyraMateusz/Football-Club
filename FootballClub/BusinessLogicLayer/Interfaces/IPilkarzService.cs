@@ -6,7 +6,7 @@ namespace BusinessLogicLayer.Interfaces
     {
         Task DodajPilkarza(Pilkarz pilkarz);
 		Task UsunPilkarza(Guid IdPilkarz);
-		Task EdytujPilkarza(Pilkarz pilkarz);
+		Task EdytujPilkarza(Pilkarz pilkarz, Guid IdPilkarz);
 		Task<Pilkarz> DajPilkarza(Guid IdPilkarz);
         Task<IEnumerable<Pilkarz>> DajPilkarzy();
 		Task<IEnumerable<Pilkarz>> DajPilkarzyBezKlubu();

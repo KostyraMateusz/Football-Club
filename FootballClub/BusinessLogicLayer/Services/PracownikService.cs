@@ -33,11 +33,11 @@ namespace BusinessLogicLayer.Services
             }
         }
 
-        public async Task EdytujPracownika(Pracownik pracownik)
+        public async Task EdytujPracownika(Pracownik pracownik, Guid id)
         {
             if (pracownik != null)
             {
-                await this.unitOfWork.PracownikRepository.UpdatePracownik(pracownik);
+                await this.unitOfWork.PracownikRepository.UpdatePracownik(pracownik, id);
             }
         }
 

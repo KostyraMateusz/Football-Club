@@ -6,7 +6,7 @@ namespace BusinessLogicLayer.Interfaces
     {
         Task DodajStatystyke(Statystyka statystyka);
         Task UsunStatystyke(Guid IdStatystyka);
-        Task EdytujStatystyke(Statystyka statystyka);
+        Task EdytujStatystyke(Statystyka statystyka, Guid id);
         Task<Statystyka> DajStatystyke(Guid IdStatystyka);
         Task<IEnumerable<Statystyka>> DajStatystyki();
         Task<Statystyka>DajStatystykeMeczu(string mecz);

@@ -54,7 +54,8 @@ namespace BusinessLogicLayer.Services
         {
             var klub = await this.unitOfWork.KlubRepository.GetKlubById(_klub.IdKlub);
             await this.unitOfWork.KlubRepository.DodajPilkarzaDoObecnych(_klub, pilkarz);
-
+            await this.unitOfWork.KlubRepository.Save();
+            await this.unitOfWork.PilkarzRepository.Save();
         }
 
         public async Task DodajPilkarzyDoObecnych(List<Pilkarz> pilkarze, Klub klub)
@@ -62,6 +63,7 @@ namespace BusinessLogicLayer.Services
             if (pilkarze.Count() > 0 && klub != null)
             {
                 await this.unitOfWork.KlubRepository.DodajPilkarzyDoObecnych(klub, pilkarze);
+                await this.unitOfWork.KlubRepository.Save();
             }
             else
             {

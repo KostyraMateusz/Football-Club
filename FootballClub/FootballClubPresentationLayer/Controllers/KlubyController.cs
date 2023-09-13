@@ -34,7 +34,7 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpDelete]
-        [Route("api/Kluby/UsunKlub/{id}")]
+        [Route("api/Kluby/UsunKlub/{IdKlubu}")]
         public async Task<ActionResult> UsunKlub([FromRoute] Guid IdKlubu)
         {
             try

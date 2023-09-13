@@ -16,10 +16,23 @@ namespace BusinessLogicLayer.Services
         public async Task DodajPilkarza(Pilkarz pilkarz)
         {
             var foundPilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(pilkarz.IdPilkarz);
-            if (foundPilkarz == null)
+            var foundKlub = await this.unitOfWork.KlubRepository.GetKlubById(pilkarz.IdKlubu);
+            if (foundPilkarz == null && foundKlub != null)
             {
+                if (foundKlub.ObecniPilkarze?.Count() > 0)
+                {
+                  
+                    pilkarz.Klub = foundKlub;
+
+                    if (!foundKlub.ObecniPilkarze.Contains(pilkarz))
+                    {
+                        foundKlub.ObecniPilkarze?.Add(pilkarz);
+                    }
+                }
+               
                 await this.unitOfWork.PilkarzRepository.CreatePilkarz(pilkarz);
                 await this.unitOfWork.Save();
+                await this.unitOfWork.KlubRepository.Save();
             }
         }
 
@@ -32,12 +45,24 @@ namespace BusinessLogicLayer.Services
             }
         }
 
-        public async Task EdytujPilkarza(Pilkarz pilkarz)
+        public async Task EdytujPilkarza(Pilkarz pilkarz, Guid IdPilkarz)
         {
-            if (pilkarz != null)
+            var foundPilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(IdPilkarz);
+            var foundKlub = await this.unitOfWork.KlubRepository.GetKlubById(pilkarz.IdKlubu);
+
+            if (foundPilkarz != null && foundKlub != null)
             {
-                await this.unitOfWork.PilkarzRepository.UpdatePilkarz(pilkarz);
+                pilkarz.Klub = foundKlub;
+
+                if (!foundKlub.ObecniPilkarze.Contains(pilkarz))
+                {
+                    foundKlub.ObecniPilkarze?.Add(pilkarz);
+                }
+              
             }
+            await this.unitOfWork.PilkarzRepository.UpdatePilkarz(pilkarz, IdPilkarz);
+            await this.unitOfWork.Save();
+            await this.unitOfWork.KlubRepository.Save();
         }
 
         public async Task<Pilkarz> DajPilkarza(Guid IdPilkarz)
@@ -72,8 +97,15 @@ namespace BusinessLogicLayer.Services
 
         public async Task<IEnumerable<Statystyka>> DajNajlepszeStatystykiPilkarza(Pilkarz pilkarz)
         {
-            var result = pilkarz.Statystyki?.OrderByDescending(p => p.Ocena).Take(5).ToList();
-            if (result.Count() < 5)
+            var statystyki = await this.unitOfWork.StatystykaRepository.GetStatystyki();
+            if (pilkarz.Statystyki == null)
+            {
+                pilkarz.Statystyki = new List<Statystyka>();
+                pilkarz.Statystyki = statystyki.Where(s => s.Pilkarz == pilkarz).ToList();
+                await this.unitOfWork.PilkarzRepository.Save();
+            }
+            var result = pilkarz.Statystyki.OrderByDescending(p => p.Ocena).Take(3);
+            if (result.Count() < 3)
             {
                 return pilkarz.Statystyki;
             }
@@ -83,7 +115,14 @@ namespace BusinessLogicLayer.Services
         public async Task<IEnumerable<Statystyka>> DajStatystykiPilkarza(Pilkarz pilkarz)
         {
             var statystyki = await this.unitOfWork.StatystykaRepository.GetStatystyki();
-            var result = statystyki.Where(s => s.Pilkarz == pilkarz).ToList();
+            if (pilkarz.Statystyki == null)
+            {
+                pilkarz.Statystyki = new List<Statystyka>();
+                pilkarz.Statystyki = statystyki.Where(s => s.Pilkarz == pilkarz).ToList();
+            }
+
+            var result = pilkarz.Statystyki;
+
             if (result == null)
             {
                 return pilkarz.Statystyki;

@@ -1,4 +1,5 @@
 <div class="add-container">
+    <button type="submit" mat-button (click)="getBack()">Powrót do głównej</button>
     <h1>Wybierz klub i piłkarza do grupy obecnych piłkarzy</h1>
     <form [formGroup]="form" (ngSubmit)="DodajPilkarzaDoObecnych()">
         <mat-form-field>

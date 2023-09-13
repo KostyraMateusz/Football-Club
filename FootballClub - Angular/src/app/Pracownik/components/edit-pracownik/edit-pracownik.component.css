@@ -1,3 +1,21 @@
+.add-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    letter-spacing: 0.11rem;
+    font-weight: 300;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 button {
     border: 1px solid darkgoldenrod;
     text-decoration: none;

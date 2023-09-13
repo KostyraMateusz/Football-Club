@@ -1,45 +1,41 @@
 <div class="form-container">
-    <h1>Edytuj wybrany klub</h1>
+    <h1>Edytuj statystyke meczu piłkarza: {{ this.pilkarz?.imie + ' ' + this.pilkarz?.nazwisko }}</h1>
     <form [formGroup]="this.statystyka" (ngSubmit)="EdytujStatystyke()">
-
-        <mat-form-field>
-            <mat-label>IdStatystyka</mat-label>
-            <input matInput formControlName="IdStatystyka" [value]="this.statystyka.value.IdStatystyka" [disabled]="true">
-        </mat-form-field>
-
         <mat-form-field>
             <mat-label>Mecz</mat-label>
-            <input matInput formControlName=" Mecz" [value]="this.statystyka.value.Mecz">
+            <input matInput formControlName="mecz" type="text" [value]="this.statystyka.value.mecz" [disabled]="true">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Gole</mat-label>
-            <input matInput formControlName="Gole" [value]="this.statystyka.value.Gole">
+            <input matInput formControlName="gole" type="number" [value]="this.statystyka.value.gole">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Asysty</mat-label>
-            <input matInput formControlName="Asysty" [value]="this.statystyka.value.Asysty">
+            <input matInput formControlName="asysty" type="number" [value]="this.statystyka.value.asysty">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>ZolteKartki</mat-label>
-            <input matInput formControlName="ZolteKartki" [value]="this.statystyka.value.ZolteKartki">
+            <input matInput formControlName="zolteKartki" type="number" [value]="this.statystyka.value.zolteKartki">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>CzerwoneKartki</mat-label>
-            <input matInput formControlName="CzerwoneKartki" [value]="this.statystyka.value.CzerwoneKartki">
+            <input matInput formControlName="czerwoneKartki" type="number"
+                [value]="this.statystyka.value.czerwoneKartki">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>PrzebiegnietyDystans</mat-label>
-            <input matInput formControlName="PrzebiegnietyDystans" [value]="this.statystyka.value.PrzebiegnietyDystans">
+            <input matInput formControlName="przebiegnietyDystans" type="number"
+                [value]="this.statystyka.value.przebiegnietyDystans">
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Ocena</mat-label>
-            <input matInput formControlName="Ocena" [value]="this.statystyka.value.Ocena">
+            <input matInput formControlName="ocena" type="number" [value]="this.statystyka.value.ocena">
         </mat-form-field>
 
         <button type="submit" mat-button>Edytuj Piłkarza</button>

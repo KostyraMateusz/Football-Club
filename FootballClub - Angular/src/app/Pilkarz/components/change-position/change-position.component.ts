@@ -13,9 +13,7 @@ export class ChangePositionComponent implements OnInit {
 
   pilkarz!: FormGroup;
   pilkarze!: Pilkarz[];
-  pozycje: string[] = ['Bramkarz', 'Boczny Obrońca', 'Środkowy Obrońca', 'Obrońca',
-    'Boczny Pomocnik', 'Środkowy Pomocnik', 'Defensywny Pomocnik', 'Ofensywny Pomocnik',
-    "Napastnik", "Środkowy Napastnik", "Skrzydłowy"];
+  pozycje: string[] = ['BR', 'ŚO', 'PO', 'LO', 'CPS', 'CLS', 'ŚPD', 'ŚP', 'ŚPO', 'LP', 'PP', 'LS', 'PS', 'ŚN', 'N']
 
   constructor(private pilkarzService: PilkarzService, private router: Router) {
     this.pilkarz = new FormGroup({
@@ -36,9 +34,8 @@ export class ChangePositionComponent implements OnInit {
   }
 
   ZmienPozycjePilkarza(): void {
-    console.log(this.pilkarz.value.pozycja);
     console.log(this.pilkarz.value);
-    this.pilkarzService.ZmienPozycjePilkarza(this.pilkarz.value.idPilkarz, this.pilkarz.value.pozycja).subscribe(res => {
+    this.pilkarzService.ZmienPozycjePilkarza(this.pilkarz.value.idPilkarz, JSON.stringify(this.pilkarz.value.pozycja)).subscribe(res => {
       console.log("Zmieniono pozycję piłkarza");
       this.getBack();
     })

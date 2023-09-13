@@ -83,6 +83,7 @@ namespace FootballClubLibrary.Repositories
 
             klub.ObecniPilkarze.Add(pilkarz);
             pilkarz.IdKlubu = klub.IdKlub;
+        
 
             if (klub.ArchiwalniPilkarze != null)
             {

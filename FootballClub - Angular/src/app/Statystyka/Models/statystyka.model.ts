@@ -1,6 +1,6 @@
 
 export interface Statystyka {
-    idStatystyka: number;
+    idStatystyka: string;
     mecz: string;
     gole: number;
     asysty: number;

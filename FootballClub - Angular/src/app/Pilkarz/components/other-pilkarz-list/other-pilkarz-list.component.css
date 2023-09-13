@@ -28,6 +28,13 @@ td {
     border: 0.5px solid rgb(134, 20, 162);
 }
 
+h2 {
+    font-weight: 300;
+    letter-spacing: 0.12rem;
+    text-align: center;
+    text-decoration: 1px underline gold;
+}
+
 .mat-mdc-row .mat-mdc-cell {
     border-bottom: 1px solid transparent;
     border-top: 1px solid transparent;
@@ -65,7 +72,6 @@ button:hover {
     transition: 0.3s;
     border: 1px solid gold;
 }
-
 
 
 mat-icon {
