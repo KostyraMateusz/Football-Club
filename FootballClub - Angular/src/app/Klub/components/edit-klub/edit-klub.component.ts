@@ -49,4 +49,8 @@ export class EditKlubComponent {
       this.router.navigateByUrl("/Kluby/InneKluby")
     })
   }
+
+  getBack(): void {
+    this.router.navigateByUrl("/Kluby/InneKluby");
+  }
 }

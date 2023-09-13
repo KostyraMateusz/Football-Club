@@ -16,8 +16,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpPost]
-        [Route("api/Pilkarze/DodajPilkarza")]
-        public async Task<ActionResult> UtworzPilkarza([FromBody] Pilkarz pilkarz)
+        [Route("api/Pilkarze/DodajPilkarza/{IdKlubu}")]
+        public async Task<ActionResult> UtworzPilkarza([FromBody] Pilkarz pilkarz, [FromRoute] Guid IdKlubu)
         {
             try
             {
@@ -25,6 +25,7 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
+                pilkarz.IdKlubu = IdKlubu;
                 await this.pilkarzService.DodajPilkarza(pilkarz);
                 return Ok();
             }
@@ -56,8 +57,8 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpPut]
-        [Route("api/Pilkarze/EdytujPilkarza/{IdPilkarza}")]
-        public async Task<ActionResult> EdytujPilkarza([FromBody] Pilkarz pilkarz, [FromRoute] Guid IdPilkarza)
+        [Route("api/Pilkarze/EdytujPilkarza/{IdPilkarza}/{IdKlubu}")]
+        public async Task<ActionResult> EdytujPilkarza([FromBody] Pilkarz pilkarz, [FromRoute] Guid IdPilkarza, [FromRoute] Guid IdKlubu)
         {
             try
             {
@@ -65,6 +66,7 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
+                pilkarz.IdKlubu = IdKlubu;
                 await this.pilkarzService.EdytujPilkarza(pilkarz, IdPilkarza);
                 return Ok();
             }

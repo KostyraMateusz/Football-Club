@@ -28,7 +28,7 @@ export class KlubService {
   }
 
   DeleteKlub(id: string): Observable<void> {
-    return this.httpClient.delete<void>(environment.url + "Kluby/UsuńKlub/" + id, this.httpOptions);
+    return this.httpClient.delete<void>(environment.url + "Kluby/UsunKlub/" + id, this.httpOptions);
   }
 
   DajKluby(): Observable<Klub[]> {
@@ -59,8 +59,8 @@ export class KlubService {
     return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajStadionKlubu/' + idKlubu, this.httpOptions);
   }
 
-  DodajPilkarzaDoObecnych(idKlubu: string, pilkarz: Pilkarz): Observable<void> {
-    return this.httpClient.post<void>(environment.url + 'Kluby/' + idKlubu + '/DodajPilkarzaDoObecnych', pilkarz, this.httpOptions);
+  DodajPilkarzaDoObecnych(idKlub: string, pilkarz: Pilkarz): Observable<void> {
+    return this.httpClient.post<void>(environment.url + 'Kluby/' + idKlub + '/DodajPilkarzaDoObecnych', pilkarz, this.httpOptions);
   }
 
   UsunPilkarzaZObecnych(IdPilkarza: string, idKlubu: string): Observable<void> {

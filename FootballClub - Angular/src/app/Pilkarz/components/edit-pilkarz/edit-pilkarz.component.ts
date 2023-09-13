@@ -18,11 +18,13 @@ export class EditPilkarzComponent implements OnInit {
 
   statystyki: Statystyka[] = [];
   archiwalneKluby: Klub[] = [];
+  kluby: Klub[] = [];
   obecnyKlubReal!: Klub;
   idKlub!: string;
   id!: string;
   pilkarz!: FormGroup;
   znalezionyPilkarz?: Pilkarz;
+  pozycje: string[] = ['BR', 'ŚO', 'PO', 'LO', 'CPS', 'CLS', 'ŚPD', 'ŚP', 'ŚPO', 'LP', 'PP', 'LS', 'PS', 'ŚN', 'N']
 
   constructor(private pilkarzService: PilkarzService, private klubyService: KlubService, private statystykiService: StatystykaService,
     private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private router: Router) {
@@ -49,11 +51,16 @@ export class EditPilkarzComponent implements OnInit {
       pozycja: this.formBuilder.control(this.znalezionyPilkarz?.pozycja, Validators.required),
       archiwalneKluby: this.formBuilder.control(this.znalezionyPilkarz?.archiwalneKluby, Validators.required),
       wynagrodzenie: this.formBuilder.control(this.znalezionyPilkarz?.wynagrodzenie, Validators.required),
-      idKlubu: this.formBuilder.control(this.znalezionyPilkarz?.idKlubu, Validators.required)
+      idKlub: this.formBuilder.control(this.znalezionyPilkarz?.idKlub, Validators.required)
     });
 
 
   }
+
+  getBack(): void {
+    this.router.navigateByUrl("/Pilkarze");
+  }
+
 
   ngOnInit(): void {
     this.getStatystyki();
@@ -70,16 +77,20 @@ export class EditPilkarzComponent implements OnInit {
   getKluby(): void {
     this.klubyService.DajKluby().subscribe(res => {
       this.archiwalneKluby = res;
+      this.kluby = res;
     })
   }
 
 
   EdytujPilkarza(): void {
     console.log(this.pilkarz.value);
-    this.pilkarzService.EdytujPilkarza(this.id, this.pilkarz.value).subscribe(res => {
-      console.log("Edytowano Piłkarza");
-      this.router.navigateByUrl("/Pracownicy");
-    })
+    if (this.pilkarz.value.idKlub) {
+      this.pilkarzService.EdytujPilkarza(this.id, this.pilkarz.value.idKlub, this.pilkarz.value).subscribe(res => {
+        console.log("Edytowano Piłkarza");
+        this.router.navigateByUrl("/Pilkarze");
+      })
+    }
+
   }
 
 

@@ -41,6 +41,7 @@ import { AddCurrentPlayerComponent } from './Klub/components/add-current-player/
 import { ChangePositionComponent } from './Pilkarz/components/change-position/change-position.component';
 import { BestStatisticsComponent } from './Pilkarz/components/best-statistics/best-statistics.component';
 import { PilkarzStatisticsComponent } from './Pilkarz/components/pilkarz-statistics/pilkarz-statistics.component';
+import { OtherPilkarzListComponent } from './Pilkarz/components/other-pilkarz-list/other-pilkarz-list.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { PilkarzStatisticsComponent } from './Pilkarz/components/pilkarz-statist
     ChangePositionComponent,
     BestStatisticsComponent,
     PilkarzStatisticsComponent,
+    OtherPilkarzListComponent,
   ],
   imports: [
     BrowserModule,

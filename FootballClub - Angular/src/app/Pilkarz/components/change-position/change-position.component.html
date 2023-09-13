@@ -12,12 +12,10 @@
 
         <mat-form-field>
             <mat-label>Pozycja</mat-label>
-            <!-- <mat-select formControlName="pozycja">
-                <mat-option *ngFor="let p of this.pozycje" [value]="p">
-                    {{ p }}
-                </mat-option>
-            </mat-select> -->
-            <input matInput formControlName="pozycja" type="text">
+            <mat-select formControlName="pozycja">
+                <mat-option *ngFor="let pozycja of this.pozycje" [value]="pozycja">
+                    {{ pozycja }}</mat-option>
+            </mat-select>
         </mat-form-field>
 
         <button type="submit" mat-button>Zmień pozycję piłkarza</button>

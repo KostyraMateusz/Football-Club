@@ -55,7 +55,7 @@ namespace BusinessLogicLayer.Services
             var klub = await this.unitOfWork.KlubRepository.GetKlubById(_klub.IdKlub);
             await this.unitOfWork.KlubRepository.DodajPilkarzaDoObecnych(_klub, pilkarz);
             await this.unitOfWork.KlubRepository.Save();
-
+            await this.unitOfWork.PilkarzRepository.Save();
         }
 
         public async Task DodajPilkarzyDoObecnych(List<Pilkarz> pilkarze, Klub klub)

@@ -32,7 +32,7 @@ export class AddArchivalPlayerComponent implements OnInit {
 
   DajKlubyDoWyboru(): void {
     this.klubService.DajKluby().subscribe(res => {
-      this.kluby = res.filter(k => k.nazwa !== "Real Madryt");
+      this.kluby = res;
       console.log(this.kluby);
     })
   }
@@ -61,5 +61,10 @@ export class AddArchivalPlayerComponent implements OnInit {
     } else {
       console.log("Błąd! Sprawdź klub lub piłkarza");
     }
+  }
+
+
+  getBack(): void{
+    this.router.navigateByUrl("/Kluby/InneKluby");
   }
 }

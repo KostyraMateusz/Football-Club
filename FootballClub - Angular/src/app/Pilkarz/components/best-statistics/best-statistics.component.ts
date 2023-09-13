@@ -36,7 +36,7 @@ export class BestStatisticsComponent implements OnInit {
   }
 
   DajNajlepszeStatystkiPilkarza(): void {
-    this.pilkarzService.DajNajlepszeStatystykiPilkarza(this.pilkarz.value.idPilkarz).subscribe(res=>{
+    this.pilkarzService.DajNajlepszeStatystykiPilkarza(this.pilkarz.value.idPilkarz).subscribe(res => {
       this.statystyki = res;
     })
   }
