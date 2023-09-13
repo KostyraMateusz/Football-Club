@@ -64,7 +64,7 @@ namespace FootballClubLibrary.Repositories
         public async Task DodajTrofeumKlubu(Guid id, string trofeum)
         {
             var klub = await this.dbContext.Kluby.FindAsync(id);
-            klub.Trofea += $"{trofeum}, ";
+            klub.Trofea += $", {trofeum}";
             await this.Save();
         }
 
@@ -82,7 +82,6 @@ namespace FootballClubLibrary.Repositories
             }
 
             klub.ObecniPilkarze.Add(pilkarz);
-            pilkarz.Klub = klub;
             pilkarz.IdKlubu = klub.IdKlub;
         
 
