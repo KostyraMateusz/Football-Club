@@ -34,7 +34,7 @@ export class AddCurrentPlayerComponent implements OnInit {
 
   DajKlubyDoWyboru(): void {
     this.klubService.DajKluby().subscribe(res => {
-      this.kluby = res.filter(k => k.nazwa !== "Real Madryt");
+      this.kluby = res;
       console.log(this.kluby);
     })
   }
@@ -53,15 +53,20 @@ export class AddCurrentPlayerComponent implements OnInit {
     console.log(this.wybranyPilkarz);
     if (this.wybranyPilkarz && this.wybranyKlub) {
       if (this.wybranyKlub?.obecniPilkarze?.includes(this.wybranyPilkarz)) {
-        console.log("Piłkarz już należy do archiwalnych piłkarzy");
+        console.log("Piłkarz już należy do obecnych piłkarzy");
       } else {
         this.klubService.DodajPilkarzaDoObecnych(this.form.value.idKlub, this.wybranyPilkarz).subscribe(res => {
-          console.log("Dodano piłkarza do archiwalnych piłkarzy");
+          console.log("Dodano piłkarza do obecnych piłkarzy");
           this.router.navigateByUrl("Kluby/InneKluby")
         })
       }
     } else {
       console.log("Błąd! Sprawdź klub lub piłkarza");
     }
+  }
+
+
+  getBack(): void{
+    this.router.navigateByUrl("/Kluby/InneKluby");
   }
 }

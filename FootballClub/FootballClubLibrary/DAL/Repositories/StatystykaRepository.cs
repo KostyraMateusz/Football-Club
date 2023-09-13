@@ -32,9 +32,16 @@ namespace FootballClubLibrary.Repositories
             this.dbContext.Statystyki.Remove(statystyka);
         }
 
-		public async Task UpdateStatystyka(Statystyka statystyka)
+		public async Task UpdateStatystyka(Statystyka statystyka, Guid Id)
 		{
-			this.dbContext.Entry(statystyka).State = EntityState.Modified;
+            var stat = this.dbContext.Statystyki.Where(s => s.IdStatystyka == Id).First();
+            stat.Asysty = statystyka.Asysty;
+            stat.Mecz = statystyka.Mecz;
+            stat.Gole = statystyka.Gole;
+            stat.ZolteKartki = statystyka.ZolteKartki;
+            stat.CzerwoneKartki = statystyka.CzerwoneKartki;
+            stat.PrzebiegnietyDystans = statystyka.PrzebiegnietyDystans;
+            stat.Ocena = statystyka.Ocena;
             await this.dbContext.SaveChangesAsync();
         }
 

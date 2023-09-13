@@ -1,1 +1,38 @@
-<p>edit-pracownik works!</p>
+<div class="add-container">
+    <h1>Edytuj pracownika: {{this.znalezionyPracownik?.imie + ' ' + this.znalezionyPracownik?.nazwisko}}</h1>
+    <form [formGroup]="pracownik" (ngSubmit)="EdytujPracownika()">
+        <mat-form-field>
+            <mat-label>Imie</mat-label>
+            <input matInput formControlName="imie" type="text" [value]="this.pracownik.value.imie">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Nazwisko</mat-label>
+            <input matInput formControlName="nazwisko" type="text" [value]="this.pracownik.value.nazwisko">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>PESEL</mat-label>
+            <input matInput formControlName="pesel" type="text" [value]="this.pracownik.value.pesel">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Wiek</mat-label>
+            <input matInput formControlName="wiek" type="number" [value]="this.pracownik.value.wiek">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>WykonywanaFunkcja</mat-label>
+            <input matInput formControlName="wykonywanaFunkcja" type="text"
+                [value]="this.pracownik.value.wykonywanaFunkcja">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Wynagrodzenie</mat-label>
+            <input matInput formControlName="wynagrodzenie" type="number" [value]="this.pracownik.value.wynagrodzenie">
+        </mat-form-field>
+
+        <button type=" submit" mat-button>Edytuj pracownika</button>
+    </form>
+
+</div>

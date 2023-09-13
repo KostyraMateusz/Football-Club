@@ -97,7 +97,7 @@ namespace FootballClubWeb.Controllers
             {
                 try
                 {
-                    await this.unitOfWork.StatystykaRepository.UpdateStatystyka(statystyka);
+                    await this.unitOfWork.StatystykaRepository.UpdateStatystyka(statystyka, statystyka.IdStatystyka);
                     await this.unitOfWork.StatystykaRepository.Save();
                 }
                 catch (DbUpdateConcurrencyException)

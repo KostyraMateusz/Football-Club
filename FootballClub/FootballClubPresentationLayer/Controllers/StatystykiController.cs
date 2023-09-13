@@ -59,16 +59,17 @@ namespace FootballClubPresentationLayer.Controllers
         }
 
         [HttpPut]
-        [Route("api/Statystyki/EdytujStatystyke/{id}")]
-        public async Task<ActionResult> EdytujStatystyke([FromBody] Statystyka statystyka)
+        [Route("api/Statystyki/EdytujStatystyke/{idStatystyka}")]
+        public async Task<ActionResult> EdytujStatystyke([FromRoute] Guid idStatystyka, [FromBody] Statystyka statystyka)
         {
             try
             {
-                if (statystyka == null)
+                var _statystyka = await this.statystykaService.DajStatystyke(idStatystyka);
+                if (_statystyka == null || statystyka == null)
                 {
                     throw new Exception("");
                 }
-                await this.statystykaService.EdytujStatystyke(statystyka);
+                await this.statystykaService.EdytujStatystyke(statystyka, idStatystyka);
                 return Ok();
             }
             catch (Exception ex)

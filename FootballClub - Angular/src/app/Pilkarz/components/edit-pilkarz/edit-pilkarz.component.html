@@ -1,1 +1,44 @@
-<p>edit-pilkarz works!</p>
+<div class="add-container">
+    <button type="submit" mat-button (click)="getBack()">Powrót do głównej</button>
+    <h1>Edytuj wybranego piłkarza: {{this.znalezionyPilkarz?.imie + ' ' + this.znalezionyPilkarz?.nazwisko }}</h1>
+    <form [formGroup]="pilkarz" (ngSubmit)="EdytujPilkarza()">
+        <mat-form-field>
+            <mat-label>Imie</mat-label>
+            <input matInput formControlName="imie" [value]="this.pilkarz.value.imie">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Nazwisko</mat-label>
+            <input matInput formControlName="nazwisko" [value]="this.pilkarz.value.nazwisko">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Wiek</mat-label>
+            <input matInput formControlName="wiek" [value]="this.pilkarz.value.wiek">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Pozycja</mat-label>
+            <mat-select formControlName="pozycja">
+                <mat-option *ngFor="let pozycja of this.pozycje" [value]="pozycja">
+                    {{ pozycja }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Wynagrodzenie</mat-label>
+            <input matInput formControlName="wynagrodzenie" [value]="this.pilkarz.value.wynagrodzenie">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Klub</mat-label>
+            <mat-select formControlName="idKlub">
+                <mat-option *ngFor="let k of this.kluby" [value]="k.idKlub">
+                    {{ k.nazwa }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button type="submit" mat-button>Edytuj pilkarza</button>
+    </form>
+
+</div>

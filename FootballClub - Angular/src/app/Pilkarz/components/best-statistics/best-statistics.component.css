@@ -1,0 +1,63 @@
+.add-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+button {
+    border: 1px solid darkgoldenrod;
+    text-decoration: none;
+}
+
+button:hover {
+    transition: 0.3s;
+    border: 1px solid gold;
+}
+
+
+h1 {
+    letter-spacing: 0.11rem;
+    font-weight: 300;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+form button {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+.table-statistics {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.warning {
+    color: darkred;
+}
+
+.example-card {
+    text-align: center;
+    width: 600px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+mat-card-header {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+    text-align: center;
+}

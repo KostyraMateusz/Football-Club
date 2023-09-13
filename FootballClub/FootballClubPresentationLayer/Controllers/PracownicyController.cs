@@ -56,7 +56,7 @@ namespace FootballClubPresentationLayer.Controllers
 
         [HttpPut]
         [Route("api/Pracownicy/EdytujPracownika/{id}")]
-        public async Task<ActionResult> EdytujPracownika([FromBody] Pracownik pracownik)
+        public async Task<ActionResult> EdytujPracownika([FromBody] Pracownik pracownik, Guid id)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace FootballClubPresentationLayer.Controllers
                 {
                     throw new Exception("");
                 }
-                await this.pracownikService.EdytujPracownika(pracownik);
+                await this.pracownikService.EdytujPracownika(pracownik, id);
                 return Ok();
             }
             catch (Exception ex)
@@ -92,17 +92,37 @@ namespace FootballClubPresentationLayer.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("api/[controller]/ZmienFunkcjePracownika/{IdPracownik}")]
-        public async Task<ActionResult> ZmienFunkcjePracownika([FromRoute] Guid IdPracownik, [FromBody]string funkcja)
+
+        [HttpGet]
+        [Route("api/[controller]/DajPracownika/{idPracownika}")]
+        public async Task<ActionResult<IEnumerable<Pracownik>>> DajPracownika([FromRoute] Guid IdPracownika)
         {
             try
             {
-                if (IdPracownik.Equals(null) || funkcja.Equals(null))
+                var result = await this.pracownikService.DajPracownika(IdPracownika);
+                if (result.Equals(null))
+                {
+                    throw new Exception("");
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("api/[controller]/ZmienFunkcjePracownika/{IdPracownik}")]
+        public async Task<ActionResult> ZmienFunkcjePracownika([FromRoute] Guid IdPracownik, [FromBody]string wykonywanaFunkcja)
+        {
+            try
+            {
+                if (IdPracownik.Equals(null) || wykonywanaFunkcja.Equals(null))
                 {
                     throw new Exception();
                 }
-                await this.pracownikService.ZmienFunkcjePracownika(IdPracownik, funkcja);
+                await this.pracownikService.ZmienFunkcjePracownika(IdPracownik, wykonywanaFunkcja);
                 return Ok();
             }
             catch (Exception ex)

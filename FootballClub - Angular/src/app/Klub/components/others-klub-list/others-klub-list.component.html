@@ -43,7 +43,11 @@
 
             <ng-container matColumnDef="Obecni Piłkarze">
                 <th mat-header-cell *matHeaderCellDef>ObecniPiłkarze</th>
-                <td mat-cell *matCellDef="let element"></td>
+                <td mat-cell *matCellDef="let element">
+                    <ul *ngFor="let p of element.obecniPilkarze">
+                        <li>{{p.imie + " " + p.nazwisko}}</li>
+                    </ul>
+                </td>
             </ng-container>
 
             <ng-container matColumnDef="Archiwalni Piłkarze">
@@ -63,7 +67,7 @@
             <ng-container matColumnDef="Usuń">
                 <th mat-header-cell *matHeaderCellDef>Usuń</th>
                 <td mat-cell *matCellDef="let element">
-                    <a [routerLink]="['']">
+                    <a (click)="deleteKlub(element.idKlub)">
                         <mat-icon aria-hidden="false" aria-label="delete"
                             fontIcon="delete_forever">delete_forever</mat-icon>
                     </a>

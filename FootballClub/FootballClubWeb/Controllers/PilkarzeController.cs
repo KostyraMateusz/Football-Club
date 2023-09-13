@@ -97,7 +97,7 @@ namespace FootballClubWeb.Controllers
             {
                 try
                 {
-                    await this.unitOfWork.PilkarzRepository.UpdatePilkarz(pilkarz);
+                    await this.unitOfWork.PilkarzRepository.UpdatePilkarz(pilkarz, id);
                     await this.unitOfWork.PilkarzRepository.Save();
                 }
                 catch (DbUpdateConcurrencyException)

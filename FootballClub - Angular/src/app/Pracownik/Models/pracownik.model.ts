@@ -1,5 +1,3 @@
-import { Zarzad } from "src/app/Zarzad/Models/zarzad.model";
-
 export interface Pracownik {
     idPracownik: number;
     imie: string;

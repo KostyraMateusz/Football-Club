@@ -16,31 +16,34 @@ export class PracownikService {
   constructor(private httpClient: HttpClient) { }
 
   DodajPracownika(pracownik: any): Observable<void> {
-    return this.httpClient.post<void>(environment.url + "Pracownicy/DodajPracownika", pracownik);
+    return this.httpClient.post<void>(environment.url + "Pracownicy/DodajPracownika", pracownik, this.httpOptions);
   }
 
   EdytujPracownika(id: string, pracownik: any): Observable<void> {
-    return this.httpClient.put<void>(environment.url + "Pracownicy/EdytujPracownika/" + id, pracownik);
+    return this.httpClient.put<void>(environment.url + "Pracownicy/EdytujPracownika/" + id, pracownik, this.httpOptions);
   }
 
   DeletePracownika(id: string): Observable<void> {
-    return this.httpClient.delete<void>(environment.url + "Pracownicy/UsunPracownika/" + id);
+    return this.httpClient.delete<void>(environment.url + "Pracownicy/UsunPracownika/" + id, this.httpOptions);
   }
 
+  DajPracownika(id: string): Observable<Pracownik> {
+    return this.httpClient.get<Pracownik>(environment.url + "Pracownicy/DajPracownika/" + id, this.httpOptions);
+  }
 
   DajPracownikow(): Observable<Pracownik[]> {
-    return this.httpClient.get<Pracownik[]>(environment.url + 'Pracownicy/DajPracownikow');
+    return this.httpClient.get<Pracownik[]>(environment.url + 'Pracownicy/DajPracownikow', this.httpOptions);
   }
 
-  ZmienFunkcjePracownika(IdPracownik: string, funkcja: string): Observable<void> {
-    return this.httpClient.put<void>(environment.url + 'Pracownicy/ZmienFunkcjePracownika/' + IdPracownik, funkcja);
+  ZmienFunkcjePracownika(IdPracownik: string, wykonywanaFunkcja: string): Observable<void> {
+    return this.httpClient.put<void>(environment.url + 'Pracownicy/ZmienFunkcjePracownika/' + IdPracownik, wykonywanaFunkcja, this.httpOptions);
   }
 
   ZmienPensjePracownika(IdPracownik: string, pensja: number): Observable<void> {
-    return this.httpClient.put<void>(environment.url + 'Pracownicy/ZmienWynagrodzeniePracownika/' + IdPracownik, pensja);
+    return this.httpClient.put<void>(environment.url + 'Pracownicy/ZmienWynagrodzeniePracownika/' + IdPracownik, pensja, this.httpOptions);
   }
 
   ZmienWiekPracownika(IdPracownik: string, wiek: number): Observable<void> {
-    return this.httpClient.put<void>(environment.url + 'Pracownicy/ZmienWiekPracownika/' + IdPracownik, wiek);
+    return this.httpClient.put<void>(environment.url + 'Pracownicy/ZmienWiekPracownika/' + IdPracownik, wiek, this.httpOptions);
   }
 }

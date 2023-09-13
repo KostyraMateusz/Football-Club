@@ -10,7 +10,7 @@ import { Pilkarz } from '../../Models/pilkarz.model';
 export class PilkarzListComponent implements OnInit {
 
   pilkarze: Pilkarz[] = [];
-  displayedColumns: string[] = ['Imie', 'Nazwisko', 'Wiek', 'Pozycja', 'Wynagrodzenie', 'Statystyki', 'ArchiwalneKluby',
+  displayedColumns: string[] = ['Imie', 'Nazwisko', 'Wiek', 'Pozycja', 'Wynagrodzenie', 'Klub', 'ArchiwalneKluby',
     'Edytuj', 'Usuń'];
 
   constructor(private pilkarzService: PilkarzService) {
@@ -23,12 +23,15 @@ export class PilkarzListComponent implements OnInit {
 
   getPilkarze() {
     this.pilkarzService.DajPilkarzy().subscribe(res => {
-      this.pilkarze = res;
+      this.pilkarze = res.filter(p => p.klub?.nazwa === "Real Madryt");
       console.log(this.pilkarze);
     })
   }
 
   usunPilkarza(idPilkarza: string): void {
-
+    this.pilkarzService.DeletePilkarza(idPilkarza).subscribe(res => {
+      console.log("Usunięto piłkarza");
+      this.getPilkarze();
+    })
   }
 }

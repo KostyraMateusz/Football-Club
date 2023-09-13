@@ -34,9 +34,18 @@ namespace FootballClubLibrary.Repositories
             await this.Save();
         }
 
-		public async Task UpdatePilkarz(Pilkarz pilkarz)
-		{
-			this.dbContext.Entry(pilkarz).State = EntityState.Modified;
+        public async Task UpdatePilkarz(Pilkarz pilkarz, Guid IdPilkarz)
+        {
+            var resP = await this.GetPilkarzById(IdPilkarz);
+            if (resP == null)
+            {
+                return;
+            }
+            resP.Imie = pilkarz.Imie;
+            resP.Nazwisko = pilkarz.Nazwisko;
+            resP.Wiek = pilkarz.Wiek;
+            resP.Pozycja = pilkarz.Pozycja;
+            resP.Wynagrodzenie = pilkarz.Wynagrodzenie;
             await this.Save();
         }
 

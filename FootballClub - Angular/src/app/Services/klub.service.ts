@@ -28,46 +28,46 @@ export class KlubService {
   }
 
   DeleteKlub(id: string): Observable<void> {
-    return this.httpClient.delete<void>(environment.url + "Kluby/UsuńKlub/" + id, this.httpOptions);
+    return this.httpClient.delete<void>(environment.url + "Kluby/UsunKlub/" + id, this.httpOptions);
   }
 
   DajKluby(): Observable<Klub[]> {
     return this.httpClient.get<Klub[]>(environment.url + 'Kluby/DajKluby', this.httpOptions);
   }
 
-  DajArchiwalnegoPilkarza(IdKlubu: string, IdPilkarz: string): Observable<Pilkarz[]> {
-    return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajArchiwalnegoPilkarza/' + IdKlubu + ',' + IdPilkarz, this.httpOptions);
+  DajArchiwalnegoPilkarza(idKlubu: string, IdPilkarz: string): Observable<Pilkarz[]> {
+    return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajArchiwalnegoPilkarza/' + idKlubu + ',' + IdPilkarz, this.httpOptions);
   }
 
-  DajArchiwalnychPilkarzy(IdKlubu: string): Observable<Pilkarz[]> {
-    return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajArchiwalnychPilkarzy/' + IdKlubu, this.httpOptions);
+  DajArchiwalnychPilkarzy(idKlubu: string): Observable<Pilkarz[]> {
+    return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajArchiwalnychPilkarzy/' + idKlubu, this.httpOptions);
   }
 
-  DajObecnegoPilkarza(IdKlubu: string, IdPilkarz: string): Observable<Pilkarz[]> {
-    return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajObecnegoPilkarza/' + IdKlubu + ',' + IdPilkarz, this.httpOptions);
+  DajObecnegoPilkarza(idKlubu: string, IdPilkarz: string): Observable<Pilkarz[]> {
+    return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajObecnegoPilkarza/' + idKlubu + ',' + IdPilkarz, this.httpOptions);
   }
 
-  DajObecnychPilkarzy(IdKlubu: number): Observable<Pilkarz[]> {
-    return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajObecnychPilkarzy/' + IdKlubu, this.httpOptions);
+  DajObecnychPilkarzy(idKlubu: number): Observable<Pilkarz[]> {
+    return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajObecnychPilkarzy/' + idKlubu, this.httpOptions);
   }
 
-  DajTrofeaKlubu(IdKlubu: number): Observable<Pilkarz[]> {
-    return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajTrofeaKlubu/' + IdKlubu, this.httpOptions);
+  DajTrofeaKlubu(idKlubu: number): Observable<Pilkarz[]> {
+    return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajTrofeaKlubu/' + idKlubu, this.httpOptions);
   }
 
-  DajStadionKlubu(IdKlubu: number): Observable<Pilkarz[]> {
-    return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajStadionKlubu/' + IdKlubu, this.httpOptions);
+  DajStadionKlubu(idKlubu: number): Observable<Pilkarz[]> {
+    return this.httpClient.get<Pilkarz[]>(environment.url + 'Kluby/DajStadionKlubu/' + idKlubu, this.httpOptions);
   }
 
-  DodajPilkarzaDoObecnych(IdKlubu: string, pilkarz: Pilkarz): Observable<void> {
-    return this.httpClient.post<void>(environment.url + 'Kluby/' + IdKlubu + '/DodajPilkarzaDoObecnych', pilkarz, this.httpOptions);
+  DodajPilkarzaDoObecnych(idKlub: string, pilkarz: Pilkarz): Observable<void> {
+    return this.httpClient.post<void>(environment.url + 'Kluby/' + idKlub + '/DodajPilkarzaDoObecnych', pilkarz, this.httpOptions);
   }
 
-  UsunPilkarzaZObecnych(IdPilkarza: string, IdKlubu: string): Observable<void> {
-    return this.httpClient.delete<void>(environment.url + 'Kluby/UsunPilkarzaZObecnych/' + IdPilkarza + ',' + IdKlubu);
+  UsunPilkarzaZObecnych(IdPilkarza: string, idKlubu: string): Observable<void> {
+    return this.httpClient.delete<void>(environment.url + 'Kluby/UsunPilkarzaZObecnych/' + IdPilkarza + ',' + idKlubu);
   }
 
-  DodajPilkarzaDoArchiwalnych(Pilkarz: Pilkarz, IdKlubu: string): Observable<void> {
-    return this.httpClient.post<void>(environment.url + 'Kluby/' + IdKlubu + '/DodajPilkarzaDoArchiwalnych/', Pilkarz);
+  DodajPilkarzaDoArchiwalnych(Pilkarz: Pilkarz, idKlubu: string): Observable<void> {
+    return this.httpClient.post<void>(environment.url + 'Kluby/' + idKlubu + '/DodajPilkarzaDoArchiwalnych/', Pilkarz);
   }
 }

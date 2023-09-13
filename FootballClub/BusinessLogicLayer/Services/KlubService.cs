@@ -1,7 +1,6 @@
 ﻿using BusinessLogicLayer.Interfaces;
 using FootballClubLibrary.Models;
 using FootballClubLibrary.UnitOfWork;
-using System.Collections.ObjectModel;
 
 namespace BusinessLogicLayer.Services
 {
@@ -55,7 +54,8 @@ namespace BusinessLogicLayer.Services
         {
             var klub = await this.unitOfWork.KlubRepository.GetKlubById(_klub.IdKlub);
             await this.unitOfWork.KlubRepository.DodajPilkarzaDoObecnych(_klub, pilkarz);
-
+            await this.unitOfWork.KlubRepository.Save();
+            await this.unitOfWork.PilkarzRepository.Save();
         }
 
         public async Task DodajPilkarzyDoObecnych(List<Pilkarz> pilkarze, Klub klub)
@@ -63,6 +63,7 @@ namespace BusinessLogicLayer.Services
             if (pilkarze.Count() > 0 && klub != null)
             {
                 await this.unitOfWork.KlubRepository.DodajPilkarzyDoObecnych(klub, pilkarze);
+                await this.unitOfWork.KlubRepository.Save();
             }
             else
             {
@@ -117,12 +118,11 @@ namespace BusinessLogicLayer.Services
             return klub.Trofea;
         }
 
-        public async Task DodajPilkarzaDoArchiwalncyh(Guid IdPilkarza, Guid IdKlubu)
+        public async Task DodajPilkarzaDoArchiwalnych(Guid IdPilkarza, Guid IdKlubu)
         {
             var pilkarz = await this.unitOfWork.PilkarzRepository.GetPilkarzById(IdPilkarza);
             var klub = await this.unitOfWork.KlubRepository.GetKlubById(IdKlubu);
             await this.unitOfWork.KlubRepository.DodajPilkarzaDoArchiwalnych(klub, pilkarz);
-
         }
     }
 }

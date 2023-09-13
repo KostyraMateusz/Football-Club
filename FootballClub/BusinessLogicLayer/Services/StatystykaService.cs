@@ -19,7 +19,7 @@ namespace BusinessLogicLayer.Services
             if (foundStatystyka == null)
             {
                 await this.unitOfWork.StatystykaRepository.CreateStatystyka(statystyka);
-                await this.unitOfWork.Save();
+                await this.unitOfWork.StatystykaRepository.Save();
             }
         }
 
@@ -29,15 +29,16 @@ namespace BusinessLogicLayer.Services
             if (foundStatystyka != null)
             {
                 await this.unitOfWork.StatystykaRepository.DeleteStatystyka(IdStatystyka);
-                await this.unitOfWork.Save();
+                await this.unitOfWork.StatystykaRepository.Save();
             }
         }
 
-        public async Task EdytujStatystyke(Statystyka statystyka)
+        public async Task EdytujStatystyke(Statystyka statystyka, Guid id)
         {
             if (statystyka != null)
             {
-                await this.unitOfWork.StatystykaRepository.UpdateStatystyka(statystyka);
+                await this.unitOfWork.StatystykaRepository.UpdateStatystyka(statystyka, id);
+                await this.unitOfWork.StatystykaRepository.Save();
             }
         }
 

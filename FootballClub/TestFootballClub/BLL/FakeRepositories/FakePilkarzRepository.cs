@@ -47,11 +47,6 @@ namespace TestsFootballClub.FakeRepositories
             return result;
         }
 
-        public int IleJestPilkarzy()
-        {
-            return pilkarze.Count();
-        }
-
         public Task Save()
         {
             throw new NotImplementedException();
