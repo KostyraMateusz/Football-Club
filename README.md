@@ -17,6 +17,34 @@ Aplikacja ta będzie stanowić źródło informacji dla kibiców klubu oraz osó
 
 # WEB API
 ## Kluby 
+##### Utwórz klub
+```http
+POST api/Kluby/DodajKlub
+```
+##### Usuń klub
+```http
+DELETE api/Kluby/UsunKlub
+```
+##### Edytuj klub
+```http
+PUT api/Kluby/EdytujKlub
+```
+##### Daj kluby
+```http
+GET api/Kluby/DajKluby
+```
+##### Daj klub
+```http
+GET api/Kluby/DajKlub
+```
+##### Daj trofea klubu
+```http
+POST /api/Kluby/DajTrofeaKlubu
+```
+##### Daj stadion klubu
+```http
+POST /api/Kluby/DajStadionKlubu
+```
 ##### Daj archiwalnego piłkarza
 ```http
 GET /api/Kluby/DajArchiwalnegoPilkarza
@@ -37,14 +65,38 @@ GET /api/Kluby/DajObecnegoPilkarza
 ```http
 POST /api/Kluby/DodajPilkarzaDoObecnych
 ```
-##### Usuń piłkarza z obecnych pilkarzy klubu
+##### Usuń pilkarza z obecnych
 ```http
 POST /api/Kluby/UsunPilkarzaZObecnych
+```
+##### Dodaj piłkarza do archiwalnych
+```http
+POST /api/Kluby/DodajPilkarzaDoArchiwalnych
 ```
 
 <br>
 
 ## Pilkarze
+##### Utworz pilkarza
+```http
+POST api/Pilkarze/DodajPilkarza
+```
+##### Usuń pilkarza
+```http
+DELETE api/Pilkarze/UsunPilkarza
+```
+##### Edytuj pilkarza
+```http
+PUT api/Pilkarze/EdytujPilkarza
+```
+##### Daj pilkarzy
+```http
+GET /api/Pilkarze/DajPilkarzy
+```
+##### Daj pilkarza
+```http
+GET /api/Pilkarze/DajPilkarza
+```
 ##### Daj archiwalne kluby piłkarza
 ```http
 GET /api/Pilkarze/DajArchiwalneKlubyPilkarza
@@ -73,6 +125,26 @@ PUT /api/Pilkarze/ZmienPozycjePilkarza
 <br>
 
 ## Pracownicy
+##### Utworz pracownika
+```http
+POST api/Pracownicy/DodajPracownika
+```
+##### Usuń pracownika
+```http
+DELETE api/Pracownicy/UsunPracownika
+```
+##### Edytuj pracownika
+```http
+PUT api/Pracownicy/EdytujPracownika
+```
+##### Daj pracownikow
+```http
+GET api/Pracownicy/DajPracownikow
+```
+##### Daj pracownika
+```http
+GET api/Pracownicy/DajPracownika
+```
 ##### Zmień funkcje pracownika
 ```http
 PUT /api/Pracownicy/ZmienFunkcjePracownika
@@ -89,6 +161,26 @@ PUT /api/Pracownicy/ZmienWiekPracownika
 <br>
 
 ## Statystyki
+##### Utworz statystykę
+```http
+POST api/Statystyki/DodajStatystke
+```
+##### Usuń statystykę
+```http
+DELETE api/Statystyki/UsunStatystyke
+```
+##### Edytuj statystykę
+```http
+PUT api/Statystyki/EdytujStatystyke
+```
+##### Daj statystyki
+```http
+GET api/Statystyki/DajStatystyki
+```
+##### Daj statystykę
+```http
+GET api/Statystyki/DajStatystyke
+```
 ##### Daj statystykę meczu
 ```http
 GET /api/Statystyki/DajStatystykeMeczu
@@ -101,14 +193,18 @@ GET /api/Statystyki/DajStatystkiZoltejKartki
 ```http
 GET /api/Statystyki/DajStatystykiCzerwonychKartek
 ```
-##### Daj statystykę najdłuższego przebiegniętego dystansu
+##### Daj statystykę najlepszej oceny
 ```http
-GET /api/Statystyki/DajStatystykeNajdluzszePrzebiegnieteDystanse
+GET /api/Statystyki/DajStatystykiNajlepszaOcena
 ```
 
 <br>
 
 ## Zarzady
+##### Daj zarządy
+```http
+GET api/Zarzady/DajZarzady
+```
 ##### Daj wynik finansowy
 ```http
 GET /api/Zarzady/DajWynikFinansowy
