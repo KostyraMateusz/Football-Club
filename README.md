@@ -31,11 +31,11 @@ PUT api/Kluby/EdytujKlub
 ```
 ##### Daj kluby
 ```http
-GET api/[controller]/DajKluby
+GET api/Kluby/DajKluby
 ```
 ##### Daj klub
 ```http
-GET api/[controller]/DajKlub
+GET api/Kluby/DajKlub
 ```
 ##### Daj trofea klubu
 ```http
